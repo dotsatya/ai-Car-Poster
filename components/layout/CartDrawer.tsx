@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, X, ArrowRight } from "lucide-react";
+import { ShoppingBag, X } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
 
 export function CartDrawer() {
@@ -12,11 +12,11 @@ export function CartDrawer() {
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm">
-      <div className="relative h-full w-full max-w-md border-l border-white/10 bg-[#0E1012] p-6 shadow-2xl flex flex-col justify-between">
+      <div className="relative h-full w-full max-w-full sm:max-w-md border-l border-white/10 bg-bg-primary p-5 sm:p-6 shadow-2xl flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div className="flex items-center gap-2">
-              <ShoppingBag className="h-5 w-5 text-[#D9272E]" />
+              <ShoppingBag className="h-5 w-5 text-brand" />
               <h3 className="text-base font-bold text-white tracking-wide">Studio Print Cart</h3>
             </div>
             <button
@@ -64,7 +64,7 @@ export function CartDrawer() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="text-xs font-bold text-[#D9272E]">${item.total}</span>
+                      <span className="text-xs font-bold text-brand">${item.total}</span>
                     </div>
                   </div>
                 ))}
@@ -87,7 +87,7 @@ export function CartDrawer() {
                 </div>
                 <div className="border-t border-white/10 pt-2 flex justify-between font-bold text-sm">
                   <span className="text-white">Estimated Total:</span>
-                  <span className="text-[#D9272E]">${cartSubtotal + 25}</span>
+                  <span className="text-brand">${cartSubtotal + 25}</span>
                 </div>
               </div>
             )}
@@ -101,7 +101,7 @@ export function CartDrawer() {
               alert("Order prototype checkout summary noted! Front-end prototype validated.");
             }}
             disabled={cartItems.length === 0}
-            className="w-full rounded-xl bg-gradient-to-r from-[#D9272E] to-[#B01A20] py-3 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-[#D9272E]/30 disabled:opacity-40"
+            className="w-full rounded-xl bg-brand hover:bg-brand-hover py-3 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-brand/30 disabled:opacity-40 cursor-pointer transition-all"
           >
             Proceed to Checkout (${cartItems.length > 0 ? cartSubtotal + 25 : 0})
           </button>

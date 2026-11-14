@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, Lock, Mail } from "lucide-react";
+import { X } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
 
 export function SignInModal() {
@@ -26,7 +26,7 @@ export function SignInModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4 backdrop-blur-md">
-      <div className="relative w-full max-w-md rounded-2xl border border-white/15 bg-[#0F1113] p-8 shadow-2xl">
+      <div className="relative w-full max-w-md rounded-2xl border border-white/15 bg-bg-primary p-5 sm:p-8 shadow-2xl">
         <button
           onClick={() => setIsSignInOpen(false)}
           className="absolute top-4 right-4 rounded-lg p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white cursor-pointer"
@@ -36,7 +36,7 @@ export function SignInModal() {
 
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#16181B] border border-white/10">
-            <svg className="h-4 w-4 text-[#D9272E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="h-4 w-4 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" />
               <circle cx="12" cy="12" r="3" />
               <path d="M12 2v7" />
@@ -44,7 +44,7 @@ export function SignInModal() {
             </svg>
           </div>
           <span className="font-sans text-base font-bold tracking-[0.2em] text-white">
-            POSTER <span className="text-[#D9272E]">GEN</span>
+            POSTER <span className="text-brand">GEN</span>
           </span>
         </div>
 
@@ -67,10 +67,10 @@ export function SignInModal() {
             <input
               type="email"
               required
-              placeholder="driver@enthusiast.com"
+              placeholder="user@gmail.com"
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-white/10 bg-neutral-900 px-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:border-[#D9272E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-white/10 bg-neutral-900 px-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:border-brand focus:outline-none"
             />
           </div>
 
@@ -79,7 +79,7 @@ export function SignInModal() {
               <label className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
                 Password / Passcode
               </label>
-              <span className="text-[10px] text-[#D9272E] font-medium">Use passcode: 0000</span>
+              <span className="text-[10px] text-brand font-medium">Use passcode: 0000</span>
             </div>
             <input
               type="password"
@@ -87,7 +87,7 @@ export function SignInModal() {
               placeholder="0000"
               value={passwordInput}
               onChange={(e) => setPasswordInput(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-white/10 bg-neutral-900 px-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:border-[#D9272E] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-white/10 bg-neutral-900 px-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:border-brand focus:outline-none"
             />
           </div>
 

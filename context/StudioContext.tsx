@@ -1,10 +1,49 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useMemo, useSyncExternalStore } from "react";
 import { User, StudioState, GenerationJobStatus, ArtworkSelection, CartItem } from "@/types";
 import { TEMPLATES } from "@/data/templates";
 import { PRINT_SIZES } from "@/data/print-sizes";
-import { SAMPLE_VEHICLES } from "@/data/sample-vehicles";
+
+const TEMPLATES_STORAGE_KEY = "poster_gen_selected_templates";
+const STORAGE_EVENT = "poster_gen_templates_changed";
+
+function subscribeTemplates(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("storage", callback);
+  window.addEventListener(STORAGE_EVENT, callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(STORAGE_EVENT, callback);
+  };
+}
+
+function getTemplatesSnapshot(): string {
+  if (typeof window === "undefined") return "[]";
+  try {
+    return localStorage.getItem(TEMPLATES_STORAGE_KEY) || "[]";
+  } catch {
+    return "[]";
+  }
+}
+
+function getServerTemplatesSnapshot(): string {
+  return "[]";
+}
+
+function saveTemplatesToStorage(templates: string[]) {
+  if (typeof window === "undefined") return;
+  try {
+    if (templates.length > 0) {
+      localStorage.setItem(TEMPLATES_STORAGE_KEY, JSON.stringify(templates));
+    } else {
+      localStorage.removeItem(TEMPLATES_STORAGE_KEY);
+    }
+    window.dispatchEvent(new Event(STORAGE_EVENT));
+  } catch (e) {
+    console.warn("Could not save templates to localStorage", e);
+  }
+}
 
 interface StudioContextType {
   // Auth
@@ -57,25 +96,36 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Selections (Default to 3 curated master templates for immediate preview capability)
-  const [selectedTemplates, setSelectedTemplates] = useState<string[]>([
-    "porsche-911-gt3-rs-minimalist-spec",
-    "koenigsegg-jesko-absolut-1600hp",
-    "mclaren-720s-red-graffiti",
-  ]);
-  const [uploadedPhoto, setUploadedPhoto] = useState<string>(SAMPLE_VEHICLES[0].image);
-  const [vehicleName, setVehicleName] = useState<string>(SAMPLE_VEHICLES[0].name);
-  const [customText, setCustomText] = useState<string>(SAMPLE_VEHICLES[0].text);
+  // Selections: Synchronized with localStorage (defaults to empty [])
+  const rawStoredTemplates = useSyncExternalStore(
+    subscribeTemplates,
+    getTemplatesSnapshot,
+    getServerTemplatesSnapshot
+  );
+
+  const selectedTemplates: string[] = useMemo(() => {
+    try {
+      const parsed = JSON.parse(rawStoredTemplates);
+      if (Array.isArray(parsed)) {
+        return parsed
+          .filter((id) => typeof id === "string" && TEMPLATES.some((t) => t.id === id))
+          .slice(0, 3);
+      }
+    } catch {
+      // Invalid JSON in localStorage
+    }
+    return [];
+  }, [rawStoredTemplates]);
+
+  const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
+  const [vehicleName, setVehicleName] = useState<string>("");
+  const [customText, setCustomText] = useState<string>("");
 
   // Workflow State
   const [studioState, setStudioState] = useState<StudioState>("configure");
   const [generationProgress, setGenerationProgress] = useState<Record<string, GenerationJobStatus>>({});
   const [combinedStatus, setCombinedStatus] = useState<"idle" | "queued" | "processing" | "completed">("idle");
-  const [selectedArtworks, setSelectedArtworks] = useState<Record<string, ArtworkSelection>>({
-    "porsche-911-gt3-rs-minimalist-spec": { selected: true, size: "a2", quantity: 1 },
-    "koenigsegg-jesko-absolut-1600hp": { selected: true, size: "a2", quantity: 1 },
-    "mclaren-720s-red-graffiti": { selected: true, size: "a2", quantity: 1 },
-  });
+  const [selectedArtworks, setSelectedArtworks] = useState<Record<string, ArtworkSelection>>({});
 
   // Auth Methods
   const signIn = (email: string, password: string) => {
@@ -97,18 +147,34 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     setCombinedStatus("idle");
   };
 
-  // Template toggle (1 to 3 templates allowed)
+  // Template toggle (1 to 3 templates allowed, synced to localStorage)
   const toggleTemplate = (id: string) => {
-    if (selectedTemplates.includes(id)) {
-      setSelectedTemplates(selectedTemplates.filter((t) => t !== id));
-    } else {
-      if (selectedTemplates.length < 3) {
-        setSelectedTemplates([...selectedTemplates, id]);
+    const next = selectedTemplates.includes(id)
+      ? selectedTemplates.filter((t) => t !== id)
+      : selectedTemplates.length < 3
+      ? [...selectedTemplates, id]
+      : selectedTemplates;
+
+    saveTemplatesToStorage(next);
+
+    setSelectedArtworks((prev) => {
+      if (prev[id]) {
+        const copy = { ...prev };
+        delete copy[id];
+        return copy;
+      } else {
+        return {
+          ...prev,
+          [id]: { selected: true, size: "a2", quantity: 1 },
+        };
       }
-    }
+    });
   };
 
-  const clearTemplates = () => setSelectedTemplates([]);
+  const clearTemplates = () => {
+    saveTemplatesToStorage([]);
+    setSelectedArtworks({});
+  };
 
   // AI Generation Pipeline Simulation
   const startGenerationPipeline = () => {
@@ -190,7 +256,7 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
 
   // Cart calculations
   const cartItems: CartItem[] = Object.entries(selectedArtworks)
-    .filter(([_, item]) => item.selected)
+    .filter(([, item]) => item.selected)
     .map(([id, item]) => {
       const isCombined = id === "combined";
       const template = isCombined ? null : TEMPLATES.find((t) => t.id === id);

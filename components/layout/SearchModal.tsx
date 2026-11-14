@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Search, X, ArrowRight } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
 import { TEMPLATES } from "@/data/templates";
 
@@ -28,7 +28,7 @@ export function SearchModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/85 pt-20 px-4 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl rounded-2xl border border-white/15 bg-[#101214] p-6 shadow-2xl">
+      <div className="relative w-full max-w-2xl rounded-2xl border border-white/15 bg-bg-primary p-4 sm:p-6 shadow-2xl">
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div className="flex items-center gap-3 flex-1">
             <Search size={18} className="text-neutral-400 shrink-0" />
@@ -61,7 +61,7 @@ export function SearchModal() {
                 setIsSearchOpen(false);
                 router.push("/#studio");
               }}
-              className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.04] p-3 transition-colors hover:border-[#D9272E]/40 hover:bg-white/[0.04]"
+              className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.04] p-3 transition-colors hover:border-brand/40 hover:bg-white/[0.04]"
             >
               <div className="flex items-center gap-3">
                 <div className="relative h-10 w-14 overflow-hidden rounded-md bg-neutral-900">
@@ -72,7 +72,7 @@ export function SearchModal() {
                   <p className="text-xs text-neutral-400">{tpl.category} · {tpl.subtitle}</p>
                 </div>
               </div>
-              <span className="text-xs font-semibold text-[#D9272E]">
+              <span className="text-xs font-semibold text-brand">
                 {selectedTemplates.includes(tpl.id) ? "Selected ✓" : "Select & Open Studio →"}
               </span>
             </div>

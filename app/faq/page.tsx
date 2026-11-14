@@ -8,51 +8,68 @@ export default function FaqPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="py-16 lg:py-24">
-      <div className="mx-auto max-w-4xl px-6 lg:px-12">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-semibold tracking-[0.25em] uppercase text-[#D9272E]">
+    <div className="py-6 sm:py-8 lg:py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        {/* Header matching standard category / page typography */}
+        <div className="mb-4 sm:mb-6 lg:mb-8">
+          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
             Atelier Clarifications
           </span>
-          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+          <h1 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             Frequently Asked Questions
           </h1>
-          <p className="mt-4 text-sm text-neutral-400 leading-relaxed">
-            Everything you need to know about our automotive AI pipeline, multi-template triptychs,
-            museum-grade 310 GSM cotton rag printing, and worldwide courier dispatch.
+          <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed">
+            Everything you need to know about our automotive AI pipeline,
+            multi-template triptychs, museum-grade 310 GSM cotton rag printing,
+            and worldwide courier dispatch.
           </p>
         </div>
 
         {/* FAQ Accordion */}
-        <div className="mt-12 space-y-4">
+        <div className="space-y-2.5 sm:space-y-3.5">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className={`rounded-2xl border transition-all duration-300 ${
+                className={`rounded-xl sm:rounded-2xl border transition-all duration-300 ${
                   isOpen
-                    ? "border-[#D9272E]/50 bg-neutral-900/90 shadow-lg shadow-[#D9272E]/10"
+                    ? "border-brand/50 bg-neutral-900/90 shadow-lg shadow-brand/10"
                     : "border-white/[0.06] bg-neutral-900/40 hover:border-white/20"
                 }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between p-6 text-left"
+                  className="flex w-full items-center justify-between p-3.5 sm:p-4.5 lg:p-5 text-left cursor-pointer"
                 >
-                  <span className="text-base font-semibold text-white pr-4">{faq.question}</span>
+                  <span className="text-sm sm:text-base font-semibold text-white pr-4">
+                    {faq.question}
+                  </span>
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 bg-[#D9272E] text-white border-transparent" : "text-neutral-400"
+                    className={`flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-full border border-white/10 transition-transform duration-300 ${
+                      isOpen
+                        ? "rotate-180 bg-brand text-white border-transparent"
+                        : "text-neutral-400"
                     }`}
                   >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    <svg
+                      className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </span>
                 </button>
+
                 {isOpen && (
-                  <div className="border-t border-white/[0.06] px-6 pb-6 pt-4 text-xs leading-relaxed text-neutral-400 md:text-sm">
+                  <div className="px-3.5 pb-3.5 sm:px-4.5 sm:pb-4.5 lg:px-5 lg:pb-5 text-xs sm:text-sm leading-relaxed text-neutral-300 border-t border-white/[0.04] pt-3">
                     {faq.answer}
                   </div>
                 )}
@@ -61,25 +78,25 @@ export default function FaqPage() {
           })}
         </div>
 
-        {/* Direct Contact Help Box */}
-        <div className="mt-16 rounded-2xl border border-white/10 bg-neutral-900/50 p-8 text-center backdrop-blur-md">
-          <h3 className="text-lg font-bold text-white">Have a Unique Question or Custom Request?</h3>
-          <p className="mt-2 text-xs text-neutral-400 max-w-md mx-auto">
-            Our curators and printmasters can assist with bespoke livery adaptations, private collection commissions,
-            and specialized framing.
+        {/* Still Have Questions Concierge Card */}
+        <div className="mt-8 sm:mt-12 rounded-xl sm:rounded-2xl border border-white/10 bg-neutral-900/60 p-5 sm:p-7 text-center">
+          <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-brand">
+            Private Concierge Support
+          </span>
+          <h3 className="mt-1 text-lg sm:text-xl md:text-2xl font-bold text-white">
+            Have a Specific Vehicle or Bespoke Request?
+          </h3>
+          <p className="mt-1.5 text-xs text-neutral-400 max-w-xl mx-auto leading-relaxed">
+            Our automotive curators and digital printmakers are available for
+            custom large-format inquiries, racing team commissions, and bespoke
+            gallery framing consultations.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
+          <div className="mt-5">
             <Link
               href="/contact"
-              className="rounded-xl bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black hover:bg-neutral-200 transition-colors"
+              className="inline-block rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 sm:px-6 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-brand/30 transition-transform duration-200 hover:scale-105"
             >
-              Contact Concierge Desk
-            </Link>
-            <Link
-              href="/#creator"
-              className="rounded-xl border border-white/15 bg-white/[0.04] px-5 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors"
-            >
-              Launch Poster Studio →
+              Contact Concierge Desk →
             </Link>
           </div>
         </div>
@@ -87,4 +104,3 @@ export default function FaqPage() {
     </div>
   );
 }
-

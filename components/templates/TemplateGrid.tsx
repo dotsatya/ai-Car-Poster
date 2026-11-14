@@ -113,41 +113,40 @@ export function TemplateGrid() {
   });
 
   return (
-    <div className="space-y-8 pb-32">
+    <div className="space-y-4 sm:space-y-6 pb-20 sm:pb-28">
       {/* 1. Full-Width Search Input Bar */}
-      <div className="relative flex items-center w-full">
-        <Search
-          size={18}
-          className="pointer-events-none absolute left-4 z-20 text-neutral-400"
-        />
+      <div className="relative w-full">
         <input
           type="text"
           placeholder="Search templates..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-2xl border border-white/10 bg-neutral-900/70 py-3.5 pl-11 pr-10 text-sm text-white placeholder-neutral-500 backdrop-blur-md transition-all focus:border-white/30 focus:outline-none focus:ring-1 focus:ring-white/20"
+          className="w-full rounded-xl sm:rounded-2xl border border-[var(--border)] bg-neutral-900/70 py-2.5 sm:py-3 pl-10 pr-10 text-xs sm:text-sm text-[var(--foreground)] placeholder-[var(--foreground-muted)] backdrop-blur-md transition-all focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
         />
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-neutral-400">
+          <Search size={16} className="shrink-0 text-neutral-400" strokeWidth={2} />
+        </div>
         {search && (
           <button
             type="button"
             onClick={() => setSearch("")}
-            className="absolute right-4 z-20 flex items-center text-neutral-400 hover:text-white cursor-pointer"
+            className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-neutral-400 hover:text-white cursor-pointer"
             title="Clear search"
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         )}
       </div>
 
       {/* 2. Category Filter Pills */}
-      <div className="flex flex-wrap items-center gap-2.5">
+      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
         {CATEGORIES.map((cat) => {
           const isActive = selectedCategory === cat;
           return (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded-full px-5 py-2 text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer ${
+              className={`rounded-full px-3 sm:px-4 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer ${
                 isActive
                   ? "bg-white text-black shadow-md shadow-white/10"
                   : "bg-neutral-900/80 text-neutral-400 border border-white/[0.08] hover:bg-neutral-800 hover:text-white"
@@ -159,8 +158,8 @@ export function TemplateGrid() {
         })}
       </div>
 
-      {/* 3. 4-Column Poster Grid */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {/* 3. Poster Grid: 2 in a row on mobile, 3 on tablet, 4 on desktop */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
         {filtered.map((tpl) => (
           <TemplateCard key={tpl.id} template={tpl} />
         ))}
@@ -177,7 +176,7 @@ export function TemplateGrid() {
               setSearch("");
               setSelectedCategory("All");
             }}
-            className="mt-4 text-xs font-semibold text-[#D9272E] hover:underline cursor-pointer"
+            className="mt-4 text-xs font-semibold text-brand hover:underline cursor-pointer"
           >
             Reset Filters
           </button>
