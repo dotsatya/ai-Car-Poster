@@ -1,17 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { toast } from "sonner";
 import { useStudio } from "@/context/StudioContext";
 import {
-  StudioAuthPrompt,
   StudioConfigure,
   StudioGenerating,
-  StudioReview,
+  GenaratePosterReview,
 } from "@/components/studio";
 
 export default function StudioPage() {
   const {
     user,
+    isSignInOpen,
+    setIsSignInOpen,
     selectedTemplates,
     uploadedPhoto,
     studioState,
@@ -21,12 +23,29 @@ export default function StudioPage() {
   } = useStudio();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const pendingGenerateRef = useRef(false);
+
+  // If the user signed in via the modal after clicking Generate, immediately start generation
+  useEffect(() => {
+    if (user && pendingGenerateRef.current) {
+      pendingGenerateRef.current = false;
+      startGenerationPipeline();
+    }
+  }, [user, startGenerationPipeline]);
+
+  // Cancel pending generation if the sign in modal is closed without authentication
+  useEffect(() => {
+    if (!isSignInOpen && !user) {
+      pendingGenerateRef.current = false;
+    }
+  }, [isSignInOpen, user]);
 
   const handleStartGenerationClick = () => {
     if (selectedTemplates.length === 0) {
-      alert(
-        "Please select at least 1 template (up to 3) before initiating generation.",
-      );
+      toast.warning("No Templates Selected", {
+        description:
+          "Please select at least 1 template (up to 3) before initiating generation.",
+      });
       const el = document.getElementById("templates");
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
@@ -35,16 +54,20 @@ export default function StudioPage() {
     }
 
     if (!uploadedPhoto) {
-      alert("Please upload your car photo first.");
+      toast.warning("Photo Required", {
+        description: "Please upload your car photo first to generate posters.",
+      });
       fileInputRef.current?.click();
       return;
     }
 
     if (!user) {
-      setStudioState("auth_prompt");
-    } else {
-      startGenerationPipeline();
+      pendingGenerateRef.current = true;
+      setIsSignInOpen(true);
+      return;
     }
+
+    startGenerationPipeline();
   };
 
   return (
@@ -55,10 +78,7 @@ export default function StudioPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Studio Header matching layout reference */}
         <div className="mb-4 sm:mb-6 lg:mb-8">
-          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
-            YOUR CREATION SPACE
-          </span>
-          <h1 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+          <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
             Let&apos;s create your masterpiece.
           </h1>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed">
@@ -83,7 +103,7 @@ export default function StudioPage() {
             <button
               onClick={handleStartGenerationClick}
               className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap ${
-                studioState === "auth_prompt" || studioState === "generating"
+                studioState === "generating"
                   ? "bg-brand text-white shadow-md"
                   : "text-neutral-400 hover:text-white"
               }`}
@@ -120,25 +140,17 @@ export default function StudioPage() {
         )}
 
         {/* ========================================================
-            STATE 2: SIGN IN GATEWAY (Email + Password 0000)
-        ======================================================== */}
-        {studioState === "auth_prompt" && (
-          <StudioAuthPrompt
-            onBack={() => setStudioState("configure")}
-            onSuccess={startGenerationPipeline}
-          />
-        )}
-
-        {/* ========================================================
-            STATE 3: PARALLEL GENERATION SIMULATION
+            STATE 2: PARALLEL GENERATION SIMULATION
         ======================================================== */}
         {studioState === "generating" && <StudioGenerating />}
 
         {/* ========================================================
-            STATE 4: REVIEW PREVIEWS & PURCHASE SIZING
+            STATE 3: REVIEW PREVIEWS & PURCHASE SIZING
         ======================================================== */}
         {studioState === "review" && (
-          <StudioReview onBackToConfigure={() => setStudioState("configure")} />
+          <GenaratePosterReview
+            onBackToConfigure={() => setStudioState("configure")}
+          />
         )}
       </div>
     </section>

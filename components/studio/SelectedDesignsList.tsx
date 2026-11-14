@@ -33,7 +33,7 @@ export function SelectedDesignsList() {
             <div
               key={id}
               onClick={() => setPreviewTemplateId(id)}
-              className="group flex items-center justify-between gap-3 sm:gap-4 rounded-xl sm:rounded-2xl border border-white/10 bg-black/40 p-2.5 sm:p-3 transition-all hover:border-brand/40 hover:bg-neutral-900/60 cursor-pointer"
+              className="group flex items-center justify-between gap-3 sm:gap-4 rounded-xl border border-white/[0.08] bg-black/40 p-2.5 sm:p-3 transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/60 hover:-translate-y-0.5 cursor-pointer"
             >
               <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
                 {/* 3:4 Portrait Poster Artwork Preview */}
@@ -45,9 +45,9 @@ export function SelectedDesignsList() {
                     sizes="55px"
                     className="object-cover"
                   />
-                  {/* <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Eye size={14} className="text-white drop-shadow" />
-                  </div> */}
+                  </div>
                 </div>
 
                 {/* Design Meta */}
@@ -91,7 +91,7 @@ export function SelectedDesignsList() {
         {selectedTemplates.length > 0 && selectedTemplates.length < 3 && (
           <Link
             href="/templates"
-            className="flex items-center justify-center gap-1.5 rounded-xl sm:rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-2.5 sm:p-3.5 text-xs font-semibold text-neutral-400 hover:border-brand/40 hover:bg-white/[0.04] hover:text-white transition-all cursor-pointer"
+            className="flex items-center justify-center gap-1.5 rounded-xl border border-dashed border-white/[0.08] bg-white/[0.02] p-2.5 sm:p-3.5 text-xs font-semibold text-neutral-400 hover:border-white/25 hover:bg-white/[0.04] hover:text-white transition-all duration-300 cursor-pointer"
           >
             <Plus size={14} className="text-brand" />
             <span>
@@ -102,7 +102,7 @@ export function SelectedDesignsList() {
 
         {/* Empty state when 0 selected */}
         {selectedTemplates.length === 0 && (
-          <div className="rounded-xl sm:rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-4 sm:p-6 text-center">
+          <div className="rounded-xl border border-dashed border-white/[0.08] bg-white/[0.02] p-4 sm:p-6 text-center hover:border-white/20 transition-all duration-300">
             <p className="text-xs text-neutral-400">
               No templates selected yet. Choose up to 3 master templates from our collection.
             </p>
@@ -118,15 +118,15 @@ export function SelectedDesignsList() {
 
       <p className="text-xs text-neutral-400">
         {selectedTemplates.length > 0
-          ? `Your uploaded photo will be used with all ${selectedTemplates.length} selected ${
+          ? `Your car photo will be paired with your ${selectedTemplates.length} chosen ${
               selectedTemplates.length === 1 ? "design" : "designs"
-            }.`
+            } to synthesize 4 distinct AI poster variations.`
           : "Select up to 3 master designs to generate parallel poster variations."}
       </p>
 
       {/* Multi-Template Triptych Benefit Callout */}
       {selectedTemplates.length >= 2 && (
-        <div className="rounded-2xl border border-purple-500/30 bg-purple-950/20 p-3.5">
+        <div className="rounded-xl border border-purple-500/30 bg-purple-950/20 p-3.5 hover:border-purple-500/50 transition-all duration-300">
           <div className="flex items-start gap-2.5">
             <div>
               <div className="text-xs font-bold text-white">

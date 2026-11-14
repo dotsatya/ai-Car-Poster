@@ -34,3 +34,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+///////////////////////////////////////////////////
+filters 
+Filter group	                  Example options
+Car Brand	                      Porsche, BMW, Mercedes-Benz, Ferrari, Lamborghini, Audi, McLaren
+Car Model / Series	              911, GT3 RS, M3, M4, AMG GT, Huracán
+Poster Style	                  Minimal, Vintage, Racing, Magazine, Artistic
+Collection	                      JDM Legends, Supercars, Classic Icons, Motorsport
+Car Category	                  Sports, Supercar, Hypercar, Muscle, Luxury, SUV
+Model Year	                      1990s, 2000s, 2010s, 2020s
+Price Range	                      ₹499–₹999, ₹999–₹1,999, Custom
+///////////////////////////////////////////////////

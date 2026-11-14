@@ -79,7 +79,9 @@
   --color-info: var(--info);
 
   /* Fonts */
-  --font-sans: Inter, Arial, sans-serif;
+  --font-sans: var(--font-body), sans-serif;
+  --font-heading: var(--font-heading), sans-serif;
+  --font-body: var(--font-body), sans-serif;
 
   /* Radius */
   --radius-lg: var(--radius);
@@ -103,6 +105,20 @@ body {
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+/* globals.css */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.font-heading {
+  font-family: var(--font-heading), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 /* =========================================

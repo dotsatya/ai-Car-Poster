@@ -1,4 +1,56 @@
-export interface TemplatePhoto {
+import {
+  PrintSizeId,
+  PaperGsmId,
+  PrintSizeOption,
+  PaperGsmOption,
+  SizeGsmPrice,
+  Template,
+} from "@/types";
+
+export type { PrintSizeId, PaperGsmId, PrintSizeOption, PaperGsmOption, SizeGsmPrice };
+
+export const ALL_PRINT_SIZES: Record<PrintSizeId, PrintSizeOption> = {
+  a4: {
+    id: "a4",
+    name: "A4",
+    dimensions: "21.0 × 29.7 cm",
+  },
+  a3: {
+    id: "a3",
+    name: "A3",
+    dimensions: "29.7 × 42.0 cm",
+  },
+  "12x18": {
+    id: "12x18",
+    name: "12 × 18 inches",
+    dimensions: "30.5 × 45.7 cm (12 × 18\")",
+  },
+  a2: {
+    id: "a2",
+    name: "A2",
+    dimensions: "42.0 × 59.4 cm",
+  },
+};
+
+export const ALL_PAPER_GSM: Record<PaperGsmId, PaperGsmOption> = {
+  "200gsm": {
+    id: "200gsm",
+    name: "200 GSM",
+    label: "200 GSM Satin Finish",
+  },
+  "250gsm": {
+    id: "250gsm",
+    name: "250 GSM",
+    label: "250 GSM Heavy Matte",
+  },
+  "300gsm": {
+    id: "300gsm",
+    name: "300 GSM",
+    label: "300 GSM Museum Cotton Rag",
+  },
+};
+
+export interface RawTemplatePhoto {
   id: number;
   name: string;
   slug: string;
@@ -9,7 +61,111 @@ export interface TemplatePhoto {
   description: string;
 }
 
-export const TEMPLATE_PHOTOS: TemplatePhoto[] = [
+export interface TemplatePhoto extends RawTemplatePhoto {
+  availableSizes: PrintSizeOption[];
+  availableGsm: PaperGsmOption[];
+  pricing: SizeGsmPrice[];
+  startingPrice: number;
+  formattedStartingPrice: string;
+}
+
+interface TemplateConfig {
+  basePrice: number;
+  sizes: PrintSizeId[];
+  gsms: PaperGsmId[];
+}
+
+// Deterministic combinations ensuring diverse sizes (1, 2, 3, or 4) and GSMs (1, 2, or 3)
+const TEMPLATE_CONFIGS: Record<number, TemplateConfig> = {
+  1: { basePrice: 499, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  2: { basePrice: 549, sizes: ["a3", "a2"], gsms: ["250gsm", "300gsm"] },
+  3: { basePrice: 449, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  4: { basePrice: 499, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  5: { basePrice: 449, sizes: ["12x18"], gsms: ["250gsm", "300gsm"] },
+  6: { basePrice: 599, sizes: ["a2"], gsms: ["300gsm"] },
+  7: { basePrice: 549, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  8: { basePrice: 549, sizes: ["12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  9: { basePrice: 449, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  10: { basePrice: 599, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  11: { basePrice: 599, sizes: ["a2"], gsms: ["300gsm"] },
+  12: { basePrice: 499, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  13: { basePrice: 449, sizes: ["a4", "a3"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  14: { basePrice: 449, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  15: { basePrice: 449, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  17: { basePrice: 499, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  18: { basePrice: 549, sizes: ["12x18"], gsms: ["250gsm", "300gsm"] },
+  19: { basePrice: 549, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  20: { basePrice: 449, sizes: ["a4", "a3"], gsms: ["200gsm", "250gsm"] },
+  21: { basePrice: 499, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  22: { basePrice: 499, sizes: ["a3", "a2"], gsms: ["250gsm", "300gsm"] },
+  23: { basePrice: 499, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  24: { basePrice: 499, sizes: ["a3"], gsms: ["250gsm"] },
+  25: { basePrice: 449, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm"] },
+  26: { basePrice: 549, sizes: ["12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  27: { basePrice: 599, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  28: { basePrice: 449, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  29: { basePrice: 549, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  30: { basePrice: 549, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+};
+
+function buildPricingMatrix(
+  basePrice: number,
+  sizeIds: PrintSizeId[],
+  gsmIds: PaperGsmId[]
+): SizeGsmPrice[] {
+  const sizeOffsets: Record<PrintSizeId, number> = {
+    a4: 0,
+    a3: 300,
+    "12x18": 450,
+    a2: 700,
+  };
+
+  const gsmOffsets: Record<PrintSizeId, Record<PaperGsmId, number>> = {
+    a4: { "200gsm": 0, "250gsm": 100, "300gsm": 200 },
+    a3: { "200gsm": 0, "250gsm": 100, "300gsm": 200 },
+    "12x18": { "200gsm": 0, "250gsm": 150, "300gsm": 300 },
+    a2: { "200gsm": 0, "250gsm": 200, "300gsm": 400 },
+  };
+
+  const matrix: SizeGsmPrice[] = [];
+  for (const size of sizeIds) {
+    for (const gsm of gsmIds) {
+      const price = basePrice + sizeOffsets[size] + gsmOffsets[size][gsm];
+      matrix.push({
+        size,
+        gsm,
+        price,
+        formattedPrice: `₹${price.toLocaleString("en-IN")}`,
+      });
+    }
+  }
+  return matrix;
+}
+
+function attachTemplateOptions(raw: RawTemplatePhoto): TemplatePhoto {
+  const config = TEMPLATE_CONFIGS[raw.id] || {
+    basePrice: 499,
+    sizes: ["a4", "a3", "12x18", "a2"] as PrintSizeId[],
+    gsms: ["200gsm", "250gsm", "300gsm"] as PaperGsmId[],
+  };
+
+  const availableSizes = config.sizes.map((s) => ALL_PRINT_SIZES[s]);
+  const availableGsm = config.gsms.map((g) => ALL_PAPER_GSM[g]);
+  const pricing = buildPricingMatrix(config.basePrice, config.sizes, config.gsms);
+  const startingPrice = Math.min(...pricing.map((p) => p.price));
+  const formattedStartingPrice = `₹${startingPrice.toLocaleString("en-IN")}`;
+
+  return {
+    ...raw,
+    availableSizes,
+    availableGsm,
+    pricing,
+    startingPrice,
+    formattedStartingPrice,
+  };
+}
+
+const RAW_TEMPLATE_PHOTOS: RawTemplatePhoto[] = [
   {
     id: 1,
     name: "Porsche 911 GT3 RS Minimalist Spec",
@@ -302,6 +458,8 @@ export const TEMPLATE_PHOTOS: TemplatePhoto[] = [
   },
 ];
 
+export const TEMPLATE_PHOTOS: TemplatePhoto[] = RAW_TEMPLATE_PHOTOS.map(attachTemplateOptions);
+
 export function getTemplatePhotoById(id: number): TemplatePhoto | undefined {
   return TEMPLATE_PHOTOS.find((p) => p.id === id);
 }
@@ -309,4 +467,13 @@ export function getTemplatePhotoById(id: number): TemplatePhoto | undefined {
 export function getTemplatePhotoBySlug(slug: string): TemplatePhoto | undefined {
   return TEMPLATE_PHOTOS.find((p) => p.slug === slug);
 }
+
+export function getTemplatePrice(
+  template: TemplatePhoto | Template,
+  sizeId: PrintSizeId | string,
+  gsmId: PaperGsmId | string
+): SizeGsmPrice | undefined {
+  return template.pricing?.find((p) => p.size === sizeId && p.gsm === gsmId);
+}
+
 

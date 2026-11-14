@@ -64,7 +64,7 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className={`relative overflow-hidden rounded-xl sm:rounded-2xl border-2 transition-all duration-300 ${
+        className={`relative overflow-hidden rounded-xl border transition-all duration-300 ${
           isDragging
             ? "border-brand bg-brand/10 scale-[1.01]"
             : "border-dashed border-white/20 bg-black/40 hover:border-white/30 hover:bg-neutral-900/40"
@@ -147,7 +147,7 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
             onClick={() => fileInputRef.current?.click()}
             className="py-6 sm:py-10 md:py-12 px-3 sm:px-6 text-center cursor-pointer flex flex-col items-center justify-center space-y-2.5 group"
           >
-            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-white/[0.03] text-neutral-300 group-hover:text-white group-hover:scale-105 transition-all">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-white/[0.03] text-neutral-300 group-hover:text-white group-hover:scale-105 transition-all">
               <UploadCloud size={24} className="sm:w-[28px] sm:h-[28px]" strokeWidth={1.8} />
             </div>
 

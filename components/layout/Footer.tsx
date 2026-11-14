@@ -21,14 +21,8 @@ export function Footer() {
 
         {/* Minimal Navigation Links */}
         <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
-          <Link href="/templates" className="text-neutral-400 hover:text-white transition-colors">
-            Templates
-          </Link>
-          <Link href="/studio" className="text-neutral-400 hover:text-white transition-colors">
-            Studio
-          </Link>
-          <Link href="/how-it-works" className="text-neutral-400 hover:text-white transition-colors">
-            Process
+          <Link href="/orders" className="text-neutral-400 hover:text-white transition-colors">
+            Orders
           </Link>
           <Link href="/about" className="text-neutral-400 hover:text-white transition-colors">
             About
@@ -38,6 +32,9 @@ export function Footer() {
           </Link>
           <Link href="/contact" className="text-neutral-400 hover:text-white transition-colors">
             Contact
+          </Link>
+          <Link href="/terms" className="text-neutral-400 hover:text-white transition-colors">
+            Terms &amp; Conditions
           </Link>
         </nav>
       </div>

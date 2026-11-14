@@ -24,10 +24,8 @@ export default function ContactPage() {
           {/* Left Column: Contact Details */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-6">
             <div>
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
-                Private Concierge
-              </span>
-              <h1 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            
+              <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
                 Contact Our Atelier
               </h1>
               <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
@@ -39,7 +37,7 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-3 sm:space-y-3.5">
-              <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md">
+              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                   Direct Enquiries
                 </div>
@@ -51,7 +49,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md">
+              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                   Global Dispatch Hubs
                 </div>
@@ -63,7 +61,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md">
+              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                   Corporate &amp; Fleet Commissions
                 </div>
@@ -80,7 +78,7 @@ export default function ContactPage() {
 
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7">
-            <div className="rounded-xl sm:rounded-3xl border border-white/15 bg-neutral-900/60 p-4 sm:p-6 lg:p-8 backdrop-blur-xl shadow-2xl">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/60 p-4 sm:p-6 lg:p-8 backdrop-blur-xl shadow-2xl hover:border-white/20 transition-all duration-300">
               {submitted ? (
                 <div className="py-8 sm:py-12 text-center space-y-3 sm:space-y-4">
                   <div className="mx-auto flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xl sm:text-2xl">
@@ -224,7 +222,7 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="w-full rounded-xl bg-brand hover:bg-brand-hover py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-brand/30 transition-transform duration-200 hover:scale-[1.01]"
+                    className="w-full rounded-xl bg-brand hover:bg-brand-hover py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
                   >
                     Submit Concierge Request
                   </button>

@@ -61,6 +61,11 @@ export const TEMPLATES: Template[] = TEMPLATE_PHOTOS.map((photo) => ({
   ],
   supportsCustomText: true,
   recommendedAspect: "3:4 Fine Art Portrait",
+  availableSizes: photo.availableSizes,
+  availableGsm: photo.availableGsm,
+  pricing: photo.pricing,
+  startingPrice: photo.startingPrice,
+  formattedStartingPrice: photo.formattedStartingPrice,
 }));
 
 // Backward compatibility map for previous sample template IDs

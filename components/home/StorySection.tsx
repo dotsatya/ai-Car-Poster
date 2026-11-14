@@ -2,14 +2,12 @@ import Image from "next/image";
 
 export function StorySection() {
   return (
-    <section id="about" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12 lg:py-20">
+    <section id="about" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-5">
-            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
-              The Art of Automotive Immortality
-            </span>
-            <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            
+            <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               Our Story
             </h2>
             <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
@@ -33,7 +31,7 @@ export function StorySection() {
         </div>
 
         {/* Front Supercar Visual with Glowing Headlights */}
-        <div className="relative mt-6 sm:mt-10 overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-black lg:mt-16">
+        <div className="relative mt-6 sm:mt-10 overflow-hidden rounded-xl border border-white/[0.08] bg-black lg:mt-16 hover:border-white/20 transition-all duration-300">
           <div className="relative aspect-[16/10] sm:aspect-[16/8] w-full overflow-hidden">
             <Image
               src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1900&q=85"
@@ -47,7 +45,7 @@ export function StorySection() {
 
           {/* 4 Floating Metric Glass Cards */}
           <div className="relative mt-4 sm:-mt-10 lg:-mt-14 z-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 px-3 sm:px-6 pb-4 sm:pb-6 lg:px-10 lg:pb-10">
-            <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-neutral-900/95 hover:-translate-y-1">
+            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
               <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
                 <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
@@ -62,7 +60,7 @@ export function StorySection() {
               <p className="mt-1 text-[11px] sm:text-xs font-medium text-neutral-400">Our Presence Across Global Markets</p>
             </div>
 
-            <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-neutral-900/95 hover:-translate-y-1">
+            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
               <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
                 <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
@@ -77,7 +75,7 @@ export function StorySection() {
               <p className="mt-1 text-[11px] sm:text-xs font-medium text-neutral-400">Curated Master Design Templates</p>
             </div>
 
-            <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-neutral-900/95 hover:-translate-y-1">
+            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
               <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
                 <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
@@ -92,7 +90,7 @@ export function StorySection() {
               <p className="mt-1 text-[11px] sm:text-xs font-medium text-neutral-400">Museum Archival Grade Fine Paper</p>
             </div>
 
-            <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-neutral-900/95 hover:-translate-y-1">
+            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
               <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
                 <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path

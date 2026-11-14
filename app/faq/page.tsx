@@ -12,10 +12,8 @@ export default function FaqPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Header matching standard category / page typography */}
         <div className="mb-4 sm:mb-6 lg:mb-8">
-          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
-            Atelier Clarifications
-          </span>
-          <h1 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+         
+          <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
             Frequently Asked Questions
           </h1>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed">
@@ -32,10 +30,10 @@ export default function FaqPage() {
             return (
               <div
                 key={index}
-                className={`rounded-xl sm:rounded-2xl border transition-all duration-300 ${
+                className={`rounded-xl border transition-all duration-300 ${
                   isOpen
                     ? "border-brand/50 bg-neutral-900/90 shadow-lg shadow-brand/10"
-                    : "border-white/[0.06] bg-neutral-900/40 hover:border-white/20"
+                    : "border-white/[0.08] bg-neutral-900/40 hover:border-white/25 hover:bg-neutral-900/60"
                 }`}
               >
                 <button
@@ -79,7 +77,7 @@ export default function FaqPage() {
         </div>
 
         {/* Still Have Questions Concierge Card */}
-        <div className="mt-8 sm:mt-12 rounded-xl sm:rounded-2xl border border-white/10 bg-neutral-900/60 p-5 sm:p-7 text-center">
+        <div className="mt-8 sm:mt-12 rounded-xl border border-white/[0.08] bg-neutral-900/60 p-5 sm:p-7 text-center hover:border-white/20 transition-all duration-300">
           <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-brand">
             Private Concierge Support
           </span>
@@ -94,7 +92,7 @@ export default function FaqPage() {
           <div className="mt-5">
             <Link
               href="/contact"
-              className="inline-block rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 sm:px-6 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-brand/30 transition-transform duration-200 hover:scale-105"
+              className="inline-block rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 sm:px-6 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
             >
               Contact Concierge Desk →
             </Link>

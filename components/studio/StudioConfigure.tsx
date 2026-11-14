@@ -14,7 +14,7 @@ export function StudioConfigure({
   onStartGeneration,
 }: StudioConfigureProps) {
   return (
-    <div className="rounded-xl sm:rounded-3xl border border-white/10 bg-[#0E1013]/90 p-3.5 sm:p-6 lg:p-8 backdrop-blur-2xl shadow-2xl">
+    <div className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-3.5 sm:p-6 lg:p-8 backdrop-blur-2xl shadow-2xl hover:border-white/20 transition-all duration-300">
       <div className="grid grid-cols-1 gap-5 sm:gap-8 lg:grid-cols-2 items-start">
         <CarPhotoUpload fileInputRef={fileInputRef} />
         <SelectedDesignsList />

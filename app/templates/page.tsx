@@ -13,10 +13,8 @@ export default function TemplatesPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Header matching user design reference */}
         <div className="mb-4 sm:mb-6 lg:mb-8">
-          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
-            Curated Collection
-          </span>
-          <h1 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+         
+          <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
             Poster Templates
           </h1>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed">

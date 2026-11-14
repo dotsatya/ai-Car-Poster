@@ -16,9 +16,12 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     agentFeedback: true,
+    cpus: 1,
+    staticGenerationMaxConcurrency: 1,
+    staticGenerationRetryCount: 3,
   },
-  cacheComponents: true,
-  partialPrefetching: true,
+  cacheComponents: false,
+  partialPrefetching: false,
   turbopack: {
     rules: {
       "*.css": {
@@ -26,6 +29,25 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  async redirects() {
+    return [
+      {
+        source: "/how-it-works",
+        destination: "/about#process",
+        permanent: true,
+      },
+      {
+        source: "/account/orders",
+        destination: "/orders",
+        permanent: true,
+      },
+      {
+        source: "/signin",
+        destination: "/signup",
+        permanent: true,
+      },
+    ];
   },
 };
 

@@ -7,12 +7,12 @@ export function MissionSection() {
   const [activeHeroTab, setActiveHeroTab] = useState<"after" | "before">("after");
 
   return (
-    <section id="how-it-works" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12 lg:py-20">
+    <section id="how-it-works" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Left Column: Photo Comparison */}
           <div className="relative lg:col-span-6">
-            <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/[0.08] bg-neutral-900 shadow-2xl">
+            <div className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-neutral-900 shadow-2xl hover:border-white/20 transition-all duration-300">
               <div className="relative aspect-[4/3] w-full">
                 <Image
                   src={
@@ -55,10 +55,8 @@ export function MissionSection() {
 
           {/* Right Column: Steps */}
           <div className="lg:col-span-6 lg:pl-4">
-            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
-              How It Works
-            </span>
-            <h2 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+          
+            <h2 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               Deliver Unmatched Luxury Performance
             </h2>
             <p className="mt-1 text-base sm:text-lg font-light text-neutral-300 lg:text-xl">

@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
+import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
-import { StudioProvider } from "@/context/StudioContext";
+import { Providers } from "@/components/providers";
+import { AmbientGlow } from "@/components/layout/AmbientGlow";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SearchModal } from "@/components/layout/SearchModal";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { SignInModal } from "@/components/layout/SignInModal";
+import { Toaster } from "sonner";
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "POSTER GEN — Bespoke Automotive Art & Fine Art Prints",
@@ -23,16 +39,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full antialiased dark scroll-smooth">
-      <body className="min-h-full flex flex-col bg-bg-primary text-foreground selection:bg-brand selection:text-white font-sans">
-        <StudioProvider>
-          {/* Ambient Glows */}
-          <div className="pointer-events-none fixed inset-0 z-0">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-b from-brand/10 via-transparent to-transparent blur-[140px] opacity-70" />
-            <div className="absolute top-[1400px] left-1/4 w-[600px] h-[600px] bg-white/[0.02] blur-[150px]" />
-            <div className="absolute top-[2800px] right-1/4 w-[700px] h-[600px] bg-brand/5 blur-[160px]" />
-          </div>
-
+    <html lang="en" className="h-full antialiased dark scroll-smooth" suppressHydrationWarning>
+      <body
+        className={`${barlowCondensed.variable} ${inter.variable} min-h-full flex flex-col bg-bg-primary text-foreground selection:bg-brand selection:text-white font-sans`}
+        suppressHydrationWarning
+      >
+        <Providers>
+          <AmbientGlow />
           <Navbar />
           <main className="relative z-10 flex-1">{children}</main>
           <Footer />
@@ -41,7 +54,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SearchModal />
           <CartDrawer />
           <SignInModal />
-        </StudioProvider>
+          <Toaster
+            position="top-right"
+            theme="dark"
+            richColors
+            closeButton
+            toastOptions={{
+              className: "font-sans",
+              style: {
+                background: "#0F1012",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                color: "#FFFFFF",
+              },
+            }}
+          />
+        </Providers>
       </body>
     </html>
   );

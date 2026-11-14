@@ -73,7 +73,7 @@ export function TemplatePreviewModal({
       }}
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 p-3 sm:p-4 backdrop-blur-md animate-in fade-in duration-200"
     >
-      <div className="relative w-full max-w-[340px] sm:max-w-sm md:max-w-[400px] max-h-[92vh] flex flex-col rounded-2xl sm:rounded-3xl border border-white/15 bg-[#0F1115] p-3.5 sm:p-5 shadow-2xl shadow-black/95 text-left animate-in zoom-in-95 duration-200 overflow-y-auto">
+      <div className="relative w-full max-w-[340px] sm:max-w-sm md:max-w-[400px] max-h-[92vh] flex flex-col rounded-xl border border-white/[0.08] bg-[#0F1115] p-3.5 sm:p-5 shadow-2xl shadow-black/95 text-left animate-in zoom-in-95 duration-200 overflow-y-auto">
         {/* Top Header: Eyebrow + Close Button */}
         <div className="flex items-center justify-between pb-2.5 border-b border-white/[0.08] shrink-0">
           <div className="flex items-center gap-2">
@@ -97,7 +97,7 @@ export function TemplatePreviewModal({
         </div>
 
         {/* Large Artwork Poster Preview */}
-        <div className="relative aspect-[3/4] w-full max-h-[44vh] sm:max-h-[50vh] overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-black mt-3 shadow-lg shrink-0">
+        <div className="relative aspect-[3/4] w-full max-h-[44vh] sm:max-h-[50vh] overflow-hidden rounded-xl border border-white/[0.08] bg-black mt-3 shadow-lg shrink-0">
           <Image
             src={template.image}
             alt={template.name}
@@ -121,12 +121,19 @@ export function TemplatePreviewModal({
 
         {/* Template Meta */}
         <div className="mt-3 space-y-1 shrink-0">
-          <h3
-            id="template-preview-title"
-            className="text-base sm:text-lg font-bold text-white tracking-wide truncate"
-          >
-            {template.name}
-          </h3>
+          <div className="flex items-center justify-between gap-2">
+            <h3
+              id="template-preview-title"
+              className="font-sans normal-case text-base sm:text-lg font-bold text-white tracking-wide truncate"
+            >
+              {template.name}
+            </h3>
+            {template.formattedStartingPrice && (
+              <span className="text-xs sm:text-sm font-bold text-brand shrink-0">
+                From {template.formattedStartingPrice}
+              </span>
+            )}
+          </div>
           <p className="text-xs text-neutral-400 leading-relaxed line-clamp-2">
             {template.subtitle || template.description}
           </p>

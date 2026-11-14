@@ -1,3 +1,25 @@
+export type PrintSizeId = "a4" | "a3" | "12x18" | "a2";
+export type PaperGsmId = "200gsm" | "250gsm" | "300gsm";
+
+export interface PrintSizeOption {
+  id: PrintSizeId;
+  name: string;
+  dimensions: string;
+}
+
+export interface PaperGsmOption {
+  id: PaperGsmId;
+  name: string;
+  label: string;
+}
+
+export interface SizeGsmPrice {
+  size: PrintSizeId;
+  gsm: PaperGsmId;
+  price: number;
+  formattedPrice: string;
+}
+
 export interface Template {
   id: string;
   slug: string;
@@ -12,6 +34,11 @@ export interface Template {
   features?: string[];
   supportsCustomText?: boolean;
   recommendedAspect?: string;
+  availableSizes?: PrintSizeOption[];
+  availableGsm?: PaperGsmOption[];
+  pricing?: SizeGsmPrice[];
+  startingPrice?: number;
+  formattedStartingPrice?: string;
 }
 
 export interface PrintSize {
@@ -40,7 +67,7 @@ export interface User {
   email: string;
 }
 
-export type StudioState = "configure" | "auth_prompt" | "generating" | "review";
+export type StudioState = "configure" | "generating" | "review";
 
 export type GenerationJobStatus = "queued" | "processing" | "completed";
 
@@ -50,14 +77,30 @@ export interface ArtworkSelection {
   quantity: number;
 }
 
+export interface GeneratedArtwork {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: string;
+  image: string;
+  badge: string;
+  size: string;
+  quantity: number;
+  selected: boolean;
+}
+
 export interface CartItem {
   id: string;
   title: string;
   size: string;
+  gsm?: string;
   dimensions: string;
   price: number;
   quantity: number;
   total: number;
   isCombined: boolean;
   image: string;
+  currency?: string;
+  formattedPrice?: string;
+  templateSlug?: string;
 }

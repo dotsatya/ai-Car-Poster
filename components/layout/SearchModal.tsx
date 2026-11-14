@@ -27,8 +27,14 @@ export function SearchModal() {
   });
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/85 pt-20 px-4 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl rounded-2xl border border-white/15 bg-bg-primary p-4 sm:p-6 shadow-2xl">
+    <div
+      onClick={() => setIsSearchOpen(false)}
+      className="fixed inset-0 z-[9999] flex items-start justify-center bg-black/85 pt-20 px-4 backdrop-blur-md overflow-y-auto"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative my-4 w-full max-w-2xl rounded-xl border border-white/[0.08] bg-bg-primary p-4 sm:p-6 shadow-2xl hover:border-white/20 transition-all duration-300"
+      >
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div className="flex items-center gap-3 flex-1">
             <Search size={18} className="text-neutral-400 shrink-0" />
@@ -59,7 +65,7 @@ export function SearchModal() {
               onClick={() => {
                 toggleTemplate(tpl.id);
                 setIsSearchOpen(false);
-                router.push("/#studio");
+                router.push("/studio");
               }}
               className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.04] p-3 transition-colors hover:border-brand/40 hover:bg-white/[0.04]"
             >
