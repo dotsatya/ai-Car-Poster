@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, X, Trash2, Plus, Minus } from "lucide-react";
-import { toast } from "sonner";
-import { useStudio } from "@/context/StudioContext";
+import { useCart } from "@/context/CartContext";
 
 export function CartDrawer() {
   const {
@@ -14,7 +13,7 @@ export function CartDrawer() {
     cartSubtotal,
     removeDirectCartItem,
     updateDirectCartQuantity,
-  } = useStudio();
+  } = useCart();
 
   if (!isCartOpen) return null;
 
@@ -162,18 +161,15 @@ export function CartDrawer() {
         </div>
 
         <div className="border-t border-white/10 pt-4">
-          <button
-            onClick={() => {
-              setIsCartOpen(false);
-              toast.success("Order Checkout Initialized", {
-                description: `Prototype checkout for $${cartSubtotal + 25} with archival museum packaging.`,
-              });
-            }}
-            disabled={cartItems.length === 0}
-            className="w-full rounded-xl bg-brand hover:bg-brand-hover py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-40 disabled:hover:scale-100"
+          <Link
+            href="/checkout"
+            onClick={() => setIsCartOpen(false)}
+            className={`w-full inline-flex items-center justify-center rounded-xl bg-brand hover:bg-brand-hover py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
+              cartItems.length === 0 ? "opacity-40 pointer-events-none" : ""
+            }`}
           >
-            Proceed to Checkout (${cartItems.length > 0 ? cartSubtotal + 25 : 0})
-          </button>
+            Proceed to Checkout ({hasInrItems ? `₹${(cartSubtotal + 199).toLocaleString("en-IN")}` : `$${cartSubtotal + 25}`})
+          </Link>
         </div>
       </div>
     </div>

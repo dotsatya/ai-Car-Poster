@@ -3,7 +3,7 @@
 import { HeroSection } from "@/components/home/HeroSection";
 import { TemplatesShowcaseSection } from "@/components/home/TemplatesShowcaseSection";
 import { StorySection } from "@/components/home/StorySection";
-import { MissionSection } from "@/components/how-it-works/MissionSection";
+import { MissionSection } from "@/components/home/MissionSection";
 import { CraftsmanshipSection } from "@/components/home/CraftsmanshipSection";
 
 export default function Home() {

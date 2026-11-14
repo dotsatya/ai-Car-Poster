@@ -41,10 +41,7 @@
   --radius: 0.75rem;
 }
 
-/* =========================================
-   TAILWIND CSS V4 THEME MAPPING
-========================================= */
-
+/* Tailwind CSS v4 Theme Mapping */
 @theme inline {
   /* Backgrounds */
   --color-bg-primary: var(--bg-primary);
@@ -87,10 +84,7 @@
   --radius-lg: var(--radius);
 }
 
-/* =========================================
-   GLOBAL BASE STYLES
-========================================= */
-
+/* Global Base Styles */
 * {
   box-sizing: border-box;
 }
@@ -107,7 +101,7 @@ body {
   overflow-x: hidden;
 }
 
-/* globals.css */
+/* Headings Typography */
 h1, h2, h3 {
   font-family: var(--font-heading);
   text-transform: uppercase;
@@ -121,19 +115,13 @@ h1, h2, h3 {
   letter-spacing: 0.02em;
 }
 
-/* =========================================
-   TEXT SELECTION
-========================================= */
-
+/* Text Selection */
 ::selection {
   background-color: var(--brand);
   color: var(--brand-foreground);
 }
 
-/* =========================================
-   SCROLLBAR
-========================================= */
-
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -151,11 +139,7 @@ h1, h2, h3 {
   background-color: var(--brand-hover);
 }
 
-
-/* =========================================
-   ACCESSIBILITY
-========================================= */
-
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

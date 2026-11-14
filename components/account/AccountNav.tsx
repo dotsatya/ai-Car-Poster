@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, MapPin, Package, Heart, Sparkles } from "lucide-react";
-import { useStudio } from "@/context/StudioContext";
+import { User, MapPin, Package, Heart, Settings, Scroll } from "lucide-react";
+import { useAppAuth } from "@/lib/auth";
 
 export function AccountNav() {
   const pathname = usePathname();
-  const { user } = useStudio();
+  const { user } = useAppAuth();
 
   const avatarLetter = user?.email
     ? user.email.trim().charAt(0).toUpperCase()
@@ -15,10 +15,11 @@ export function AccountNav() {
 
   const tabs = [
     { label: "Overview", href: "/account", icon: User },
-    { label: "Generated Posters", href: "/account/generated", icon: Sparkles },
-    { label: "My Orders", href: "/orders", icon: Package },
+    { label: "Generated Posters", href: "/account/generated", icon: Scroll   },
+    { label: "My Orders", href: "/account/orders", icon: Package },
     { label: "Wishlist", href: "/account/wishlist", icon: Heart },
     { label: "My Addresses", href: "/account/addresses", icon: MapPin },
+    { label: "Settings", href: "/account/settings", icon: Settings },
   ];
 
   return (
@@ -62,7 +63,7 @@ export function AccountNav() {
             const isActive =
               pathname === tab.href ||
               (tab.href === "/account" && pathname === "/account") ||
-              (tab.href === "/orders" && (pathname === "/orders" || pathname === "/account/orders"));
+              (tab.href === "/account/orders" && pathname.startsWith("/account/orders"));
 
             return (
               <Link

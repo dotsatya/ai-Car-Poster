@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Package, Heart, Truck, Sparkles } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
+import { useAppAuth } from "@/lib/auth";
 import { AccountNav } from "@/components/account/AccountNav";
 
 const FAVOURITES_EVENT = "poster_gen_favourites_changed";
@@ -28,7 +29,8 @@ function getFavouritesRaw(): string {
 }
 
 export default function AccountPage() {
-  const { user, setIsSignInOpen, generatedArtworks } = useStudio();
+  const { user, setIsSignInOpen } = useAppAuth();
+  const { generatedArtworks } = useStudio();
 
   const favouritesRaw = useSyncExternalStore(
     subscribeFavourites,
@@ -99,7 +101,7 @@ export default function AccountPage() {
         {/* Quick Summary Metric Cards: Active Shipments, Delivered Prints, Wishlist Posters, Generated Posters */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <Link
-            href="/orders"
+            href="/account/orders"
             className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer"
           >
             <div className="flex items-center justify-between text-neutral-400">
@@ -111,7 +113,7 @@ export default function AccountPage() {
           </Link>
 
           <Link
-            href="/orders"
+            href="/account/orders"
             className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer"
           >
             <div className="flex items-center justify-between text-neutral-400">

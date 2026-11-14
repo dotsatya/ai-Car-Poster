@@ -3,10 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import { X, Mail, KeyRound, ArrowRight, ArrowLeft, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
-import { useStudio } from "@/context/StudioContext";
+import { useAppAuth } from "@/lib/auth";
 
 export function SignInModal() {
-  const { isSignInOpen, setIsSignInOpen, signIn } = useStudio();
+  const { isSignInOpen, setIsSignInOpen, signIn } = useAppAuth();
   const [step, setStep] = useState<"email" | "otp">("email");
   const [emailInput, setEmailInput] = useState("");
   const [otpDigits, setOtpDigits] = useState<string[]>(["", "", "", ""]);

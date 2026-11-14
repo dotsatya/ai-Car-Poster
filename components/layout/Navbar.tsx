@@ -16,16 +16,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
-import { SearchModal } from "./SearchModal";
-import { CartDrawer } from "./CartDrawer";
-import { SignInModal } from "./SignInModal";
+import { useAppAuth } from "@/lib/auth";
 
 export function Navbar() {
   const pathname = usePathname();
+  const { user, signOut, setIsSignInOpen } = useAppAuth();
   const {
-    user,
-    signOut,
-    setIsSignInOpen,
     setIsCartOpen,
     setIsSearchOpen,
     cartItems,
@@ -220,7 +216,7 @@ export function Navbar() {
                     </Link>
 
                     <Link
-                      href="/orders"
+                      href="/account/orders"
                       onClick={() => setIsUserMenuOpen(false)}
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
@@ -388,7 +384,7 @@ export function Navbar() {
                     </Link>
 
                     <Link
-                      href="/orders"
+                      href="/account/orders"
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.04]"
                     >
@@ -442,11 +438,6 @@ export function Navbar() {
           </div>
         </div>
       )}
-
-      {/* Modals & Drawers */}
-      <SearchModal />
-      <CartDrawer />
-      <SignInModal />
     </header>
   );
 }

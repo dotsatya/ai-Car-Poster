@@ -57,12 +57,6 @@ export interface FaqItem {
   category?: string;
 }
 
-export interface SampleVehicle {
-  name: string;
-  image: string;
-  text: string;
-}
-
 export interface User {
   email: string;
 }
@@ -70,12 +64,6 @@ export interface User {
 export type StudioState = "configure" | "generating" | "review";
 
 export type GenerationJobStatus = "queued" | "processing" | "completed";
-
-export interface ArtworkSelection {
-  selected: boolean;
-  size: string;
-  quantity: number;
-}
 
 export interface GeneratedArtwork {
   id: string;

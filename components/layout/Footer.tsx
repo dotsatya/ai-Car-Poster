@@ -21,7 +21,7 @@ export function Footer() {
 
         {/* Minimal Navigation Links */}
         <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
-          <Link href="/orders" className="text-neutral-400 hover:text-white transition-colors">
+          <Link href="/account/orders" className="text-neutral-400 hover:text-white transition-colors">
             Orders
           </Link>
           <Link href="/about" className="text-neutral-400 hover:text-white transition-colors">

@@ -34,18 +34,23 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/how-it-works",
-        destination: "/about#process",
+        destination: "/about",
         permanent: true,
       },
       {
-        source: "/account/orders",
-        destination: "/orders",
+        source: "/orders",
+        destination: "/account/orders",
         permanent: true,
+      },
+      {
+        source: "/signup",
+        destination: "/",
+        permanent: false,
       },
       {
         source: "/signin",
-        destination: "/signup",
-        permanent: true,
+        destination: "/",
+        permanent: false,
       },
     ];
   },

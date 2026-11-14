@@ -10,7 +10,6 @@ import { useStudio } from "@/context/StudioContext";
 
 interface TemplateCardProps {
   template: Template;
-  showDetailsLink?: boolean;
 }
 
 const FAVOURITES_EVENT = "poster_gen_favourites_changed";

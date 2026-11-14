@@ -31,26 +31,22 @@ export function HeroSection() {
         <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Left Column: Heading, Subheading & CTAs */}
           <div className="lg:col-span-6 xl:col-span-6 space-y-4 sm:space-y-6 lg:pr-4">
-            {/* Eyebrow */}
             <div className="inline-flex items-center gap-2">
               <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
                 AI-POWERED CAR POSTERS
               </span>
             </div>
 
-            {/* Headline */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-wide text-white leading-[1.05]">
               Turn Your Car Into <br className="hidden sm:inline" />
               <span>A Premium Poster</span>
             </h1>
 
-            {/* Subtitle */}
             <p className="text-xs sm:text-base lg:text-lg leading-relaxed text-neutral-400 max-w-xl">
               Upload your car photo, choose a design, and get stunning,
               print-ready automotive posters powered by AI.
             </p>
 
-            {/* Call to Actions */}
             <div className="pt-1.5 sm:pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5">
               <Link
                 href="/templates"
@@ -89,7 +85,6 @@ export function HeroSection() {
       {/* Bottom Features / Value Proposition Bar */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 w-full mt-6 sm:mt-8 lg:mt-10 pt-5 sm:pt-6 border-t border-white/[0.08]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-          {/* Feature 1: AI-Generated Designs */}
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
               <Sparkles className="h-5 w-5" />
@@ -104,7 +99,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Feature 2: Print-Ready Quality */}
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
               <Printer className="h-5 w-5" />
@@ -119,7 +113,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Feature 3: Premium Templates */}
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
               <LayoutGrid className="h-5 w-5" />
@@ -134,7 +127,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Feature 4: Worldwide Shipping */}
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
               <Package className="h-5 w-5" />

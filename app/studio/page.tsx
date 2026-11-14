@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import { toast } from "sonner";
 import { useStudio } from "@/context/StudioContext";
+import { useAppAuth } from "@/lib/auth";
 import {
   StudioConfigure,
   StudioGenerating,
@@ -10,10 +11,8 @@ import {
 } from "@/components/studio";
 
 export default function StudioPage() {
+  const { user, isSignInOpen, setIsSignInOpen } = useAppAuth();
   const {
-    user,
-    isSignInOpen,
-    setIsSignInOpen,
     selectedTemplates,
     uploadedPhoto,
     studioState,
@@ -23,9 +22,9 @@ export default function StudioPage() {
   } = useStudio();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Deferred generation queue: starts generation once modal sign-in succeeds
   const pendingGenerateRef = useRef(false);
 
-  // If the user signed in via the modal after clicking Generate, immediately start generation
   useEffect(() => {
     if (user && pendingGenerateRef.current) {
       pendingGenerateRef.current = false;
@@ -129,9 +128,6 @@ export default function StudioPage() {
           </div>
         </div>
 
-        {/* ========================================================
-            STATE 1: CONFIGURE & PHOTO UPLOAD (2-COLUMN REFERENCE LAYOUT)
-        ======================================================== */}
         {studioState === "configure" && (
           <StudioConfigure
             fileInputRef={fileInputRef}
@@ -139,14 +135,8 @@ export default function StudioPage() {
           />
         )}
 
-        {/* ========================================================
-            STATE 2: PARALLEL GENERATION SIMULATION
-        ======================================================== */}
         {studioState === "generating" && <StudioGenerating />}
 
-        {/* ========================================================
-            STATE 3: REVIEW PREVIEWS & PURCHASE SIZING
-        ======================================================== */}
         {studioState === "review" && (
           <GenaratePosterReview
             onBackToConfigure={() => setStudioState("configure")}

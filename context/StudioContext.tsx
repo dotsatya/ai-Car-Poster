@@ -1,16 +1,14 @@
 "use client";
 
 import React, { createContext, useContext, useState, useMemo, useSyncExternalStore } from "react";
-import { User, StudioState, GenerationJobStatus, ArtworkSelection, GeneratedArtwork, CartItem } from "@/types";
+import { User, StudioState, GenerationJobStatus, GeneratedArtwork, CartItem } from "@/types";
 import { TEMPLATES } from "@/data/templates";
 import { PRINT_SIZES } from "@/data/print-sizes";
 import { toast } from "sonner";
+import { useAppAuth } from "@/lib/auth";
 
 const TEMPLATES_STORAGE_KEY = "poster_gen_selected_templates";
 const STORAGE_EVENT = "poster_gen_templates_changed";
-
-const USER_STORAGE_KEY = "poster_gen_auth_user";
-const USER_STORAGE_EVENT = "poster_gen_auth_changed";
 
 const GENERATED_STORAGE_KEY = "poster_gen_generated_artworks";
 const GENERATED_STORAGE_EVENT = "poster_gen_generated_changed";
@@ -91,43 +89,6 @@ export const DEFAULT_GENERATED_ARTWORKS: GeneratedArtwork[] = [
   },
 ];
 
-function subscribeUser(callback: () => void) {
-  if (typeof window === "undefined") return () => {};
-  window.addEventListener("storage", callback);
-  window.addEventListener(USER_STORAGE_EVENT, callback);
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener(USER_STORAGE_EVENT, callback);
-  };
-}
-
-function getUserSnapshot(): string {
-  if (typeof window === "undefined") return "";
-  try {
-    return localStorage.getItem(USER_STORAGE_KEY) || "";
-  } catch {
-    return "";
-  }
-}
-
-function getServerUserSnapshot(): string {
-  return "";
-}
-
-function saveUserToStorage(user: User | null) {
-  if (typeof window === "undefined") return;
-  try {
-    if (user && user.email) {
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify({ email: user.email.trim() }));
-    } else {
-      localStorage.removeItem(USER_STORAGE_KEY);
-    }
-    window.dispatchEvent(new Event(USER_STORAGE_EVENT));
-  } catch (e) {
-    console.warn("Could not save user to localStorage", e);
-  }
-}
-
 function subscribeTemplates(callback: () => void) {
   if (typeof window === "undefined") return () => {};
   window.addEventListener("storage", callback);
@@ -166,9 +127,9 @@ function saveTemplatesToStorage(templates: string[]) {
 }
 
 interface StudioContextType {
-  // Auth
+  // Auth from app auth provider
   user: User | null;
-  signIn: (email: string, password: string) => { success: boolean; error?: string };
+  signIn: (email: string, password?: string) => { success: boolean; error?: string };
   signOut: () => void;
   isSignInOpen: boolean;
   setIsSignInOpen: (open: boolean) => void;
@@ -194,13 +155,10 @@ interface StudioContextType {
   studioState: StudioState;
   setStudioState: (state: StudioState) => void;
   generationProgress: Record<string, GenerationJobStatus>;
-  combinedStatus: "idle" | "queued" | "processing" | "completed";
   startGenerationPipeline: () => void;
-  generateCombined: () => void;
 
   // Review & Cart
   generatedArtworks: GeneratedArtwork[];
-  selectedArtworks: Record<string, ArtworkSelection>;
   toggleArtworkSelection: (id: string) => void;
   updateArtworkSize: (id: string, size: string) => void;
   updateArtworkQuantity: (id: string, delta: number) => void;
@@ -216,41 +174,19 @@ const StudioContext = createContext<StudioContextType | undefined>(undefined);
 const emptySubscribe = () => () => {};
 
 export function StudioProvider({ children }: { children: React.ReactNode }) {
-  // Modal & Navigation States
-  const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const { user, signIn, signOut: authSignOut, isSignInOpen, setIsSignInOpen } = useAppAuth();
+
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Hydration-safe client mount detection (clean React 19 pattern without setState in effect)
+  // Client hydration check
   const isMounted = useSyncExternalStore(
     emptySubscribe,
     () => true,
     () => false
   );
 
-  // Authentication: Synchronized with localStorage (persists after signup until explicit sign out)
-  const rawStoredUser = useSyncExternalStore(
-    subscribeUser,
-    getUserSnapshot,
-    getServerUserSnapshot
-  );
-
-  const user: User | null = useMemo(() => {
-    if (!isMounted || !rawStoredUser) return null;
-    try {
-      const parsed = JSON.parse(rawStoredUser);
-      if (parsed && typeof parsed.email === "string" && parsed.email.trim().length > 0) {
-        return { email: parsed.email.trim() };
-      }
-    } catch {
-      if (typeof rawStoredUser === "string" && rawStoredUser.includes("@")) {
-        return { email: rawStoredUser.trim() };
-      }
-    }
-    return null;
-  }, [isMounted, rawStoredUser]);
-
-  // Selections: Synchronized with localStorage (defaults to empty [])
+  // Template selections synced with localStorage
   const rawStoredTemplates = useSyncExternalStore(
     subscribeTemplates,
     getTemplatesSnapshot,
@@ -266,9 +202,7 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
           .filter((id) => typeof id === "string" && TEMPLATES.some((t) => t.id === id))
           .slice(0, 3);
       }
-    } catch {
-      // Invalid JSON in localStorage
-    }
+    } catch {}
     return [];
   }, [isMounted, rawStoredTemplates]);
 
@@ -276,10 +210,9 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   const [vehicleName, setVehicleName] = useState<string>("");
   const [customText, setCustomText] = useState<string>("");
 
-  // Workflow State
   const [studioState, setStudioState] = useState<StudioState>("configure");
   const [generationProgress, setGenerationProgress] = useState<Record<string, GenerationJobStatus>>({});
-  const [combinedStatus, setCombinedStatus] = useState<"idle" | "queued" | "processing" | "completed">("idle");
+
   const rawStoredGenerated = useSyncExternalStore(
     subscribeGenerated,
     getGeneratedSnapshot,
@@ -310,50 +243,25 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  // Auth Methods
-  const signIn = (email: string, password: string) => {
-    const trimmed = email.trim();
-    if (!trimmed) {
-      return { success: false, error: "Please enter your email address." };
-    }
-    if (password.trim() !== "0000") {
-      return { success: false, error: "Invalid verification code. Enter demo OTP: 0000." };
-    }
-    saveUserToStorage({ email: trimmed });
-    setIsSignInOpen(false);
-    toast.success("Welcome to Poster Gen", {
-      description: `Authenticated as ${trimmed}`,
-    });
-    return { success: true };
-  };
-
   const signOut = () => {
-    saveUserToStorage(null);
+    authSignOut();
     setStudioState("configure");
     setGenerationProgress({});
-    setCombinedStatus("idle");
-    toast.info("Signed Out", {
-      description: "You have been signed out of your atelier account.",
-    });
   };
 
-  // Template toggle in selection bar (purely configures up to 3 templates for generation, DOES NOT ADD TO CART)
   const toggleTemplate = (id: string) => {
     const template = TEMPLATES.find((t) => t.id === id);
     const templateName = template?.name || "Template";
 
-    // 1. If template is already selected, remove it from selection bar
     if (selectedTemplates.includes(id)) {
       const next = selectedTemplates.filter((t) => t !== id);
       saveTemplatesToStorage(next);
-
       toast.info(`Removed "${templateName}"`, {
         description: `${next.length} of 3 templates selected for studio`,
       });
       return;
     }
 
-    // 2. If 3 are already selected, warn the user
     if (selectedTemplates.length >= 3) {
       toast.warning("Maximum 3 Templates Reached", {
         description: "You can select up to 3 templates for generation. Please remove one before adding another design.",
@@ -361,10 +269,8 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    // 3. Otherwise, add the template to selection bar
     const next = [...selectedTemplates, id];
     saveTemplatesToStorage(next);
-
     toast.success(`Selected "${templateName}"`, {
       description: `${next.length} of 3 template${next.length > 1 ? "s" : ""} selected for studio generation`,
     });
@@ -446,7 +352,7 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     ];
   };
 
-  // AI Generation Pipeline: Generates 4 pictures
+  // Simulates progressive AI generation queue
   const startGenerationPipeline = () => {
     setStudioState("generating");
 
@@ -478,17 +384,6 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     }, totalTime);
   };
 
-  const generateCombined = () => {
-    setCombinedStatus("queued");
-    setTimeout(() => {
-      setCombinedStatus("processing");
-    }, 600);
-    setTimeout(() => {
-      setCombinedStatus("completed");
-    }, 2200);
-  };
-
-  // Toggling selection on a generated picture adds/removes it from the Studio Print Cart
   const toggleArtworkSelection = (id: string) => {
     setGeneratedArtworks((prev) =>
       prev.map((art) => {
@@ -527,20 +422,7 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  // Backwards compatibility for components referencing selectedArtworks
-  const selectedArtworks: Record<string, ArtworkSelection> = useMemo(() => {
-    const record: Record<string, ArtworkSelection> = {};
-    generatedArtworks.forEach((art) => {
-      record[art.id] = {
-        selected: art.selected,
-        size: art.size,
-        quantity: art.quantity,
-      };
-    });
-    return record;
-  }, [generatedArtworks]);
-
-  // Direct Template Cart Items (for configured size & GSM purchases)
+  // Direct template purchases for size & GSM
   const [directCartItems, setDirectCartItems] = useState<CartItem[]>([]);
 
   const addDirectCartItem = (newItem: Omit<CartItem, "total">) => {
@@ -596,7 +478,6 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  // Cart calculations: ONLY selected generated posters are added to the cart
   const studioCartItems: CartItem[] = generatedArtworks
     .filter((art) => art.selected)
     .map((art) => {
@@ -643,11 +524,8 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
         studioState,
         setStudioState,
         generationProgress,
-        combinedStatus,
         startGenerationPipeline,
-        generateCombined,
         generatedArtworks,
-        selectedArtworks,
         toggleArtworkSelection,
         updateArtworkSize,
         updateArtworkQuantity,

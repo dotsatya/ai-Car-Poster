@@ -1,15 +1,9 @@
 "use client";
 
 import React from "react";
+import { AuthProvider } from "@/lib/auth";
 import { StudioProvider } from "@/context/StudioContext";
-
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
-
-export function CartProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
+import { CartProvider } from "@/context/CartContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
