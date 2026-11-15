@@ -21,40 +21,30 @@ export default function AccountSettingsPage() {
     <div className="min-h-screen bg-bg-primary pb-24">
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-8 sm:py-10">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
         {/* Subsection Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex items-start sm:items-center justify-between gap-3 mb-3.5 sm:mb-6">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold uppercase tracking-wider text-white">
+            <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
               Account Settings
             </h1>
-            <p className="text-xs sm:text-sm text-neutral-400 mt-1">
-              Manage your personal credentials, communication preferences, and security settings.
-            </p>
+      
           </div>
 
-          <div className="flex items-center gap-2 self-start sm:self-auto">
-            <button
-              type="button"
-              onClick={handleSave}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
-            >
-              <Check className="h-3.5 w-3.5" />
-              <span>Save Changes</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Sub-bar metadata row */}
-        <div className="flex items-center justify-between text-xs text-neutral-400 mb-6">
-          <span>Security &amp; Preferences</span>
-          <span>Verified Atelier Account</span>
+          <button
+            type="button"
+            onClick={handleSave}
+            className="shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl bg-brand hover:bg-brand-hover px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
+          >
+            <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+            <span>Save Changes</span>
+          </button>
         </div>
 
         {/* Settings Cards Grid */}
-        <div className="space-y-6 max-w-4xl">
+        <div className="space-y-4 sm:space-y-6 max-w-4xl">
           {/* Profile & Credentials */}
-          <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-5 sm:p-6 hover:border-white/20 transition-all duration-300">
+          <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-3.5 sm:p-5 hover:border-white/20 transition-all duration-300">
             <div className="flex items-center gap-2.5 mb-4">
               <User className="h-4 w-4 text-brand" />
               <h2 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white">

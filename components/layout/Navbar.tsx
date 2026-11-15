@@ -14,6 +14,7 @@ import {
   Heart,
   LogOut,
   Sparkles,
+  Scroll,
 } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
 import { useAppAuth } from "@/lib/auth";
@@ -28,21 +29,36 @@ export function Navbar() {
   } = useStudio();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isMobileUserMenuOpen, setIsMobileUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const mobileUserMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on outside click or Escape key
+  // Close dropdowns on outside click or Escape key
   useEffect(() => {
-    if (!isUserMenuOpen) return;
+    if (!isUserMenuOpen && !isMobileUserMenuOpen) return;
 
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      if (
+        isUserMenuOpen &&
+        userMenuRef.current &&
+        !userMenuRef.current.contains(target)
+      ) {
         setIsUserMenuOpen(false);
+      }
+      if (
+        isMobileUserMenuOpen &&
+        mobileUserMenuRef.current &&
+        !mobileUserMenuRef.current.contains(target)
+      ) {
+        setIsMobileUserMenuOpen(false);
       }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsUserMenuOpen(false);
+        setIsMobileUserMenuOpen(false);
       }
     };
 
@@ -55,7 +71,7 @@ export function Navbar() {
       document.removeEventListener("touchstart", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isUserMenuOpen]);
+  }, [isUserMenuOpen, isMobileUserMenuOpen]);
 
   const navLinks = [
     { label: "Templates", href: "/templates" },
@@ -301,21 +317,128 @@ export function Navbar() {
             )}
           </button>
 
-          {/* Mobile User Avatar Shortcut */}
+          {/* Mobile User Avatar with Dedicated Account Dropdown */}
           {user && (
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-neutral-800 to-neutral-900 border border-brand/50 text-white font-bold text-xs shadow-sm cursor-pointer"
-              title={user.email}
-            >
-              <span>{avatarLetter}</span>
-            </button>
+            <div className="relative" ref={mobileUserMenuRef}>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsMobileUserMenuOpen(!isMobileUserMenuOpen);
+                }}
+                aria-expanded={isMobileUserMenuOpen}
+                aria-haspopup="true"
+                aria-label="User Account Menu"
+                className={`flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-neutral-800 to-neutral-900 border text-white font-bold text-xs shadow-sm transition-all duration-200 cursor-pointer ${
+                  isMobileUserMenuOpen
+                    ? "border-brand ring-2 ring-brand/40 shadow-brand/20 scale-105"
+                    : "border-brand/50 hover:border-brand hover:scale-105"
+                }`}
+                title={user.email}
+              >
+                <span>{avatarLetter}</span>
+              </button>
+
+              {/* Dedicated Mobile Account Dropdown Menu */}
+              {isMobileUserMenuOpen && (
+                <div
+                  role="menu"
+                  className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] rounded-xl border border-white/[0.08] bg-[#121215]/98 p-1.5 shadow-2xl backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150"
+                >
+                  {/* Dropdown Header: Avatar + User Email */}
+                  <div className="flex items-center gap-2.5 px-3 py-2.5 border-b border-white/[0.08]">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 border border-brand/30 text-white font-bold text-xs shadow-inner">
+                      {avatarLetter}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-semibold text-white truncate" title={user.email}>
+                        {user.email}
+                      </p>
+                      <p className="text-[10px] text-neutral-400 font-medium">
+                        Atelier Collector
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Menu Links in Serial Order */}
+                  <div className="py-1 space-y-0.5">
+                    <Link
+                      href="/account"
+                      onClick={() => setIsMobileUserMenuOpen(false)}
+                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      role="menuitem"
+                    >
+                      <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Account</span>
+                    </Link>
+
+                    <Link
+                      href="/account/generated"
+                      onClick={() => setIsMobileUserMenuOpen(false)}
+                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      role="menuitem"
+                    >
+                      <Scroll className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>Generated Posters</span>
+                    </Link>
+
+                    <Link
+                      href="/account/orders"
+                      onClick={() => setIsMobileUserMenuOpen(false)}
+                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      role="menuitem"
+                    >
+                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Orders</span>
+                    </Link>
+
+                    <Link
+                      href="/account/wishlist"
+                      onClick={() => setIsMobileUserMenuOpen(false)}
+                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      role="menuitem"
+                    >
+                      <Heart className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>Wishlist</span>
+                    </Link>
+
+                    <Link
+                      href="/account/addresses"
+                      onClick={() => setIsMobileUserMenuOpen(false)}
+                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      role="menuitem"
+                    >
+                      <MapPin className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Addresses</span>
+                    </Link>
+                  </div>
+
+                  {/* Sign Out Item */}
+                  <div className="pt-1 border-t border-white/[0.08]">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileUserMenuOpen(false);
+                        signOut();
+                      }}
+                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer text-left"
+                      role="menuitem"
+                    >
+                      <LogOut className="h-4 w-4 text-red-400 shrink-0" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
 
           {/* Mobile Hamburger Toggle */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              setIsMobileUserMenuOpen(false);
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }}
             className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white cursor-pointer"
             aria-label="Toggle menu"
           >
@@ -328,7 +451,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu (Three-bar icon) */}
       {isMobileMenuOpen && (
         <div className="border-b border-white/10 bg-bg-primary/95 px-4 py-4 md:hidden backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-1">
@@ -339,10 +462,10 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`rounded-xl px-3 py-2 text-xs sm:text-sm font-medium transition-colors ${
+                  className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium transition-colors ${
                     isActive
                       ? "bg-white/10 font-semibold text-white"
-                      : "hover:bg-white/[0.04] hover:text-white"
+                      : "hover:bg-white/[0.04] text-neutral-300 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -350,89 +473,42 @@ export function Navbar() {
               );
             })}
 
-            {/* Mobile User Section */}
-            <div className="pt-2 border-t border-white/10 mt-2">
+            {/* Additional Section: Account (if logged in) or Sign Up / Sign In (if not logged in) */}
+            <div className="pt-2.5 border-t border-white/10 mt-2">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400 block px-3.5 pb-1.5">
+                Account
+              </span>
+
               {user ? (
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/20 border border-brand/30 text-white font-bold text-xs">
-                      {avatarLetter}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-semibold text-white truncate">{user.email}</p>
-                      <p className="text-[10px] text-neutral-400">Atelier Member</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-0.5">
-                    <Link
-                      href="/account"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.04]"
-                    >
-                      <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Account</span>
-                    </Link>
-
-                    <Link
-                      href="/account/generated"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.04]"
-                    >
-                      <Sparkles className="h-4 w-4 text-brand shrink-0" />
-                      <span>Generated Posters</span>
-                    </Link>
-
-                    <Link
-                      href="/account/orders"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.04]"
-                    >
-                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Orders</span>
-                    </Link>
-
-                    <Link
-                      href="/account/wishlist"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.04]"
-                    >
-                      <Heart className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>Wishlist</span>
-                    </Link>
-
-                    <Link
-                      href="/account/addresses"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:text-white hover:bg-white/[0.04]"
-                    >
-                      <MapPin className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Addresses</span>
-                    </Link>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        signOut();
-                      }}
-                      className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-red-400 hover:bg-red-500/10 w-full text-left cursor-pointer mt-1"
-                    >
-                      <LogOut className="h-4 w-4 text-red-400 shrink-0" />
-                      <span>Sign Out</span>
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsSignInOpen(true);
-                  }}
-                  className="w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-brand font-bold bg-brand/10 hover:bg-brand/20 transition-colors text-center cursor-pointer"
+                <Link
+                  href="/account"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-between w-full rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer shadow-sm"
                 >
-                  Sign In
-                </button>
+                  <div className="flex items-center gap-2.5">
+                    <UserIcon className="h-4 w-4 text-brand" />
+                    <span>Account</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
+                    Enter Account →
+                  </span>
+                </Link>
+              ) : (
+                <div className="space-y-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsSignInOpen(true);
+                    }}
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-2.5 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                  >
+                    <span>Sign Up / Sign In</span>
+                  </button>
+                  <p className="text-[10px] text-center text-neutral-400">
+                    Sign in with one-time passcode to sync orders &amp; saved posters.
+                  </p>
+                </div>
               )}
             </div>
           </div>

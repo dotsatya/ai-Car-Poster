@@ -3,9 +3,9 @@
 import React, { createContext, useContext, useState, useMemo, useSyncExternalStore } from "react";
 import { User, StudioState, GenerationJobStatus, GeneratedArtwork, CartItem } from "@/types";
 import { TEMPLATES } from "@/data/templates";
-import { PRINT_SIZES } from "@/data/print-sizes";
 import { toast } from "sonner";
 import { useAppAuth } from "@/lib/auth";
+import { getAvailableSizesForArtwork } from "@/lib/templateSizes";
 
 const TEMPLATES_STORAGE_KEY = "poster_gen_selected_templates";
 const STORAGE_EVENT = "poster_gen_templates_changed";
@@ -53,6 +53,7 @@ export const DEFAULT_GENERATED_ARTWORKS: GeneratedArtwork[] = [
     size: "a2",
     quantity: 1,
     selected: false,
+    templateId: "porsche-911-gt3-rs-minimalist-spec",
   },
   {
     id: "gen-poster-2",
@@ -64,6 +65,7 @@ export const DEFAULT_GENERATED_ARTWORKS: GeneratedArtwork[] = [
     size: "a2",
     quantity: 1,
     selected: false,
+    templateId: "porsche-911-gt3-rs-racing-green-gold",
   },
   {
     id: "gen-poster-3",
@@ -72,9 +74,10 @@ export const DEFAULT_GENERATED_ARTWORKS: GeneratedArtwork[] = [
     category: "Heritage Racing",
     image: "/template photo/3.webp",
     badge: "Variation #03 · Heritage",
-    size: "a2",
+    size: "a3",
     quantity: 1,
     selected: false,
+    templateId: "porsche-carrera-gt-engineering-spec",
   },
   {
     id: "gen-poster-4",
@@ -86,6 +89,7 @@ export const DEFAULT_GENERATED_ARTWORKS: GeneratedArtwork[] = [
     size: "a2",
     quantity: 1,
     selected: false,
+    templateId: "porsche-911-turbo-s-shark-blue-cyber",
   },
 ];
 
@@ -299,6 +303,18 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     const hasNamedCar = vehicleName && !/^\d+$/.test(vehicleName.trim()) && vehicleName.trim().length > 1;
     const carLabel = hasNamedCar ? vehicleName.trim() : (t1?.subtitle || "bespoke vehicle");
 
+    const template1 = t1 || TEMPLATES[0];
+    const template2 = t2 || t1 || TEMPLATES[1];
+    const template3 = t3 || t1 || TEMPLATES[2];
+    const template4 = t1 || TEMPLATES[3] || TEMPLATES[0];
+
+    const getInitialSize = (template: typeof TEMPLATES[0]) => {
+      if (!template.availableSizes || template.availableSizes.length === 0) return "a2";
+      if (template.availableSizes.some((s) => s.id === "a2")) return "a2";
+      if (template.availableSizes.some((s) => s.id === "a3")) return "a3";
+      return template.availableSizes[0].id;
+    };
+
     return [
       {
         id: "gen-poster-1",
@@ -307,9 +323,10 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
         category: t1 ? t1.category : "Technical Spec",
         image: uploadedPhoto || t1?.image || fallbackImgs[0],
         badge: "Variation #01 · Minimalist",
-        size: "a2",
+        size: getInitialSize(template1),
         quantity: 1,
         selected: false,
+        templateId: template1.id,
       },
       {
         id: "gen-poster-2",
@@ -318,9 +335,10 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
         category: t2 ? t2.category : "Dark Atelier",
         image: t2?.image || fallbackImgs[1],
         badge: "Variation #02 · Shadow Box",
-        size: "a2",
+        size: getInitialSize(template2),
         quantity: 1,
         selected: false,
+        templateId: template2.id,
       },
       {
         id: "gen-poster-3",
@@ -329,9 +347,10 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
         category: t3 ? t3.category : "Heritage Racing",
         image: t3?.image || fallbackImgs[2],
         badge: "Variation #03 · Heritage",
-        size: "a2",
+        size: getInitialSize(template3),
         quantity: 1,
         selected: false,
+        templateId: template3.id,
       },
       {
         id: "gen-poster-4",
@@ -345,9 +364,10 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
         category: "Exhibition Cyber",
         image: fallbackImgs[3],
         badge: "Variation #04 · Master Render",
-        size: "a2",
+        size: getInitialSize(template4),
         quantity: 1,
         selected: false,
+        templateId: template4.id,
       },
     ];
   };
@@ -389,10 +409,11 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
       prev.map((art) => {
         if (art.id === id) {
           const nextSelected = !art.selected;
-          const sizeObj = PRINT_SIZES.find((s) => s.id === art.size) || PRINT_SIZES[3];
+          const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
+          const sizeObj = availableSizes.find((s) => s.id === art.size) || availableSizes[0];
           if (nextSelected) {
             toast.success(`Added to Cart: "${art.title}"`, {
-              description: `${sizeObj.label} (${sizeObj.dimensions}) · ${sizeObj.price}`,
+              description: `${sizeObj.name} (${sizeObj.dimensions}) · ${sizeObj.price}`,
             });
           } else {
             toast.info(`Removed from Cart: "${art.title}"`);
@@ -481,11 +502,12 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   const studioCartItems: CartItem[] = generatedArtworks
     .filter((art) => art.selected)
     .map((art) => {
-      const sizeObj = PRINT_SIZES.find((s) => s.id === art.size) || PRINT_SIZES[3];
+      const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
+      const sizeObj = availableSizes.find((s) => s.id === art.size) || availableSizes[0];
       return {
         id: art.id,
         title: art.title,
-        size: sizeObj.label,
+        size: sizeObj.name,
         dimensions: sizeObj.dimensions,
         price: sizeObj.priceNum,
         quantity: art.quantity,

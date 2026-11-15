@@ -75,6 +75,7 @@ export interface GeneratedArtwork {
   size: string;
   quantity: number;
   selected: boolean;
+  templateId?: string;
 }
 
 export interface CartItem {

@@ -31,53 +31,51 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
     <div className="min-h-screen bg-bg-primary pb-24">
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-8 sm:py-10">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
         {/* Back navigation */}
-        <div className="mb-6">
+        <div className="mb-3.5 sm:mb-6">
           <Link
             href="/account/orders"
-            className="inline-flex items-center gap-2 text-xs font-medium text-neutral-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-neutral-400 hover:text-white transition-colors"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-3.5 w-3.5" />
             <span>Back to All Orders</span>
           </Link>
         </div>
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex items-start sm:items-center justify-between gap-3 mb-4 sm:mb-6">
           <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-xl sm:text-2xl font-bold uppercase tracking-wider text-white">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
                 Order #{id || "PG-2026-911RS"}
               </h1>
-              <span className="rounded-full bg-brand/10 border border-brand/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand">
+              <span className="rounded-full bg-brand/10 border border-brand/30 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand">
                 In Transit
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-neutral-400 mt-1">
+            <p className="text-[11px] sm:text-xs text-neutral-400 mt-0.5">
               Archival giclée commission registered with Certificate of Authenticity.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => toast.success("Certificate downloaded", { description: "Verified archival print seal." })}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-3.5 py-2 text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span>Certificate PDF</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => toast.success("Certificate downloaded", { description: "Verified archival print seal." })}
+            className="shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer whitespace-nowrap"
+          >
+            <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+            <span>Certificate PDF</span>
+          </button>
         </div>
 
         {/* Content grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
           {/* Main Info */}
-          <div className="lg:col-span-8 space-y-6">
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-5 sm:p-6 space-y-5">
-              <div className="flex flex-col sm:flex-row gap-5 items-start">
-                <div className="relative aspect-[3/4] w-28 sm:w-36 rounded-xl overflow-hidden border border-white/[0.08] bg-black shrink-0">
+          <div className="lg:col-span-8 space-y-4 sm:space-y-6">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-3.5 sm:p-5 space-y-3.5">
+              <div className="flex flex-row gap-3 sm:gap-4 items-start">
+                <div className="relative aspect-[3/4] w-20 sm:w-28 rounded-lg sm:rounded-xl overflow-hidden border border-white/[0.08] bg-black shrink-0">
                   <Image
                     src="/template photo/1.webp"
                     alt="Porsche 911 GT3 RS Minimalist"
@@ -86,32 +84,32 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
                   />
                 </div>
 
-                <div className="flex-1 space-y-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand">
+                <div className="flex-1 space-y-1.5 min-w-0">
+                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-brand">
                     Commissioned Artwork
                   </span>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-sm sm:text-base font-bold text-white truncate">
                     Porsche 911 GT3 RS Minimalist
                   </h3>
-                  <p className="text-xs text-neutral-400">
+                  <p className="text-[11px] sm:text-xs text-neutral-400">
                     Chassis geometry &amp; clean typography on museum rag.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-3 pt-3">
-                    <div className="rounded-xl border border-white/[0.06] bg-black/40 p-2.5">
-                      <span className="text-[10px] uppercase tracking-wider text-neutral-400 block font-semibold">
+                  <div className="grid grid-cols-2 gap-2 pt-1.5">
+                    <div className="rounded-lg border border-white/[0.06] bg-black/40 p-2">
+                      <span className="text-[9px] uppercase tracking-wider text-neutral-400 block font-semibold">
                         Dimensions
                       </span>
-                      <span className="text-xs text-white font-medium mt-0.5 block">
+                      <span className="text-[11px] sm:text-xs text-white font-medium mt-0.5 block truncate">
                         A2 Gallery (42.0 × 59.4 cm)
                       </span>
                     </div>
 
-                    <div className="rounded-xl border border-white/[0.06] bg-black/40 p-2.5">
-                      <span className="text-[10px] uppercase tracking-wider text-neutral-400 block font-semibold">
+                    <div className="rounded-lg border border-white/[0.06] bg-black/40 p-2">
+                      <span className="text-[9px] uppercase tracking-wider text-neutral-400 block font-semibold">
                         Media Substrate
                       </span>
-                      <span className="text-xs text-white font-medium mt-0.5 block">
+                      <span className="text-[11px] sm:text-xs text-white font-medium mt-0.5 block truncate">
                         300 GSM Archival Cotton
                       </span>
                     </div>
@@ -121,10 +119,10 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
             </div>
 
             {/* Courier milestones */}
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-5 sm:p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Truck className="h-4 w-4 text-brand" />
-                <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-3.5 sm:p-5">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <Truck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-brand" />
+                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
                   Shipment Milestones
                 </h3>
               </div>

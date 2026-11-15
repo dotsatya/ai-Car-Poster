@@ -11,9 +11,10 @@ import {
   ShoppingBag,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
 } from "lucide-react";
-import { PRINT_SIZES } from "@/data/print-sizes";
 import { useStudio } from "@/context/StudioContext";
+import { getAvailableSizesForArtwork } from "@/lib/templateSizes";
 
 interface GenaratePosterReviewProps {
   onBackToConfigure: () => void;
@@ -24,6 +25,7 @@ const emptySubscribe = () => () => {};
 export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReviewProps) {
   const {
     generatedArtworks,
+    selectedTemplates,
     toggleArtworkSelection,
     updateArtworkSize,
     updateArtworkQuantity,
@@ -34,6 +36,32 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
   } = useStudio();
 
   const [inspectArtworkIndex, setInspectArtworkIndex] = useState<number | null>(null);
+  const [openSizeMenuId, setOpenSizeMenuId] = useState<string | null>(null);
+
+  // Close size popover on outside click or escape
+  useEffect(() => {
+    if (!openSizeMenuId) return;
+
+    const handlePointerDown = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && !target.closest(".size-menu-container")) {
+        setOpenSizeMenuId(null);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenSizeMenuId(null);
+      }
+    };
+
+    window.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [openSizeMenuId]);
 
   const isClient = useSyncExternalStore(
     emptySubscribe,
@@ -72,6 +100,12 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
   const selectedCount = generatedArtworks.filter((a) => a.selected).length;
   const currentArtwork =
     inspectArtworkIndex !== null ? generatedArtworks[inspectArtworkIndex] : null;
+
+  const modalSizes = currentArtwork
+    ? getAvailableSizesForArtwork(currentArtwork, selectedTemplates)
+    : [];
+  const modalCurrentSize =
+    modalSizes.find((s) => s.id === currentArtwork?.size) || modalSizes[0];
 
   const handlePrev = () => {
     if (inspectArtworkIndex === null) return;
@@ -120,8 +154,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
       {/* 4 Generated Pictures Grid */}
       <div className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {generatedArtworks.map((art, idx) => {
+          const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
           const currentSize =
-            PRINT_SIZES.find((s) => s.id === art.size) || PRINT_SIZES[3];
+            availableSizes.find((s) => s.id === art.size) || availableSizes[0];
           const itemTotal = currentSize.priceNum * art.quantity;
 
           return (
@@ -216,29 +251,105 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                   )}
                 </button>
 
-                {/* Sizing & Quantity Configuration (Active for all or selected) */}
-                <div className={`space-y-2 transition-opacity ${art.selected ? "opacity-100" : "opacity-60"}`}>
-                  {/* <div>
+                {/* Sizing & Quantity Configuration */}
+                <div className="space-y-2">
+                  {/* Size Selector Button & Popover */}
+                  <div className="relative size-menu-container">
                     <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mb-1">
                       <span>Print Size</span>
-                      <span className="text-neutral-500 font-mono">{currentSize.dimensions}</span>
+                      <span className="text-neutral-500 font-mono text-[9px]">{currentSize.dimensions}</span>
                     </div>
-                    <select
-                      value={art.size}
-                      onChange={(e) => updateArtworkSize(art.id, e.target.value)}
-                      className="w-full rounded-xl border border-white/15 bg-black/80 px-2.5 py-1.5 text-xs text-white focus:border-brand focus:outline-none cursor-pointer"
+
+                    <button
+                      type="button"
+                      onClick={() => setOpenSizeMenuId(openSizeMenuId === art.id ? null : art.id)}
+                      className={`w-full flex items-center justify-between gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs transition-all cursor-pointer group ${
+                        openSizeMenuId === art.id
+                          ? "border-brand bg-brand/10 ring-1 ring-brand/40 text-white shadow-sm"
+                          : "border-white/15 bg-black/60 hover:bg-black/90 hover:border-white/30 text-neutral-200"
+                      }`}
+                      title="Click to choose available size for this template"
                     >
-                      {PRINT_SIZES.map((size) => (
-                        <option
-                          key={size.id}
-                          value={size.id}
-                          className="bg-neutral-900 text-white"
-                        >
-                          {size.label} ({size.dimensions}) — {size.price}
-                        </option>
-                      ))}
-                    </select>
-                  </div> */}
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span className="font-bold text-white text-xs truncate">
+                          {currentSize.name}
+                        </span>
+                        <span className="text-[10px] text-neutral-400 font-mono hidden sm:inline truncate">
+                          ({currentSize.dimensions})
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
+                        <span className="font-mono font-bold text-brand text-xs">
+                          {currentSize.price}
+                        </span>
+                        <ChevronDown
+                          className={`h-3.5 w-3.5 text-neutral-400 transition-transform duration-200 group-hover:text-white ${
+                            openSizeMenuId === art.id ? "rotate-180 text-white" : ""
+                          }`}
+                        />
+                      </div>
+                    </button>
+
+                    {/* Available Sizes Dropdown Popover (Solid Opaque Background + Blur) */}
+                    {openSizeMenuId === art.id && (
+                      <div
+                        className="absolute left-0 right-0 bottom-full mb-1.5 z-50 rounded-xl border border-white/20 bg-[#15161c] p-2 shadow-2xl shadow-black/95 ring-1 ring-white/10 backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150"
+                        style={{ backgroundColor: "#15161c" }}
+                      >
+                        <div className="px-2 py-1 border-b border-white/[0.08] flex items-center justify-between text-[10px] text-neutral-400 uppercase font-semibold tracking-wider">
+                          <span>Available Sizes</span>
+                          <span className="text-brand font-mono text-[9px]">
+                            {availableSizes.length} option{availableSizes.length > 1 ? "s" : ""}
+                          </span>
+                        </div>
+
+                        <div className="mt-1 space-y-1 max-h-48 overflow-y-auto pr-0.5">
+                          {availableSizes.map((size) => {
+                            const isSelected = currentSize.id === size.id;
+                            return (
+                              <button
+                                key={size.id}
+                                type="button"
+                                onClick={() => {
+                                  updateArtworkSize(art.id, size.id);
+                                  setOpenSizeMenuId(null);
+                                }}
+                                className={`w-full flex items-center justify-between gap-2 rounded-lg px-2.5 py-1.5 text-left text-xs transition-all cursor-pointer ${
+                                  isSelected
+                                    ? "bg-brand/20 text-white border border-brand/50 font-semibold shadow-sm"
+                                    : "text-neutral-300 hover:bg-white/[0.08] hover:text-white border border-transparent"
+                                }`}
+                              >
+                                <div className="min-w-0">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="font-bold text-xs text-white">{size.name}</span>
+                                    {size.isPopular && (
+                                      <span className="rounded bg-brand/25 border border-brand/40 px-1 py-0.2 text-[8px] font-bold text-brand uppercase">
+                                        Popular
+                                      </span>
+                                    )}
+                                  </div>
+                                  <span className="text-[10px] text-neutral-400 font-mono block mt-0.5">
+                                    {size.dimensions}
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-1.5 shrink-0">
+                                  <span className="font-mono font-bold text-brand text-xs">
+                                    {size.price}
+                                  </span>
+                                  {isSelected ? (
+                                    <Check className="h-3.5 w-3.5 text-brand stroke-[2.5]" />
+                                  ) : (
+                                    <span className="w-3.5" />
+                                  )}
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Quantity & Unit Total */}
                   <div className="flex items-center justify-between pt-1">
@@ -316,10 +427,20 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-3 sm:p-5 md:p-8 backdrop-blur-xl animate-in fade-in duration-200"
           >
             <div className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-xl border border-white/[0.08] bg-[#0D0F13] p-4 sm:p-6 lg:p-7 shadow-2xl shadow-black/95 text-left animate-in zoom-in-95 duration-200">
+              {/* Mobile Floating Close Button */}
+              <button
+                type="button"
+                onClick={() => setInspectArtworkIndex(null)}
+                className="md:hidden absolute top-3 right-3 z-30 flex h-8 w-8 items-center justify-center rounded-full bg-black/80 border border-white/20 text-neutral-300 hover:text-white cursor-pointer"
+                title="Close preview (Esc)"
+              >
+                <X size={16} />
+              </button>
+
               <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-7 items-center">
                 {/* Left Column: Authentic 3:4 Portrait Poster Frame (object-cover, NO letterboxing) */}
                 <div className="md:col-span-6 lg:col-span-6 flex flex-col items-center">
-                  <div className="relative aspect-[3/4] w-full max-h-[56vh] sm:max-h-[62vh] overflow-hidden rounded-xl border border-white/[0.08] bg-black shadow-2xl shadow-black/95 group">
+                  <div className="relative aspect-[3/4] w-full max-h-[46vh] sm:max-h-[56vh] md:max-h-[62vh] overflow-hidden rounded-xl border border-white/[0.08] bg-black shadow-2xl shadow-black/95 group">
                     <Image
                       src={currentArtwork.image}
                       alt={currentArtwork.title}
@@ -411,7 +532,7 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                       <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mb-1">
                         <span>Fine Art Print Size</span>
                         <span className="text-neutral-500 font-mono">
-                          {PRINT_SIZES.find((s) => s.id === currentArtwork.size)?.dimensions}
+                          {modalCurrentSize?.dimensions}
                         </span>
                       </div>
                       <select
@@ -419,9 +540,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                         onChange={(e) => updateArtworkSize(currentArtwork.id, e.target.value)}
                         className="w-full rounded-xl border border-white/15 bg-neutral-900 px-3 py-2 text-xs text-white focus:border-brand focus:outline-none cursor-pointer"
                       >
-                        {PRINT_SIZES.map((size) => (
+                        {modalSizes.map((size) => (
                           <option key={size.id} value={size.id} className="bg-neutral-900 text-white">
-                            {size.label} ({size.dimensions}) — {size.price} {size.popular ? "★ Popular" : ""}
+                            {size.name} ({size.dimensions}) — {size.price} {size.isPopular ? "★ Popular" : ""}
                           </option>
                         ))}
                       </select>
@@ -456,7 +577,7 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                         <div className="text-base sm:text-lg font-bold text-white mt-0.5">
                           ₹
                           {(
-                            (PRINT_SIZES.find((s) => s.id === currentArtwork.size)?.priceNum || 1299) *
+                            (modalCurrentSize?.priceNum || 1299) *
                             currentArtwork.quantity
                           ).toLocaleString("en-IN")}
                         </div>

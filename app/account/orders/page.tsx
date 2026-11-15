@@ -301,43 +301,33 @@ export default function OrdersPage() {
   return (
     <div className="min-h-screen bg-bg-primary pb-24">
       <AccountNav />
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-8 sm:py-10">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
         {/* Subsection Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex items-start sm:items-center justify-between gap-3 mb-3.5 sm:mb-6">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold uppercase tracking-wider text-white">
-              Physical Prints &amp; Active Shipments
+            <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
+              Order History
             </h1>
-            <p className="text-xs sm:text-sm text-neutral-400 mt-1">
-              Track real-time Giclée curation, framing, and insured courier dispatch for your bespoke automotive fine art editions.
-            </p>
+      
           </div>
 
-          <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
-            <Link
-              href="/studio"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
-            >
-              <span>Make New Poster</span>
-              <ArrowUpRight size={13} />
-            </Link>
-          </div>
-        </div>
-
-        {/* Sub-bar metadata row */}
-        <div className="flex items-center justify-between text-xs text-neutral-400 mb-6">
-          <span>Showing {filteredOrders.length} order{filteredOrders.length !== 1 ? "s" : ""}</span>
-          <span>Insured DHL Express Fine Art Logistics</span>
+          <Link
+            href="/studio"
+            className="shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl bg-brand hover:bg-brand-hover px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
+          >
+            <span>New Poster</span>
+            <ArrowUpRight size={12} />
+          </Link>
         </div>
 
         {/* Filters & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
-          {/* Status Tabs */}
-          <div className="flex items-center gap-1.5 p-1 rounded-xl border border-white/10 bg-neutral-900/60 backdrop-blur-md overflow-x-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4 mb-4 sm:mb-6">
+          {/* Status Tabs without scrollbar track */}
+          <div className="flex items-center gap-1 p-0.5 sm:p-1 rounded-lg sm:rounded-xl border border-white/10 bg-neutral-900/60 backdrop-blur-md overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             <button
               type="button"
               onClick={() => setFilter("all")}
-              className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`rounded-md sm:rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 filter === "all"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white"
@@ -348,7 +338,7 @@ export default function OrdersPage() {
             <button
               type="button"
               onClick={() => setFilter("active")}
-              className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`rounded-md sm:rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 filter === "active"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white"
@@ -359,7 +349,7 @@ export default function OrdersPage() {
             <button
               type="button"
               onClick={() => setFilter("delivered")}
-              className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`rounded-md sm:rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 filter === "delivered"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white"
@@ -370,24 +360,24 @@ export default function OrdersPage() {
           </div>
 
           {/* Search Input */}
-          <div className="relative w-full sm:w-64 md:w-72">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-neutral-500" />
+          <div className="relative w-full sm:w-60 md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3 w-3 text-neutral-500" />
             <input
               type="text"
-              placeholder="Search by chassis or order ID..."
+              placeholder="Search order ID or vehicle..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-neutral-900/60 pl-9 pr-3.5 py-2 text-xs text-white placeholder-neutral-500 focus:border-brand focus:outline-none transition-all"
+              className="w-full rounded-lg sm:rounded-xl border border-white/10 bg-neutral-900/60 pl-8 pr-3 py-1.5 text-[11px] sm:text-xs text-white placeholder-neutral-500 focus:border-brand focus:outline-none transition-all"
             />
           </div>
         </div>
 
         {/* Orders List */}
         {filteredOrders.length === 0 ? (
-          <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-12 text-center hover:border-white/20 transition-all duration-300">
-            <Package className="mx-auto h-10 w-10 text-neutral-600 mb-3" />
-            <h3 className="text-base font-bold text-white">No Matching Commissions Found</h3>
-            <p className="mt-1 text-xs text-neutral-400 max-w-sm mx-auto">
+          <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-8 sm:p-12 text-center hover:border-white/20 transition-all duration-300">
+            <Package className="mx-auto h-8 w-8 text-neutral-600 mb-2" />
+            <h3 className="text-sm sm:text-base font-bold text-white">No Matching Commissions Found</h3>
+            <p className="mt-1 text-[11px] sm:text-xs text-neutral-400 max-w-sm mx-auto">
               No orders matched your filter. Try adjusting your search query or reset your status tabs.
             </p>
             <button
@@ -396,13 +386,13 @@ export default function OrdersPage() {
                 setFilter("all");
                 setSearchQuery("");
               }}
-              className="mt-4 inline-block text-xs font-semibold text-brand hover:underline cursor-pointer"
+              className="mt-3 inline-block text-xs font-semibold text-brand hover:underline cursor-pointer"
             >
               Reset Filters
             </button>
           </div>
         ) : (
-          <div className="space-y-5 sm:space-y-6">
+          <div className="space-y-3.5 sm:space-y-5">
             {filteredOrders.map((order) => {
               const isInTransit = order.status === "in_transit";
               const isProcessing = order.status === "processing";
@@ -411,22 +401,22 @@ export default function OrdersPage() {
               return (
                 <div
                   key={order.id}
-                  className="group rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-white/25 hover:shadow-2xl hover:shadow-black/80 hover:-translate-y-0.5 shadow-xl shadow-black/40"
+                  className="group rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-white/25 hover:shadow-xl hover:shadow-black/70 hover:-translate-y-0.5 shadow-lg shadow-black/40"
                 >
                   {/* Top Bar: Order ID, Date, Status, Total */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] pb-4 mb-5">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="font-mono text-sm font-bold text-white tracking-wide">
+                  <div className="flex items-center justify-between gap-2 border-b border-white/[0.06] pb-2 sm:pb-3 mb-3 sm:mb-4">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="font-mono text-xs sm:text-sm font-bold text-white tracking-wide truncate">
                         {order.orderNumber}
                       </span>
-                      <span className="text-neutral-600 hidden sm:inline">•</span>
-                      <span className="text-xs text-neutral-400">{order.date}</span>
+                      <span className="text-neutral-600 hidden xs:inline">•</span>
+                      <span className="text-[10px] sm:text-xs text-neutral-400 truncate hidden xs:inline">{order.date}</span>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 shrink-0">
                       {/* Status Badge */}
                       <span
-                        className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${
                           isInTransit
                             ? "bg-amber-500/15 text-amber-400 border border-amber-500/30"
                             : isProcessing
@@ -446,128 +436,105 @@ export default function OrdersPage() {
                         <span>{order.statusLabel}</span>
                       </span>
 
-                      <span className="font-bold text-sm sm:text-base text-white">
+                      <span className="font-bold text-xs sm:text-sm md:text-base text-white">
                         {order.price}
                       </span>
                     </div>
                   </div>
 
                   {/* Main Grid: Poster Preview + Spec Details */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center">
-                    {/* Left: Poster Artwork Thumbnail */}
-                    <div className="md:col-span-3 lg:col-span-2 flex justify-center md:justify-start">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-5 items-start">
+                    {/* Left: Poster Artwork Thumbnail & Info in clean flex row */}
+                    <div className="md:col-span-8 lg:col-span-8 flex items-start gap-3 sm:gap-4 min-w-0">
                       <Link
                         href={`/templates/${order.templateSlug}`}
-                        className="group/img relative aspect-[3/4] w-32 sm:w-36 md:w-full overflow-hidden rounded-xl border border-white/15 bg-black shadow-lg hover:border-brand transition-all cursor-pointer block"
+                        className="group/img relative aspect-[3/4] w-16 sm:w-20 md:w-24 shrink-0 overflow-hidden rounded-lg sm:rounded-xl border border-white/15 bg-black shadow-md hover:border-brand transition-all cursor-pointer block"
                       >
                         <Image
                           src={order.image}
                           alt={order.templateName}
                           fill
-                          sizes="(max-width: 768px) 140px, 180px"
+                          sizes="96px"
                           className="object-cover transition-transform duration-500 group-hover/img:scale-105"
                         />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        <span className="absolute bottom-1.5 left-1.5 right-1.5 text-[8px] font-mono text-center text-white/80 bg-black/60 py-0.5 rounded backdrop-blur-sm">
-                          View Template
-                        </span>
                       </Link>
-                    </div>
 
-                    {/* Middle: Vehicle Spec, Size, Certificate */}
-                    <div className="md:col-span-9 lg:col-span-6 space-y-2.5">
-                      <div>
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">
-                          {order.templateName}
-                        </span>
-                        <h2 className="font-sans normal-case text-base sm:text-lg font-bold text-white mt-0.5">
-                          {order.vehicle}
-                        </h2>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                        <div className="rounded-xl border border-white/[0.06] bg-black/40 p-2.5">
-                          <span className="text-[10px] uppercase tracking-wider text-neutral-400 block font-semibold">
-                            Size &amp; Substrate
+                      {/* Middle: Vehicle Spec, Size, Certificate */}
+                      <div className="min-w-0 flex-1 space-y-1 sm:space-y-1.5">
+                        <div>
+                          <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-brand block">
+                            {order.templateName}
                           </span>
-                          <span className="text-white font-medium mt-0.5 block truncate">
+                          <h2 className="font-sans normal-case text-xs sm:text-sm md:text-base font-bold text-white truncate mt-0.5">
+                            {order.vehicle}
+                          </h2>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[11px] text-neutral-300">
+                          <span className="rounded bg-black/50 border border-white/10 px-1.5 py-0.5 font-mono">
                             {order.sizeLabel}
                           </span>
-                          <span className="text-[10px] text-neutral-400">
-                            310 GSM Cotton Rag Giclée
-                          </span>
-                        </div>
-
-                        <div className="rounded-xl border border-white/[0.06] bg-black/40 p-2.5">
-                          <span className="text-[10px] uppercase tracking-wider text-neutral-400 block font-semibold">
-                            Aerospace Framing
-                          </span>
-                          <span className="text-white font-medium mt-0.5 block truncate">
+                          <span className="rounded bg-black/50 border border-white/10 px-1.5 py-0.5 truncate max-w-[200px]">
                             {order.framing}
                           </span>
-                          <span className="text-[10px] text-neutral-400">
-                            UV-Filtering Acrylic
-                          </span>
                         </div>
-                      </div>
 
-                      {/* Registration Seal & Courier Preview */}
-                      <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-neutral-400">
-                        <span className="inline-flex items-center gap-1.5 text-neutral-300 font-mono text-[11px]">
-                          <ShieldCheck className="h-3.5 w-3.5 text-brand" />
-                          <span>{order.certificateNumber}</span>
-                        </span>
-                        <span>•</span>
-                        <span className="truncate max-w-[280px]">
-                          {order.courier}
-                        </span>
+                        {/* Registration Seal & Courier Preview */}
+                        <div className="flex items-center gap-2 pt-0.5 text-[9px] sm:text-[10px] text-neutral-400 font-mono">
+                          <span className="inline-flex items-center gap-1 text-neutral-300 shrink-0">
+                            <ShieldCheck className="h-3 w-3 text-brand" />
+                            <span>{order.certificateNumber}</span>
+                          </span>
+                          <span>•</span>
+                          <span className="truncate">{order.courier}</span>
+                        </div>
                       </div>
                     </div>
 
                     {/* Right: Courier Status & Action Buttons */}
-                    <div className="md:col-span-12 lg:col-span-4 flex flex-col justify-center space-y-3 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/[0.08] lg:pl-6">
+                    <div className="md:col-span-4 lg:col-span-4 flex flex-col justify-between space-y-2 pt-2.5 md:pt-0 border-t md:border-t-0 md:border-l border-white/[0.06] md:pl-4">
                       {/* Tracking / Delivery Note */}
-                      <div className="rounded-xl border border-white/[0.06] bg-black/30 p-3">
-                        <div className="flex items-center justify-between text-xs mb-1">
-                          <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold">
+                      <div className="rounded-lg border border-white/[0.06] bg-black/30 p-2 sm:p-2.5">
+                        <div className="flex items-center justify-between text-[10px] sm:text-xs mb-0.5">
+                          <span className="text-[9px] uppercase tracking-wider text-neutral-400 font-semibold">
                             {isDelivered ? "Delivered On" : "Estimated Arrival"}
                           </span>
-                          <span className="text-white font-bold text-xs">
+                          <span className="text-white font-bold text-[10px] sm:text-xs">
                             {isDelivered ? order.deliveredDate : order.estimatedDelivery}
                           </span>
                         </div>
 
-                        <div className="flex items-center justify-between gap-2 pt-1 border-t border-white/[0.06] text-[11px] font-mono text-neutral-300">
+                        <div className="flex items-center justify-between gap-1 pt-1 border-t border-white/[0.06] text-[9px] sm:text-[10px] font-mono text-neutral-300">
                           <span className="truncate">{order.trackingNumber}</span>
                           <button
                             type="button"
                             onClick={() => handleCopyTracking(order.trackingNumber)}
                             title="Copy Tracking Number"
-                            className="p-1 hover:text-white transition-colors cursor-pointer"
+                            className="p-0.5 hover:text-white transition-colors cursor-pointer text-neutral-400"
                           >
                             <Copy className="h-3 w-3" />
                           </button>
                         </div>
                       </div>
 
-                      {/* Action CTAs */}
-                      <div className="flex flex-col sm:flex-row lg:flex-col gap-2">
+                      {/* Action CTAs: side-by-side on mobile, stacked on desktop */}
+                      <div className="flex flex-row md:flex-col gap-1.5">
                         <button
                           type="button"
                           onClick={() => setActiveTrackingOrder(order)}
-                          className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 px-4 py-2.5 text-xs font-semibold text-white transition-all cursor-pointer"
+                          className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 px-2.5 py-1.5 text-[10px] sm:text-xs font-semibold text-white transition-all cursor-pointer whitespace-nowrap"
                         >
-                          <Truck className="h-3.5 w-3.5 text-brand" />
-                          <span>Track Shipment &amp; Milestones</span>
+                          <Truck className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-brand" />
+                          <span>Track</span>
                         </button>
 
                         <button
                           type="button"
                           onClick={() => handleDownloadDigitalMaster(order)}
-                          className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-transparent hover:bg-white/[0.04] border border-white/10 px-4 py-2 text-xs font-medium text-neutral-300 hover:text-white transition-all cursor-pointer"
+                          className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-transparent hover:bg-white/[0.04] border border-white/10 px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-neutral-300 hover:text-white transition-all cursor-pointer whitespace-nowrap"
                         >
-                          <Download className="h-3.5 w-3.5 text-neutral-400" />
-                          <span>Download Digital Master (300 DPI)</span>
+                          <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-400" />
+                          <span>Digital Master</span>
                         </button>
                       </div>
                     </div>

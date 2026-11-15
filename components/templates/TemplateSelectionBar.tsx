@@ -33,7 +33,7 @@ export function TemplateSelectionBar() {
   const hasSelection = selectedTemplates.length > 0;
 
   return (
-    <div className="fixed bottom-3 sm:bottom-5 left-1/2 z-50 w-[95%] sm:w-[92%] max-w-xl -translate-x-1/2 animate-in fade-in slide-in-from-bottom-3 duration-200">
+    <div className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] sm:bottom-5 left-1/2 z-50 w-[95%] sm:w-[92%] max-w-xl -translate-x-1/2 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* ============================================================== */}
       {/* 1. MOBILE VIEW (sm:hidden): Compact, slots left, count & button right */}
       {/* ============================================================== */}

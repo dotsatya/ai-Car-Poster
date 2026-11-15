@@ -67,18 +67,18 @@ export function SearchModal() {
                 setIsSearchOpen(false);
                 router.push("/studio");
               }}
-              className="flex cursor-pointer items-center justify-between rounded-xl border border-white/[0.04] p-3 transition-colors hover:border-brand/40 hover:bg-white/[0.04]"
+              className="flex flex-col sm:flex-row cursor-pointer sm:items-center justify-between gap-2.5 rounded-xl border border-white/[0.04] p-3 transition-colors hover:border-brand/40 hover:bg-white/[0.04]"
             >
-              <div className="flex items-center gap-3">
-                <div className="relative h-10 w-14 overflow-hidden rounded-md bg-neutral-900">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="relative h-10 w-14 overflow-hidden rounded-md bg-neutral-900 shrink-0">
                   <Image src={tpl.image} alt={tpl.name} fill className="object-cover" />
                 </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-white">{tpl.name}</h4>
-                  <p className="text-xs text-neutral-400">{tpl.category} · {tpl.subtitle}</p>
+                <div className="min-w-0">
+                  <h4 className="text-sm font-semibold text-white truncate">{tpl.name}</h4>
+                  <p className="text-xs text-neutral-400 truncate">{tpl.category} · {tpl.subtitle}</p>
                 </div>
               </div>
-              <span className="text-xs font-semibold text-brand">
+              <span className="text-xs font-semibold text-brand self-end sm:self-auto shrink-0">
                 {selectedTemplates.includes(tpl.id) ? "Selected ✓" : "Select & Open Studio →"}
               </span>
             </div>

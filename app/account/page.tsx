@@ -51,20 +51,20 @@ export default function AccountPage() {
       {/* Shared Account Navigation */}
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-8 sm:py-10">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
         {!user && (
-          <div className="mb-8 rounded-xl border border-brand/30 bg-brand/10 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover:border-brand/50 transition-all duration-300">
+          <div className="mb-4 sm:mb-6 rounded-xl border border-brand/30 bg-brand/10 p-3 sm:p-4.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 hover:border-brand/50 transition-all duration-300">
             <div>
-              <p className="text-xs sm:text-sm font-semibold text-white">
+              <p className="text-[11px] sm:text-xs font-semibold text-white">
                 You are viewing sample account data.
               </p>
-              <p className="text-xs text-neutral-300 mt-0.5">
+              <p className="text-[10px] sm:text-[11px] text-neutral-300 mt-0.5">
                 Sign in to sync your personalized archival poster orders, favorites, and saved delivery addresses.
               </p>
             </div>
             <button
               onClick={() => setIsSignInOpen(true)}
-              className="rounded-xl bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] whitespace-nowrap"
+              className="rounded-lg sm:rounded-xl bg-brand hover:bg-brand-hover px-3 py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
             >
               Sign In with OTP
             </button>
@@ -72,86 +72,71 @@ export default function AccountPage() {
         )}
 
         {/* Subsection Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex items-start sm:items-center justify-between gap-3 mb-3.5 sm:mb-6">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold uppercase tracking-wider text-white">
+            <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
               Collector Overview
             </h1>
-            <p className="text-xs sm:text-sm text-neutral-400 mt-1">
+            <p className="text-[11px] sm:text-xs text-neutral-400 mt-0.5">
               Real-time summary of your atelier commissions, shipments, and creative pipeline.
             </p>
           </div>
-
-          <div className="flex items-center gap-2 self-start sm:self-auto">
-            <Link
-              href="/studio"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-3.5 py-2 text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer"
-            >
-              <span>Launch Studio</span>
-            </Link>
-          </div>
         </div>
 
-        {/* Sub-bar metadata row */}
-        <div className="flex items-center justify-between text-xs text-neutral-400 mb-6">
-          <span>Active Atelier Member</span>
-          <span>Available for physical print &amp; studio generation</span>
-        </div>
-
-        {/* Quick Summary Metric Cards: Active Shipments, Delivered Prints, Wishlist Posters, Generated Posters */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        {/* Quick Summary Metric Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
           <Link
             href="/account/orders"
-            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer"
+            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-3.5 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer min-w-0"
           >
-            <div className="flex items-center justify-between text-neutral-400">
-              <span className="text-[11px] font-semibold uppercase tracking-wider">Active Shipments</span>
-              <Truck className="h-4 w-4 text-brand" />
+            <div className="flex items-center justify-between text-neutral-400 gap-1">
+              <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider truncate">Active Shipments</span>
+              <Truck className="h-4 w-4 text-brand shrink-0" />
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-extrabold text-white">1</div>
-            <p className="mt-1 text-[11px] text-emerald-400 font-medium">In Transit via DHL Air</p>
+            <div className="mt-2 text-xl sm:text-2xl lg:text-3xl font-extrabold text-white">1</div>
+            <p className="mt-1 text-[10px] sm:text-[11px] text-emerald-400 font-medium truncate">In Transit via DHL Air</p>
           </Link>
 
           <Link
             href="/account/orders"
-            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer"
+            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-3.5 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer min-w-0"
           >
-            <div className="flex items-center justify-between text-neutral-400">
-              <span className="text-[11px] font-semibold uppercase tracking-wider">Delivered Prints</span>
-              <Package className="h-4 w-4 text-neutral-400 group-hover:text-white" />
+            <div className="flex items-center justify-between text-neutral-400 gap-1">
+              <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider truncate">Delivered Prints</span>
+              <Package className="h-4 w-4 text-neutral-400 group-hover:text-white shrink-0" />
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-extrabold text-white">3</div>
-            <p className="mt-1 text-[11px] text-neutral-400 font-medium">Museum Sealed</p>
+            <div className="mt-2 text-xl sm:text-2xl lg:text-3xl font-extrabold text-white">3</div>
+            <p className="mt-1 text-[10px] sm:text-[11px] text-neutral-400 font-medium truncate">Museum Sealed</p>
           </Link>
 
           <Link
             href="/account/wishlist"
-            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer"
+            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-3.5 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer min-w-0"
           >
-            <div className="flex items-center justify-between text-neutral-400">
-              <span className="text-[11px] font-semibold uppercase tracking-wider">Wishlist Posters</span>
-              <Heart className="h-4 w-4 text-brand" />
+            <div className="flex items-center justify-between text-neutral-400 gap-1">
+              <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider truncate">Wishlist Posters</span>
+              <Heart className="h-4 w-4 text-brand shrink-0" />
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-extrabold text-white">
+            <div className="mt-2 text-xl sm:text-2xl lg:text-3xl font-extrabold text-white truncate">
               {wishlistCount > 0 ? wishlistCount : "Saved"}
             </div>
-            <p className="mt-1 text-[11px] text-neutral-400 font-medium">
+            <p className="mt-1 text-[10px] sm:text-[11px] text-neutral-400 font-medium truncate">
               {wishlistCount > 0 ? `${wishlistCount} saved design${wishlistCount > 1 ? "s" : ""}` : "Favorite artworks"}
             </p>
           </Link>
 
           <Link
             href="/account/generated"
-            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer"
+            className="group rounded-xl border border-white/[0.08] bg-neutral-900/50 p-3.5 sm:p-5 hover:border-white/25 hover:bg-neutral-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300 cursor-pointer min-w-0"
           >
-            <div className="flex items-center justify-between text-neutral-400">
-              <span className="text-[11px] font-semibold uppercase tracking-wider">Generated Posters</span>
-              <Sparkles className="h-4 w-4 text-brand" />
+            <div className="flex items-center justify-between text-neutral-400 gap-1">
+              <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider truncate">Generated Posters</span>
+              <Sparkles className="h-4 w-4 text-brand shrink-0" />
             </div>
-            <div className="mt-2 text-2xl sm:text-3xl font-extrabold text-white">
+            <div className="mt-2 text-xl sm:text-2xl lg:text-3xl font-extrabold text-white">
               {generatedArtworks.length}
             </div>
-            <p className="mt-1 text-[11px] text-neutral-400 font-medium">
+            <p className="mt-1 text-[10px] sm:text-[11px] text-neutral-400 font-medium truncate">
               {generatedArtworks.length} created in studio
             </p>
           </Link>
