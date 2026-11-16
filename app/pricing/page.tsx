@@ -95,7 +95,7 @@ export default function PricingPage() {
           <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white leading-[1.08] font-heading uppercase">
             Museum-Grade Fine Art Editions
           </h1>
-          <p className="mt-2.5 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
+          <p className="mt-2.5 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
             Honest, transparent pricing for bespoke automotive generative art.
             Executed on 310 GSM 100% cotton rag with 12-pigment archival Giclée
             inks certified 100+ years lightfast.

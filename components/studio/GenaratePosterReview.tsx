@@ -422,7 +422,7 @@ export function GenaratePosterReview({
                 <button
                   type="button"
                   onClick={() => toggleArtworkSelection(art.id)}
-                  className={`w-full flex items-center justify-center gap-1 rounded-xl py-2 sm:py-2.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all cursor-pointer shadow-sm active:scale-[0.98] ${
+                  className={`w-full flex items-center justify-center gap-1 rounded-md py-2 sm:py-2.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all cursor-pointer shadow-sm active:scale-[0.98] ${
                     art.selected
                       ? "bg-brand text-white shadow-brand/30 hover:bg-brand-hover hover:shadow-brand/50 ring-1 ring-brand/50"
                       : "border border-white/20 bg-white/[0.05] text-neutral-200 hover:border-brand/70 hover:bg-brand/10 hover:text-white"

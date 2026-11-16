@@ -50,7 +50,7 @@ export function TemplateSelectionBar() {
                   key={tpl.id}
                   onClick={() => setPreviewTemplateId(tpl.id)}
                   title={`Preview ${tpl.name}`}
-                  className="group relative h-12 w-8.5 shrink-0 overflow-hidden rounded-lg border border-white/25 bg-black shadow-md cursor-pointer hover:border-brand/70 active:scale-95 transition-all"
+                  className="group relative h-12 w-8.5 shrink-0 overflow-hidden rounded-md border border-white/25 bg-black shadow-md cursor-pointer hover:border-brand/70 active:scale-95 transition-all"
                 >        
                   <Image
                     src={tpl.image}
@@ -85,7 +85,7 @@ export function TemplateSelectionBar() {
             return (
               <div
                 key={index}
-                className="flex h-12 w-8.5 shrink-0 flex-col items-center justify-center rounded-lg border border-dashed border-white/20 bg-white/[0.02] text-neutral-500 transition-colors"
+                className="flex h-12 w-8.5 shrink-0 flex-col items-center justify-center rounded-md border border-dashed border-white/20 bg-white/[0.02] text-neutral-500 transition-colors"
               >
                 <Plus size={10} className="text-neutral-500" />
                 <span className="text-[7px] font-mono font-medium text-neutral-500 mt-0.5">
@@ -175,7 +175,7 @@ export function TemplateSelectionBar() {
                   key={tpl.id}
                   onClick={() => setPreviewTemplateId(tpl.id)}
                   title={`Preview ${tpl.name}`}
-                  className="group relative h-13 w-9.5 shrink-0 overflow-hidden rounded-lg border border-white/30 bg-black shadow-md cursor-pointer hover:border-brand/70 hover:scale-105 transition-all"
+                  className="group relative h-13 w-9.5 shrink-0 overflow-hidden rounded-md border border-white/30 bg-black shadow-md cursor-pointer hover:border-brand/70 hover:scale-105 transition-all"
                 >
                   <Image
                     src={tpl.image}
@@ -210,7 +210,7 @@ export function TemplateSelectionBar() {
             return (
               <div
                 key={index}
-                className="flex h-13 w-9.5 shrink-0 flex-col items-center justify-center rounded-lg border border-dashed border-white/20 bg-white/[0.02] text-neutral-400 transition-colors"
+                className="flex h-13 w-9.5 shrink-0 flex-col items-center justify-center rounded-md border border-dashed border-white/20 bg-white/[0.02] text-neutral-400 transition-colors"
               >
                 <Plus size={9} className="text-neutral-400" />
                 <span className="text-[7px] font-mono mt-0.5">#{index + 1}</span>

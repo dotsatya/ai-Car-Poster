@@ -26,18 +26,18 @@ export function HeroSection() {
         aria-hidden="true"
       />
 
-      {/* Main Content: Left Copy + Right 3D Leaning Posters */}
+      {/* Main Content: Left Copy + Right 3D Leaning Posters (Mobile: Picture first, then Copy) */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 w-full">
-        <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-8">
-          {/* Left Column: Heading, Subheading & CTAs */}
-          <div className="lg:col-span-6 xl:col-span-6 space-y-4 sm:space-y-6 lg:pr-4">
+        <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-8">
+          {/* Left Column: Heading, Subheading & CTAs (order-2 on mobile, order-1 on desktop) */}
+          <div className="order-2 lg:order-1 lg:col-span-6 xl:col-span-6 space-y-3.5 sm:space-y-6 lg:pr-4">
             <div className="inline-flex items-center gap-2">
               <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
                 AI-POWERED CAR POSTERS
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-wide text-white leading-[1.05]">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-wide text-white leading-[1.08] sm:leading-[1.05]">
               Turn Your Car Into <br className="hidden sm:inline" />
               <span>A Premium Poster</span>
             </h1>
@@ -47,7 +47,7 @@ export function HeroSection() {
               print-ready automotive posters powered by AI.
             </p>
 
-            <div className="pt-1.5 sm:pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5">
+            <div className="pt-1 sm:pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5">
               <Link
                 href="/templates"
                 className="group inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
@@ -58,9 +58,9 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: 3D Leaning Framed Posters Studio Visual */}
-          <div className="lg:col-span-6 xl:col-span-6 flex justify-center lg:justify-end w-full">
-            <div className="group relative w-full max-w-[340px] xs:max-w-[390px] sm:max-w-[460px] md:max-w-[490px] lg:max-w-[440px] xl:max-w-[480px] 2xl:max-w-[530px] aspect-[1465/1073]">
+          {/* Right Column: 3D Leaning Framed Posters Studio Visual (order-1 on mobile, order-2 on desktop) */}
+          <div className="order-1 lg:order-2 lg:col-span-6 xl:col-span-6 flex justify-center lg:justify-end w-full">
+            <div className="group relative w-full max-w-[330px] xs:max-w-[380px] sm:max-w-[460px] md:max-w-[490px] lg:max-w-[440px] xl:max-w-[480px] 2xl:max-w-[530px] aspect-[1465/1073]">
               <Image
                 src="/hero.png"
                 alt="AI-Powered Porsche 911 GT3 RS Leaning Framed Gallery Posters"
@@ -83,60 +83,60 @@ export function HeroSection() {
       </div>
 
       {/* Bottom Features / Value Proposition Bar */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 w-full mt-6 sm:mt-8 lg:mt-10 pt-5 sm:pt-6 border-t border-white/[0.08]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
-              <Sparkles className="h-5 w-5" />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 w-full mt-6 sm:mt-8 lg:mt-10 pt-4 sm:pt-6 border-t border-white/[0.08]">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
+          <div className="flex items-start gap-2.5 sm:gap-4">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border border-brand/30 bg-brand/10 text-brand">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h3 className="font-sans normal-case text-sm font-bold text-white tracking-wide">
+              <h3 className="font-sans normal-case text-xs sm:text-sm font-bold text-white tracking-wide">
                 AI-Generated Designs
               </h3>
-              <p className="mt-0.5 text-xs text-neutral-400">
+              <p className="mt-0.5 text-[11px] sm:text-xs text-neutral-400">
                 Unique posters from your car photo
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
-              <Printer className="h-5 w-5" />
+          <div className="flex items-start gap-2.5 sm:gap-4">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border border-brand/30 bg-brand/10 text-brand">
+              <Printer className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h3 className="font-sans normal-case text-sm font-bold text-white tracking-wide">
+              <h3 className="font-sans normal-case text-xs sm:text-sm font-bold text-white tracking-wide">
                 Print-Ready Quality
               </h3>
-              <p className="mt-0.5 text-xs text-neutral-400">
+              <p className="mt-0.5 text-[11px] sm:text-xs text-neutral-400">
                 High-resolution, up to 300 DPI
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
-              <LayoutGrid className="h-5 w-5" />
+          <div className="flex items-start gap-2.5 sm:gap-4">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border border-brand/30 bg-brand/10 text-brand">
+              <LayoutGrid className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h3 className="font-sans normal-case text-sm font-bold text-white tracking-wide">
+              <h3 className="font-sans normal-case text-xs sm:text-sm font-bold text-white tracking-wide">
                 Premium Templates
               </h3>
-              <p className="mt-0.5 text-xs text-neutral-400">
-                Curated designs for car enthusiasts
+              <p className="mt-0.5 text-[11px] sm:text-xs text-neutral-400">
+                Curated designs for enthusiasts
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
-              <Package className="h-5 w-5" />
+          <div className="flex items-start gap-2.5 sm:gap-4">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border border-brand/30 bg-brand/10 text-brand">
+              <Package className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h3 className="font-sans normal-case text-sm font-bold text-white tracking-wide">
+              <h3 className="font-sans normal-case text-xs sm:text-sm font-bold text-white tracking-wide">
                 Worldwide Shipping
               </h3>
-              <p className="mt-0.5 text-xs text-neutral-400">
-                Get your poster delivered to your door
+              <p className="mt-0.5 text-[11px] sm:text-xs text-neutral-400">
+                Delivered direct to your door
               </p>
             </div>
           </div>

@@ -201,7 +201,7 @@ export function TemplatesShowcaseSection() {
           ref={trackRef}
           style={{ x }}
           suppressHydrationWarning
-          className="flex items-center gap-4 sm:gap-6 pl-4 sm:pl-8 md:pl-12 w-max"
+          className="flex items-center gap-3 sm:gap-6 pl-3 sm:pl-8 md:pl-12 w-max"
         >
           {INFINITE_TEMPLATES.map((tpl, idx) => {
             const isHovered = hoveredIdx === idx;
@@ -236,9 +236,9 @@ export function TemplatesShowcaseSection() {
                   }}
                   className="block"
                 >
-                  {/* 3:4 Portrait Poster Card */}
+                  {/* 3:4 Portrait Poster Card: Compact on smartphones (145px), full on tablet/desktop */}
                   <div
-                    className={`relative aspect-[3/4] w-[190px] sm:w-[225px] md:w-[250px] lg:w-[265px] overflow-hidden rounded-xl border bg-black shadow-2xl transition-all duration-300 ${
+                    className={`relative aspect-[3/4] w-[145px] sm:w-[225px] md:w-[250px] lg:w-[265px] overflow-hidden rounded-xl border bg-black shadow-2xl transition-all duration-300 ${
                       isHovered
                         ? "border-brand/70 shadow-[0_10px_30px_rgba(220,38,38,0.35)] ring-1 ring-brand/50"
                         : isSelected
@@ -251,7 +251,7 @@ export function TemplatesShowcaseSection() {
                       src={tpl.image}
                       alt={tpl.name}
                       fill
-                      sizes="(max-width: 640px) 190px, (max-width: 1024px) 250px, 265px"
+                      sizes="(max-width: 640px) 145px, (max-width: 1024px) 250px, 265px"
                       priority={idx < 5}
                       draggable={false}
                       className="object-cover filter contrast-110 brightness-95"
@@ -261,15 +261,15 @@ export function TemplatesShowcaseSection() {
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
                     {/* Top-Left Category Badge */}
-                    <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-20">
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/75 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider text-white backdrop-blur-md shadow-md">
-                        <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+                    <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-20">
+                      <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-white/20 bg-black/75 px-1.5 py-0.5 sm:px-2.5 sm:py-1 text-[7.5px] sm:text-[9px] font-semibold uppercase tracking-wider text-white backdrop-blur-md shadow-md">
+                        <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-brand" />
                         <span>{tpl.category}</span>
                       </span>
                     </div>
 
                     {/* Top-Right Quick Select Button */}
-                    <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-20">
+                    <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20">
                       <button
                         type="button"
                         onClick={(e) => {
@@ -285,47 +285,47 @@ export function TemplatesShowcaseSection() {
                             ? `Selected #${selectionSlot + 1} — Click to remove`
                             : "Select this template"
                         }
-                        className={`flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full border backdrop-blur-md transition-all shadow-md cursor-pointer ${
+                        className={`flex h-5.5 w-5.5 sm:h-7 sm:w-7 items-center justify-center rounded-full border backdrop-blur-md transition-all shadow-md cursor-pointer ${
                           isSelected
                             ? "border-emerald-500 bg-emerald-500 text-black shadow-emerald-500/40"
                             : "border-white/25 bg-black/70 text-white hover:border-brand hover:bg-brand hover:text-white"
                         }`}
                       >
                         {isSelected ? (
-                          <Check size={12} strokeWidth={3} />
+                          <Check size={11} strokeWidth={3} />
                         ) : (
-                          <Plus size={12} strokeWidth={2.5} />
+                          <Plus size={11} strokeWidth={2.5} />
                         )}
                       </button>
                     </div>
 
                     {/* Minimal & Clean Bottom Title & Arrow */}
-                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-3.5 z-20 flex items-end justify-between gap-2">
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5">
-                          <p className="text-[9px] sm:text-[10px] text-neutral-400 font-medium truncate">
+                    <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3.5 z-20 flex items-end justify-between gap-1.5 sm:gap-2">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1 sm:gap-1.5">
+                          <p className="text-[8px] sm:text-[10px] text-neutral-400 font-medium truncate">
                             {tpl.subtitle}
                           </p>
                           {tpl.formattedStartingPrice && (
-                            <span className="text-[9px] sm:text-[10px] font-bold text-brand shrink-0">
+                            <span className="text-[8px] sm:text-[10px] font-bold text-brand shrink-0">
                               • From {tpl.formattedStartingPrice}
                             </span>
                           )}
                         </div>
-                        <h3 className="font-sans normal-case text-xs sm:text-sm font-extrabold text-white tracking-wide truncate group-hover:text-brand transition-colors mt-0.5">
+                        <h3 className="font-sans normal-case text-[11px] sm:text-sm font-extrabold text-white tracking-wide truncate group-hover:text-brand transition-colors mt-0.5">
                           {tpl.name}
                         </h3>
                       </div>
 
                       {/* Subtle Arrow Action Icon (Always visible & high contrast) */}
                       <div
-                        className={`flex h-6.5 w-6.5 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-full border shadow-md transition-all duration-200 ${
+                        className={`flex h-5.5 w-5.5 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-full border shadow-md transition-all duration-200 ${
                           isHovered
                             ? "bg-brand border-brand text-white shadow-brand/40 scale-105"
                             : "bg-black/60 border-white/20 text-neutral-300 group-hover:text-white"
                         }`}
                       >
-                        <ArrowUpRight size={12} strokeWidth={2.5} />
+                        <ArrowUpRight size={11} strokeWidth={2.5} />
                       </div>
                     </div>
                   </div>

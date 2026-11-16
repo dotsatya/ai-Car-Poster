@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Box,
@@ -10,7 +9,6 @@ import {
   ArrowRight,
   Search,
   ArrowUpRight,
-  ChevronDown,
 } from "lucide-react";
 import { AccountNav } from "@/components/account/AccountNav";
 import { AtelierOrder, getAllOrders, getStatusBadgeStyle } from "@/data/orders";
@@ -19,16 +17,6 @@ export default function OrdersPage() {
   const [orders] = useState<AtelierOrder[]>(() => getAllOrders());
   const [filter, setFilter] = useState<"all" | "active" | "delivered">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [expandedOrders, setExpandedOrders] = useState<Record<string, boolean>>(
-    {},
-  );
-
-  const toggleOrder = (id: string) => {
-    setExpandedOrders((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
 
   const isDeliveredOrder = (o: AtelierOrder) =>
     o.status === "delivered" || o.statusLabel === "Delivered";
@@ -156,10 +144,9 @@ export default function OrdersPage() {
             </button>
           </div>
         ) : (
-          <div className="space-y-3 sm:space-y-3.5">
+          <div className="space-y-3 sm:space-y-4">
             {filteredOrders.map((order) => {
               const isDelivered = isDeliveredOrder(order);
-              const isExpanded = !!expandedOrders[order.id];
               const badgeStyle = getStatusBadgeStyle(
                 order.status,
                 order.statusLabel,
@@ -168,197 +155,105 @@ export default function OrdersPage() {
               return (
                 <div
                   key={order.id}
-                  className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 hover:border-white/20 transition-all duration-200 overflow-hidden shadow-lg shadow-black/40"
+                  className="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-3 sm:p-4.5 md:p-5 shadow-xl shadow-black/40 space-y-2.5 sm:space-y-3.5 hover:border-white/15 transition-all duration-200"
                 >
-                  {/* Collapsed Bar: Clickable to toggle dropdown */}
-                  <button
-                    type="button"
-                    onClick={() => toggleOrder(order.id)}
-                    className="w-full text-left p-3.5 sm:px-5 sm:py-4 cursor-pointer select-none transition-colors hover:bg-white/[0.02]"
-                    aria-expanded={isExpanded}
-                  >
-                    {/* Responsive Grid/Flex: 
-                        - Desktop/Tablet (sm+): 1 clean horizontal row
-                        - Smartphone (<sm): 2 clean rows that never cramp */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4">
-                      {/* Top Row on Phone / Left Group on Tablet+ */}
-                      <div className="flex items-center justify-between sm:justify-start gap-2.5 sm:gap-3.5 min-w-0 w-full sm:w-auto">
-                        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                          {/* Standalone Red Wireframe Cube Icon */}
-                          <Box
-                            className="h-5 w-5 text-red-500 shrink-0"
-                            strokeWidth={1.8}
-                          />
-
-                          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-wrap">
-                            {/* Order Number (Exact format from reference) */}
-                            <span className="font-mono text-xs sm:text-sm md:text-base font-bold text-white tracking-wide shrink-0">
-                              #{order.orderNumber.replace(/^#/, "")}
-                            </span>
-
-                            <span className="text-neutral-600 hidden sm:inline">
-                              •
-                            </span>
-
-                            {/* Date (inline on sm+) */}
-                            <span className="text-neutral-400 text-xs sm:text-sm hidden sm:inline whitespace-nowrap">
-                              {order.date}
-                            </span>
-
-                            {/* Posters Count Pill */}
-                            <span className="rounded-full bg-white/[0.06] border border-white/10 px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs text-neutral-300 font-medium whitespace-nowrap shrink-0">
-                              {order.items.length}{" "}
-                              {order.items.length === 1 ? "Poster" : "Posters"}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Mobile-only Price + Chevron on top right (< sm) */}
-                        <div className="flex sm:hidden items-center gap-2 shrink-0">
-                          <span className="font-mono font-bold text-xs text-white">
-                            {order.totalAmount}
-                          </span>
-                          <div className="p-0.5 text-neutral-400">
-                            <ChevronDown
-                              className={`h-4 w-4 transition-transform duration-200 ${
-                                isExpanded ? "rotate-180 text-white" : ""
-                              }`}
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Mobile-only Sub-Row: Placed Date + Status Pill (< sm) */}
-                      <div className="flex sm:hidden items-center justify-between gap-2 pl-7 pr-0.5">
-                        <span className="text-neutral-400 text-[11px] whitespace-nowrap font-mono">
+                  {/* Header Row: Clean 2-row on phone / 1-row on sm+ */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4">
+                    {/* Top part on phone / Left on desktop */}
+                    <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 min-w-0">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <Box
+                          className="h-4 w-4 sm:h-5 sm:w-5 text-red-500 shrink-0"
+                          strokeWidth={1.8}
+                        />
+                        <span className="font-mono text-xs sm:text-sm md:text-base font-bold text-white tracking-wide shrink-0">
+                          #{order.orderNumber.replace(/^#/, "")}
+                        </span>
+                        <span className="text-neutral-600 hidden sm:inline">•</span>
+                        <span className="text-neutral-400 text-xs sm:text-sm hidden sm:inline whitespace-nowrap">
                           {order.date}
                         </span>
-                        <span
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-medium whitespace-nowrap ${badgeStyle.pill}`}
-                        >
-                          <span
-                            className={`h-1.5 w-1.5 rounded-full ${badgeStyle.dot}`}
-                          />
-                          <span>{badgeStyle.label}</span>
+                        <span className="rounded-full bg-white/[0.06] border border-white/10 px-1.5 sm:px-2.5 py-0.5 text-[9px] sm:text-xs text-neutral-300 font-medium whitespace-nowrap shrink-0">
+                          {order.items.length}{" "}
+                          {order.items.length === 1 ? "Poster" : "Posters"}
                         </span>
                       </div>
 
-                      {/* Tablet/Desktop Right Group (sm+): Status Pill + Total Price + Chevron */}
-                      <div className="hidden sm:flex items-center gap-3 md:gap-4 shrink-0">
-                        {/* Status Pill */}
+                      {/* Mobile-only Price right aligned */}
+                      <span className="font-mono font-bold text-xs sm:hidden text-white">
+                        {order.totalAmount}
+                      </span>
+                    </div>
+
+                    {/* Bottom part on phone / Right on desktop */}
+                    <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3 shrink-0">
+                      <span className="text-neutral-400 text-[10px] sm:hidden font-mono">
+                        {order.date}
+                      </span>
+                      <div className="flex items-center gap-2.5 sm:gap-3">
                         <span
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1 text-xs font-medium whitespace-nowrap ${badgeStyle.pill}`}
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium whitespace-nowrap ${badgeStyle.pill}`}
                         >
                           <span
                             className={`h-1.5 w-1.5 rounded-full ${badgeStyle.dot}`}
                           />
                           <span>{badgeStyle.label}</span>
                         </span>
-
-                        {/* Total Amount */}
-                        <span className="font-mono font-bold text-sm md:text-base text-white">
+                        <span className="hidden sm:inline font-mono font-bold text-sm sm:text-base text-white">
                           {order.totalAmount}
                         </span>
-
-                        {/* Chevron Down (rotates when expanded) */}
-                        <div className="p-0.5 text-neutral-400 hover:text-white transition-colors">
-                          <ChevronDown
-                            className={`h-4 w-4 transition-transform duration-200 ${
-                              isExpanded ? "rotate-180 text-white" : ""
-                            }`}
-                          />
-                        </div>
                       </div>
                     </div>
-                  </button>
+                  </div>
 
-                  {/* Expanded Dropdown Content */}
-                  {isExpanded && (
-                    <div className="border-t border-white/[0.06] bg-black/40 p-3.5 sm:p-5 space-y-3.5 sm:space-y-4 animate-in fade-in duration-150">
-                      {/* Commissioned Posters Preview Grid */}
-                      <div className="space-y-2.5">
-                        <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-400 font-semibold block">
-                          COMMISSIONED POSTERS IN THIS ORDER:
-                        </span>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
-                          {order.items.map((item) => (
-                            <div
-                              key={item.id}
-                              className="flex items-center gap-3 sm:gap-3.5 p-2.5 sm:p-3 rounded-xl border border-white/[0.08] bg-black/50 hover:border-white/15 transition-colors"
-                            >
-                              {/* Poster preview with white mat frame */}
-                              <div className="relative aspect-[3/4] w-12 sm:w-14 h-16 sm:h-18 rounded-lg overflow-hidden border border-white/20 bg-neutral-900 shrink-0 shadow-md">
-                                <Image
-                                  src={item.image}
-                                  alt={item.templateName}
-                                  fill
-                                  sizes="64px"
-                                  className="object-cover"
-                                />
-                              </div>
-
-                              <div className="min-w-0 flex-1">
-                                <p
-                                  className="text-xs sm:text-sm font-bold text-white uppercase tracking-wide truncate leading-tight"
-                                  title={item.templateName}
-                                >
-                                  {item.templateName}
-                                </p>
-                                <p className="text-[11px] sm:text-xs text-neutral-400 truncate mt-0.5">
-                                  {item.vehicle}
-                                </p>
-                                <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-mono mt-1 flex-wrap">
-                                  <span className="text-red-500 font-medium">
-                                    {item.sizeLabel}
-                                  </span>
-                                  <span className="text-neutral-600">•</span>
-                                  <span className="text-neutral-400">
-                                    Qty: {item.qty}
-                                  </span>
-                                  <span className="text-neutral-600">•</span>
-                                  <span className="text-white font-bold">
-                                    {item.price}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Bottom Footer: Delivery Info + Order Details Button */}
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-white/[0.04]">
-                        <div className="flex items-center gap-2 text-xs text-neutral-400 min-w-0 flex-wrap">
-                          <Truck className="h-4 w-4 text-red-500 shrink-0" />
-                          <span className="text-neutral-400">
-                            Estimated Arrival:{" "}
-                            <strong className="text-white font-semibold">
-                              {order.estimatedDelivery ||
-                                (isDelivered
-                                  ? order.deliveredDate
-                                  : "Expected in 4-5 business days")}
-                            </strong>
-                          </span>
-                          {order.trackingNumber && (
-                            <>
-                              <span className="text-neutral-600">•</span>
-                              <span className="font-mono text-neutral-400">
-                                {order.trackingNumber}
-                              </span>
-                            </>
-                          )}
-                        </div>
-
-                        <Link
-                          href={`/account/orders/${order.orderNumber}`}
-                          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.98] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-red-600/30 transition-all cursor-pointer whitespace-nowrap w-full sm:w-auto"
+                  {/* Commissioned Posters List: Unified sleek container for all viewports (1-col on phone, 2-cols on laptop/desktop) */}
+                  <div className="rounded-xl border border-white/[0.06] bg-black/40 px-3 py-2 sm:px-4 sm:py-3 divide-y divide-white/[0.04] sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-2">
+                    {order.items.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center justify-between gap-2 py-1 sm:py-1.5 first:pt-0 sm:first:pt-1.5 last:pb-0 sm:last:pb-1.5"
+                      >
+                        <p
+                          className="text-[11px] sm:text-xs md:text-sm text-neutral-300 truncate font-medium hover:text-white transition-colors"
+                          title={`${item.templateName} x ${item.qty}`}
                         >
-                          <span>ORDER DETAILS</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
+                          {item.templateName}
+                        </p>
+                        <span className="text-[10px] sm:text-[11px] font-mono text-neutral-400 shrink-0 font-medium ml-2 bg-white/[0.04] px-1.5 py-0.5 rounded">
+                          ×{item.qty}
+                        </span>
                       </div>
+                    ))}
+                  </div>
+
+                  {/* Bottom Footer: Single unified row on mobile and desktop */}
+                  <div className="flex items-center justify-between gap-2 pt-2 sm:pt-3 border-t border-white/[0.06]">
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-neutral-400 min-w-0">
+                      <Truck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-red-500 shrink-0" />
+                      <span className="truncate">
+                        <span className="hidden sm:inline">Estimated Arrival: </span>
+                        <strong className="text-white font-medium sm:font-semibold">
+                          {order.estimatedDelivery ||
+                            (isDelivered
+                              ? order.deliveredDate
+                              : "Expected in 4-5 business days")}
+                        </strong>
+                        {order.trackingNumber && (
+                          <span className="hidden md:inline font-mono text-neutral-400">
+                            {" "}• {order.trackingNumber}
+                          </span>
+                        )}
+                      </span>
                     </div>
-                  )}
+
+                    <Link
+                      href={`/account/orders/${order.orderNumber}`}
+                      className="inline-flex items-center justify-center gap-1 sm:gap-1.5 rounded-lg sm:rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.98] px-3 sm:px-5 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-red-600/30 transition-all cursor-pointer whitespace-nowrap shrink-0"
+                    >
+                      <span>Order Details</span>
+                      <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                    </Link>
+                  </div>
                 </div>
               );
             })}

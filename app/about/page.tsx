@@ -146,9 +146,9 @@ export default function AboutPage() {
             Crafting Automotive Immortality
           </h1>
 
-          <p className="mt-2.5 sm:mt-3 lg:mt-4 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
-            Poster Gen bridges the physical garage and digital generative
-            intelligence. Every vehicle has a soul: a symphony of displacement,
+          <p className="mt-2.5 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
+            Poster Gen bridges the physical garage and digital generative intelligence. 
+            Every vehicle has a soul: a symphony of displacement,
             silhouette, and human memory. Here is our story, our production
             standards, and the full creation journey from photograph to fine
             art.

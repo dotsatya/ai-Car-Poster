@@ -10,7 +10,9 @@ import { TemplatePreviewModal } from "@/components/templates/TemplatePreviewModa
 
 export function SelectedDesignsList() {
   const { selectedTemplates, toggleTemplate } = useStudio();
-  const [previewTemplateId, setPreviewTemplateId] = useState<string | null>(null);
+  const [previewTemplateId, setPreviewTemplateId] = useState<string | null>(
+    null,
+  );
 
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -95,7 +97,8 @@ export function SelectedDesignsList() {
           >
             <Plus size={14} className="text-brand" />
             <span>
-              Add Another Template ({selectedTemplates.length}/3) — Browse Library →
+              Add Another Template ({selectedTemplates.length}/3) — Browse
+              Library →
             </span>
           </Link>
         )}
@@ -104,7 +107,8 @@ export function SelectedDesignsList() {
         {selectedTemplates.length === 0 && (
           <div className="rounded-xl border border-dashed border-white/[0.08] bg-white/[0.02] p-4 sm:p-6 text-center hover:border-white/20 transition-all duration-300">
             <p className="text-xs text-neutral-400">
-              No templates selected yet. Choose up to 3 master templates from our collection.
+              No templates selected yet. Choose up to 3 master templates from
+              our collection.
             </p>
             <Link
               href="/templates"
@@ -123,22 +127,6 @@ export function SelectedDesignsList() {
             } to synthesize 4 distinct AI poster variations.`
           : "Select up to 3 master designs to generate parallel poster variations."}
       </p>
-
-      {/* Multi-Template Triptych Benefit Callout */}
-      {selectedTemplates.length >= 2 && (
-        <div className="rounded-xl border border-purple-500/30 bg-purple-950/20 p-3.5 hover:border-purple-500/50 transition-all duration-300">
-          <div className="flex items-start gap-2.5">
-            <div>
-              <div className="text-xs font-bold text-white">
-                ✦ Multi-Template Advantage: Combined Triptych Unlocked
-              </div>
-              <p className="mt-0.5 text-[11px] text-neutral-400 leading-relaxed">
-                Because you selected {selectedTemplates.length} templates, you will also receive one harmonized composite artwork blending all angles.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Pop-up Image Preview Modal with dark backdrop & deselect button */}
       <TemplatePreviewModal
