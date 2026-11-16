@@ -31,7 +31,7 @@ export function StudioActionBar({ onStartGeneration }: StudioActionBarProps) {
         type="button"
         onClick={onStartGeneration}
         disabled={selectedTemplates.length === 0}
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-5 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-40 disabled:hover:scale-100 whitespace-nowrap"
+        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover px-5 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-40 disabled:hover:scale-100 whitespace-nowrap"
       >
         <span>Generate Posters</span>
         <ArrowRight size={15} />

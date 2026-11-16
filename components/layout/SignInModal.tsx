@@ -150,7 +150,7 @@ export function SignInModal() {
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-4 right-4 rounded-xl p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer border border-transparent hover:border-white/10"
+          className="absolute top-4 right-4 rounded-md p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer border border-transparent hover:border-white/10"
           aria-label="Close modal"
         >
           <X className="h-4 w-4" />
@@ -212,7 +212,7 @@ export function SignInModal() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-3 px-4 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover py-3 px-4 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
               >
                 <span>Continue with Email</span>
                 <ArrowRight className="h-4 w-4" />
@@ -284,7 +284,7 @@ export function SignInModal() {
                 <button
                   type="button"
                   onClick={handleAutoFillDemo}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] hover:border-brand/40 bg-brand/10 hover:bg-brand/20 px-2.5 py-1 text-[11px] font-medium text-brand transition-all duration-200 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-white/[0.08] hover:border-brand/40 bg-brand/10 hover:bg-brand/20 px-2.5 py-1 text-[11px] font-medium text-brand transition-all duration-200 cursor-pointer"
                 >
                   <KeyRound className="h-3 w-3" />
                   <span>Use Demo OTP: <strong>0000</strong></span>
@@ -306,7 +306,7 @@ export function SignInModal() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-neutral-200 py-3 px-4 text-xs font-bold uppercase tracking-wider text-black shadow-lg transition-all cursor-pointer hover:scale-[1.01] active:scale-95"
+                className="w-full flex items-center justify-center gap-2 rounded-md bg-white hover:bg-neutral-200 py-3 px-4 text-xs font-bold uppercase tracking-wider text-black shadow-lg transition-all cursor-pointer hover:scale-[1.01] active:scale-95"
               >
                 <span>Verify &amp; Sign Up</span>
                 <ArrowRight className="h-4 w-4" />

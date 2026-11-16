@@ -56,7 +56,7 @@ export default function OrdersPage() {
 
           <Link
             href="/studio"
-            className="shrink-0 inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
+            className="shrink-0 inline-flex items-center gap-1.5 rounded-md bg-brand hover:bg-brand-hover px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
           >
             <span>New Poster</span>
             <ArrowUpRight size={14} />
@@ -70,7 +70,7 @@ export default function OrdersPage() {
             <button
               type="button"
               onClick={() => setFilter("all")}
-              className={`rounded-lg py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
+              className={`rounded-md py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                 filter === "all"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
@@ -81,7 +81,7 @@ export default function OrdersPage() {
             <button
               type="button"
               onClick={() => setFilter("active")}
-              className={`rounded-lg py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
+              className={`rounded-md py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                 filter === "active"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
@@ -98,7 +98,7 @@ export default function OrdersPage() {
             <button
               type="button"
               onClick={() => setFilter("delivered")}
-              className={`rounded-lg py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
+              className={`rounded-md py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                 filter === "delivered"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
@@ -116,7 +116,7 @@ export default function OrdersPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by order ID or vehicle..."
-              className="w-full rounded-xl border border-white/[0.08] bg-black/40 pl-9 pr-3.5 py-1.5 sm:py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-brand transition-colors"
+              className="w-full rounded-md border border-white/[0.08] bg-black/40 pl-9 pr-3.5 py-1.5 sm:py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-brand transition-colors"
             />
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function OrdersPage() {
               return (
                 <div
                   key={order.id}
-                  className="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-3 sm:p-4.5 md:p-5 shadow-xl shadow-black/40 space-y-2.5 sm:space-y-3.5 hover:border-white/15 transition-all duration-200"
+                  className="rounded-xl sm:rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-3 sm:p-4.5 md:p-5 shadow-xl shadow-black/40 space-y-2.5 sm:space-y-3.5 hover:border-white/15 transition-all duration-200"
                 >
                   {/* Header Row: Clean 2-row on phone / 1-row on sm+ */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4">

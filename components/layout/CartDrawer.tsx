@@ -36,7 +36,7 @@ export function CartDrawer() {
           </div>
           <button
             onClick={() => setIsCartOpen(false)}
-            className="rounded-lg p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white cursor-pointer"
+            className="rounded-md p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
@@ -75,7 +75,7 @@ export function CartDrawer() {
                     className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] p-3"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="relative h-12 w-14 overflow-hidden rounded-lg bg-black shrink-0">
+                      <div className="relative h-12 w-14 overflow-hidden rounded-md bg-black shrink-0">
                         <Image src={item.image} alt={item.title} fill className="object-cover" />
                       </div>
                       <div>
@@ -165,7 +165,7 @@ export function CartDrawer() {
           <Link
             href="/checkout"
             onClick={() => setIsCartOpen(false)}
-            className={`w-full inline-flex items-center justify-center rounded-xl bg-brand hover:bg-brand-hover py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
+            className={`w-full inline-flex items-center justify-center rounded-md bg-brand hover:bg-brand-hover py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
               cartItems.length === 0 ? "opacity-40 pointer-events-none" : ""
             }`}
           >

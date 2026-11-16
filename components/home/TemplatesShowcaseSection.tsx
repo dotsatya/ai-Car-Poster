@@ -107,7 +107,7 @@ export function TemplatesShowcaseSection() {
   };
 
   return (
-    <section className="relative overflow-hidden border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-14 lg:py-16 select-none">
+    <section className="relative overflow-hidden border-t border-white/[0.06] bg-[#07080A] py-8 sm:py-12 lg:py-16 select-none">
       {/* Background ambient lighting accents */}
       <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-80 w-[700px] rounded-full bg-brand/10 blur-[140px]" />
       <div className="pointer-events-none absolute -bottom-40 right-10 h-72 w-96 rounded-full bg-blue-600/5 blur-[120px]" />
@@ -116,16 +116,16 @@ export function TemplatesShowcaseSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6 mb-6 sm:mb-8 lg:mb-10">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-brand animate-pulse" />
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-brand">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
                 CURATED ATELIER ARCHIVE
               </span>
             </div>
-            <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] font-heading">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] font-heading uppercase">
               EXPLORE OUR EXCLUSIVE TEMPLATES
             </h2>
-            <p className="mt-2.5 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed">
+            <p className="mt-2 sm:mt-2.5 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed">
               Step into a world where every poster tells a story, crafted with precision and passion.
             </p>
           </div>
@@ -137,7 +137,7 @@ export function TemplatesShowcaseSection() {
               type="button"
               onClick={() => setIsPaused((prev) => !prev)}
               aria-label={isPaused ? "Resume auto-scroll" : "Pause auto-scroll"}
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/25 hover:bg-white/[0.07] hover:text-white transition-all cursor-pointer"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/25 hover:bg-white/[0.07] hover:text-white transition-all cursor-pointer"
               title={isPaused ? "Resume auto-scroll" : "Pause auto-scroll"}
             >
               {isPaused ? <Play size={14} className="ml-0.5" /> : <Pause size={14} />}
@@ -148,7 +148,7 @@ export function TemplatesShowcaseSection() {
               type="button"
               onClick={() => nudge("left")}
               aria-label="Scroll left"
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/25 hover:bg-white/[0.07] hover:text-white transition-all cursor-pointer"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/25 hover:bg-white/[0.07] hover:text-white transition-all cursor-pointer"
             >
               <ChevronLeft size={16} />
             </button>
@@ -158,7 +158,7 @@ export function TemplatesShowcaseSection() {
               type="button"
               onClick={() => nudge("right")}
               aria-label="Scroll right"
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/25 hover:bg-white/[0.07] hover:text-white transition-all cursor-pointer"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/25 hover:bg-white/[0.07] hover:text-white transition-all cursor-pointer"
             >
               <ChevronRight size={16} />
             </button>
@@ -166,7 +166,7 @@ export function TemplatesShowcaseSection() {
             {/* Link to Full Template Catalog */}
             <Link
               href="/templates"
-              className="inline-flex items-center gap-1.5 rounded-full border border-brand/40 bg-brand/10 hover:bg-brand px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-bold text-white transition-all shadow-sm shadow-brand/30 hover:shadow-brand/50 hover:scale-[1.01] active:scale-[0.98] cursor-pointer ml-1 whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 rounded-md border border-brand/40 bg-brand/10 hover:bg-brand px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-bold text-white transition-all shadow-sm shadow-brand/30 hover:shadow-brand/50 hover:scale-[1.01] active:scale-[0.98] cursor-pointer ml-1 whitespace-nowrap"
             >
               <span>View All 29</span>
               <ArrowRight size={13} />
@@ -285,7 +285,7 @@ export function TemplatesShowcaseSection() {
                             ? `Selected #${selectionSlot + 1} — Click to remove`
                             : "Select this template"
                         }
-                        className={`flex h-5.5 w-5.5 sm:h-7 sm:w-7 items-center justify-center rounded-full border backdrop-blur-md transition-all shadow-md cursor-pointer ${
+                        className={`flex h-5.5 w-5.5 sm:h-7 sm:w-7 items-center justify-center rounded-md border backdrop-blur-md transition-all shadow-md cursor-pointer ${
                           isSelected
                             ? "border-emerald-500 bg-emerald-500 text-black shadow-emerald-500/40"
                             : "border-white/25 bg-black/70 text-white hover:border-brand hover:bg-brand hover:text-white"
@@ -319,7 +319,7 @@ export function TemplatesShowcaseSection() {
 
                       {/* Subtle Arrow Action Icon (Always visible & high contrast) */}
                       <div
-                        className={`flex h-5.5 w-5.5 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-full border shadow-md transition-all duration-200 ${
+                        className={`flex h-5.5 w-5.5 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-md border shadow-md transition-all duration-200 ${
                           isHovered
                             ? "bg-brand border-brand text-white shadow-brand/40 scale-105"
                             : "bg-black/60 border-white/20 text-neutral-300 group-hover:text-white"

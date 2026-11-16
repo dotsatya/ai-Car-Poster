@@ -122,19 +122,19 @@ export default function PricingPage() {
       {/* ============================================================== */}
       {/* 2. PRINT SIZES PRICING GRID */}
       {/* ============================================================== */}
-      <section className="py-10 sm:py-14 lg:py-16">
+      <section className="py-8 sm:py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="mb-6 sm:mb-8 lg:mb-10">
+          <div className="max-w-3xl mb-6 sm:mb-8 lg:mb-10 text-left">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
+              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
                 ARCHIVAL CANVAS SIZES
               </span>
             </div>
-            <h2 className="mt-1 text-xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] font-heading uppercase">
               Choose Your Physical Format
             </h2>
-            <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-2xl">
+            <p className="mt-2 sm:mt-2.5 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed">
               All sizes governed by true 300 DPI native pixel counts and
               physical millimeter execution.
             </p>
@@ -152,7 +152,7 @@ export default function PricingPage() {
               return (
                 <div
                   key={size.id}
-                  className={`group relative rounded-2xl border transition-all duration-300 flex flex-col justify-between p-4 sm:p-6 backdrop-blur-xl ${
+                  className={`group relative rounded-xl border transition-all duration-300 flex flex-col justify-between p-4 sm:p-6 backdrop-blur-xl ${
                     isPopular
                       ? "border-brand/60 bg-[#0E1013] shadow-2xl shadow-brand/15 ring-1 ring-brand/40 -translate-y-1 sm:-translate-y-1.5"
                       : "border-white/[0.08] bg-[#0E1013]/80 hover:border-white/20 hover:bg-[#121418] hover:-translate-y-0.5 sm:hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80"
@@ -231,7 +231,7 @@ export default function PricingPage() {
                   <div className="mt-5 sm:mt-6 pt-2">
                     <Link
                       href={`/studio?size=${size.id}`}
-                      className={`w-full flex items-center justify-center gap-2 rounded-xl py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                      className={`w-full flex items-center justify-center gap-2 rounded-md py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                         isPopular
                           ? "bg-brand hover:bg-brand-hover text-white shadow-sm shadow-brand/30 hover:shadow-brand/50"
                           : "border border-white/15 bg-white/[0.04] hover:bg-white/10 text-white"
@@ -251,19 +251,19 @@ export default function PricingPage() {
       {/* ============================================================== */}
       {/* 3. INCLUDED ATELIER STANDARDS (3 Pillars) */}
       {/* ============================================================== */}
-      <section className="py-10 sm:py-14 lg:py-16 border-t border-white/[0.06] bg-[#07080A]">
+      <section className="py-8 sm:py-12 lg:py-16 border-t border-white/[0.06] bg-[#07080A]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-10">
-            <div className="inline-flex items-center gap-2 mb-2">
+          <div className="max-w-3xl mb-6 sm:mb-8 lg:mb-10 text-left">
+            <div className="flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
+              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
                 THE PHYSICAL ATELIER STANDARD
               </span>
             </div>
-            <h2 className="mt-1 text-xl sm:text-3xl font-bold tracking-tight text-white font-heading uppercase">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] font-heading uppercase">
               Included with Every Commission
             </h2>
-            <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl mx-auto">
+            <p className="mt-2 sm:mt-2.5 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed">
               We never compromise on material integrity. Every physical delivery
               includes museum cotton rag, aerospace aluminum framing, and
               serialized provenance.
@@ -271,7 +271,7 @@ export default function PricingPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300">
+            <div className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300">
               <span className="font-mono text-xs font-bold text-brand">
                 01 / ARCHIVAL SUBSTRATE
               </span>
@@ -285,7 +285,7 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300">
+            <div className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300">
               <span className="font-mono text-xs font-bold text-brand">
                 02 / AEROSPACE FRAMING
               </span>
@@ -299,7 +299,7 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300 sm:col-span-2 lg:col-span-1">
+            <div className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300 sm:col-span-2 lg:col-span-1">
               <span className="font-mono text-xs font-bold text-brand">
                 03 / PROVENANCE SEAL
               </span>
@@ -394,14 +394,14 @@ export default function PricingPage() {
             <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 relative z-10 w-full sm:w-auto">
               <Link
                 href="/studio"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] w-full sm:w-auto"
               >
                 <span>Launch Creation Studio</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/templates"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[0.04] hover:bg-white/[0.09] px-6 py-3 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 bg-white/[0.04] hover:bg-white/[0.09] px-6 py-3 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer w-full sm:w-auto"
               >
                 <Layers className="h-4 w-4 text-brand" />
                 <span>Browse All 29 Templates</span>

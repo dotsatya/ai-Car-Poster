@@ -80,7 +80,7 @@ export function SelectedDesignsList() {
                   toggleTemplate(id);
                 }}
                 aria-label={`Remove ${tpl.name}`}
-                className="flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-neutral-400 hover:border-red-500/40 hover:bg-red-500/20 hover:text-white transition-colors cursor-pointer"
+                className="flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-neutral-400 hover:border-red-500/40 hover:bg-red-500/20 hover:text-white transition-colors cursor-pointer"
                 title={`Remove ${tpl.name}`}
               >
                 <X size={12} className="sm:w-3.5 sm:h-3.5" />

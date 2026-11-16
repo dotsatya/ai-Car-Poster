@@ -69,7 +69,7 @@ export function TemplateSelectionBar() {
                       toggleTemplate(tpl.id);
                     }}
                     aria-label={`Remove ${tpl.name}`}
-                    className="absolute top-0.5 right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-black/85 border border-white/20 text-neutral-300 hover:bg-brand hover:border-brand hover:text-white transition-colors duration-150 shadow-md cursor-pointer"
+                    className="absolute top-0.5 right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-md bg-black/85 border border-white/20 text-neutral-300 hover:bg-brand hover:border-brand hover:text-white transition-colors duration-150 shadow-md cursor-pointer"
                   >
                     <X size={9} strokeWidth={2.5} />
                   </button>
@@ -113,7 +113,7 @@ export function TemplateSelectionBar() {
             type="button"
             onClick={handleProceedToGenerate}
             disabled={!hasSelection}
-            className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold tracking-wide transition-all duration-200 whitespace-nowrap cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
+            className={`inline-flex items-center justify-center gap-1.5 rounded-md px-3.5 py-2 text-xs font-bold tracking-wide transition-all duration-200 whitespace-nowrap cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
               hasSelection
                 ? "bg-brand text-white shadow-sm shadow-brand/30 border border-brand/40 hover:bg-brand-hover hover:shadow-brand/50"
                 : "bg-white/[0.05] text-neutral-500 border border-white/10 cursor-not-allowed opacity-60 hover:scale-100"
@@ -194,7 +194,7 @@ export function TemplateSelectionBar() {
                       toggleTemplate(tpl.id);
                     }}
                     aria-label={`Remove ${tpl.name}`}
-                    className="absolute top-0.5 right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-black/80 text-white/90 hover:bg-brand hover:text-white transition-colors duration-150 shadow-md cursor-pointer"
+                    className="absolute top-0.5 right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-md bg-black/80 text-white/90 hover:bg-brand hover:text-white transition-colors duration-150 shadow-md cursor-pointer"
                   >
                     <X size={9} strokeWidth={2.5} />
                   </button>
@@ -225,7 +225,7 @@ export function TemplateSelectionBar() {
             type="button"
             onClick={handleProceedToGenerate}
             disabled={!hasSelection}
-            className={`inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-bold transition-all duration-200 whitespace-nowrap cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
+            className={`inline-flex items-center justify-center gap-1.5 rounded-md px-4 py-2.5 text-xs font-bold transition-all duration-200 whitespace-nowrap cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
               hasSelection
                 ? "bg-brand text-white shadow-sm shadow-brand/30 hover:bg-brand-hover hover:shadow-brand/50"
                 : "bg-white/[0.06] text-neutral-400 border border-white/10 cursor-not-allowed opacity-60 hover:scale-100"

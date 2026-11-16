@@ -221,7 +221,7 @@ export default function AboutPage() {
                   <button
                     type="button"
                     onClick={() => setActivePhotoTab("before")}
-                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-3 sm:px-3.5 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer ${
+                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-3 sm:px-3.5 rounded-md text-xs font-medium transition-all duration-200 cursor-pointer ${
                       activePhotoTab === "before"
                         ? "bg-white/10 text-white border border-white/20 shadow-sm"
                         : "text-neutral-400 hover:text-white"
@@ -239,7 +239,7 @@ export default function AboutPage() {
                   <button
                     type="button"
                     onClick={() => setActivePhotoTab("after")}
-                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-3 sm:px-3.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-3 sm:px-3.5 rounded-md text-xs font-semibold transition-all duration-200 cursor-pointer ${
                       activePhotoTab === "after"
                         ? "bg-brand text-white border border-brand/50 shadow-sm shadow-brand/30"
                         : "text-neutral-400 hover:text-white"
@@ -406,7 +406,7 @@ export default function AboutPage() {
                     key={idx}
                     type="button"
                     onClick={() => setActiveProcessStep(idx)}
-                    className={`rounded-xl border p-2.5 sm:p-3.5 text-left transition-all cursor-pointer flex flex-col justify-between shrink-0 w-[145px] xs:w-[160px] sm:w-auto ${
+                    className={`rounded-md border p-2.5 sm:p-3.5 text-left transition-all cursor-pointer flex flex-col justify-between shrink-0 w-[145px] xs:w-[160px] sm:w-auto ${
                       isSelected
                         ? "border-brand bg-brand/10 shadow-lg shadow-brand/15 ring-1 ring-brand/40 -translate-y-0.5"
                         : "border-white/[0.08] bg-[#0E1013]/80 hover:border-white/20 hover:bg-[#121418]"
@@ -498,7 +498,7 @@ export default function AboutPage() {
                       onClick={() =>
                         setActiveProcessStep((prev) => Math.max(0, prev - 1))
                       }
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer transition-colors"
                     >
                       <span>← Prev</span>
                       <span className="hidden xs:inline">Stage</span>
@@ -514,7 +514,7 @@ export default function AboutPage() {
                           Math.min(processSteps.length - 1, prev + 1),
                         )
                       }
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand/20 border border-brand/40 text-brand hover:bg-brand/30 hover:text-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-brand/20 border border-brand/40 text-brand hover:bg-brand/30 hover:text-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer transition-colors"
                     >
                       <span>Next</span>
                       <span className="hidden xs:inline">Stage</span>
@@ -696,14 +696,14 @@ export default function AboutPage() {
             <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 relative z-10 w-full sm:w-auto">
               <Link
                 href="/studio"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] w-full sm:w-auto"
               >
                 <span>Launch Creation Studio</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/templates"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[0.04] hover:bg-white/[0.09] px-6 py-3 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 bg-white/[0.04] hover:bg-white/[0.09] px-6 py-3 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer w-full sm:w-auto"
               >
                 <span>Browse All Templates</span>
               </Link>

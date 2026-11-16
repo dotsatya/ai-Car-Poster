@@ -101,7 +101,7 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-1 sm:gap-1.5 rounded-full border border-white/20 bg-black/75 px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold text-white backdrop-blur-md transition-all hover:bg-brand hover:border-brand cursor-pointer"
+                  className="flex items-center gap-1 sm:gap-1.5 rounded-md border border-white/20 bg-black/75 px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold text-white backdrop-blur-md transition-all hover:bg-brand hover:border-brand cursor-pointer"
                 >
                   <RefreshCw size={11} />
                   <span>Change</span>
@@ -113,7 +113,7 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
                     setVehicleName("");
                     setCustomText("");
                   }}
-                  className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full border border-white/20 bg-black/75 text-neutral-300 backdrop-blur-md transition-all hover:bg-red-600 hover:border-red-600 hover:text-white cursor-pointer"
+                  className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-md border border-white/20 bg-black/75 text-neutral-300 backdrop-blur-md transition-all hover:bg-red-600 hover:border-red-600 hover:text-white cursor-pointer"
                   title="Remove photo"
                 >
                   <X size={12} />

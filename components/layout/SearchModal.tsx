@@ -49,7 +49,7 @@ export function SearchModal() {
           </div>
           <button
             onClick={() => setIsSearchOpen(false)}
-            className="rounded-lg p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white cursor-pointer"
+            className="rounded-md p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white cursor-pointer"
           >
             <X size={18} />
           </button>

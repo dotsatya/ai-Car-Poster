@@ -87,10 +87,10 @@ export default function StudioPage() {
 
         {/* WORKFLOW TABS (kept for seamless state switching) */}
         <div className="mb-5 sm:mb-6 flex justify-center">
-          <div className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center rounded-full border border-white/10 bg-neutral-900/80 p-1 backdrop-blur-md">
+          <div className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center rounded-md border border-white/10 bg-neutral-900/80 p-1 backdrop-blur-md">
             <button
               onClick={() => setStudioState("configure")}
-              className={`flex-1 sm:flex-initial rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
+              className={`flex-1 sm:flex-initial rounded-md px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
                 studioState === "configure"
                   ? "bg-white text-black shadow-md"
                   : "text-neutral-400 hover:text-white"
@@ -101,7 +101,7 @@ export default function StudioPage() {
             </button>
             <button
               onClick={handleStartGenerationClick}
-              className={`flex-1 sm:flex-initial rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
+              className={`flex-1 sm:flex-initial rounded-md px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
                 studioState === "generating"
                   ? "bg-brand text-white shadow-md"
                   : "text-neutral-400 hover:text-white"
@@ -116,7 +116,7 @@ export default function StudioPage() {
                   setStudioState("review");
                 else handleStartGenerationClick();
               }}
-              className={`flex-1 sm:flex-initial rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
+              className={`flex-1 sm:flex-initial rounded-md px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
                 studioState === "review"
                   ? "bg-white text-black shadow-md"
                   : "text-neutral-400 hover:text-white"

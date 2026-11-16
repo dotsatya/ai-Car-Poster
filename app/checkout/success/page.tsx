@@ -207,7 +207,7 @@ function OrderSuccessContent() {
                     description: `Official Certificate for ${orderId} generated.`,
                   })
                 }
-                className="shrink-0 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-3 py-2 text-xs font-semibold text-neutral-200 hover:text-white transition-all cursor-pointer whitespace-nowrap"
+                className="shrink-0 inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.04] hover:bg-white/10 px-3 py-2 text-xs font-semibold text-neutral-200 hover:text-white transition-all cursor-pointer whitespace-nowrap"
               >
                 <Download className="h-3.5 w-3.5 text-brand" />
                 <span>Certificate PDF</span>
@@ -278,7 +278,7 @@ function OrderSuccessContent() {
             <div className="space-y-2.5">
               <Link
                 href="/account/orders"
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-3.5 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover py-3.5 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
               >
                 <span>Track in My Orders</span>
                 <ArrowRight className="h-4 w-4" />

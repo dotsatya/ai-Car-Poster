@@ -86,8 +86,8 @@ export function Navbar() {
       <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-12">
         {/* Brand Monogram & Logo */}
         <Link href="/" className="group flex items-center gap-2.5 sm:gap-3 shrink-0">
-          <div className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neutral-800 to-black p-[1px] shadow-lg shadow-black/80">
-            <div className="flex h-full w-full items-center justify-center rounded-xl bg-[#0F1012] transition-colors group-hover:bg-[#16181C]">
+          <div className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-md bg-gradient-to-br from-neutral-800 to-black p-[1px] shadow-lg shadow-black/80">
+            <div className="flex h-full w-full items-center justify-center rounded-md bg-[#0F1012] transition-colors group-hover:bg-[#16181C]">
               <svg
                 className="h-4 w-4 sm:h-5 sm:w-5 text-brand transition-transform duration-300 group-hover:scale-110"
                 viewBox="0 0 24 24"
@@ -144,7 +144,7 @@ export function Navbar() {
           {/* Search Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
             aria-label="Search"
             title="Search Templates"
           >
@@ -154,7 +154,7 @@ export function Navbar() {
           {/* Shopping Bag Button */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className="relative flex h-9 w-9 items-center justify-center rounded-full text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
+            className="relative flex h-9 w-9 items-center justify-center rounded-md text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
             aria-label="Shopping Bag"
             title="Studio Bag"
           >
@@ -189,7 +189,7 @@ export function Navbar() {
               {isUserMenuOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 top-full mt-2 w-64 rounded-xl border border-white/[0.08] bg-[#121215]/95 p-1.5 shadow-2xl backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150 hover:border-white/20 transition-all duration-300"
+                  className="absolute right-0 top-full mt-2 w-64 rounded-md border border-white/[0.08] bg-[#121215]/95 p-1.5 shadow-2xl backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150 hover:border-white/20 transition-all duration-300"
                 >
                   {/* Dropdown Header: Avatar + User Email */}
                   <div className="flex items-center gap-2.5 px-3 py-2.5 border-b border-white/[0.08]">
@@ -211,7 +211,7 @@ export function Navbar() {
                     <Link
                       href="/account"
                       onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
                       <LayoutDashboard className="h-4 w-4 text-neutral-400 shrink-0" />
@@ -221,7 +221,7 @@ export function Navbar() {
                     <Link
                       href="/account/settings"
                       onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
                       <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
@@ -237,7 +237,7 @@ export function Navbar() {
                         setIsUserMenuOpen(false);
                         signOut();
                       }}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer text-left"
+                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer text-left"
                       role="menuitem"
                     >
                       <LogOut className="h-4 w-4 text-red-400 shrink-0" />
@@ -250,7 +250,7 @@ export function Navbar() {
           ) : (
             <button
               onClick={() => setIsSignInOpen(true)}
-              className="rounded-full bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+              className="rounded-md bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
             >
               Sign In
             </button>
@@ -262,7 +262,7 @@ export function Navbar() {
           {/* Mobile Search Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg text-neutral-300 hover:bg-white/[0.06] hover:text-white cursor-pointer"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md text-neutral-300 hover:bg-white/[0.06] hover:text-white cursor-pointer"
             aria-label="Search templates"
             title="Search"
           >
@@ -272,7 +272,7 @@ export function Navbar() {
           {/* Mobile Shopping Bag */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg text-neutral-300 hover:bg-white/[0.06] hover:text-white cursor-pointer"
+            className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md text-neutral-300 hover:bg-white/[0.06] hover:text-white cursor-pointer"
             aria-label="Shopping Bag"
             title="Cart"
           >
@@ -310,7 +310,7 @@ export function Navbar() {
               {isMobileUserMenuOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] rounded-xl border border-white/[0.08] bg-[#121215]/98 p-1.5 shadow-2xl backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150"
+                  className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] rounded-md border border-white/[0.08] bg-[#121215]/98 p-1.5 shadow-2xl backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150"
                 >
                   {/* Dropdown Header: Avatar + User Email */}
                   <div className="flex items-center gap-2.5 px-3 py-2.5 border-b border-white/[0.08]">
@@ -332,7 +332,7 @@ export function Navbar() {
                     <Link
                       href="/account"
                       onClick={() => setIsMobileUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
                       <LayoutDashboard className="h-4 w-4 text-neutral-400 shrink-0" />
@@ -342,7 +342,7 @@ export function Navbar() {
                     <Link
                       href="/account/settings"
                       onClick={() => setIsMobileUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
                       <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
@@ -358,7 +358,7 @@ export function Navbar() {
                         setIsMobileUserMenuOpen(false);
                         signOut();
                       }}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer text-left"
+                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer text-left"
                       role="menuitem"
                     >
                       <LogOut className="h-4 w-4 text-red-400 shrink-0" />
@@ -372,7 +372,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setIsSignInOpen(true)}
-              className="rounded-full bg-brand hover:bg-brand-hover px-2.5 sm:px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer"
+              className="rounded-md bg-brand hover:bg-brand-hover px-2.5 sm:px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer"
             >
               Sign In
             </button>
@@ -384,7 +384,7 @@ export function Navbar() {
               setIsMobileUserMenuOpen(false);
               setIsMobileMenuOpen(!isMobileMenuOpen);
             }}
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white cursor-pointer"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white cursor-pointer"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -415,7 +415,7 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium transition-colors ${
+                    className={`rounded-md px-3.5 py-2.5 text-xs sm:text-sm font-medium transition-colors ${
                       isActive
                         ? "bg-white/10 font-semibold text-white"
                         : "hover:bg-white/[0.04] text-neutral-300 hover:text-white"

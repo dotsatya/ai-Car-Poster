@@ -231,7 +231,7 @@ export default function CheckoutPage() {
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("card")}
-                  className={`rounded-xl border p-3 text-center text-xs font-semibold transition-all cursor-pointer ${
+                  className={`rounded-md border p-3 text-center text-xs font-semibold transition-all cursor-pointer ${
                     paymentMethod === "card"
                       ? "border-brand bg-brand/10 text-white"
                       : "border-white/[0.08] bg-black/30 text-neutral-400 hover:text-white"
@@ -243,7 +243,7 @@ export default function CheckoutPage() {
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("upi")}
-                  className={`rounded-xl border p-3 text-center text-xs font-semibold transition-all cursor-pointer ${
+                  className={`rounded-md border p-3 text-center text-xs font-semibold transition-all cursor-pointer ${
                     paymentMethod === "upi"
                       ? "border-brand bg-brand/10 text-white"
                       : "border-white/[0.08] bg-black/30 text-neutral-400 hover:text-white"
@@ -255,7 +255,7 @@ export default function CheckoutPage() {
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("wire")}
-                  className={`rounded-xl border p-3 text-center text-xs font-semibold transition-all cursor-pointer ${
+                  className={`rounded-md border p-3 text-center text-xs font-semibold transition-all cursor-pointer ${
                     paymentMethod === "wire"
                       ? "border-brand bg-brand/10 text-white"
                       : "border-white/[0.08] bg-black/30 text-neutral-400 hover:text-white"
@@ -359,7 +359,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
               >
                 <CheckCircle2 className="h-4 w-4" />
                 <span>{isSubmitting ? "Processing ..." : "Pay Now"}</span>

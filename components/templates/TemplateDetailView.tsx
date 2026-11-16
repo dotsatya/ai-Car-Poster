@@ -220,7 +220,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                       type="button"
                       disabled={!isAvailable}
                       onClick={() => handleSizeChange(sizeKey)}
-                      className={`relative flex flex-col items-center justify-center rounded-xl border p-2.5 text-center transition-all ${
+                      className={`relative flex flex-col items-center justify-center rounded-md border p-2.5 text-center transition-all ${
                         !isAvailable
                           ? "border-white/5 bg-neutral-950/40 text-neutral-600 cursor-not-allowed opacity-40 line-through"
                           : isSelected
@@ -265,7 +265,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                       type="button"
                       disabled={!isEnabled}
                       onClick={() => setSelectedGsmId(gsmKey)}
-                      className={`relative flex flex-col items-start p-2.5 sm:p-3 rounded-xl border text-left transition-all ${
+                      className={`relative flex flex-col items-start p-2.5 sm:p-3 rounded-md border text-left transition-all ${
                         !isEnabled
                           ? "border-white/5 bg-neutral-950/40 text-neutral-600 cursor-not-allowed opacity-40"
                           : isSelected
@@ -298,7 +298,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
               <button
                 type="button"
                 onClick={() => toggleTemplate(template.id)}
-                className={`w-full flex items-center justify-center gap-2 rounded-xl py-3.5 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] text-center ${
+                className={`w-full flex items-center justify-center gap-2 rounded-md py-3.5 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] text-center ${
                   isSelected
                     ? "bg-brand/90 hover:bg-brand text-white shadow-brand/30 hover:shadow-brand/50 ring-1 ring-brand/50"
                     : "bg-brand hover:bg-brand-hover text-white shadow-brand/30 hover:shadow-brand/50"
@@ -436,7 +436,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                     e.stopPropagation();
                     toggleTemplate(rel.id);
                   }}
-                  className={`absolute top-2 right-2 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full border backdrop-blur-md transition-all cursor-pointer ${
+                  className={`absolute top-2 right-2 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-md border backdrop-blur-md transition-all cursor-pointer ${
                     isRelSelected
                       ? "border-brand bg-brand text-white shadow-md shadow-brand/30"
                       : "border-white/20 bg-black/60 text-white hover:border-white"

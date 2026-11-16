@@ -46,7 +46,7 @@ export function AccountNav() {
 
           {/* <Link
             href="/studio"
-            className="shrink-0 rounded-lg sm:rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer whitespace-nowrap"
+            className="shrink-0 rounded-md border border-white/15 bg-white/[0.04] hover:bg-white/10 px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer whitespace-nowrap"
           >
             <span>Studio →</span>
           </Link> */}
@@ -65,7 +65,7 @@ export function AccountNav() {
               <Link
                 key={tab.href}
                 href={tab.href}
-                className={`relative flex items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-all whitespace-nowrap cursor-pointer shrink-0 ${
+                className={`relative flex items-center gap-1.5 sm:gap-2 rounded-md px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-all whitespace-nowrap cursor-pointer shrink-0 ${
                   isActive
                     ? "bg-white/[0.08] text-white font-semibold shadow-sm"
                     : "text-neutral-400 hover:text-white hover:bg-white/[0.03]"

@@ -133,7 +133,7 @@ export function TemplateFilterDrawer({
                   <button
                     type="button"
                     onClick={onReset}
-                    className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[11px] font-semibold text-neutral-400 hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold text-neutral-400 hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
                     title="Reset all filters"
                   >
                     <RotateCcw size={12} />
@@ -144,7 +144,7 @@ export function TemplateFilterDrawer({
                   type="button"
                   onClick={onClose}
                   aria-label="Close filters"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors cursor-pointer"
+                  className="flex h-8 w-8 items-center justify-center rounded-md border border-white/[0.08] text-neutral-400 hover:text-white hover:bg-white/[0.08] transition-colors cursor-pointer"
                 >
                   <X size={16} />
                 </button>
@@ -173,7 +173,7 @@ export function TemplateFilterDrawer({
                         key={brand}
                         type="button"
                         onClick={() => toggleArrayItem("brands", brand)}
-                        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
+                        className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
                           isSelected
                             ? "bg-brand text-white border border-brand shadow-sm shadow-brand/30 scale-102"
                             : "bg-neutral-900/90 text-neutral-300 border border-white/[0.08] hover:border-white/20 hover:text-white hover:bg-neutral-800"
@@ -207,7 +207,7 @@ export function TemplateFilterDrawer({
                         key={model}
                         type="button"
                         onClick={() => toggleArrayItem("models", model)}
-                        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
+                        className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
                           isSelected
                             ? "bg-brand text-white border border-brand shadow-sm shadow-brand/30 scale-102"
                             : "bg-neutral-900/90 text-neutral-300 border border-white/[0.08] hover:border-white/20 hover:text-white hover:bg-neutral-800"
@@ -241,7 +241,7 @@ export function TemplateFilterDrawer({
                         key={style}
                         type="button"
                         onClick={() => toggleArrayItem("styles", style)}
-                        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
+                        className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
                           isSelected
                             ? "bg-brand text-white border border-brand shadow-sm shadow-brand/30 scale-102"
                             : "bg-neutral-900/90 text-neutral-300 border border-white/[0.08] hover:border-white/20 hover:text-white hover:bg-neutral-800"
@@ -275,7 +275,7 @@ export function TemplateFilterDrawer({
                         key={col}
                         type="button"
                         onClick={() => toggleArrayItem("collections", col)}
-                        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
+                        className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
                           isSelected
                             ? "bg-brand text-white border border-brand shadow-sm shadow-brand/30 scale-102"
                             : "bg-neutral-900/90 text-neutral-300 border border-white/[0.08] hover:border-white/20 hover:text-white hover:bg-neutral-800"
@@ -309,7 +309,7 @@ export function TemplateFilterDrawer({
                         key={cat}
                         type="button"
                         onClick={() => toggleArrayItem("categories", cat)}
-                        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
+                        className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer ${
                           isSelected
                             ? "bg-brand text-white border border-brand shadow-sm shadow-brand/30 scale-102"
                             : "bg-neutral-900/90 text-neutral-300 border border-white/[0.08] hover:border-white/20 hover:text-white hover:bg-neutral-800"
@@ -343,7 +343,7 @@ export function TemplateFilterDrawer({
                         key={year}
                         type="button"
                         onClick={() => toggleArrayItem("years", year)}
-                        className={`text-center rounded-lg py-2 text-xs font-mono font-medium transition-all duration-200 cursor-pointer ${
+                        className={`text-center rounded-md py-2 text-xs font-mono font-medium transition-all duration-200 cursor-pointer ${
                           isSelected
                             ? "bg-brand text-white border border-brand shadow-sm shadow-brand/30 scale-102 font-bold"
                             : "bg-neutral-900/90 text-neutral-300 border border-white/[0.08] hover:border-white/20 hover:text-white hover:bg-neutral-800"
@@ -382,7 +382,7 @@ export function TemplateFilterDrawer({
                             priceRange: pr.id as FilterState["priceRange"],
                           }))
                         }
-                        className={`text-center rounded-lg py-2 px-3 text-xs font-medium transition-all duration-200 cursor-pointer ${
+                        className={`text-center rounded-md py-2 px-3 text-xs font-medium transition-all duration-200 cursor-pointer ${
                           isSelected
                             ? "bg-brand text-white border border-brand shadow-sm shadow-brand/30 font-semibold"
                             : "bg-neutral-900/90 text-neutral-300 border border-white/[0.08] hover:border-white/20 hover:text-white hover:bg-neutral-800"
@@ -452,7 +452,7 @@ export function TemplateFilterDrawer({
                 type="button"
                 onClick={onReset}
                 disabled={activeCount === 0}
-                className="inline-flex items-center justify-center rounded-xl border border-white/[0.08] hover:border-white/20 bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 disabled:cursor-not-allowed px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-neutral-300 hover:text-white transition-all cursor-pointer"
+                className="inline-flex items-center justify-center rounded-md border border-white/[0.08] hover:border-white/20 bg-white/[0.04] hover:bg-white/[0.08] disabled:opacity-40 disabled:cursor-not-allowed px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-neutral-300 hover:text-white transition-all cursor-pointer"
               >
                 Reset All
               </button>
@@ -460,7 +460,7 @@ export function TemplateFilterDrawer({
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
               >
                 Apply
               </button>

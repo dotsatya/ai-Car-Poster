@@ -154,14 +154,14 @@ export function GenaratePosterReview({
           <button
             type="button"
             onClick={onBackToConfigure}
-            className="flex-1 sm:flex-initial text-center rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-3 py-2 text-xs font-semibold text-neutral-300 hover:text-white cursor-pointer transition-colors whitespace-nowrap"
+            className="flex-1 sm:flex-initial text-center rounded-md border border-white/15 bg-white/[0.04] hover:bg-white/10 px-3 py-2 text-xs font-semibold text-neutral-300 hover:text-white cursor-pointer transition-colors whitespace-nowrap"
           >
             ← Adjust Inputs
           </button>
           <button
             type="button"
             onClick={() => setIsCartOpen(true)}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 text-center rounded-xl bg-brand hover:bg-brand-hover px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 text-center rounded-md bg-brand hover:bg-brand-hover px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
           >
             <ShoppingBag className="h-3.5 w-3.5" />
             <span>Print Cart ({cartItems.length})</span>
@@ -294,7 +294,7 @@ export function GenaratePosterReview({
                         openSizeMenuId === art.id ? null : art.id,
                       )
                     }
-                    className={`w-full flex items-center justify-between gap-1 rounded-xl border px-2 sm:px-2.5 py-1.5 text-xs transition-all cursor-pointer group ${
+                    className={`w-full flex items-center justify-between gap-1 rounded-md border px-2 sm:px-2.5 py-1.5 text-xs transition-all cursor-pointer group ${
                       openSizeMenuId === art.id
                         ? "border-brand bg-brand/10 ring-1 ring-brand/40 text-white shadow-sm"
                         : "border-white/15 bg-black/60 hover:bg-black/90 hover:border-white/30 text-neutral-200"
@@ -350,7 +350,7 @@ export function GenaratePosterReview({
                                 updateArtworkSize(art.id, size.id);
                                 setOpenSizeMenuId(null);
                               }}
-                              className={`w-full flex items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-left text-xs transition-all cursor-pointer ${
+                              className={`w-full flex items-center justify-between gap-2 rounded-md px-2.5 py-2 text-left text-xs transition-all cursor-pointer ${
                                 isSelected
                                   ? "bg-brand/20 text-white border border-brand/50 font-semibold shadow-sm"
                                   : "text-neutral-300 hover:bg-white/[0.08] hover:text-white border border-transparent"
@@ -470,7 +470,7 @@ export function GenaratePosterReview({
         <button
           type="button"
           onClick={() => setIsCartOpen(true)}
-          className="w-full sm:w-auto rounded-xl bg-brand hover:bg-brand-hover px-6 sm:px-7 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer active:scale-[0.98] text-center whitespace-nowrap"
+          className="w-full sm:w-auto rounded-md bg-brand hover:bg-brand-hover px-6 sm:px-7 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer active:scale-[0.98] text-center whitespace-nowrap"
         >
           Open Print Cart ({selectedCount}) →
         </button>
@@ -492,7 +492,7 @@ export function GenaratePosterReview({
         <button
           type="button"
           onClick={() => setIsCartOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-brand/30 transition-all cursor-pointer whitespace-nowrap active:scale-95"
+          className="inline-flex items-center gap-1.5 rounded-md bg-brand hover:bg-brand-hover px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-brand/30 transition-all cursor-pointer whitespace-nowrap active:scale-95"
         >
           <ShoppingBag size={14} />
           <span>Print Cart ({selectedCount}) →</span>
@@ -520,7 +520,7 @@ export function GenaratePosterReview({
                   <button
                     type="button"
                     onClick={handlePrev}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    className="flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                     title="Previous variation (←)"
                   >
                     <ChevronLeft size={16} />
@@ -532,7 +532,7 @@ export function GenaratePosterReview({
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    className="flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                     title="Next variation (→)"
                   >
                     <ChevronRight size={16} />
@@ -542,7 +542,7 @@ export function GenaratePosterReview({
                 <button
                   type="button"
                   onClick={() => setInspectArtworkIndex(null)}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  className="flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                   title="Close preview (Esc)"
                 >
                   <X size={16} />
@@ -683,7 +683,7 @@ export function GenaratePosterReview({
                     <button
                       type="button"
                       onClick={() => toggleArtworkSelection(currentArtwork.id)}
-                      className={`w-full py-2.5 sm:py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-[0.98] ${
+                      className={`w-full py-2.5 sm:py-3 px-4 rounded-md text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-[0.98] ${
                         currentArtwork.selected
                           ? "bg-brand text-white shadow-brand/30 hover:bg-brand-hover hover:shadow-brand/50 ring-1 ring-brand"
                           : "border border-white/20 bg-white/[0.06] hover:border-brand hover:bg-brand hover:text-white text-white"
@@ -714,7 +714,7 @@ export function GenaratePosterReview({
                           key={art.id}
                           type="button"
                           onClick={() => setInspectArtworkIndex(idx)}
-                          className={`relative aspect-[3/4] rounded-lg overflow-hidden border transition-all cursor-pointer ${
+                          className={`relative aspect-[3/4] rounded-md overflow-hidden border transition-all cursor-pointer ${
                             idx === inspectArtworkIndex
                               ? "border-brand ring-2 ring-brand/40 scale-105 shadow-md"
                               : "border-white/15 opacity-60 hover:opacity-100"

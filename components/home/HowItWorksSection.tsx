@@ -54,16 +54,16 @@ export function HowItWorksSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 md:gap-x-8 lg:gap-x-10 xl:gap-x-12 gap-y-4 sm:gap-y-6 md:gap-y-8 items-stretch">
           {/* ─── ROW 1 LEFT: Header (order-1 on mobile, Row 1 Col 1-7 on tablet/desktop) ─── */}
           <div className="order-1 md:order-none md:col-span-7 xl:col-span-8 flex flex-col justify-end">
-            <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
+            <div className="flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
               <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
                 SIMPLE PROCESS
               </span>
             </div>
-            <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] font-heading uppercase">
               HOW IT WORKS
             </h2>
-            <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl">
+            <p className="mt-2 sm:mt-2.5 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-2xl">
               Four steps from your photo to a poster on your wall.
             </p>
           </div>
@@ -75,7 +75,7 @@ export function HowItWorksSection() {
                 <button
                   type="button"
                   onClick={() => setActiveView("before")}
-                  className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-2.5 sm:px-3.5 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer ${
+                  className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-2.5 sm:px-3.5 rounded-md text-xs font-medium transition-all duration-200 cursor-pointer ${
                     activeView === "before"
                       ? "bg-white/10 text-white border border-white/20 shadow-sm"
                       : "text-neutral-400 hover:text-white"
@@ -89,7 +89,7 @@ export function HowItWorksSection() {
                 <button
                   type="button"
                   onClick={() => setActiveView("after")}
-                  className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-2.5 sm:px-3.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-2.5 sm:px-3.5 rounded-md text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     activeView === "after"
                       ? "bg-brand text-white border border-brand/50 shadow-sm shadow-brand/30"
                       : "text-neutral-400 hover:text-white"

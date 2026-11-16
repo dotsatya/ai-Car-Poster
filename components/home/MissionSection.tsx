@@ -30,7 +30,7 @@ export function MissionSection() {
                   <div className="flex gap-1 w-full sm:w-auto">
                     <button
                       onClick={() => setActiveHeroTab("before")}
-                      className={`flex-1 sm:flex-initial rounded-lg px-2 sm:px-2.5 py-1 text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all text-center ${
+                      className={`flex-1 sm:flex-initial rounded-md px-2 sm:px-2.5 py-1 text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all text-center ${
                         activeHeroTab === "before" ? "bg-white text-black" : "text-neutral-400 hover:text-white"
                       }`}
                     >
@@ -38,7 +38,7 @@ export function MissionSection() {
                     </button>
                     <button
                       onClick={() => setActiveHeroTab("after")}
-                      className={`flex-1 sm:flex-initial rounded-lg px-2 sm:px-2.5 py-1 text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all text-center ${
+                      className={`flex-1 sm:flex-initial rounded-md px-2 sm:px-2.5 py-1 text-[9px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all text-center ${
                         activeHeroTab === "after" ? "bg-brand text-white" : "text-neutral-400 hover:text-white"
                       }`}
                     >

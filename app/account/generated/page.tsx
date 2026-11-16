@@ -91,7 +91,7 @@ export default function AccountGeneratedPostersPage() {
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-lg sm:rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.04] hover:bg-white/10 px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer"
               >
                 <ShoppingBag size={13} className="text-brand" />
                 <span>Cart ({cartItems.length})</span>
@@ -113,7 +113,7 @@ export default function AccountGeneratedPostersPage() {
             <div className="mt-6">
               <Link
                 href="/studio"
-                className="inline-flex items-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-md bg-brand hover:bg-brand-hover px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
               >
                 <span>Launch Poster Studio</span>
                 <ArrowRight size={14} />
@@ -209,7 +209,7 @@ export default function AccountGeneratedPostersPage() {
                               e.stopPropagation();
                               toggleArtworkSelection(art.id);
                             }}
-                            className={`inline-flex items-center gap-1.5 rounded-lg px-2 sm:px-2.5 py-1 text-xs font-semibold transition-all duration-200 cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] ${
+                            className={`inline-flex items-center gap-1.5 rounded-md px-2 sm:px-2.5 py-1 text-xs font-semibold transition-all duration-200 cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] ${
                               art.selected
                                 ? "bg-brand/90 text-white shadow-brand/30 hover:shadow-brand/50 ring-1 ring-brand/35 hover:bg-brand"
                                 : "border border-white/20 bg-white/[0.06] text-white hover:border-brand/60 hover:bg-brand/80 hover:text-white hover:shadow-sm hover:shadow-brand/30"
@@ -282,7 +282,7 @@ export default function AccountGeneratedPostersPage() {
                                         updateArtworkSize(art.id, size.id);
                                         setOpenSizeMenuId(null);
                                       }}
-                                      className={`w-full flex items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-left text-xs transition-all cursor-pointer ${
+                                      className={`w-full flex items-center justify-between gap-2 rounded-md px-2.5 py-2 text-left text-xs transition-all cursor-pointer ${
                                         isSelected
                                           ? "bg-brand/20 text-white border border-brand/50 font-semibold shadow-sm"
                                           : "text-neutral-300 hover:bg-white/[0.08] hover:text-white border border-transparent"
@@ -346,7 +346,7 @@ export default function AccountGeneratedPostersPage() {
             <button
               type="button"
               onClick={() => setIsCartOpen(true)}
-              className="w-full sm:w-auto shrink-0 rounded-xl bg-brand hover:bg-brand-hover px-5 sm:px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] whitespace-nowrap text-center"
+              className="w-full sm:w-auto shrink-0 rounded-md bg-brand hover:bg-brand-hover px-5 sm:px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] whitespace-nowrap text-center"
             >
               Open Print Cart ({selectedCount}) →
             </button>
@@ -376,7 +376,7 @@ export default function AccountGeneratedPostersPage() {
                 type="button"
                 onClick={() => setInspectIndex(null)}
                 aria-label="Close dialog"
-                className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-30 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/20 bg-black/75 text-neutral-300 hover:text-white hover:bg-black transition-colors cursor-pointer shadow-lg"
+                className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-30 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md border border-white/20 bg-black/75 text-neutral-300 hover:text-white hover:bg-black transition-colors cursor-pointer shadow-lg"
               >
                 <X size={16} />
               </button>
@@ -430,7 +430,7 @@ export default function AccountGeneratedPostersPage() {
                             key={size.id}
                             type="button"
                             onClick={() => updateArtworkSize(currentArtwork.id, size.id)}
-                            className={`p-2 sm:p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                            className={`p-2 sm:p-2.5 rounded-md border text-left transition-all cursor-pointer ${
                               isSizeActive
                                 ? "border-brand bg-brand/10 ring-1 ring-brand text-white shadow-sm"
                                 : "border-white/10 bg-white/[0.03] text-neutral-300 hover:border-white/20 hover:text-white"
@@ -465,7 +465,7 @@ export default function AccountGeneratedPostersPage() {
                     <button
                       type="button"
                       onClick={() => toggleArtworkSelection(currentArtwork.id)}
-                      className={`w-full sm:flex-1 py-2.5 sm:py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] ${
+                      className={`w-full sm:flex-1 py-2.5 sm:py-3 px-4 rounded-md text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] ${
                         currentArtwork.selected
                           ? "bg-brand text-white shadow-brand/30 hover:bg-brand-hover hover:shadow-brand/50 ring-1 ring-brand"
                           : "border border-white/20 bg-white/[0.06] hover:border-brand hover:bg-brand hover:text-white text-white"
@@ -487,7 +487,7 @@ export default function AccountGeneratedPostersPage() {
                     <button
                       type="button"
                       onClick={() => setInspectIndex(null)}
-                      className="w-full sm:w-auto rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-4 py-2.5 sm:py-3 text-xs font-semibold text-neutral-300 hover:text-white transition-colors cursor-pointer text-center"
+                      className="w-full sm:w-auto rounded-md border border-white/15 bg-white/[0.04] hover:bg-white/10 px-4 py-2.5 sm:py-3 text-xs font-semibold text-neutral-300 hover:text-white transition-colors cursor-pointer text-center"
                     >
                       Close
                     </button>

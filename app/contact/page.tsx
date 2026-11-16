@@ -95,7 +95,7 @@ export default function ContactPage() {
                   <div className="pt-2">
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-neutral-300 hover:text-white"
+                      className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-neutral-300 hover:text-white"
                     >
                       Send Another Inquiry
                     </button>
@@ -224,7 +224,7 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="w-full rounded-xl bg-brand hover:bg-brand-hover py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                    className="w-full rounded-md bg-brand hover:bg-brand-hover py-2.5 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
                   >
                     Submit Concierge Request
                   </button>

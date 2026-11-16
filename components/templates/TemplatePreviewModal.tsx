@@ -90,7 +90,7 @@ export function TemplatePreviewModal({
             type="button"
             onClick={onClose}
             aria-label="Close preview"
-            className="flex h-7 w-7 items-center justify-center rounded-lg text-neutral-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
+            className="flex h-7 w-7 items-center justify-center rounded-md text-neutral-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
           >
             <X size={16} />
           </button>
@@ -145,7 +145,7 @@ export function TemplatePreviewModal({
           <button
             type="button"
             onClick={handleDeselect}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-red-500/35 bg-red-500/15 hover:bg-red-500/25 text-red-300 hover:text-white py-2 sm:py-2.5 px-3 text-xs font-semibold transition-all cursor-pointer shadow-sm shadow-red-500/20 active:scale-95"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-md border border-red-500/35 bg-red-500/15 hover:bg-red-500/25 text-red-300 hover:text-white py-2 sm:py-2.5 px-3 text-xs font-semibold transition-all cursor-pointer shadow-sm shadow-red-500/20 active:scale-95"
           >
             <Trash2 size={13} className="shrink-0 text-red-400" />
             <span>Remove</span>
@@ -155,7 +155,7 @@ export function TemplatePreviewModal({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 inline-flex items-center justify-center gap-1 rounded-xl border border-white/15 bg-white/[0.05] hover:bg-white/10 text-white py-2 sm:py-2.5 px-3 text-xs font-semibold transition-all cursor-pointer active:scale-95"
+            className="flex-1 inline-flex items-center justify-center gap-1 rounded-md border border-white/15 bg-white/[0.05] hover:bg-white/10 text-white py-2 sm:py-2.5 px-3 text-xs font-semibold transition-all cursor-pointer active:scale-95"
           >
             <Check size={13} className="text-emerald-400 shrink-0" />
             <span>Keep Selected</span>

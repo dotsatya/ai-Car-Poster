@@ -32,7 +32,8 @@ export function HeroSection() {
           {/* Left Column: Heading, Subheading & CTAs (order-2 on mobile, order-1 on desktop) */}
           <div className="order-2 lg:order-1 lg:col-span-6 xl:col-span-6 space-y-3.5 sm:space-y-6 lg:pr-4">
             <div className="inline-flex items-center gap-2">
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
                 AI-POWERED CAR POSTERS
               </span>
             </div>
@@ -50,7 +51,7 @@ export function HeroSection() {
             <div className="pt-1 sm:pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5">
               <Link
                 href="/templates"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
               >
                 <span>CHOOSE TEMPLATES</span>
                 <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1" />

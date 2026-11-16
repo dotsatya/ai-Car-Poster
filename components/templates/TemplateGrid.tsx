@@ -112,7 +112,7 @@ export function TemplateGrid() {
         <button
           type="button"
           onClick={() => setIsFilterOpen(true)}
-          className={`inline-flex items-center justify-center gap-2 rounded-xl border px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer shrink-0 shadow-lg ${
+          className={`inline-flex items-center justify-center gap-2 rounded-md border px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer shrink-0 shadow-lg ${
             activeCount > 0
               ? "border-brand bg-brand/15 text-white shadow-brand/20 hover:bg-brand/25 ring-1 ring-brand/40"
               : "border-white/[0.08] bg-neutral-900/80 text-neutral-300 hover:border-white/25 hover:bg-neutral-800 hover:text-white"
@@ -138,7 +138,7 @@ export function TemplateGrid() {
             placeholder="Search templates (e.g., Porsche, GT3 RS, Monaco, Retro)..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-white/[0.08] hover:border-white/20 bg-neutral-900/70 py-2.5 sm:py-3 pl-10 pr-10 text-xs sm:text-sm text-white placeholder-neutral-400 backdrop-blur-md transition-all focus:border-brand/70 focus:outline-none focus:ring-1 focus:ring-brand/40"
+            className="w-full rounded-md border border-white/[0.08] hover:border-white/20 bg-neutral-900/70 py-2.5 sm:py-3 pl-10 pr-10 text-xs sm:text-sm text-white placeholder-neutral-400 backdrop-blur-md transition-all focus:border-brand/70 focus:outline-none focus:ring-1 focus:ring-brand/40"
           />
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-neutral-400">
             <Search
@@ -173,7 +173,7 @@ export function TemplateGrid() {
                 key={style}
                 type="button"
                 onClick={() => handleQuickStyleClick(style)}
-                className={`rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer ${
+                className={`rounded-md px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-white text-black shadow-md shadow-white/10"
                     : "bg-neutral-900/80 text-neutral-400 border border-white/[0.08] hover:bg-neutral-800 hover:text-white"
@@ -199,7 +199,7 @@ export function TemplateGrid() {
         ) : (
           <>
             {search && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-neutral-900 px-2.5 py-1 text-[11px] text-white">
+              <span className="inline-flex items-center gap-1 rounded-md border border-white/15 bg-neutral-900 px-2.5 py-1 text-[11px] text-white">
                 <span>&ldquo;{search}&rdquo;</span>
                 <button
                   type="button"
@@ -214,7 +214,7 @@ export function TemplateGrid() {
             {filters.brands.map((b) => (
               <span
                 key={`b-${b}`}
-                className="inline-flex items-center gap-1 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] text-brand font-medium"
+                className="inline-flex items-center gap-1 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] text-brand font-medium"
               >
                 <span>Brand: {b}</span>
                 <button
@@ -230,7 +230,7 @@ export function TemplateGrid() {
             {filters.models.map((m) => (
               <span
                 key={`m-${m}`}
-                className="inline-flex items-center gap-1 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] text-brand font-medium"
+                className="inline-flex items-center gap-1 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] text-brand font-medium"
               >
                 <span>Model: {m}</span>
                 <button
@@ -246,7 +246,7 @@ export function TemplateGrid() {
             {filters.styles.map((s) => (
               <span
                 key={`s-${s}`}
-                className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-neutral-900 px-2.5 py-1 text-[11px] text-neutral-200"
+                className="inline-flex items-center gap-1 rounded-md border border-white/20 bg-neutral-900 px-2.5 py-1 text-[11px] text-neutral-200"
               >
                 <span>Style: {s}</span>
                 <button
@@ -262,7 +262,7 @@ export function TemplateGrid() {
             {filters.collections.map((c) => (
               <span
                 key={`c-${c}`}
-                className="inline-flex items-center gap-1 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] text-brand font-medium"
+                className="inline-flex items-center gap-1 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] text-brand font-medium"
               >
                 <span>Collection: {c}</span>
                 <button
@@ -278,7 +278,7 @@ export function TemplateGrid() {
             {filters.categories.map((cat) => (
               <span
                 key={`cat-${cat}`}
-                className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-neutral-900 px-2.5 py-1 text-[11px] text-neutral-200"
+                className="inline-flex items-center gap-1 rounded-md border border-white/20 bg-neutral-900 px-2.5 py-1 text-[11px] text-neutral-200"
               >
                 <span>Category: {cat}</span>
                 <button
@@ -294,7 +294,7 @@ export function TemplateGrid() {
             {filters.years.map((y) => (
               <span
                 key={`y-${y}`}
-                className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-neutral-900 px-2.5 py-1 text-[11px] font-mono text-neutral-200"
+                className="inline-flex items-center gap-1 rounded-md border border-white/20 bg-neutral-900 px-2.5 py-1 text-[11px] font-mono text-neutral-200"
               >
                 <span>Era: {y}</span>
                 <button
@@ -308,7 +308,7 @@ export function TemplateGrid() {
             ))}
 
             {filters.priceRange !== "all" && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] font-mono text-brand">
+              <span className="inline-flex items-center gap-1 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] font-mono text-brand">
                 <span>
                   {filters.priceRange === "499-999" && "₹499–₹999"}
                   {filters.priceRange === "999-1999" && "₹999–₹1,999"}
@@ -360,7 +360,7 @@ export function TemplateGrid() {
           <button
             type="button"
             onClick={handleResetFilters}
-            className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+            className="mt-5 inline-flex items-center gap-1.5 rounded-md bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
           >
             <RotateCcw size={13} />
             <span>Reset All Filters</span>

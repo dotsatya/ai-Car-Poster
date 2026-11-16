@@ -112,7 +112,10 @@ export default function AccountSettingsPage() {
   const saveAddresses = (newAddresses: Address[]) => {
     setAddresses(newAddresses);
     try {
-      localStorage.setItem("postergen_user_addresses", JSON.stringify(newAddresses));
+      localStorage.setItem(
+        "postergen_user_addresses",
+        JSON.stringify(newAddresses),
+      );
     } catch {
       // Ignore localStorage errors
     }
@@ -146,8 +149,15 @@ export default function AccountSettingsPage() {
 
   const handleSaveAddress = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!addrName.trim() || !addrStreet.trim() || !addrCity.trim() || !addrPostalCode.trim()) {
-      toast.error("Please fill in required fields (Name, Street, City, PIN code).");
+    if (
+      !addrName.trim() ||
+      !addrStreet.trim() ||
+      !addrCity.trim() ||
+      !addrPostalCode.trim()
+    ) {
+      toast.error(
+        "Please fill in required fields (Name, Street, City, PIN code).",
+      );
       return;
     }
 
@@ -189,7 +199,10 @@ export default function AccountSettingsPage() {
 
       let updated: Address[];
       if (newAddress.isDefault) {
-        updated = [newAddress, ...addresses.map((a) => ({ ...a, isDefault: false }))];
+        updated = [
+          newAddress,
+          ...addresses.map((a) => ({ ...a, isDefault: false })),
+        ];
       } else {
         updated = [...addresses, newAddress];
       }
@@ -259,14 +272,10 @@ export default function AccountSettingsPage() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
                 <User className="h-4 w-4" />
               </div>
-              <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
-                  01 / PARTITION
-                </span>
-                <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
-                  Personal &amp; Account Details
-                </h2>
-              </div>
+
+              <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
+                Personal &amp; Account Details
+              </h2>
             </div>
 
             <form onSubmit={handleSaveProfile} className="space-y-4">
@@ -308,7 +317,6 @@ export default function AccountSettingsPage() {
                 </div>
               </div>
 
-  
               {/* Subtle divider */}
               <div className="pt-1 border-t border-white/[0.06]" />
 
@@ -362,7 +370,7 @@ export default function AccountSettingsPage() {
               <div className="pt-2 flex justify-end">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-md bg-brand hover:bg-brand-hover px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
                 >
                   <Check className="h-3.5 w-3.5" />
                   <span>Save Details</span>
@@ -380,22 +388,16 @@ export default function AccountSettingsPage() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
                   <MapPin className="h-4 w-4" />
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
-                      02 / PARTITION
-                    </span>
-                  </div>
-                  <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
-                    Delivery Addresses
-                  </h2>
-                </div>
+
+                <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
+                  Delivery Addresses
+                </h2>
               </div>
 
               <button
                 type="button"
                 onClick={openAddAddressModal}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-3 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap shrink-0 hover:scale-[1.01] active:scale-[0.98]"
+                className="inline-flex items-center gap-1.5 rounded-md bg-brand hover:bg-brand-hover px-3 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap shrink-0 hover:scale-[1.01] active:scale-[0.98]"
               >
                 <Plus className="h-3.5 w-3.5" />
                 <span>Add Address</span>
@@ -431,7 +433,7 @@ export default function AccountSettingsPage() {
                         <button
                           type="button"
                           onClick={() => openEditAddressModal(addr)}
-                          className="h-7 w-7 flex items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                          className="h-7 w-7 flex items-center justify-center rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                           title="Edit address"
                         >
                           <Edit2 className="h-3.5 w-3.5" />
@@ -440,7 +442,7 @@ export default function AccountSettingsPage() {
                           <button
                             type="button"
                             onClick={() => handleDeleteAddress(addr.id)}
-                            className="h-7 w-7 flex items-center justify-center rounded-lg text-neutral-400 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
+                            className="h-7 w-7 flex items-center justify-center rounded-md text-neutral-400 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
                             title="Delete address"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -449,12 +451,18 @@ export default function AccountSettingsPage() {
                       </div>
                     </div>
 
-                    <h3 className="text-sm font-bold text-white">{addr.name}</h3>
-                    <p className="mt-1 text-xs text-neutral-300 leading-relaxed">{addr.street}</p>
+                    <h3 className="text-sm font-bold text-white">
+                      {addr.name}
+                    </h3>
+                    <p className="mt-1 text-xs text-neutral-300 leading-relaxed">
+                      {addr.street}
+                    </p>
                     <p className="text-xs text-neutral-400 mt-0.5">
                       {addr.city}, {addr.state} — {addr.postalCode}
                     </p>
-                    <p className="text-xs text-neutral-400 mt-0.5">{addr.country}</p>
+                    <p className="text-xs text-neutral-400 mt-0.5">
+                      {addr.country}
+                    </p>
                     {addr.phone && (
                       <p className="text-xs text-neutral-400 font-mono mt-2 pt-2 border-t border-white/[0.06]">
                         Phone: {addr.phone}
@@ -495,7 +503,9 @@ export default function AccountSettingsPage() {
                     Sign Out of Atelier
                   </h3>
                   <p className="text-xs text-neutral-400 mt-0.5 max-w-md leading-relaxed">
-                    End your active session on this device. Your orders, generated posters, and wishlist remain securely linked to your email.
+                    End your active session on this device. Your orders,
+                    generated posters, and wishlist remain securely linked to
+                    your email.
                   </p>
                 </div>
               </div>
@@ -503,7 +513,7 @@ export default function AccountSettingsPage() {
               <button
                 type="button"
                 onClick={signOut}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 px-4 py-2.5 text-xs font-semibold text-red-300 hover:text-white transition-all cursor-pointer whitespace-nowrap shrink-0"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 px-4 py-2.5 text-xs font-semibold text-red-300 hover:text-white transition-all cursor-pointer whitespace-nowrap shrink-0"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 <span>Sign Out</span>
@@ -523,19 +533,24 @@ export default function AccountSettingsPage() {
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-brand" />
                 <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white">
-                  {editingAddressId ? "Edit Delivery Address" : "Add Delivery Address"}
+                  {editingAddressId
+                    ? "Edit Delivery Address"
+                    : "Add Delivery Address"}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsAddressModalOpen(false)}
-                className="h-8 w-8 flex items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="h-8 w-8 flex items-center justify-center rounded-md text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveAddress} className="space-y-3 sm:space-y-3.5">
+            <form
+              onSubmit={handleSaveAddress}
+              className="space-y-3 sm:space-y-3.5"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
@@ -642,20 +657,22 @@ export default function AccountSettingsPage() {
                   onChange={(e) => setAddrIsDefault(e.target.checked)}
                   className="rounded border-white/20 bg-neutral-800 text-brand focus:ring-brand h-4 w-4"
                 />
-                <span className="text-xs text-neutral-300">Set as default shipping destination</span>
+                <span className="text-xs text-neutral-300">
+                  Set as default shipping destination
+                </span>
               </label>
 
               <div className="pt-3 border-t border-white/[0.08] flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setIsAddressModalOpen(false)}
-                  className="w-full sm:w-auto px-3.5 py-2 rounded-xl text-xs font-semibold text-neutral-400 hover:text-white transition-colors cursor-pointer text-center"
+                  className="w-full sm:w-auto px-3.5 py-2 rounded-md text-xs font-semibold text-neutral-400 hover:text-white transition-colors cursor-pointer text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer text-center"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-md bg-brand hover:bg-brand-hover px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer text-center"
                 >
                   <Check className="h-3.5 w-3.5" />
                   <span>Save Address</span>

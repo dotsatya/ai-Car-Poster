@@ -91,7 +91,7 @@ export default function FaqPage() {
           <div className="mt-5">
             <Link
               href="/contact"
-              className="inline-block rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 sm:px-6 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+              className="inline-block rounded-md bg-brand hover:bg-brand-hover px-5 py-2.5 sm:px-6 sm:py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
             >
               Contact Concierge Desk →
             </Link>

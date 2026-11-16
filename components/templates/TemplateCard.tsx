@@ -77,7 +77,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
       {/* Selected Indicator Badge on Top-Left (Matches Luxury Reference) */}
       {isSelected && (
         <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-20 pointer-events-none">
-          <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-brand/90 text-white shadow-md shadow-brand/25 ring-1 ring-white/20 animate-in zoom-in-75 duration-200">
+          <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-b-md bg-brand/90 text-white shadow-md shadow-brand/25 ring-1 ring-white/20 animate-in zoom-in-75 duration-200">
             <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.5]" />
           </span>
         </div>
@@ -91,7 +91,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
             isFavourite ? "Remove from favourites" : "Add to favourites"
           }
           onClick={toggleFavourite}
-          className={`flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-200 cursor-pointer shadow-md ${
+          className={`flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-md border backdrop-blur-md transition-all duration-200 cursor-pointer shadow-md ${
             isFavourite
               ? "border-brand/40 bg-black/80 text-brand scale-105 shadow-brand/30"
               : "border-white/20 bg-black/60 text-white/80 hover:border-white hover:text-white hover:bg-black/90 hover:scale-110"
@@ -179,7 +179,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
                   e.stopPropagation();
                   toggleTemplate(template.id);
                 }}
-                className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all duration-200 cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] ${
+                className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all duration-200 cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] ${
                   isSelected
                     ? "bg-brand/90 text-white shadow-brand/30 hover:shadow-brand/50 ring-1 ring-brand/35 hover:bg-brand"
                     : "border border-white/20 bg-white/[0.06] text-white hover:border-brand/60 hover:bg-brand/80 hover:text-white hover:shadow-sm hover:shadow-brand/30"

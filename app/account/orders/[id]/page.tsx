@@ -126,7 +126,7 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
             <button
               type="button"
               onClick={handleDownloadCertificate}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 active:scale-[0.98] px-4 py-2.5 sm:py-2 text-xs font-semibold text-neutral-200 hover:text-white transition-all cursor-pointer whitespace-nowrap w-full sm:w-auto shadow-sm"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/[0.04] hover:bg-white/10 active:scale-[0.98] px-4 py-2.5 sm:py-2 text-xs font-semibold text-neutral-200 hover:text-white transition-all cursor-pointer whitespace-nowrap w-full sm:w-auto shadow-sm"
             >
               <Download className="h-3.5 w-3.5 text-brand" />
               <span>Certificate PDF</span>
