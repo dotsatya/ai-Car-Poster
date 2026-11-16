@@ -76,21 +76,21 @@ export default function StudioPage() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Studio Header matching layout reference */}
-        <div className="mb-4 sm:mb-6 lg:mb-8">
-          <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
+        <div className="mb-4 sm:mb-6 lg:mb-8 text-center sm:text-left">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
             Let&apos;s create your masterpiece.
           </h1>
-          <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed mx-auto sm:mx-0">
             Upload your car. Choose your selected designs. Let AI do the rest.
           </p>
         </div>
 
         {/* WORKFLOW TABS (kept for seamless state switching) */}
         <div className="mb-5 sm:mb-6 flex justify-center">
-          <div className="inline-flex max-w-full overflow-x-auto rounded-full border border-white/10 bg-neutral-900/80 p-1 backdrop-blur-md">
+          <div className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center rounded-full border border-white/10 bg-neutral-900/80 p-1 backdrop-blur-md">
             <button
               onClick={() => setStudioState("configure")}
-              className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap ${
+              className={`flex-1 sm:flex-initial rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
                 studioState === "configure"
                   ? "bg-white text-black shadow-md"
                   : "text-neutral-400 hover:text-white"
@@ -101,7 +101,7 @@ export default function StudioPage() {
             </button>
             <button
               onClick={handleStartGenerationClick}
-              className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap ${
+              className={`flex-1 sm:flex-initial rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
                 studioState === "generating"
                   ? "bg-brand text-white shadow-md"
                   : "text-neutral-400 hover:text-white"
@@ -116,7 +116,7 @@ export default function StudioPage() {
                   setStudioState("review");
                 else handleStartGenerationClick();
               }}
-              className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap ${
+              className={`flex-1 sm:flex-initial rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer whitespace-nowrap text-center ${
                 studioState === "review"
                   ? "bg-white text-black shadow-md"
                   : "text-neutral-400 hover:text-white"

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/context/CartContext";
+import { generateOrderMilestones } from "@/data/orders";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -38,6 +39,62 @@ export default function CheckoutPage() {
     setIsSubmitting(true);
 
     const generatedOrderId = `PG-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+
+    const newOrder = {
+      id: generatedOrderId,
+      orderNumber: generatedOrderId,
+      date: new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+      status: "order_received",
+      statusLabel: "Order Received",
+      estimatedDelivery: "Expected in 4-5 business days",
+      courier: "DHL Express Worldwide · Insured Fine Art Flight",
+      trackingNumber: `DHL-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}-IN`,
+      shippingAddress: {
+        name: fullName || "Satya Dey",
+        street: address || "Studio 4B, Atelier Penthouse, Bandra West",
+        city: cityPostal.split(" ")[0] || "Mumbai",
+        state: "Maharashtra",
+        postalCode: cityPostal.split(" ")[1] || "400050",
+        phone: phone || "+91 98765 43210",
+      },
+      totalAmount: hasInrItems ? `₹${grandTotal.toLocaleString("en-IN")}` : `$${grandTotal.toFixed(2)}`,
+      items: cartItems.length > 0 ? cartItems.map((item, idx) => ({
+        id: `${generatedOrderId}-${idx + 1}`,
+        templateName: item.title,
+        templateSlug: item.templateSlug || "porsche-911-gt3-rs-minimalist-spec",
+        vehicle: item.isCombined ? "Harmonized Triptych Spec" : "Porsche 911 GT3 RS",
+        sizeLabel: item.size || item.dimensions || "A2 Gallery",
+        dimensions: item.dimensions || "420 × 594 mm",
+        framing: "CNC Matte Obsidian Aluminum · Museum UV Acrylic Glazing",
+        certificateNumber: `CERT-#${Math.floor(1000 + Math.random() * 9000)}-PG`,
+        price: item.currency === "INR" || item.price >= 200 ? `₹${item.price.toLocaleString("en-IN")}` : `$${item.price}`,
+        image: item.image,
+        qty: item.quantity,
+      })) : [
+        {
+          id: `${generatedOrderId}-1`,
+          templateName: "Porsche 911 GT3 RS Minimalist Spec",
+          templateSlug: "porsche-911-gt3-rs-minimalist-spec",
+          vehicle: "Porsche 911 GT3 RS (992)",
+          sizeLabel: "A2 Gallery (42.0 × 59.4 cm)",
+          dimensions: "420 × 594 mm • 300 DPI",
+          framing: "CNC Matte Obsidian Aluminum · Museum UV Acrylic Glazing",
+          certificateNumber: `CERT-#${Math.floor(1000 + Math.random() * 9000)}-PG`,
+          price: "₹1,499",
+          image: "/template photo/1.webp",
+          qty: 1,
+        }
+      ],
+      milestones: generateOrderMilestones("order_received", "Today"),
+    };
+
+    try {
+      const prev = localStorage.getItem("postergen_orders");
+      const list = prev ? JSON.parse(prev) : [];
+      localStorage.setItem("postergen_orders", JSON.stringify([newOrder, ...list]));
+    } catch {
+      // Ignore
+    }
 
     setTimeout(() => {
       setIsSubmitting(false);

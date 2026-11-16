@@ -6,10 +6,13 @@ export function StorySection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Section Header */}
         <div className="max-w-3xl mb-8 sm:mb-10">
-          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
-            V1 ATELIER SPECIFICATION
-          </span>
-          <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+            <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
+              V1 ATELIER SPECIFICATION
+            </span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
             Our Story &amp; Heritage
           </h2>
           <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
@@ -19,9 +22,9 @@ export function StorySection() {
         </div>
 
         {/* 3 Core Tenet Cards (Directly from V1 Specification) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10">
           {/* Card 1: Authentic Machine Vision */}
-          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand">
@@ -41,7 +44,7 @@ export function StorySection() {
           </div>
 
           {/* Card 2: Generative Architecture */}
-          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand">
@@ -61,7 +64,7 @@ export function StorySection() {
           </div>
 
           {/* Card 3: Archival Physicality */}
-          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand">

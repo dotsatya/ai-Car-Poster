@@ -1,384 +1,145 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  Box,
   Package,
   Truck,
-  CheckCircle2,
-  Clock,
-  ArrowUpRight,
+  ArrowRight,
   Search,
-  Copy,
-  Download,
-  ShieldCheck,
-  X,
+  ArrowUpRight,
+  ChevronDown,
 } from "lucide-react";
-import { toast } from "sonner";
 import { AccountNav } from "@/components/account/AccountNav";
-
-interface OrderMilestone {
-  date: string;
-  title: string;
-  detail: string;
-  completed: boolean;
-  current?: boolean;
-}
-
-interface AtelierOrder {
-  id: string;
-  orderNumber: string;
-  date: string;
-  status: "in_transit" | "processing" | "delivered";
-  statusLabel: string;
-  estimatedDelivery?: string;
-  deliveredDate?: string;
-  courier: string;
-  trackingNumber: string;
-  templateName: string;
-  templateSlug: string;
-  vehicle: string;
-  sizeLabel: string;
-  framing: string;
-  certificateNumber: string;
-  price: string;
-  image: string;
-  milestones: OrderMilestone[];
-}
-
-const DUMMY_ORDERS: AtelierOrder[] = [
-  {
-    id: "ord-1",
-    orderNumber: "PG-2026-911RS",
-    date: "November 12, 2026",
-    status: "in_transit",
-    statusLabel: "In Transit · International Air",
-    estimatedDelivery: "Monday, Nov 16, 2026",
-    courier: "DHL Express Worldwide · Insured Fine Art Flight",
-    trackingNumber: "DHL-9482-7710-DE",
-    templateName: "Porsche 911 GT3 RS Minimalist Spec",
-    templateSlug: "porsche-911-gt3-rs-minimalist-spec",
-    vehicle: "Porsche 911 GT3 RS (992) — Ice Grey / Pyro Red",
-    sizeLabel: "A2 Gallery (42.0 × 59.4 cm)",
-    framing: "CNC Matte Obsidian Aluminum · Museum UV Acrylic Glazing",
-    certificateNumber: "CERT-#0892-GT3",
-    price: "$214.00",
-    image: "/template photo/1.webp",
-    milestones: [
-      {
-        date: "Nov 12, 2026 · 14:22",
-        title: "Commission Placed & Authenticated",
-        detail: "Digital AI diffusion master rendered at 300+ DPI. Order verified in production registry.",
-        completed: true,
-      },
-      {
-        date: "Nov 13, 2026 · 09:15",
-        title: "12-Color Archival Giclée Plotter Execution",
-        detail: "Printed on 310 GSM 100% cotton rag paper. 24-hour pigment curing cycle completed.",
-        completed: true,
-      },
-      {
-        date: "Nov 14, 2026 · 16:40",
-        title: "Aerospace Aluminum Framing & Glazing",
-        detail: "Mounted inside CNC anodized frame with UV-filtering acrylic. Serialized seal embossed.",
-        completed: true,
-      },
-      {
-        date: "Nov 15, 2026 · 08:30",
-        title: "Dispatched via Insured Express Air Courier",
-        detail: "Departed European logistics hub (Leipzig). In transit to destination customs hub.",
-        completed: true,
-        current: true,
-      },
-      {
-        date: "Expected Nov 16, 2026",
-        title: "Final Courier Handover & Signature",
-        detail: "Dispatched with white-glove direct recipient signature requirement.",
-        completed: false,
-      },
-    ],
-  },
-  {
-    id: "ord-2",
-    orderNumber: "PG-2026-BRG02",
-    date: "November 11, 2026",
-    status: "processing",
-    statusLabel: "Archival Framing & Glazing",
-    estimatedDelivery: "Wednesday, Nov 18, 2026",
-    courier: "FedEx Custom Critical Fine Art Services",
-    trackingNumber: "Pending Courier Handover (Expected Nov 14)",
-    templateName: "Porsche 911 GT3 RS British Racing Green & Gold",
-    templateSlug: "porsche-911-gt3-rs-racing-green-gold",
-    vehicle: "Porsche 911 GT3 RS — Weissach Package",
-    sizeLabel: "Panoramic Grand (60.0 × 120.0 cm)",
-    framing: "Hand-Brushed Champagne Gold Anodized Aluminum · Anti-Glare Acrylic",
-    certificateNumber: "CERT-#0744-BRG",
-    price: "$414.00",
-    image: "/template photo/2.webp",
-    milestones: [
-      {
-        date: "Nov 11, 2026 · 18:04",
-        title: "Commission Placed & Authenticated",
-        detail: "High-resolution panoramic triptych layout approved by atelier lead master.",
-        completed: true,
-      },
-      {
-        date: "Nov 12, 2026 · 11:30",
-        title: "Archival Giclée Large-Format Print",
-        detail: "Executed on wide-format fine art plotter using lightfast 12-pigment archival inks.",
-        completed: true,
-      },
-      {
-        date: "Nov 13, 2026 · 15:10",
-        title: "Hand-Assembled Aerospace Framing",
-        detail: "Custom champagne gold frame fabrication in progress. Undergoing final glare inspection.",
-        completed: true,
-        current: true,
-      },
-      {
-        date: "Expected Nov 14, 2026",
-        title: "Reinforced Impact Packaging & Dispatch",
-        detail: "Sealed in wooden reinforced transit crate for express priority flight handover.",
-        completed: false,
-      },
-      {
-        date: "Expected Nov 18, 2026",
-        title: "Collector Destination Delivery",
-        detail: "Direct insured courier delivery to designated private garage address.",
-        completed: false,
-      },
-    ],
-  },
-  {
-    id: "ord-3",
-    orderNumber: "PG-2026-720MC",
-    date: "October 28, 2026",
-    status: "delivered",
-    statusLabel: "Delivered & Signed by Collector",
-    deliveredDate: "November 02, 2026 · Signed by Collector",
-    courier: "DHL Express Worldwide",
-    trackingNumber: "DHL-3810-9921-GB",
-    templateName: "McLaren 720S Red Street Graffiti Edition",
-    templateSlug: "mclaren-720s-red-graffiti",
-    vehicle: "McLaren 720S Performance Coupe",
-    sizeLabel: "A1 Exhibition (59.4 × 84.1 cm)",
-    framing: "Deep Anodized Obsidian Shadow Box · 310 GSM Cotton Rag",
-    certificateNumber: "CERT-#0621-720",
-    price: "$294.00",
-    image: "/template photo/3.webp",
-    milestones: [
-      {
-        date: "Oct 28, 2026 · 10:12",
-        title: "Order Placed & Verified",
-        detail: "Client photo processed and color-graded for Street Graffiti palette.",
-        completed: true,
-      },
-      {
-        date: "Oct 29, 2026 · 14:00",
-        title: "Print & Shadow Box Assembly",
-        detail: "Archival mounting completed. Serialized hologram affixed to backing board.",
-        completed: true,
-      },
-      {
-        date: "Oct 30, 2026 · 19:45",
-        title: "Dispatched via Express Courier",
-        detail: "Airway bill generated, collected from atelier dispatch desk.",
-        completed: true,
-      },
-      {
-        date: "Nov 02, 2026 · 11:24",
-        title: "Delivered & Handed Over",
-        detail: "Package delivered in pristine condition. Proof of delivery signed by client.",
-        completed: true,
-        current: true,
-      },
-    ],
-  },
-  {
-    id: "ord-4",
-    orderNumber: "PG-2026-SHARK",
-    date: "October 14, 2026",
-    status: "delivered",
-    statusLabel: "Delivered & Signed by Collector",
-    deliveredDate: "October 19, 2026 · Signed by Collector",
-    courier: "UPS Worldwide Express Fine Art",
-    trackingNumber: "1Z-892A-4491-002",
-    templateName: "Porsche 911 Turbo S Shark Blue Tokyo Cyber",
-    templateSlug: "porsche-911-turbo-s-shark-blue-cyber",
-    vehicle: "Porsche 911 Turbo S (992)",
-    sizeLabel: "A3 Studio (29.7 × 42.0 cm)",
-    framing: "Unframed Fine Art Folio Presentation with Serialized Seal",
-    certificateNumber: "CERT-#0510-TYO",
-    price: "$154.00",
-    image: "/template photo/4.webp",
-    milestones: [
-      {
-        date: "Oct 14, 2026 · 16:30",
-        title: "Order Placed & Verified",
-        detail: "Tokyo Cyber graphic elements combined with client vehicle photo.",
-        completed: true,
-      },
-      {
-        date: "Oct 15, 2026 · 10:00",
-        title: "310 GSM Hahnemühle Giclée Print",
-        detail: "High-density pigment curing on heavyweight cotton rag paper.",
-        completed: true,
-      },
-      {
-        date: "Oct 16, 2026 · 13:15",
-        title: "Dispatched via Priority Air",
-        detail: "Shipped flat in archival acid-free museum presentation folio.",
-        completed: true,
-      },
-      {
-        date: "Oct 19, 2026 · 14:48",
-        title: "Delivered & Handed Over",
-        detail: "Successfully delivered. Digital download token activated in user account.",
-        completed: true,
-        current: true,
-      },
-    ],
-  },
-];
+import { AtelierOrder, getAllOrders, getStatusBadgeStyle } from "@/data/orders";
 
 export default function OrdersPage() {
+  const [orders] = useState<AtelierOrder[]>(() => getAllOrders());
   const [filter, setFilter] = useState<"all" | "active" | "delivered">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTrackingOrder, setActiveTrackingOrder] = useState<AtelierOrder | null>(null);
+  const [expandedOrders, setExpandedOrders] = useState<Record<string, boolean>>(
+    {
+      "PG-2026-18637": true,
+    },
+  );
 
-  // Close modal on Escape key and lock body scrolling
-  useEffect(() => {
-    if (!activeTrackingOrder) return;
+  const toggleOrder = (id: string) => {
+    setExpandedOrders((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActiveTrackingOrder(null);
-      }
-    };
+  const isDeliveredOrder = (o: AtelierOrder) =>
+    o.status === "delivered" || o.statusLabel === "Delivered";
 
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [activeTrackingOrder]);
-
-  const filteredOrders = DUMMY_ORDERS.filter((order) => {
+  const filteredOrders = orders.filter((order) => {
     // Tab filter
-    if (filter === "active" && order.status === "delivered") return false;
-    if (filter === "delivered" && order.status !== "delivered") return false;
+    if (filter === "active" && isDeliveredOrder(order)) return false;
+    if (filter === "delivered" && !isDeliveredOrder(order)) return false;
 
     // Search query filter
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
-    return (
-      order.orderNumber.toLowerCase().includes(q) ||
-      order.vehicle.toLowerCase().includes(q) ||
-      order.templateName.toLowerCase().includes(q) ||
-      order.certificateNumber.toLowerCase().includes(q)
+    const matchesOrderNo = order.orderNumber.toLowerCase().includes(q);
+    const matchesCourier = order.courier.toLowerCase().includes(q);
+    const matchesItems = order.items.some(
+      (item) =>
+        item.templateName.toLowerCase().includes(q) ||
+        item.vehicle.toLowerCase().includes(q) ||
+        item.certificateNumber.toLowerCase().includes(q),
     );
+    return matchesOrderNo || matchesCourier || matchesItems;
   });
 
-  const handleCopyTracking = (tracking: string) => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(tracking);
-      toast.success("Tracking Number Copied", {
-        description: `${tracking} copied to clipboard`,
-      });
-    }
-  };
-
-  const handleDownloadDigitalMaster = (order: AtelierOrder) => {
-    toast.success("Digital Master Download Ready", {
-      description: `300 DPI master render package for ${order.orderNumber} initialized.`,
-    });
-  };
-
   return (
-    <div className="min-h-screen bg-bg-primary pb-24">
+    <div className="min-h-screen bg-bg-primary pb-24 text-white">
+      {/* Account Navigation */}
       <AccountNav />
+
       <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
         {/* Subsection Header */}
-        <div className="flex items-start sm:items-center justify-between gap-3 mb-3.5 sm:mb-6">
+        <div className="flex items-center justify-between gap-3 mb-3.5 sm:mb-6">
           <div>
             <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
               Order History
             </h1>
-      
           </div>
 
           <Link
             href="/studio"
-            className="shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl bg-brand hover:bg-brand-hover px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
+            className="shrink-0 inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
           >
             <span>New Poster</span>
-            <ArrowUpRight size={12} />
+            <ArrowUpRight size={14} />
           </Link>
         </div>
 
         {/* Filters & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4 mb-4 sm:mb-6">
-          {/* Status Tabs without scrollbar track */}
-          <div className="flex items-center gap-1 p-0.5 sm:p-1 rounded-lg sm:rounded-xl border border-white/10 bg-neutral-900/60 backdrop-blur-md overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+          {/* Status Filter Tabs */}
+          <div className="flex items-center gap-1 p-1 rounded-xl border border-white/10 bg-neutral-900/60 backdrop-blur-md overflow-x-auto scrollbar-none w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setFilter("all")}
-              className={`rounded-md sm:rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 filter === "all"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white"
               }`}
             >
-              All Orders ({DUMMY_ORDERS.length})
+              All Orders ({orders.length})
             </button>
             <button
               type="button"
               onClick={() => setFilter("active")}
-              className={`rounded-md sm:rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 filter === "active"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white"
               }`}
             >
-              Active &amp; In Transit (2)
+              Active &amp; In Transit (
+              {orders.filter((o) => !isDeliveredOrder(o)).length})
             </button>
             <button
               type="button"
               onClick={() => setFilter("delivered")}
-              className={`rounded-md sm:rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 filter === "delivered"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
                   : "text-neutral-400 hover:text-white"
               }`}
             >
-              Delivered (2)
+              Delivered ({orders.filter(isDeliveredOrder).length})
             </button>
           </div>
 
-          {/* Search Input */}
-          <div className="relative w-full sm:w-60 md:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3 w-3 text-neutral-500" />
+          {/* Search Bar */}
+          <div className="relative w-full sm:w-64 md:w-80">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-neutral-400 pointer-events-none" />
             <input
               type="text"
-              placeholder="Search order ID or vehicle..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg sm:rounded-xl border border-white/10 bg-neutral-900/60 pl-8 pr-3 py-1.5 text-[11px] sm:text-xs text-white placeholder-neutral-500 focus:border-brand focus:outline-none transition-all"
+              placeholder="Search by order ID or vehicle..."
+              className="w-full rounded-xl border border-white/[0.08] bg-black/40 pl-9 pr-3.5 py-1.5 sm:py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-brand transition-colors"
             />
           </div>
         </div>
 
-        {/* Orders List */}
+        {/* Orders Dropdown List */}
         {filteredOrders.length === 0 ? (
-          <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-8 sm:p-12 text-center hover:border-white/20 transition-all duration-300">
-            <Package className="mx-auto h-8 w-8 text-neutral-600 mb-2" />
-            <h3 className="text-sm sm:text-base font-bold text-white">No Matching Commissions Found</h3>
-            <p className="mt-1 text-[11px] sm:text-xs text-neutral-400 max-w-sm mx-auto">
-              No orders matched your filter. Try adjusting your search query or reset your status tabs.
+          <div className="rounded-2xl border border-white/[0.08] bg-neutral-900/30 p-8 sm:p-12 text-center backdrop-blur-md">
+            <Package className="h-10 w-10 text-neutral-500 mx-auto mb-3" />
+            <h3 className="text-base font-bold text-white">
+              No commissions found
+            </h3>
+            <p className="mt-1 text-xs text-neutral-400 max-w-sm mx-auto">
+              No orders matched your filter. Try adjusting your search query or
+              reset your status tabs.
             </p>
             <button
               type="button"
@@ -392,266 +153,215 @@ export default function OrdersPage() {
             </button>
           </div>
         ) : (
-          <div className="space-y-3.5 sm:space-y-5">
+          <div className="space-y-3 sm:space-y-3.5">
             {filteredOrders.map((order) => {
-              const isInTransit = order.status === "in_transit";
-              const isProcessing = order.status === "processing";
-              const isDelivered = order.status === "delivered";
+              const isDelivered = isDeliveredOrder(order);
+              const isExpanded = !!expandedOrders[order.id];
+              const badgeStyle = getStatusBadgeStyle(
+                order.status,
+                order.statusLabel,
+              );
 
               return (
                 <div
                   key={order.id}
-                  className="group rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-white/25 hover:shadow-xl hover:shadow-black/70 hover:-translate-y-0.5 shadow-lg shadow-black/40"
+                  className="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 hover:border-white/20 transition-all duration-200 overflow-hidden shadow-lg shadow-black/40"
                 >
-                  {/* Top Bar: Order ID, Date, Status, Total */}
-                  <div className="flex items-center justify-between gap-2 border-b border-white/[0.06] pb-2 sm:pb-3 mb-3 sm:mb-4">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="font-mono text-xs sm:text-sm font-bold text-white tracking-wide truncate">
-                        {order.orderNumber}
-                      </span>
-                      <span className="text-neutral-600 hidden xs:inline">•</span>
-                      <span className="text-[10px] sm:text-xs text-neutral-400 truncate hidden xs:inline">{order.date}</span>
-                    </div>
+                  {/* Collapsed Bar: Clickable to toggle dropdown */}
+                  <button
+                    type="button"
+                    onClick={() => toggleOrder(order.id)}
+                    className="w-full text-left p-3 sm:px-5 sm:py-4 cursor-pointer select-none transition-colors hover:bg-white/[0.02]"
+                    aria-expanded={isExpanded}
+                  >
+                    {/* Responsive Grid/Flex: 
+                        - Desktop/Tablet (sm+): 1 clean horizontal row
+                        - Smartphone (<sm): 2 clean rows that never cramp */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4">
+                      {/* Top Row on Phone / Left Group on Tablet+ */}
+                      <div className="flex items-center justify-between sm:justify-start gap-2.5 sm:gap-3.5 min-w-0 w-full sm:w-auto">
+                        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                          {/* Standalone Red Wireframe Cube Icon */}
+                          <Box
+                            className="h-5 w-5 text-red-500 shrink-0"
+                            strokeWidth={1.8}
+                          />
 
-                    <div className="flex items-center gap-2 shrink-0">
-                      {/* Status Badge */}
-                      <span
-                        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${
-                          isInTransit
-                            ? "bg-amber-500/15 text-amber-400 border border-amber-500/30"
-                            : isProcessing
-                            ? "bg-sky-500/15 text-sky-400 border border-sky-500/30"
-                            : "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
-                        }`}
-                      >
+                          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-wrap">
+                            {/* Order Number (Exact format from reference) */}
+                            <span className="font-mono text-xs sm:text-sm md:text-base font-bold text-white tracking-wide shrink-0">
+                              #{order.orderNumber.replace(/^#/, "")}
+                            </span>
+
+                            <span className="text-neutral-600 hidden sm:inline">
+                              •
+                            </span>
+
+                            {/* Date (inline on sm+) */}
+                            <span className="text-neutral-400 text-xs sm:text-sm hidden sm:inline whitespace-nowrap">
+                              {order.date}
+                            </span>
+
+                            {/* Posters Count Pill */}
+                            <span className="rounded-full bg-white/[0.06] border border-white/10 px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs text-neutral-300 font-medium whitespace-nowrap shrink-0">
+                              {order.items.length}{" "}
+                              {order.items.length === 1 ? "Poster" : "Posters"}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Mobile-only Price + Chevron on top right (< sm) */}
+                        <div className="flex sm:hidden items-center gap-2 shrink-0">
+                          <span className="font-mono font-bold text-xs text-white">
+                            {order.totalAmount}
+                          </span>
+                          <div className="p-0.5 text-neutral-400">
+                            <ChevronDown
+                              className={`h-4 w-4 transition-transform duration-200 ${
+                                isExpanded ? "rotate-180 text-white" : ""
+                              }`}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Mobile-only Sub-Row: Placed Date + Status Pill (< sm) */}
+                      <div className="flex sm:hidden items-center justify-between gap-2 pl-7.5 pr-0.5">
+                        <span className="text-neutral-400 text-[11px] whitespace-nowrap font-mono">
+                          {order.date}
+                        </span>
                         <span
-                          className={`h-1.5 w-1.5 rounded-full ${
-                            isInTransit
-                              ? "bg-amber-400 animate-pulse"
-                              : isProcessing
-                              ? "bg-sky-400 animate-pulse"
-                              : "bg-emerald-400"
-                          }`}
-                        />
-                        <span>{order.statusLabel}</span>
-                      </span>
-
-                      <span className="font-bold text-xs sm:text-sm md:text-base text-white">
-                        {order.price}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Main Grid: Poster Preview + Spec Details */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-5 items-start">
-                    {/* Left: Poster Artwork Thumbnail & Info in clean flex row */}
-                    <div className="md:col-span-8 lg:col-span-8 flex items-start gap-3 sm:gap-4 min-w-0">
-                      <Link
-                        href={`/templates/${order.templateSlug}`}
-                        className="group/img relative aspect-[3/4] w-16 sm:w-20 md:w-24 shrink-0 overflow-hidden rounded-lg sm:rounded-xl border border-white/15 bg-black shadow-md hover:border-brand transition-all cursor-pointer block"
-                      >
-                        <Image
-                          src={order.image}
-                          alt={order.templateName}
-                          fill
-                          sizes="96px"
-                          className="object-cover transition-transform duration-500 group-hover/img:scale-105"
-                        />
-                      </Link>
-
-                      {/* Middle: Vehicle Spec, Size, Certificate */}
-                      <div className="min-w-0 flex-1 space-y-1 sm:space-y-1.5">
-                        <div>
-                          <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-brand block">
-                            {order.templateName}
-                          </span>
-                          <h2 className="font-sans normal-case text-xs sm:text-sm md:text-base font-bold text-white truncate mt-0.5">
-                            {order.vehicle}
-                          </h2>
-                        </div>
-
-                        <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[11px] text-neutral-300">
-                          <span className="rounded bg-black/50 border border-white/10 px-1.5 py-0.5 font-mono">
-                            {order.sizeLabel}
-                          </span>
-                          <span className="rounded bg-black/50 border border-white/10 px-1.5 py-0.5 truncate max-w-[200px]">
-                            {order.framing}
-                          </span>
-                        </div>
-
-                        {/* Registration Seal & Courier Preview */}
-                        <div className="flex items-center gap-2 pt-0.5 text-[9px] sm:text-[10px] text-neutral-400 font-mono">
-                          <span className="inline-flex items-center gap-1 text-neutral-300 shrink-0">
-                            <ShieldCheck className="h-3 w-3 text-brand" />
-                            <span>{order.certificateNumber}</span>
-                          </span>
-                          <span>•</span>
-                          <span className="truncate">{order.courier}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right: Courier Status & Action Buttons */}
-                    <div className="md:col-span-4 lg:col-span-4 flex flex-col justify-between space-y-2 pt-2.5 md:pt-0 border-t md:border-t-0 md:border-l border-white/[0.06] md:pl-4">
-                      {/* Tracking / Delivery Note */}
-                      <div className="rounded-lg border border-white/[0.06] bg-black/30 p-2 sm:p-2.5">
-                        <div className="flex items-center justify-between text-[10px] sm:text-xs mb-0.5">
-                          <span className="text-[9px] uppercase tracking-wider text-neutral-400 font-semibold">
-                            {isDelivered ? "Delivered On" : "Estimated Arrival"}
-                          </span>
-                          <span className="text-white font-bold text-[10px] sm:text-xs">
-                            {isDelivered ? order.deliveredDate : order.estimatedDelivery}
-                          </span>
-                        </div>
-
-                        <div className="flex items-center justify-between gap-1 pt-1 border-t border-white/[0.06] text-[9px] sm:text-[10px] font-mono text-neutral-300">
-                          <span className="truncate">{order.trackingNumber}</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopyTracking(order.trackingNumber)}
-                            title="Copy Tracking Number"
-                            className="p-0.5 hover:text-white transition-colors cursor-pointer text-neutral-400"
-                          >
-                            <Copy className="h-3 w-3" />
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Action CTAs: side-by-side on mobile, stacked on desktop */}
-                      <div className="flex flex-row md:flex-col gap-1.5">
-                        <button
-                          type="button"
-                          onClick={() => setActiveTrackingOrder(order)}
-                          className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 px-2.5 py-1.5 text-[10px] sm:text-xs font-semibold text-white transition-all cursor-pointer whitespace-nowrap"
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-medium whitespace-nowrap ${badgeStyle.pill}`}
                         >
-                          <Truck className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-brand" />
-                          <span>Track</span>
-                        </button>
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full ${badgeStyle.dot}`}
+                          />
+                          <span>{badgeStyle.label}</span>
+                        </span>
+                      </div>
 
-                        <button
-                          type="button"
-                          onClick={() => handleDownloadDigitalMaster(order)}
-                          className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-transparent hover:bg-white/[0.04] border border-white/10 px-2.5 py-1.5 text-[10px] sm:text-xs font-medium text-neutral-300 hover:text-white transition-all cursor-pointer whitespace-nowrap"
+                      {/* Tablet/Desktop Right Group (sm+): Status Pill + Total Price + Chevron */}
+                      <div className="hidden sm:flex items-center gap-3 md:gap-4 shrink-0">
+                        {/* Status Pill */}
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1 text-xs font-medium whitespace-nowrap ${badgeStyle.pill}`}
                         >
-                          <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-400" />
-                          <span>Digital Master</span>
-                        </button>
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full ${badgeStyle.dot}`}
+                          />
+                          <span>{badgeStyle.label}</span>
+                        </span>
+
+                        {/* Total Amount */}
+                        <span className="font-mono font-bold text-sm md:text-base text-white">
+                          {order.totalAmount}
+                        </span>
+
+                        {/* Chevron Down (rotates when expanded) */}
+                        <div className="p-0.5 text-neutral-400 hover:text-white transition-colors">
+                          <ChevronDown
+                            className={`h-4 w-4 transition-transform duration-200 ${
+                              isExpanded ? "rotate-180 text-white" : ""
+                            }`}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </button>
+
+                  {/* Expanded Dropdown Content */}
+                  {isExpanded && (
+                    <div className="border-t border-white/[0.06] bg-black/40 p-3.5 sm:p-5 space-y-3.5 sm:space-y-4 animate-in fade-in duration-150">
+                      {/* Commissioned Posters Preview Grid */}
+                      <div className="space-y-2.5">
+                        <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-400 font-semibold block">
+                          COMMISSIONED POSTERS IN THIS ORDER:
+                        </span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+                          {order.items.map((item) => (
+                            <div
+                              key={item.id}
+                              className="flex items-center gap-3 sm:gap-3.5 p-2.5 sm:p-3 rounded-xl border border-white/[0.08] bg-black/50 hover:border-white/15 transition-colors"
+                            >
+                              {/* Poster preview with white mat frame */}
+                              <div className="relative aspect-[3/4] w-12 sm:w-14 h-16 sm:h-18 rounded-lg overflow-hidden border border-white/20 bg-neutral-900 shrink-0 shadow-md">
+                                <Image
+                                  src={item.image}
+                                  alt={item.templateName}
+                                  fill
+                                  sizes="64px"
+                                  className="object-cover"
+                                />
+                              </div>
+
+                              <div className="min-w-0 flex-1">
+                                <p
+                                  className="text-xs sm:text-sm font-bold text-white uppercase tracking-wide truncate leading-tight"
+                                  title={item.templateName}
+                                >
+                                  {item.templateName}
+                                </p>
+                                <p className="text-[11px] sm:text-xs text-neutral-400 truncate mt-0.5">
+                                  {item.vehicle}
+                                </p>
+                                <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-mono mt-1 flex-wrap">
+                                  <span className="text-red-500 font-medium">
+                                    {item.sizeLabel}
+                                  </span>
+                                  <span className="text-neutral-600">•</span>
+                                  <span className="text-neutral-400">
+                                    Qty: {item.qty}
+                                  </span>
+                                  <span className="text-neutral-600">•</span>
+                                  <span className="text-white font-bold">
+                                    {item.price}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Bottom Footer: Delivery Info + Order Details Button */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-white/[0.04]">
+                        <div className="flex items-center gap-2 text-xs text-neutral-400 min-w-0 flex-wrap">
+                          <Truck className="h-4 w-4 text-red-500 shrink-0" />
+                          <span className="text-neutral-400">
+                            Estimated Arrival:{" "}
+                            <strong className="text-white font-semibold">
+                              {order.estimatedDelivery ||
+                                (isDelivered
+                                  ? order.deliveredDate
+                                  : "Expected in 4-5 business days")}
+                            </strong>
+                          </span>
+                          {order.trackingNumber && (
+                            <>
+                              <span className="text-neutral-600">•</span>
+                              <span className="font-mono text-neutral-400">
+                                {order.trackingNumber}
+                              </span>
+                            </>
+                          )}
+                        </div>
+
+                        <Link
+                          href={`/account/orders/${order.orderNumber}`}
+                          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.98] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-red-600/30 transition-all cursor-pointer whitespace-nowrap w-full sm:w-auto"
+                        >
+                          <span>ORDER DETAILS</span>
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
         )}
       </main>
-
-      {/* Tracking Modal / Milestone Timeline Drawer */}
-      {activeTrackingOrder && (
-        <div
-          onClick={() => setActiveTrackingOrder(null)}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 p-4 sm:p-6 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="tracking-modal-title"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative my-auto w-full max-w-lg rounded-xl border border-white/[0.08] bg-[#111114] p-5 sm:p-7 shadow-2xl hover:border-white/25 transition-all duration-300 max-h-[calc(100vh-3rem)] overflow-y-auto"
-          >
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={() => setActiveTrackingOrder(null)}
-              className="absolute top-4 right-4 rounded-xl p-1.5 text-neutral-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer border border-transparent hover:border-white/10"
-              aria-label="Close tracking"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
-            {/* Modal Header */}
-            <div className="flex items-center gap-2.5 pr-8">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand/10 border border-brand/30 text-brand">
-                <Truck className="h-4 w-4" />
-              </div>
-              <div className="min-w-0">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-brand block">
-                  Courier Milestones
-                </span>
-                <h3 id="tracking-modal-title" className="text-base font-bold text-white truncate">
-                  {activeTrackingOrder.orderNumber}
-                </h3>
-              </div>
-            </div>
-
-            <div className="mt-4 p-3 rounded-xl border border-white/[0.08] bg-neutral-900/60 text-xs space-y-1.5">
-              <div className="text-neutral-400 leading-snug">
-                Courier: <strong className="text-white">{activeTrackingOrder.courier}</strong>
-              </div>
-              <div className="text-neutral-400 font-mono text-[11px] flex items-center justify-between gap-2 pt-1 border-t border-white/[0.06]">
-                <span className="truncate">Tracking: {activeTrackingOrder.trackingNumber}</span>
-                <button
-                  type="button"
-                  onClick={() => handleCopyTracking(activeTrackingOrder.trackingNumber)}
-                  className="text-brand hover:underline cursor-pointer shrink-0 font-sans text-xs font-semibold"
-                >
-                  Copy
-                </button>
-              </div>
-            </div>
-
-            {/* Timeline Steps */}
-            <div className="mt-6 space-y-5 relative before:absolute before:inset-0 before:left-[13px] before:w-[2px] before:bg-white/10">
-              {activeTrackingOrder.milestones.map((m, idx) => {
-                return (
-                  <div key={idx} className="relative flex items-start gap-4">
-                    {/* Circle icon indicator */}
-                    <div
-                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-xs z-10 transition-colors ${
-                        m.current
-                          ? "bg-brand text-white border-brand shadow-lg shadow-brand/40 animate-pulse"
-                          : m.completed
-                          ? "bg-emerald-500 text-black border-emerald-500"
-                          : "bg-neutral-900 text-neutral-500 border-white/20"
-                      }`}
-                    >
-                      {m.completed ? (
-                        <CheckCircle2 className="h-3.5 w-3.5" />
-                      ) : (
-                        <Clock className="h-3.5 w-3.5" />
-                      )}
-                    </div>
-
-                    {/* Step details */}
-                    <div className="flex-1 pt-0.5 min-w-0">
-                      <div className="flex flex-wrap sm:flex-nowrap items-baseline justify-between gap-2 text-xs">
-                        <span className="font-bold text-white leading-tight">{m.title}</span>
-                        <span className="text-[10px] text-neutral-400 font-mono shrink-0">
-                          {m.date}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
-                        {m.detail}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Bottom Modal Action */}
-            <div className="mt-7 pt-4 border-t border-white/[0.08] flex justify-end">
-              <button
-                type="button"
-                onClick={() => setActiveTrackingOrder(null)}
-                className="rounded-xl border border-white/[0.08] hover:border-white/25 bg-white/[0.06] hover:bg-white/[0.12] px-4 py-2 text-xs font-semibold text-white transition-all cursor-pointer"
-              >
-                Close Tracking
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -20,22 +20,21 @@ export default function ContactPage() {
   return (
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12 items-start">
+             <div>
+            <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
+              Contact Our Atelier
+            </h1>
+            <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
+              Whether commissioning artwork for a rare collector chassis,
+              inquiring about custom large-scale gallery installations, or
+              tracking physical print production, our concierge is at your
+              service.
+            </p>
+          </div> <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12 items-start">
+        
+    
           {/* Left Column: Contact Details */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-6">
-            <div>
-            
-              <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
-                Contact Our Atelier
-              </h1>
-              <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
-                Whether commissioning artwork for a rare collector chassis,
-                inquiring about custom large-scale gallery installations, or
-                tracking physical print production, our concierge is at your
-                service.
-              </p>
-            </div>
-
             <div className="space-y-3 sm:space-y-3.5">
               <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-brand">
@@ -75,7 +74,6 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7">
             <div className="rounded-xl border border-white/[0.08] bg-neutral-900/60 p-4 sm:p-6 lg:p-8 backdrop-blur-xl shadow-2xl hover:border-white/20 transition-all duration-300">
@@ -103,7 +101,10 @@ export default function ContactPage() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-3.5 sm:space-y-4"
+                >
                   <h3 className="text-lg sm:text-xl font-bold text-white">
                     Send Concierge Message
                   </h3>

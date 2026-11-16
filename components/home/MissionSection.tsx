@@ -55,8 +55,13 @@ export function MissionSection() {
 
           {/* Right Column: Steps */}
           <div className="lg:col-span-6 lg:pl-4">
-          
-            <h2 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
+                THE ATELIER STANDARD
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-heading uppercase">
               Deliver Unmatched Luxury Performance
             </h2>
             <p className="mt-1 text-base sm:text-lg font-light text-neutral-300 lg:text-xl">

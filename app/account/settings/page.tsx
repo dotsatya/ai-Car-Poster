@@ -240,18 +240,14 @@ export default function AccountSettingsPage() {
       {/* Account Navigation Bar */}
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-5 sm:py-8">
-        {/* Page Title */}
-        <div className="mb-6 sm:mb-8">
-          <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase text-brand font-mono">
-            COLLECTOR PROFILE
-          </span>
-          <h1 className="mt-1 text-xl sm:text-3xl font-bold tracking-tight text-white font-heading uppercase">
-            My Account
-          </h1>
-          <p className="mt-1.5 text-xs sm:text-sm text-neutral-400">
-            Manage your physical delivery addresses, registered email identity, and personal credentials.
-          </p>
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
+        {/* Subsection Header */}
+        <div className="flex items-start sm:items-center justify-between gap-3 mb-3.5 sm:mb-6">
+          <div>
+            <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
+              My Account
+            </h1>
+          </div>
         </div>
 
         <div className="space-y-6 sm:space-y-8 max-w-4xl">

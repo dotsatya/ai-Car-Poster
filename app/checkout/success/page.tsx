@@ -30,34 +30,46 @@ function OrderSuccessContent() {
 
   const milestones = [
     {
-      title: "Commission Received",
+      title: "Order Received",
       time: "Today, Just now",
       status: "completed",
-      description: "256-bit encrypted checkout authorized & registered in Atelier ledger.",
+      description: "Order confirmed and logged in the Atelier fine-art production registry.",
     },
     {
-      title: "300 DPI Prepress Curation",
+      title: "Preparing Artwork",
       time: "Within 4 hours",
       status: "current",
-      description: "Proprietary vector alignment & true physical millimeter resolution scaling.",
+      description: "Digital AI diffusion master scaled at 300+ DPI. Prepress curation & color grading.",
     },
     {
-      title: "12-Pigment Fine Art Giclée Plot",
+      title: "Printing",
       time: "Tomorrow",
       status: "upcoming",
-      description: "Archival cotton rag 310 GSM execution with certified 100+ year lightfast inks.",
+      description: "12-color archival giclée plotter execution on 310 GSM 100% cotton rag paper.",
     },
     {
-      title: "Hologram Seal & Aerospace Framing",
+      title: "Quality Check & Packing",
       time: "Day 2",
       status: "upcoming",
-      description: "Serialized hologram seal applied; CNC matte obsidian aluminum mounting.",
+      description: "Chromatics inspection, serialized hologram seal applied, and protective flight casing.",
     },
     {
-      title: "DHL Express Insured Air Dispatch",
+      title: "Shipped",
       time: "Day 3",
       status: "upcoming",
-      description: "Reinforced wooden-backed transit packaging with direct door signature.",
+      description: "Dispatched via insured express air courier logistics with end-to-end telemetry.",
+    },
+    {
+      title: "Out for Delivery",
+      time: "Day 4",
+      status: "upcoming",
+      description: "Package arrived at local delivery hub and out for white-glove collector handover.",
+    },
+    {
+      title: "Delivered",
+      time: "Day 5",
+      status: "upcoming",
+      description: "Successfully handed over and confirmed with recipient signature.",
     },
   ];
 

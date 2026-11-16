@@ -12,8 +12,7 @@ export default function FaqPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Header matching standard category / page typography */}
         <div className="mb-4 sm:mb-6 lg:mb-8">
-         
-          <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
             Frequently Asked Questions
           </h1>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed">

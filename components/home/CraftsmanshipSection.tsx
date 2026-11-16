@@ -5,10 +5,13 @@ export function CraftsmanshipSection() {
     <section id="craftsmanship" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
-          <span className="inline-block text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand mb-2">
-            Museum-Grade Execution
-          </span>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+          <div className="inline-flex items-center gap-2 mb-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
+              Museum-Grade Execution
+            </span>
+          </div>
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-heading uppercase">
             Archival Inks &amp; Aerospace Framing
           </h2>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed">

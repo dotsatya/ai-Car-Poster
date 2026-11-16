@@ -54,10 +54,13 @@ export function HowItWorksSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 lg:gap-x-10 xl:gap-x-12 gap-y-6 sm:gap-y-8 items-stretch">
           {/* ─── ROW 1 LEFT: Header (order-1 on mobile/tablet, Row 1 on desktop) ─── */}
           <div className="order-1 lg:order-none lg:col-span-7 xl:col-span-8 flex flex-col justify-end">
-            <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
-              SIMPLE PROCESS
-            </span>
-            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
+                SIMPLE PROCESS
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
               HOW IT WORKS
             </h2>
             <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl">

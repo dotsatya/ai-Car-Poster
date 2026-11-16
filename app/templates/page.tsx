@@ -11,14 +11,13 @@ export default function TemplatesPage() {
   return (
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        {/* Header matching user design reference */}
+        {/* Header matching unified luxury atelier hierarchy */}
         <div className="mb-4 sm:mb-6 lg:mb-8">
-         
-          <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
             Poster Templates
           </h1>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed">
-            Choose from our premium automotive poster designs.
+            Choose from our premium automotive poster designs. Turn your machine photograph into a museum-grade archival edition.
           </p>
         </div>
 

@@ -283,8 +283,8 @@ export function Navbar() {
             )}
           </button>
 
-          {/* Mobile User Avatar with Dedicated Account Dropdown */}
-          {user && (
+          {/* Mobile User Avatar with Dedicated Account Dropdown (or Sign In button) */}
+          {user ? (
             <div className="relative" ref={mobileUserMenuRef}>
               <button
                 type="button"
@@ -367,6 +367,14 @@ export function Navbar() {
                 </div>
               )}
             </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsSignInOpen(true)}
+              className="rounded-full bg-brand hover:bg-brand-hover px-2.5 sm:px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer"
+            >
+              Sign In
+            </button>
           )}
 
           {/* Mobile Hamburger Toggle */}
@@ -387,7 +395,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu (Three-bar icon) */}
+      {/* Mobile Drawer Menu (Three-bar icon: Pure navigation without account settings) */}
       {isMobileMenuOpen && (
         <div className="border-b border-white/10 bg-bg-primary/95 px-4 py-4 md:hidden backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-1">
@@ -409,55 +417,15 @@ export function Navbar() {
               );
             })}
 
-            {/* Additional Section: Account (if logged in) or Sign Up / Sign In (if not logged in) */}
-            <div className="pt-2.5 border-t border-white/10 mt-2">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400 block px-3.5 pb-1.5">
-                Account
-              </span>
-
-              {user ? (
-                <div className="space-y-1.5">
-                  <Link
-                    href="/account"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-between w-full rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer shadow-sm"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <LayoutDashboard className="h-4 w-4 text-brand" />
-                      <span>My Dashboard</span>
-                    </div>
-                    <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
-                      Enter →
-                    </span>
-                  </Link>
-                  <Link
-                    href="/account/settings"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-between w-full rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 px-3.5 py-2 text-xs font-medium text-neutral-300 hover:text-white transition-all cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <UserIcon className="h-4 w-4 text-neutral-400" />
-                      <span>My Account</span>
-                    </div>
-                  </Link>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      setIsSignInOpen(true);
-                    }}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-2.5 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
-                  >
-                    <span>Sign Up / Sign In</span>
-                  </button>
-                  <p className="text-[10px] text-center text-neutral-400">
-                    Sign in with one-time passcode to sync orders &amp; saved posters.
-                  </p>
-                </div>
-              )}
+            {/* Direct Studio Link */}
+            <div className="pt-3 border-t border-white/10 mt-2">
+              <Link
+                href="/studio"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-2.5 px-4 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer"
+              >
+                <span>Launch Creation Studio</span>
+              </Link>
             </div>
           </div>
         </div>
