@@ -99,56 +99,56 @@ export function getStatusBadgeStyle(status: string, statusLabel?: string) {
     return {
       pill: "bg-emerald-950/40 text-emerald-400 border border-emerald-500/25",
       dot: "bg-emerald-400",
-      label: statusLabel || "Delivered",
+      label: "Delivered",
     };
   }
   if (norm.includes("out for delivery") || norm.includes("out_for_delivery")) {
     return {
       pill: "bg-amber-950/40 text-amber-400 border border-amber-500/25",
       dot: "bg-amber-400 animate-pulse",
-      label: statusLabel || "Out for Delivery",
+      label: "Out for Delivery",
     };
   }
   if (norm.includes("shipped")) {
     return {
       pill: "bg-purple-950/40 text-purple-400 border border-purple-500/25",
       dot: "bg-purple-400",
-      label: statusLabel || "Shipped",
+      label: "Shipped",
     };
   }
-  if (norm.includes("quality") || norm.includes("packing")) {
+  if (norm.includes("quality") || norm.includes("packing") || norm.includes("check")) {
     return {
       pill: "bg-cyan-950/40 text-cyan-400 border border-cyan-500/25",
       dot: "bg-cyan-400 animate-pulse",
-      label: statusLabel || "Quality Check & Packing",
+      label: "Quality Check & Packing",
     };
   }
   if (
-    norm.includes("production") ||
     norm.includes("printing") ||
+    norm.includes("production") ||
     norm.includes("plotter")
   ) {
     return {
       pill: "bg-sky-950/40 text-sky-400 border border-sky-500/25",
-      dot: "bg-sky-400",
-      label: statusLabel || "Printing",
+      dot: "bg-sky-400 animate-pulse",
+      label: "Printing",
     };
   }
   if (
     norm.includes("preparing") ||
     norm.includes("artwork") ||
-    norm.includes("processing")
+    norm.includes("process")
   ) {
     return {
       pill: "bg-indigo-950/40 text-indigo-400 border border-indigo-500/25",
       dot: "bg-indigo-400 animate-pulse",
-      label: statusLabel || "Preparing Artwork",
+      label: "Preparing Artwork",
     };
   }
   return {
     pill: "bg-neutral-800/60 text-neutral-300 border border-white/15",
     dot: "bg-neutral-400",
-    label: statusLabel || "Order Received",
+    label: "Order Received",
   };
 }
 
@@ -200,7 +200,7 @@ export const INITIAL_ORDERS: AtelierOrder[] = [
     orderNumber: "PG-2026-18637",
     date: "November 16, 2026",
     status: "printing",
-    statusLabel: "IN PRODUCTION · ARCHIVAL PLOTTER",
+    statusLabel: "Printing",
     estimatedDelivery: "Expected in 4-5 business days",
     courier: "DHL Express Worldwide · Insured Fine Art Flight",
     trackingNumber: "DHL-1781-9957-IN",
@@ -269,28 +269,46 @@ export const INITIAL_ORDERS: AtelierOrder[] = [
     ],
     milestones: [
       {
-        date: "Just now",
-        title: "Commission Placed & Authenticated",
-        detail: "Order confirmed and logged in Atelier fine-art production registry.",
+        date: "Nov 16, 2026 · 10:15",
+        title: "Order Received",
+        detail: "Order confirmed and logged in the Atelier fine-art production registry.",
+        completed: true,
+      },
+      {
+        date: "Nov 16, 2026 · 11:30",
+        title: "Preparing Artwork",
+        detail: "Digital AI diffusion master scaled at 300+ DPI. Prepress curation & color grading.",
+        completed: true,
+      },
+      {
+        date: "In Progress",
+        title: "Printing",
+        detail: "12-color archival giclée plotter execution on 310 GSM 100% cotton rag paper.",
         completed: true,
         current: true,
       },
       {
         date: "Pending",
-        title: "12-Color Archival Giclée Plotter Execution",
-        detail: "310 GSM 100% acid-free cotton rag printing and pigment curing.",
+        title: "Quality Check & Packing",
+        detail: "Chromatics inspection, serialized hologram seal applied, and protective flight casing.",
         completed: false,
       },
       {
         date: "Pending",
-        title: "Aerospace Aluminum Framing & Hologram Seal",
-        detail: "CNC aluminum frame assembly with serialized tamper-evident hologram seal.",
+        title: "Shipped",
+        detail: "Dispatched via insured express air courier logistics with end-to-end telemetry.",
         completed: false,
       },
       {
         date: "Pending",
-        title: "Dispatched via Insured Express Air Courier",
-        detail: "Reinforced fine-art protective flight packaging.",
+        title: "Out for Delivery",
+        detail: "Package arrived at local delivery hub and out for white-glove collector handover.",
+        completed: false,
+      },
+      {
+        date: "Pending",
+        title: "Delivered",
+        detail: "Successfully handed over and confirmed with recipient signature.",
         completed: false,
       },
     ],

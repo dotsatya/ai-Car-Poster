@@ -20,9 +20,7 @@ export default function OrdersPage() {
   const [filter, setFilter] = useState<"all" | "active" | "delivered">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedOrders, setExpandedOrders] = useState<Record<string, boolean>>(
-    {
-      "PG-2026-18637": true,
-    },
+    {},
   );
 
   const toggleOrder = (id: string) => {
@@ -59,9 +57,9 @@ export default function OrdersPage() {
       {/* Account Navigation */}
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8 lg:py-10">
         {/* Subsection Header */}
-        <div className="flex items-center justify-between gap-3 mb-3.5 sm:mb-6">
+        <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
           <div>
             <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
               Order History
@@ -79,46 +77,51 @@ export default function OrdersPage() {
 
         {/* Filters & Search Bar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
-          {/* Status Filter Tabs */}
-          <div className="flex items-center gap-1 p-1 rounded-xl border border-white/10 bg-neutral-900/60 backdrop-blur-md overflow-x-auto scrollbar-none w-full sm:w-auto">
+          {/* Status Filter Tabs (Segmented Control: 3 equal cols on mobile, snug inline-flex on sm+) */}
+          <div className="grid grid-cols-3 sm:inline-flex sm:flex-row items-center gap-1 p-1 rounded-xl border border-white/10 bg-[#0E1013]/90 backdrop-blur-md w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setFilter("all")}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`rounded-lg py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                 filter === "all"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
-                  : "text-neutral-400 hover:text-white"
+                  : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
               }`}
             >
-              All Orders ({orders.length})
+              <span>All Orders ({orders.length})</span>
             </button>
             <button
               type="button"
               onClick={() => setFilter("active")}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`rounded-lg py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                 filter === "active"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
-                  : "text-neutral-400 hover:text-white"
+                  : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
               }`}
             >
-              Active &amp; In Transit (
-              {orders.filter((o) => !isDeliveredOrder(o)).length})
+              <span className="sm:hidden">
+                Active ({orders.filter((o) => !isDeliveredOrder(o)).length})
+              </span>
+              <span className="hidden sm:inline">
+                Active &amp; In Transit (
+                {orders.filter((o) => !isDeliveredOrder(o)).length})
+              </span>
             </button>
             <button
               type="button"
               onClick={() => setFilter("delivered")}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`rounded-lg py-1.5 sm:py-2 px-1.5 sm:px-3.5 text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center flex items-center justify-center ${
                 filter === "delivered"
                   ? "bg-brand text-white shadow-md shadow-brand/30"
-                  : "text-neutral-400 hover:text-white"
+                  : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
               }`}
             >
-              Delivered ({orders.filter(isDeliveredOrder).length})
+              <span>Delivered ({orders.filter(isDeliveredOrder).length})</span>
             </button>
           </div>
 
           {/* Search Bar */}
-          <div className="relative w-full sm:w-64 md:w-80">
+          <div className="relative w-full sm:w-56 md:w-72 lg:w-80">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-neutral-400 pointer-events-none" />
             <input
               type="text"
@@ -165,13 +168,13 @@ export default function OrdersPage() {
               return (
                 <div
                   key={order.id}
-                  className="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 hover:border-white/20 transition-all duration-200 overflow-hidden shadow-lg shadow-black/40"
+                  className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 hover:border-white/20 transition-all duration-200 overflow-hidden shadow-lg shadow-black/40"
                 >
                   {/* Collapsed Bar: Clickable to toggle dropdown */}
                   <button
                     type="button"
                     onClick={() => toggleOrder(order.id)}
-                    className="w-full text-left p-3 sm:px-5 sm:py-4 cursor-pointer select-none transition-colors hover:bg-white/[0.02]"
+                    className="w-full text-left p-3.5 sm:px-5 sm:py-4 cursor-pointer select-none transition-colors hover:bg-white/[0.02]"
                     aria-expanded={isExpanded}
                   >
                     {/* Responsive Grid/Flex: 
@@ -226,7 +229,7 @@ export default function OrdersPage() {
                       </div>
 
                       {/* Mobile-only Sub-Row: Placed Date + Status Pill (< sm) */}
-                      <div className="flex sm:hidden items-center justify-between gap-2 pl-7.5 pr-0.5">
+                      <div className="flex sm:hidden items-center justify-between gap-2 pl-7 pr-0.5">
                         <span className="text-neutral-400 text-[11px] whitespace-nowrap font-mono">
                           {order.date}
                         </span>

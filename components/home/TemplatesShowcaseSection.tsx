@@ -107,14 +107,14 @@ export function TemplatesShowcaseSection() {
   };
 
   return (
-    <section className="relative overflow-hidden border-t border-white/[0.06] bg-[#07080A] py-12 select-none">
+    <section className="relative overflow-hidden border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-14 lg:py-16 select-none">
       {/* Background ambient lighting accents */}
       <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-80 w-[700px] rounded-full bg-brand/10 blur-[140px]" />
       <div className="pointer-events-none absolute -bottom-40 right-10 h-72 w-96 rounded-full bg-blue-600/5 blur-[120px]" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6 mb-8 ">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6 mb-6 sm:mb-8 lg:mb-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-brand animate-pulse" />

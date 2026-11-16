@@ -2,9 +2,9 @@ import { PRINT_SIZES } from "@/data/print-sizes";
 
 export function CraftsmanshipSection() {
   return (
-    <section id="craftsmanship" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12 lg:py-20">
+    <section id="craftsmanship" className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-10">
           <div className="inline-flex items-center gap-2 mb-2">
             <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
             <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">

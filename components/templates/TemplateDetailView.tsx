@@ -108,7 +108,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
   const relatedTemplates = [...sameCategory, ...otherCategory].slice(0, 4);
 
   return (
-    <div className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-5 sm:py-8 lg:py-12 pb-32 sm:pb-36">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-6 sm:py-8 lg:py-12 pb-32 sm:pb-36">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-neutral-400 mb-4 sm:mb-6">
         <Link href="/" className="hover:text-white transition-colors">
@@ -438,7 +438,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
           {relatedTemplates.map((rel) => {
             const isRelSelected = selectedTemplates.includes(rel.id);
             return (

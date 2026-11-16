@@ -129,8 +129,8 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
-        <div className="mb-8">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-6 sm:py-8 lg:py-12">
+        <div className="mb-6 sm:mb-8 lg:mb-10">
           <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
             SECURE ATELIER COMMISSIONS
           </span>
@@ -362,7 +362,7 @@ export default function CheckoutPage() {
                 className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
               >
                 <CheckCircle2 className="h-4 w-4" />
-                <span>{isSubmitting ? "Processing Commission..." : "Authorize Commission"}</span>
+                <span>{isSubmitting ? "Processing ..." : "Pay Now"}</span>
               </button>
             </div>
           </div>

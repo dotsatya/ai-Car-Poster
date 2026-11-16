@@ -98,7 +98,7 @@ export function CartDrawer() {
                           <button
                             type="button"
                             onClick={() => updateDirectCartQuantity(item.id, -1)}
-                            className="h-5 w-5 rounded bg-white/10 text-white flex items-center justify-center hover:bg-white/20 text-[10px]"
+                            className="h-5 w-5 rounded-md bg-white/10 text-white flex items-center justify-center hover:bg-white/20 text-[10px] cursor-pointer"
                           >
                             <Minus className="h-2.5 w-2.5" />
                           </button>
@@ -108,7 +108,7 @@ export function CartDrawer() {
                           <button
                             type="button"
                             onClick={() => updateDirectCartQuantity(item.id, 1)}
-                            className="h-5 w-5 rounded bg-white/10 text-white flex items-center justify-center hover:bg-white/20 text-[10px]"
+                            className="h-5 w-5 rounded-md bg-white/10 text-white flex items-center justify-center hover:bg-white/20 text-[10px] cursor-pointer"
                           >
                             <Plus className="h-2.5 w-2.5" />
                           </button>

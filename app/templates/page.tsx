@@ -12,7 +12,7 @@ export default function TemplatesPage() {
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Header matching unified luxury atelier hierarchy */}
-        <div className="mb-4 sm:mb-6 lg:mb-8">
+        <div className="mb-6 sm:mb-8 lg:mb-10">
           <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
             Poster Templates
           </h1>

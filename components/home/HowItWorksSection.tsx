@@ -50,7 +50,7 @@ export function HowItWorksSection() {
       id="how-it-works"
       className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-16"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 lg:gap-x-10 xl:gap-x-12 gap-y-6 sm:gap-y-8 items-stretch">
           {/* ─── ROW 1 LEFT: Header (order-1 on mobile/tablet, Row 1 on desktop) ─── */}
           <div className="order-1 lg:order-none lg:col-span-7 xl:col-span-8 flex flex-col justify-end">

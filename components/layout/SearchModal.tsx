@@ -70,7 +70,7 @@ export function SearchModal() {
               className="flex flex-col sm:flex-row cursor-pointer sm:items-center justify-between gap-2.5 rounded-xl border border-white/[0.04] p-3 transition-colors hover:border-brand/40 hover:bg-white/[0.04]"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="relative h-10 w-14 overflow-hidden rounded-md bg-neutral-900 shrink-0">
+                <div className="relative h-10 w-14 overflow-hidden rounded-lg bg-neutral-900 shrink-0">
                   <Image src={tpl.image} alt={tpl.name} fill className="object-cover" />
                 </div>
                 <div className="min-w-0">

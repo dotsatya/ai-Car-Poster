@@ -20,23 +20,24 @@ export default function ContactPage() {
   return (
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-             <div>
-            <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
-              Contact Our Atelier
-            </h1>
-            <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
-              Whether commissioning artwork for a rare collector chassis,
-              inquiring about custom large-scale gallery installations, or
-              tracking physical print production, our concierge is at your
-              service.
-            </p>
-          </div> <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12 items-start">
-        
-    
+        {/* Header matching standard category / page typography */}
+        <div className="mb-6 sm:mb-8 lg:mb-10 max-w-3xl">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
+            Contact Our Atelier
+          </h1>
+          <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
+            Whether commissioning artwork for a rare collector chassis,
+            inquiring about custom large-scale gallery installations, or
+            tracking physical print production, our concierge is at your
+            service.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12 items-start">
           {/* Left Column: Contact Details */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-6">
-            <div className="space-y-3 sm:space-y-3.5">
-              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                   Direct Enquiries
                 </div>
@@ -48,7 +49,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
+              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                   Global Dispatch Hubs
                 </div>
@@ -60,7 +61,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-4.5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
+              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300">
                 <div className="text-[10px] font-semibold uppercase tracking-wider text-brand">
                   Corporate &amp; Fleet Commissions
                 </div>

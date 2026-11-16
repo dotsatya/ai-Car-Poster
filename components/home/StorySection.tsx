@@ -5,7 +5,7 @@ export function StorySection() {
     <section id="story" className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Section Header */}
-        <div className="max-w-3xl mb-8 sm:mb-10">
+        <div className="max-w-3xl mb-6 sm:mb-8 lg:mb-10">
           <div className="flex items-center gap-2 mb-2">
             <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
             <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">

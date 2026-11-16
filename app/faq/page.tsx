@@ -11,7 +11,7 @@ export default function FaqPage() {
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Header matching standard category / page typography */}
-        <div className="mb-4 sm:mb-6 lg:mb-8">
+        <div className="mb-6 sm:mb-8 lg:mb-10">
           <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
             Frequently Asked Questions
           </h1>
@@ -23,7 +23,7 @@ export default function FaqPage() {
         </div>
 
         {/* FAQ Accordion */}
-        <div className="space-y-2.5 sm:space-y-3.5">
+        <div className="space-y-3 sm:space-y-4">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -76,7 +76,7 @@ export default function FaqPage() {
         </div>
 
         {/* Still Have Questions Concierge Card */}
-        <div className="mt-8 sm:mt-12 rounded-xl border border-white/[0.08] bg-neutral-900/60 p-5 sm:p-7 text-center hover:border-white/20 transition-all duration-300">
+        <div className="mt-10 sm:mt-14 rounded-xl border border-white/[0.08] bg-neutral-900/60 p-6 sm:p-8 text-center hover:border-white/20 transition-all duration-300">
           <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-brand">
             Private Concierge Support
           </span>

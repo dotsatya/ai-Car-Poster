@@ -7,7 +7,7 @@ export function MissionSection() {
   const [activeHeroTab, setActiveHeroTab] = useState<"after" | "before">("after");
 
   return (
-    <section id="how-it-works" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12">
+    <section id="how-it-works" className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Left Column: Photo Comparison */}

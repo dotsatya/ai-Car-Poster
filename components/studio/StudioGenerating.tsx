@@ -7,7 +7,7 @@ export function StudioGenerating() {
   const { vehicleName, generatedArtworks, generationProgress } = useStudio();
 
   return (
-    <div className="mt-4 sm:mt-8 rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-3.5 sm:p-6 lg:p-8 backdrop-blur-xl hover:border-white/20 transition-all duration-300 shadow-xl shadow-black/40">
+    <div className="mt-4 sm:mt-8 rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 lg:p-8 backdrop-blur-xl hover:border-white/20 transition-all duration-300 shadow-xl shadow-black/40">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
         <div>
           <span className="text-[10px] font-semibold uppercase tracking-wider text-brand block">
@@ -23,14 +23,14 @@ export function StudioGenerating() {
         </div>
       </div>
 
-      <div className="mt-4 sm:mt-8 grid grid-cols-2 gap-2.5 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-4 sm:mt-8 grid grid-cols-2 gap-3.5 sm:gap-4 lg:gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {generatedArtworks.map((art) => {
           const status = generationProgress[art.id] || "queued";
 
           return (
             <div
               key={art.id}
-              className="rounded-xl border border-white/[0.08] bg-black/60 p-2.5 sm:p-4 overflow-hidden relative flex flex-col justify-between hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300"
+              className="rounded-xl border border-white/[0.08] bg-black/60 p-3 sm:p-4 overflow-hidden relative flex flex-col justify-between hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300"
             >
               <div className="flex items-center justify-between gap-1 sm:gap-2">
                 <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-brand truncate">

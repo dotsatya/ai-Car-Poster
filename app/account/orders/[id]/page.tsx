@@ -72,9 +72,9 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
       {/* Account Navigation Bar */}
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-12 py-3.5 sm:py-8">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8 lg:py-10">
         {/* Top Breadcrumb Navigation */}
-        <div className="mb-3 sm:mb-6">
+        <div className="mb-3.5 sm:mb-6">
           <Link
             href="/account/orders"
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-400 hover:text-white transition-colors cursor-pointer group py-1"
@@ -87,7 +87,7 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
         {/* ============================================================== */}
         {/* HERO ORDER HEADER CARD (Luxury Receipt Header on Mobile & Desktop) */}
         {/* ============================================================== */}
-        <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-xl mb-4 sm:mb-6 shadow-xl shadow-black/40">
+        <div className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-3.5 sm:p-6 backdrop-blur-xl mb-4 sm:mb-6 shadow-xl shadow-black/40">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 sm:gap-4">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
@@ -145,7 +145,7 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
             {/* ============================================================== */}
             <section
               id="tracker"
-              className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md shadow-lg shadow-black/40"
+              className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md shadow-lg shadow-black/40"
             >
               {/* Tracker Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3.5 mb-4 border-b border-white/[0.06]">
@@ -289,7 +289,7 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
             {/* ============================================================== */}
             <section
               id="posters"
-              className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md shadow-lg shadow-black/40"
+              className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md shadow-lg shadow-black/40"
             >
               <div className="flex items-center justify-between gap-3 pb-3.5 mb-4 border-b border-white/[0.06]">
                 <div className="flex items-center gap-2">
@@ -418,7 +418,7 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
           {/* RIGHT COLUMN: Shipping Address, Pricing Breakdown & Provenance */}
           <div className="lg:col-span-4 sm:grid sm:grid-cols-2 lg:flex lg:flex-col gap-4 sm:gap-5 lg:gap-6">
             {/* Delivery Address Card */}
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-5 backdrop-blur-md space-y-3 sm:col-span-1 shadow-lg shadow-black/40">
+            <div className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-5 backdrop-blur-md space-y-3 sm:col-span-1 shadow-lg shadow-black/40">
               <div className="flex items-center justify-between pb-2.5 border-b border-white/[0.06]">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-brand" />
@@ -457,7 +457,7 @@ export default function OrderDetailPage({ params }: OrderPageProps) {
             </div>
 
             {/* Invoicing Breakdown */}
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-5 backdrop-blur-md space-y-3 sm:col-span-1 shadow-lg shadow-black/40">
+            <div className="rounded-xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-5 backdrop-blur-md space-y-3 sm:col-span-1 shadow-lg shadow-black/40">
               <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white pb-2.5 border-b border-white/[0.06]">
                 Payment Summary
               </h3>

@@ -75,7 +75,7 @@ function OrderSuccessContent() {
 
   return (
     <div className="min-h-screen bg-bg-primary pb-24 text-white">
-      <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <main className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         {/* Hero Success Badge */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <div className="relative inline-flex items-center justify-center mb-4">

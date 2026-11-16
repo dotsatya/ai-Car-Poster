@@ -6,7 +6,6 @@ import Image from "next/image";
 import {
   Check,
   Plus,
-  Eye,
   X,
   ShoppingBag,
   ChevronLeft,
@@ -24,7 +23,9 @@ interface GenaratePosterReviewProps {
 
 const emptySubscribe = () => () => {};
 
-export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReviewProps) {
+export function GenaratePosterReview({
+  onBackToConfigure,
+}: GenaratePosterReviewProps) {
   const {
     generatedArtworks,
     selectedTemplates,
@@ -37,7 +38,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
     setIsCartOpen,
   } = useStudio();
 
-  const [inspectArtworkIndex, setInspectArtworkIndex] = useState<number | null>(null);
+  const [inspectArtworkIndex, setInspectArtworkIndex] = useState<number | null>(
+    null,
+  );
   const [openSizeMenuId, setOpenSizeMenuId] = useState<string | null>(null);
   const [mobileViewMode, setMobileViewMode] = useState<"grid" | "list">("grid");
 
@@ -69,7 +72,7 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
   const isClient = useSyncExternalStore(
     emptySubscribe,
     () => true,
-    () => false
+    () => false,
   );
 
   // Keyboard navigation & body scroll locking when preview modal is open
@@ -81,11 +84,13 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
         setInspectArtworkIndex(null);
       } else if (e.key === "ArrowLeft") {
         setInspectArtworkIndex((prev) =>
-          prev === null ? 0 : (prev - 1 + generatedArtworks.length) % generatedArtworks.length
+          prev === null
+            ? 0
+            : (prev - 1 + generatedArtworks.length) % generatedArtworks.length,
         );
       } else if (e.key === "ArrowRight") {
         setInspectArtworkIndex((prev) =>
-          prev === null ? 0 : (prev + 1) % generatedArtworks.length
+          prev === null ? 0 : (prev + 1) % generatedArtworks.length,
         );
       }
     };
@@ -102,7 +107,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
 
   const selectedCount = generatedArtworks.filter((a) => a.selected).length;
   const currentArtwork =
-    inspectArtworkIndex !== null ? generatedArtworks[inspectArtworkIndex] : null;
+    inspectArtworkIndex !== null
+      ? generatedArtworks[inspectArtworkIndex]
+      : null;
 
   const modalSizes = currentArtwork
     ? getAvailableSizesForArtwork(currentArtwork, selectedTemplates)
@@ -112,18 +119,23 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
 
   const handlePrev = () => {
     if (inspectArtworkIndex === null) return;
-    setInspectArtworkIndex((inspectArtworkIndex - 1 + generatedArtworks.length) % generatedArtworks.length);
+    setInspectArtworkIndex(
+      (inspectArtworkIndex - 1 + generatedArtworks.length) %
+        generatedArtworks.length,
+    );
   };
 
   const handleNext = () => {
     if (inspectArtworkIndex === null) return;
-    setInspectArtworkIndex((inspectArtworkIndex + 1) % generatedArtworks.length);
+    setInspectArtworkIndex(
+      (inspectArtworkIndex + 1) % generatedArtworks.length,
+    );
   };
 
   return (
     <div className="mt-4 sm:mt-8 space-y-4 sm:space-y-6 pb-20 sm:pb-0">
       {/* Top Banner: Fully responsive */}
-      <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-3.5 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 backdrop-blur-md hover:border-white/20 transition-all duration-300 shadow-xl shadow-black/40">
+      <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 backdrop-blur-md hover:border-white/20 transition-all duration-300 shadow-xl shadow-black/40">
         <div className="space-y-0.5">
           <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-400">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -133,7 +145,8 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
             Review &amp; Select Posters for Print
           </h3>
           <p className="text-[11px] sm:text-xs text-neutral-400 leading-relaxed max-w-2xl">
-            Choose which pictures you want printed. Only selected posters will be packaged in your Studio Print Cart.
+            Choose which pictures you want printed. Only selected posters will
+            be packaged in your Studio Print Cart.
           </p>
         </div>
 
@@ -159,7 +172,8 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
       {/* Mobile Bar: Counter + View Switcher */}
       <div className="flex items-center justify-between gap-2 px-1">
         <div className="text-xs text-neutral-400 font-medium">
-          <span className="text-white font-bold">{selectedCount}</span> of {generatedArtworks.length} selected for print
+          <span className="text-white font-bold">{selectedCount}</span> of{" "}
+          {generatedArtworks.length} selected for print
         </div>
 
         {/* View Toggle on Mobile only (2-Column Grid vs 1-Column Focus) */}
@@ -200,7 +214,10 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
         }`}
       >
         {generatedArtworks.map((art, idx) => {
-          const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
+          const availableSizes = getAvailableSizesForArtwork(
+            art,
+            selectedTemplates,
+          );
           const currentSize =
             availableSizes.find((s) => s.id === art.size) || availableSizes[0];
           const itemTotal = currentSize.priceNum * art.quantity;
@@ -209,7 +226,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
           return (
             <div
               key={art.id}
-              className={`rounded-2xl border p-2.5 sm:p-4.5 transition-all duration-300 flex flex-col justify-between ${
+              className={`relative rounded-xl border p-1.5 sm:p-2.5 transition-all duration-300 flex flex-col justify-between ${
+                openSizeMenuId === art.id ? "z-40" : "z-10"
+              } ${
                 art.selected
                   ? "border-brand/70 bg-neutral-900/90 shadow-xl shadow-brand/10 ring-1 ring-brand/30 -translate-y-0.5 sm:-translate-y-1"
                   : "border-white/[0.08] bg-[#0E1013]/80 hover:border-white/25 hover:bg-neutral-900/50 hover:-translate-y-0.5 sm:hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80"
@@ -231,24 +250,6 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
 
-                  {/* Top Badges */}
-                  <div className="absolute top-2 left-2 right-2 flex items-center justify-between z-10">
-                    <span className="rounded-full bg-black/75 border border-white/15 px-1.5 sm:px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
-                      {art.badge}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setInspectArtworkIndex(idx);
-                      }}
-                      className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-black/80 border border-white/20 text-neutral-300 hover:text-white hover:bg-black transition-colors cursor-pointer"
-                      title="Inspect full resolution"
-                    >
-                      <Eye size={12} className="sm:w-3.5 sm:h-3.5" />
-                    </button>
-                  </div>
-
                   {/* Bottom Text Over Image */}
                   <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 pointer-events-none">
                     <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-brand block leading-tight">
@@ -266,7 +267,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                 </div>
 
                 {/* Subtitle Info (visible in list mode or on sm+) */}
-                <div className={`mt-2 px-0.5 ${isCompact ? "hidden sm:block" : "block"}`}>
+                <div
+                  className={`mt-2 px-0.5 ${isCompact ? "hidden sm:block" : "block"}`}
+                >
                   <p className="text-[11px] text-neutral-400 line-clamp-2 leading-relaxed">
                     {art.subtitle}
                   </p>
@@ -286,7 +289,11 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
 
                   <button
                     type="button"
-                    onClick={() => setOpenSizeMenuId(openSizeMenuId === art.id ? null : art.id)}
+                    onClick={() =>
+                      setOpenSizeMenuId(
+                        openSizeMenuId === art.id ? null : art.id,
+                      )
+                    }
                     className={`w-full flex items-center justify-between gap-1 rounded-xl border px-2 sm:px-2.5 py-1.5 text-xs transition-all cursor-pointer group ${
                       openSizeMenuId === art.id
                         ? "border-brand bg-brand/10 ring-1 ring-brand/40 text-white shadow-sm"
@@ -305,7 +312,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                       </span>
                       <ChevronDown
                         className={`h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-400 transition-transform duration-200 group-hover:text-white ${
-                          openSizeMenuId === art.id ? "rotate-180 text-white" : ""
+                          openSizeMenuId === art.id
+                            ? "rotate-180 text-white"
+                            : ""
                         }`}
                       />
                     </div>
@@ -314,17 +323,23 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                   {/* Available Sizes Dropdown Popover (Solid Opaque Background + Blur) */}
                   {openSizeMenuId === art.id && (
                     <div
-                      className="absolute left-0 right-0 bottom-full mb-1.5 z-50 rounded-xl border border-white/20 bg-[#15161c] p-2 shadow-2xl shadow-black/95 ring-1 ring-white/10 backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150"
+                      className={`absolute bottom-full mb-2 z-50 rounded-xl border border-white/20 bg-[#15161c] p-2 sm:p-2.5 shadow-2xl shadow-black/95 ring-1 ring-white/10 backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150 w-[240px] xs:w-[260px] sm:w-full max-w-[calc(100vw-24px)] ${
+                        idx % 2 === 0
+                          ? "left-0 sm:left-0 sm:right-0"
+                          : "right-0 sm:left-0 sm:right-0"
+                      }`}
                       style={{ backgroundColor: "#15161c" }}
                     >
-                      <div className="px-2 py-1 border-b border-white/[0.08] flex items-center justify-between text-[10px] text-neutral-400 uppercase font-semibold tracking-wider">
-                        <span>Available Sizes</span>
-                        <span className="text-brand font-mono text-[9px]">
+                      <div className="px-2 py-1.5 border-b border-white/[0.08] flex items-center justify-between text-[10px] text-neutral-400 uppercase font-semibold tracking-wider gap-2">
+                        <span className="whitespace-nowrap">
+                          Available Sizes
+                        </span>
+                        <span className="text-brand font-mono text-[9px] whitespace-nowrap">
                           {availableSizes.length} options
                         </span>
                       </div>
 
-                      <div className="mt-1 space-y-1 max-h-44 sm:max-h-48 overflow-y-auto pr-0.5">
+                      <div className="mt-1 space-y-1 max-h-52 overflow-y-auto pr-1">
                         {availableSizes.map((size) => {
                           const isSelected = currentSize.id === size.id;
                           return (
@@ -335,35 +350,35 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                                 updateArtworkSize(art.id, size.id);
                                 setOpenSizeMenuId(null);
                               }}
-                              className={`w-full flex items-center justify-between gap-1.5 rounded-lg px-2 py-1.5 text-left text-xs transition-all cursor-pointer ${
+                              className={`w-full flex items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-left text-xs transition-all cursor-pointer ${
                                 isSelected
                                   ? "bg-brand/20 text-white border border-brand/50 font-semibold shadow-sm"
                                   : "text-neutral-300 hover:bg-white/[0.08] hover:text-white border border-transparent"
                               }`}
                             >
                               <div className="min-w-0">
-                                <div className="flex items-center gap-1">
-                                  <span className="font-bold text-[11px] sm:text-xs text-white truncate">
+                                <div className="flex items-center gap-1.5 flex-wrap">
+                                  <span className="font-bold text-xs text-white whitespace-nowrap">
                                     {size.name}
                                   </span>
                                   {size.isPopular && (
-                                    <span className="rounded bg-brand/25 border border-brand/40 px-1 py-0.2 text-[7px] font-bold text-brand uppercase">
+                                    <span className="rounded bg-brand/25 border border-brand/40 px-1 py-0.2 text-[7px] font-bold text-brand uppercase tracking-wider shrink-0">
                                       Popular
                                     </span>
                                   )}
                                 </div>
-                                <span className="text-[9px] text-neutral-400 font-mono block mt-0.5">
+                                <span className="text-[10px] text-neutral-400 font-mono block mt-0.5 whitespace-nowrap">
                                   {size.dimensions}
                                 </span>
                               </div>
-                              <div className="flex items-center gap-1 shrink-0">
-                                <span className="font-mono font-bold text-brand text-[11px] sm:text-xs">
+                              <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                                <span className="font-mono font-bold text-brand text-xs whitespace-nowrap">
                                   {size.price}
                                 </span>
                                 {isSelected ? (
-                                  <Check className="h-3 w-3 text-brand stroke-[2.5]" />
+                                  <Check className="h-3.5 w-3.5 text-brand stroke-[2.5]" />
                                 ) : (
-                                  <span className="w-3" />
+                                  <span className="w-3.5" />
                                 )}
                               </div>
                             </button>
@@ -416,7 +431,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                   {art.selected ? (
                     <>
                       <Check className="h-3.5 w-3.5 stroke-[2.5]" />
-                      <span>{isCompact ? "Selected" : "Selected for Print"}</span>
+                      <span>
+                        {isCompact ? "Selected" : "Selected for Print"}
+                      </span>
                     </>
                   ) : (
                     <>
@@ -483,7 +500,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
       </div>
 
       {/* Gallery-Grade High-Resolution Modal View */}
-      {isClient && currentArtwork && inspectArtworkIndex !== null &&
+      {isClient &&
+        currentArtwork &&
+        inspectArtworkIndex !== null &&
         createPortal(
           <div
             role="dialog"
@@ -507,7 +526,8 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                     <ChevronLeft size={16} />
                   </button>
                   <span className="text-xs font-mono font-bold text-white px-1 sm:px-1.5">
-                    Variation {inspectArtworkIndex + 1} of {generatedArtworks.length}
+                    Variation {inspectArtworkIndex + 1} of{" "}
+                    {generatedArtworks.length}
                   </span>
                   <button
                     type="button"
@@ -595,12 +615,19 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                       </div>
                       <select
                         value={currentArtwork.size}
-                        onChange={(e) => updateArtworkSize(currentArtwork.id, e.target.value)}
+                        onChange={(e) =>
+                          updateArtworkSize(currentArtwork.id, e.target.value)
+                        }
                         className="w-full rounded-xl border border-white/15 bg-neutral-900 px-3 py-2 text-xs text-white focus:border-brand focus:outline-none cursor-pointer"
                       >
                         {modalSizes.map((size) => (
-                          <option key={size.id} value={size.id} className="bg-neutral-900 text-white">
-                            {size.name} ({size.dimensions}) — {size.price} {size.isPopular ? "★ Popular" : ""}
+                          <option
+                            key={size.id}
+                            value={size.id}
+                            className="bg-neutral-900 text-white"
+                          >
+                            {size.name} ({size.dimensions}) — {size.price}{" "}
+                            {size.isPopular ? "★ Popular" : ""}
                           </option>
                         ))}
                       </select>
@@ -608,11 +635,15 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
 
                     <div className="flex items-center justify-between pt-1 border-t border-white/[0.06]">
                       <div>
-                        <span className="text-[10px] text-neutral-500 uppercase font-semibold">Quantity</span>
+                        <span className="text-[10px] text-neutral-500 uppercase font-semibold">
+                          Quantity
+                        </span>
                         <div className="flex items-center gap-1.5 mt-1 rounded-lg border border-white/10 bg-neutral-900 px-2 py-1">
                           <button
                             type="button"
-                            onClick={() => updateArtworkQuantity(currentArtwork.id, -1)}
+                            onClick={() =>
+                              updateArtworkQuantity(currentArtwork.id, -1)
+                            }
                             className="h-5 w-5 rounded text-neutral-400 hover:text-white flex items-center justify-center text-xs cursor-pointer active:scale-90"
                           >
                             -
@@ -622,7 +653,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                           </span>
                           <button
                             type="button"
-                            onClick={() => updateArtworkQuantity(currentArtwork.id, 1)}
+                            onClick={() =>
+                              updateArtworkQuantity(currentArtwork.id, 1)
+                            }
                             className="h-5 w-5 rounded text-neutral-400 hover:text-white flex items-center justify-center text-xs cursor-pointer active:scale-90"
                           >
                             +
@@ -631,7 +664,9 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                       </div>
 
                       <div className="text-right">
-                        <span className="text-[10px] text-neutral-500 uppercase font-semibold">Unit Price</span>
+                        <span className="text-[10px] text-neutral-500 uppercase font-semibold">
+                          Unit Price
+                        </span>
                         <div className="text-base sm:text-lg font-bold text-white mt-0.5 font-mono">
                           ₹
                           {(
@@ -685,7 +720,12 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
                               : "border-white/15 opacity-60 hover:opacity-100"
                           }`}
                         >
-                          <Image src={art.image} alt={art.title} fill className="object-cover" />
+                          <Image
+                            src={art.image}
+                            alt={art.title}
+                            fill
+                            className="object-cover"
+                          />
                           {art.selected && (
                             <span className="absolute top-1 right-1 h-3.5 w-3.5 rounded-full bg-brand text-white flex items-center justify-center text-[8px] font-bold shadow">
                               ✓
@@ -699,7 +739,7 @@ export function GenaratePosterReview({ onBackToConfigure }: GenaratePosterReview
               </div>
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </div>
   );

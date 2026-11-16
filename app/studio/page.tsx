@@ -76,12 +76,12 @@ export default function StudioPage() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Studio Header matching layout reference */}
-        <div className="mb-4 sm:mb-6 lg:mb-8 text-center sm:text-left">
+        <div className="mb-5 sm:mb-6 lg:mb-8 text-center sm:text-left">
           <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-heading uppercase leading-[1.08]">
             Let&apos;s create your masterpiece.
           </h1>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 max-w-3xl leading-relaxed mx-auto sm:mx-0">
-            Upload your car. Choose your selected designs. Let AI do the rest.
+            Upload your car. Let AI do the rest.
           </p>
         </div>
 

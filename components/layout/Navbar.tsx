@@ -31,7 +31,7 @@ export function Navbar() {
 
   // Close dropdowns on outside click or Escape key
   useEffect(() => {
-    if (!isUserMenuOpen && !isMobileUserMenuOpen) return;
+    if (!isUserMenuOpen && !isMobileUserMenuOpen && !isMobileMenuOpen) return;
 
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       const target = e.target as Node;
@@ -55,6 +55,7 @@ export function Navbar() {
       if (e.key === "Escape") {
         setIsUserMenuOpen(false);
         setIsMobileUserMenuOpen(false);
+        setIsMobileMenuOpen(false);
       }
     };
 
@@ -67,7 +68,7 @@ export function Navbar() {
       document.removeEventListener("touchstart", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isUserMenuOpen, isMobileUserMenuOpen]);
+  }, [isUserMenuOpen, isMobileUserMenuOpen, isMobileMenuOpen]);
 
   const navLinks = [
     { label: "Templates", href: "/templates" },
@@ -395,40 +396,38 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu (Three-bar icon: Pure navigation without account settings) */}
+      {/* Mobile Drawer Menu (Pure navigation overlay floating over the page without pushing content down) */}
       {isMobileMenuOpen && (
-        <div className="border-b border-white/10 bg-bg-primary/95 px-4 py-4 md:hidden backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="flex flex-col space-y-1">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium transition-colors ${
-                    isActive
-                      ? "bg-white/10 font-semibold text-white"
-                      : "hover:bg-white/[0.04] text-neutral-300 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+        <>
+          {/* Backdrop overlay */}
+          <div
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="fixed inset-0 top-16 sm:top-20 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-in fade-in duration-200"
+          />
 
-            {/* Direct Studio Link */}
-            <div className="pt-3 border-t border-white/10 mt-2">
-              <Link
-                href="/studio"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-2.5 px-4 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer"
-              >
-                <span>Launch Creation Studio</span>
-              </Link>
+          {/* Navigation Dropdown Overlay */}
+          <div className="absolute top-full left-0 right-0 border-b border-white/10 bg-[#08090A]/98 px-4 py-4 md:hidden backdrop-blur-2xl shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col space-y-1">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium transition-colors ${
+                      isActive
+                        ? "bg-white/10 font-semibold text-white"
+                        : "hover:bg-white/[0.04] text-neutral-300 hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );

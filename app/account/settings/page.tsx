@@ -240,24 +240,24 @@ export default function AccountSettingsPage() {
       {/* Account Navigation Bar */}
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8 lg:py-10">
         {/* Subsection Header */}
-        <div className="flex items-start sm:items-center justify-between gap-3 mb-3.5 sm:mb-6">
+        <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
           <div>
-            <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
+            <h1 className="text-sm sm:text-base md:text-xl font-bold uppercase tracking-wider text-white">
               My Account
             </h1>
           </div>
         </div>
 
-        <div className="space-y-6 sm:space-y-8 max-w-4xl">
+        <div className="space-y-5 sm:space-y-6 max-w-4xl">
           {/* ============================================================== */}
           {/* PARTITION 1: FIRST — DELIVERY ADDRESSES */}
           {/* ============================================================== */}
-          <section className="rounded-2xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-6 backdrop-blur-md">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-white/[0.06]">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand">
+          <section className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-6 backdrop-blur-md">
+            <div className="flex items-center justify-between gap-2.5 pb-3.5 sm:pb-4 mb-4 border-b border-white/[0.06]">
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
                   <MapPin className="h-4 w-4" />
                 </div>
                 <div>
@@ -266,7 +266,7 @@ export default function AccountSettingsPage() {
                       01 / PARTITION
                     </span>
                   </div>
-                  <h2 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white">
+                  <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
                     Delivery Addresses
                   </h2>
                 </div>
@@ -275,7 +275,7 @@ export default function AccountSettingsPage() {
               <button
                 type="button"
                 onClick={openAddAddressModal}
-                className="self-start sm:self-auto inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-3 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap shrink-0"
               >
                 <Plus className="h-3.5 w-3.5" />
                 <span>Add Address</span>
@@ -283,11 +283,11 @@ export default function AccountSettingsPage() {
             </div>
 
             {/* Addresses Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               {addresses.map((addr) => (
                 <div
                   key={addr.id}
-                  className={`relative rounded-xl border p-4 sm:p-5 transition-all duration-300 flex flex-col justify-between ${
+                  className={`relative rounded-xl border p-3.5 sm:p-5 transition-all duration-300 flex flex-col justify-between ${
                     addr.isDefault
                       ? "border-brand/40 bg-neutral-900/80 shadow-lg shadow-brand/5 ring-1 ring-brand/30"
                       : "border-white/[0.08] bg-neutral-900/40 hover:border-white/20 hover:bg-neutral-900/60"
@@ -302,7 +302,7 @@ export default function AccountSettingsPage() {
                         </span>
                         {addr.isDefault && (
                           <span className="rounded-full bg-brand/15 border border-brand/30 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand">
-                            Default Destination
+                            Default
                           </span>
                         )}
                       </div>
@@ -311,7 +311,7 @@ export default function AccountSettingsPage() {
                         <button
                           type="button"
                           onClick={() => openEditAddressModal(addr)}
-                          className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                          className="h-7 w-7 flex items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                           title="Edit address"
                         >
                           <Edit2 className="h-3.5 w-3.5" />
@@ -320,7 +320,7 @@ export default function AccountSettingsPage() {
                           <button
                             type="button"
                             onClick={() => handleDeleteAddress(addr.id)}
-                            className="p-1.5 rounded-lg text-neutral-400 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
+                            className="h-7 w-7 flex items-center justify-center rounded-lg text-neutral-400 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
                             title="Delete address"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -347,7 +347,7 @@ export default function AccountSettingsPage() {
                       <button
                         type="button"
                         onClick={() => handleSetDefaultAddress(addr.id)}
-                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-neutral-400 hover:text-brand transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1 py-1 px-2 rounded text-[11px] font-semibold text-neutral-400 hover:text-brand transition-colors cursor-pointer"
                       >
                         <span>Set as Default</span>
                       </button>
@@ -361,24 +361,24 @@ export default function AccountSettingsPage() {
           {/* ============================================================== */}
           {/* PARTITION 2: THEN — ACCOUNT USER EMAIL ID */}
           {/* ============================================================== */}
-          <section className="rounded-2xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-6 backdrop-blur-md">
-            <div className="flex items-center gap-2.5 pb-4 mb-4 border-b border-white/[0.06]">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand">
+          <section className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-6 backdrop-blur-md">
+            <div className="flex items-center gap-2.5 pb-3.5 sm:pb-4 mb-4 border-b border-white/[0.06]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
                 <Mail className="h-4 w-4" />
               </div>
               <div>
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
                   02 / PARTITION
                 </span>
-                <h2 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white">
+                <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
                   Account User Email ID
                 </h2>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center justify-between">
+                <label className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center justify-between">
                   <span>Registered Email Identifier</span>
                   <span className="inline-flex items-center gap-1 text-[10px] text-neutral-400 lowercase font-mono">
                     <Lock className="h-3 w-3 text-neutral-400" />
@@ -394,7 +394,7 @@ export default function AccountSettingsPage() {
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+                <label className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
                   Authentication Status
                 </label>
                 <div className="mt-1.5 flex items-center justify-between rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs text-neutral-300">
@@ -402,7 +402,7 @@ export default function AccountSettingsPage() {
                     <ShieldCheck className="h-4 w-4 text-emerald-400" />
                     Passwordless OTP
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                     Active &amp; Verified
                   </span>
                 </div>
@@ -416,17 +416,17 @@ export default function AccountSettingsPage() {
           {/* ============================================================== */}
           {/* PARTITION 3: THEN — OPTION TO INCLUDE NAME AND PHONE NUMBER */}
           {/* ============================================================== */}
-          <section className="rounded-2xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-6 backdrop-blur-md">
-            <div className="flex items-center justify-between gap-3 pb-4 mb-4 border-b border-white/[0.06]">
+          <section className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-6 backdrop-blur-md">
+            <div className="flex items-center justify-between gap-3 pb-3.5 sm:pb-4 mb-4 border-b border-white/[0.06]">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
                   <User className="h-4 w-4" />
                 </div>
                 <div>
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
                     03 / PARTITION
                   </span>
-                  <h2 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white">
+                  <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
                     Personal Details
                   </h2>
                 </div>
@@ -434,12 +434,12 @@ export default function AccountSettingsPage() {
             </div>
 
             <form onSubmit={handleSaveProfile} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {/* Name Option */}
                 <div>
                   <label
                     htmlFor="fullNameInput"
-                    className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
+                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
                   >
                     <User className="h-3 w-3 text-brand" />
                     <span>Collector Full Name</span>
@@ -461,7 +461,7 @@ export default function AccountSettingsPage() {
                 <div>
                   <label
                     htmlFor="phoneInput"
-                    className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
+                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
                   >
                     <Phone className="h-3 w-3 text-brand" />
                     <span>Contact Phone Number</span>
@@ -483,7 +483,7 @@ export default function AccountSettingsPage() {
               <div className="pt-2 flex justify-end">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer"
                 >
                   <Check className="h-3.5 w-3.5" />
                   <span>Save Details</span>
@@ -495,8 +495,8 @@ export default function AccountSettingsPage() {
           {/* ============================================================== */}
           {/* PARTITION 4: THEN — SIGN OUT BUTTON */}
           {/* ============================================================== */}
-          <section className="rounded-2xl border border-red-500/20 bg-red-950/10 p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <section className="rounded-xl border border-red-500/20 bg-red-950/10 p-3.5 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 sm:gap-4">
               <div className="flex items-start gap-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-500/10 border border-red-500/25 text-red-400 mt-0.5 sm:mt-0">
                   <LogOut className="h-4 w-4" />
@@ -505,10 +505,10 @@ export default function AccountSettingsPage() {
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-400">
                     04 / PARTITION
                   </span>
-                  <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white">
+                  <h3 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
                     Sign Out of Atelier
                   </h3>
-                  <p className="text-xs text-neutral-400 mt-0.5 max-w-md">
+                  <p className="text-xs text-neutral-400 mt-0.5 max-w-md leading-relaxed">
                     End your active session on this device. Your orders, generated posters, and wishlist remain securely linked to your email.
                   </p>
                 </div>
@@ -517,7 +517,7 @@ export default function AccountSettingsPage() {
               <button
                 type="button"
                 onClick={signOut}
-                className="self-start sm:self-auto inline-flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 px-4 py-2.5 text-xs font-semibold text-red-300 hover:text-white transition-all cursor-pointer whitespace-nowrap"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 px-4 py-2.5 text-xs font-semibold text-red-300 hover:text-white transition-all cursor-pointer whitespace-nowrap shrink-0"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 <span>Sign Out</span>
@@ -531,25 +531,25 @@ export default function AccountSettingsPage() {
       {/* ADDRESS MODAL (ADD / EDIT) */}
       {/* ============================================================== */}
       {isAddressModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-lg rounded-2xl border border-white/[0.12] bg-[#0E1013] p-5 sm:p-6 shadow-2xl">
-            <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-white/[0.08]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl border border-white/[0.12] bg-[#0E1013] p-4 sm:p-6 shadow-2xl">
+            <div className="flex items-center justify-between pb-3 mb-3.5 sm:mb-4 border-b border-white/[0.08]">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-brand" />
-                <h3 className="text-base font-bold uppercase tracking-wider text-white">
+                <h3 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white">
                   {editingAddressId ? "Edit Delivery Address" : "Add Delivery Address"}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsAddressModalOpen(false)}
-                className="p-1 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="h-8 w-8 flex items-center justify-center rounded-lg text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            <form onSubmit={handleSaveAddress} className="space-y-3.5">
+            <form onSubmit={handleSaveAddress} className="space-y-3 sm:space-y-3.5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
@@ -593,7 +593,7 @@ export default function AccountSettingsPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
                 <div>
                   <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
                     City *
@@ -621,7 +621,7 @@ export default function AccountSettingsPage() {
                   />
                 </div>
 
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
                     PIN Code *
                   </label>
@@ -659,17 +659,17 @@ export default function AccountSettingsPage() {
                 <span className="text-xs text-neutral-300">Set as default shipping destination</span>
               </label>
 
-              <div className="pt-3 border-t border-white/[0.08] flex items-center justify-end gap-2">
+              <div className="pt-3 border-t border-white/[0.08] flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setIsAddressModalOpen(false)}
-                  className="px-3.5 py-2 rounded-xl text-xs font-semibold text-neutral-400 hover:text-white transition-colors cursor-pointer"
+                  className="w-full sm:w-auto px-3.5 py-2 rounded-xl text-xs font-semibold text-neutral-400 hover:text-white transition-colors cursor-pointer text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer text-center"
                 >
                   <Check className="h-3.5 w-3.5" />
                   <span>Save Address</span>

@@ -34,23 +34,27 @@ const SIZE_SPECS: Record<string, SizeSpec> = {
   },
   "12x18": {
     pixels: "3,600 × 5,400 px",
-    ideal: "Classic architectural 2:3 ratio ideal for corridors and modern lounges.",
+    ideal:
+      "Classic architectural 2:3 ratio ideal for corridors and modern lounges.",
     badge: "Architectural Proportion",
   },
   a2: {
     pixels: "4,960 × 7,016 px",
-    ideal: "Our most popular size. Striking, balanced presence above desks and sofas.",
+    ideal:
+      "Our most popular size. Striking, balanced presence above desks and sofas.",
     badge: "Enthusiast Favorite",
     popular: true,
   },
   a1: {
     pixels: "7,016 × 9,933 px",
-    ideal: "Commanding museum focal point for enthusiast lounges and feature walls.",
+    ideal:
+      "Commanding museum focal point for enthusiast lounges and feature walls.",
     badge: "Exhibition Master",
   },
   ultra: {
     pixels: "7,087 × 14,173 px",
-    ideal: "Showroom-scale panoramic statement—optimized for the 3-template combined triptych.",
+    ideal:
+      "Showroom-scale panoramic statement—optimized for the 3-template combined triptych.",
     badge: "Triptych Panoramic",
   },
 };
@@ -82,21 +86,23 @@ export default function PricingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <div className="min-h-screen bg-bg-primary pb-24 text-white overflow-x-hidden">
+    <div className="py-6 sm:py-8 lg:py-12 bg-bg-primary overflow-x-hidden">
       {/* ============================================================== */}
       {/* 1. HERO HEADER */}
       {/* ============================================================== */}
-      <section className="relative pt-8 sm:pt-14 lg:pt-16 pb-7 sm:pb-12 border-b border-white/[0.06] ">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 mb-8 sm:mb-12 lg:mb-14">
-        <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white leading-[1.08] font-heading uppercase">
-          Museum-Grade Fine Art Editions
+      <section className="relative pb-8 sm:pb-12 lg:pb-16 border-b border-white/[0.06]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white leading-[1.08] font-heading uppercase">
+            Museum-Grade Fine Art Editions
           </h1>
           <p className="mt-2.5 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
-            Honest, transparent pricing for bespoke automotive generative art. Executed on 310 GSM 100% cotton rag with 12-pigment archival Giclée inks certified 100+ years lightfast.
+            Honest, transparent pricing for bespoke automotive generative art.
+            Executed on 310 GSM 100% cotton rag with 12-pigment archival Giclée
+            inks certified 100+ years lightfast.
           </p>
 
           {/* Key Value Badges */}
-          <div className="mt-5 sm:mt-6 flex flex-wrap   gap-2 sm:gap-3 text-[11px] sm:text-xs font-mono">
+          <div className="mt-5 sm:mt-6 flex flex-wrap gap-2 sm:gap-3 text-[11px] sm:text-xs font-mono">
             <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 shrink-0">
               <Printer className="h-3.5 w-3.5 text-brand" />
               12-Pigment Giclée
@@ -116,9 +122,9 @@ export default function PricingPage() {
       {/* ============================================================== */}
       {/* 2. PRINT SIZES PRICING GRID */}
       {/* ============================================================== */}
-      <section className="py-8 sm:py-14 lg:py-16">
+      <section className="py-10 sm:py-14 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="mb-6 sm:mb-10">
+          <div className="mb-6 sm:mb-8 lg:mb-10">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
               <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
@@ -129,7 +135,8 @@ export default function PricingPage() {
               Choose Your Physical Format
             </h2>
             <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-2xl">
-              All sizes governed by true 300 DPI native pixel counts and physical millimeter execution.
+              All sizes governed by true 300 DPI native pixel counts and
+              physical millimeter execution.
             </p>
           </div>
 
@@ -180,7 +187,9 @@ export default function PricingPage() {
                       <span className="text-2xl sm:text-4xl font-extrabold text-brand font-mono">
                         {size.price}
                       </span>
-                      <span className="text-xs text-neutral-400 font-mono">/ edition</span>
+                      <span className="text-xs text-neutral-400 font-mono">
+                        / edition
+                      </span>
                     </div>
 
                     {/* 300 DPI Canvas Box */}
@@ -242,9 +251,9 @@ export default function PricingPage() {
       {/* ============================================================== */}
       {/* 3. INCLUDED ATELIER STANDARDS (3 Pillars) */}
       {/* ============================================================== */}
-      <section className="py-10 sm:py-14 border-t border-white/[0.06] bg-[#07080A]">
+      <section className="py-10 sm:py-14 lg:py-16 border-t border-white/[0.06] bg-[#07080A]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-10">
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
               <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
@@ -255,38 +264,52 @@ export default function PricingPage() {
               Included with Every Commission
             </h2>
             <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl mx-auto">
-              We never compromise on material integrity. Every physical delivery includes museum cotton rag, aerospace aluminum framing, and serialized provenance.
+              We never compromise on material integrity. Every physical delivery
+              includes museum cotton rag, aerospace aluminum framing, and
+              serialized provenance.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">01 / ARCHIVAL SUBSTRATE</span>
+              <span className="font-mono text-xs font-bold text-brand">
+                01 / ARCHIVAL SUBSTRATE
+              </span>
               <h4 className="mt-2 text-base font-bold text-white font-heading uppercase">
                 310 GSM Museum Cotton Rag
               </h4>
               <p className="mt-1.5 text-xs text-neutral-400 leading-relaxed">
-                100% acid-free cotton fiber featuring a velvety matte texture that eliminates glare from ceiling lights, garage LEDs, and showroom spotlights.
+                100% acid-free cotton fiber featuring a velvety matte texture
+                that eliminates glare from ceiling lights, garage LEDs, and
+                showroom spotlights.
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">02 / AEROSPACE FRAMING</span>
+              <span className="font-mono text-xs font-bold text-brand">
+                02 / AEROSPACE FRAMING
+              </span>
               <h4 className="mt-2 text-base font-bold text-white font-heading uppercase">
                 CNC Anodized Obsidian Aluminum
               </h4>
               <p className="mt-1.5 text-xs text-neutral-400 leading-relaxed">
-                Precision CNC-machined aluminum framing finished in deep anodized obsidian or brushed titanium, glazed with UV-filtering museum-grade acrylic.
+                Precision CNC-machined aluminum framing finished in deep
+                anodized obsidian or brushed titanium, glazed with UV-filtering
+                museum-grade acrylic.
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-4 sm:p-6 backdrop-blur-md hover:border-white/20 transition-all duration-300 sm:col-span-2 lg:col-span-1">
-              <span className="font-mono text-xs font-bold text-brand">03 / PROVENANCE SEAL</span>
+              <span className="font-mono text-xs font-bold text-brand">
+                03 / PROVENANCE SEAL
+              </span>
               <h4 className="mt-2 text-base font-bold text-white font-heading uppercase">
                 Serialized Hologram &amp; COA
               </h4>
               <p className="mt-1.5 text-xs text-neutral-400 leading-relaxed">
-                Each edition is assigned a permanent serial identifier in our registry, stamped with a tamper-evident holographic seal and numbered Certificate of Authenticity.
+                Each edition is assigned a permanent serial identifier in our
+                registry, stamped with a tamper-evident holographic seal and
+                numbered Certificate of Authenticity.
               </p>
             </div>
           </div>
@@ -296,9 +319,9 @@ export default function PricingPage() {
       {/* ============================================================== */}
       {/* 4. PRICING FAQ ACCORDION */}
       {/* ============================================================== */}
-      <section className="py-10 sm:py-16 border-t border-white/[0.06]">
+      <section className="py-10 sm:py-14 lg:py-16 border-t border-white/[0.06]">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-10">
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
               <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
@@ -309,7 +332,8 @@ export default function PricingPage() {
               Pricing &amp; Shipping Queries
             </h2>
             <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl mx-auto">
-              Everything you need to know about our transparent edition pricing, courier timelines, and bespoke museum framing.
+              Everything you need to know about our transparent edition pricing,
+              courier timelines, and bespoke museum framing.
             </p>
           </div>
 
@@ -348,9 +372,9 @@ export default function PricingPage() {
       {/* ============================================================== */}
       {/* 5. BOTTOM CALL TO ACTION */}
       {/* ============================================================== */}
-      <section className="py-8 sm:py-12 border-t border-white/[0.06]">
+      <section className="py-10 sm:py-14 lg:py-16 border-t border-white/[0.06]">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-white/[0.08] bg-gradient-to-r from-neutral-950 via-neutral-900 to-black p-5 sm:p-10 text-center relative overflow-hidden">
+          <div className="rounded-2xl border border-white/[0.08] bg-gradient-to-r from-neutral-950 via-neutral-900 to-black p-6 sm:p-10 lg:p-12 text-center relative overflow-hidden">
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-48 w-[600px] rounded-full bg-brand/15 blur-[100px]" />
 
             <div className="inline-flex items-center gap-2 mb-2 relative z-10">
@@ -363,7 +387,8 @@ export default function PricingPage() {
               Transform Your Car into Fine Art
             </h3>
             <p className="mt-2 max-w-lg mx-auto text-xs sm:text-sm text-neutral-400 relative z-10 leading-relaxed">
-              Upload one photo, select up to 3 templates, and preview your custom automotive poster in minutes with zero commitment.
+              Upload one photo, select up to 3 templates, and preview your
+              custom automotive poster in minutes with zero commitment.
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 relative z-10 w-full sm:w-auto">

@@ -61,14 +61,13 @@ export default function WishlistPage() {
       {/* Account Navigation */}
       <AccountNav />
 
-      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8">
+      <main className="mx-auto max-w-7xl px-3.5 sm:px-6 lg:px-12 py-4 sm:py-8 lg:py-10">
         {/* Subsection Header */}
-        <div className="flex items-start sm:items-center justify-between gap-3 mb-3.5 sm:mb-6">
+        <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
           <div>
-            <h1 className="text-base sm:text-xl font-bold uppercase tracking-wider text-white">
+            <h1 className="text-sm sm:text-base md:text-xl font-bold uppercase tracking-wider text-white">
               Saved Artworks &amp; Wishlist
             </h1>
-
           </div>
 
           {wishlistedTemplates.length > 0 && (
@@ -105,7 +104,7 @@ export default function WishlistPage() {
             </div>
           </div>
         ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
               {wishlistedTemplates.map((template) => (
                 <TemplateCard key={template.id} template={template} />
               ))}

@@ -68,7 +68,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
 
   return (
     <div
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-xl border transition-all duration-300 ${
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-xl border transition-all duration-300 ${
         isSelected
           ? "border border-brand/50 bg-[#111114] shadow-[0_0_15px_rgba(217,39,46,0.18)] ring-1 ring-brand/20 -translate-y-1"
           : "border-white/[0.08] bg-[#111114] hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80"
@@ -112,7 +112,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
         className="block p-2.5 sm:p-3 pb-3"
       >
         {/* Poster Image Container */}
-        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl sm:rounded-xl bg-black">
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg sm:rounded-xl bg-black">
           <Image
             src={template.image}
             alt={template.name}

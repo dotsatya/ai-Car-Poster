@@ -33,7 +33,7 @@ export function SelectedDesignsList() {
             <div
               key={id}
               onClick={() => setPreviewTemplateId(id)}
-              className="group flex items-center justify-between gap-3 sm:gap-4 rounded-xl border border-white/[0.08] bg-black/40 p-2.5 sm:p-3 transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/60 hover:-translate-y-0.5 cursor-pointer"
+              className="group flex items-center justify-between gap-3 sm:gap-4 rounded-xl border border-white/[0.08] bg-black/40 p-3 sm:p-3.5 transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/60 hover:-translate-y-0.5 cursor-pointer"
             >
               <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
                 {/* 3:4 Portrait Poster Artwork Preview */}

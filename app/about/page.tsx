@@ -140,7 +140,7 @@ export default function AboutPage() {
       {/* 1. HERO HEADER SECTION */}
       {/* ============================================================== */}
 
-      <section className="relative pb-7 sm:pb-12 border-b border-white/[0.06]">
+      <section className="relative pb-8 sm:pb-12 lg:pb-16 border-b border-white/[0.06]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
           <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white leading-[1.08] font-heading uppercase">
             Crafting Automotive Immortality
@@ -533,10 +533,10 @@ export default function AboutPage() {
       {/* ============================================================== */}
       <section
         id="specifications"
-        className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-20"
+        className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-16"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-10">
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
               <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
@@ -605,10 +605,10 @@ export default function AboutPage() {
       {/* ============================================================== */}
       <section
         id="pillars"
-        className="border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-14 lg:py-20"
+        className="border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-14 lg:py-16"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="max-w-2xl mb-8 sm:mb-10">
+          <div className="max-w-2xl mb-6 sm:mb-8 lg:mb-10">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
               <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand font-mono">
