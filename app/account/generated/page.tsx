@@ -12,7 +12,6 @@ import {
   Eye,
   X,
   ArrowRight,
-  Wand2,
   ChevronDown,
 } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";

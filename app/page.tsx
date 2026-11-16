@@ -2,8 +2,7 @@
 
 import { HeroSection } from "@/components/home/HeroSection";
 import { TemplatesShowcaseSection } from "@/components/home/TemplatesShowcaseSection";
-import { StorySection } from "@/components/home/StorySection";
-import { MissionSection } from "@/components/home/MissionSection";
+import { HowItWorksSection } from "@/components/home/HowItWorksSection";
 import { CraftsmanshipSection } from "@/components/home/CraftsmanshipSection";
 
 export default function Home() {
@@ -14,8 +13,8 @@ export default function Home() {
       {/* Premium Automotive Templates Showcase (Continuously Auto-scrolling Infinite Loop) */}
       <TemplatesShowcaseSection />
 
-      <StorySection />
-      <MissionSection />
+      {/* 4-Step Interactive Process */}
+      <HowItWorksSection />
 
       {/* Craftsmanship Specifications */}
       <CraftsmanshipSection />

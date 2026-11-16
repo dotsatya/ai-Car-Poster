@@ -14,6 +14,7 @@ interface CartContextType {
   addDirectCartItem: (item: Omit<CartItem, "total">) => void;
   removeDirectCartItem: (id: string) => void;
   updateDirectCartQuantity: (id: string, delta: number) => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -27,6 +28,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     addDirectCartItem,
     removeDirectCartItem,
     updateDirectCartQuantity,
+    clearCart,
   } = useStudio();
 
   return (
@@ -41,6 +43,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         addDirectCartItem,
         removeDirectCartItem,
         updateDirectCartQuantity,
+        clearCart,
       }}
     >
       {children}

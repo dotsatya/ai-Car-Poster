@@ -13,7 +13,6 @@ import {
   Package,
   Heart,
   LogOut,
-  Sparkles,
   Scroll,
 } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
@@ -212,13 +211,13 @@ export function Navbar() {
                   {/* Menu Links in Serial Order */}
                   <div className="py-1 space-y-0.5">
                     <Link
-                      href="/account"
+                      href="/account/orders"
                       onClick={() => setIsUserMenuOpen(false)}
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
-                      <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Account</span>
+                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Orders</span>
                     </Link>
 
                     <Link
@@ -227,18 +226,8 @@ export function Navbar() {
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
-                      <Sparkles className="h-4 w-4 text-brand shrink-0" />
+                      <Scroll className="h-4 w-4 text-neutral-400 shrink-0" />
                       <span>Generated Posters</span>
-                    </Link>
-
-                    <Link
-                      href="/account/orders"
-                      onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Orders</span>
                     </Link>
 
                     <Link
@@ -363,13 +352,13 @@ export function Navbar() {
                   {/* Menu Links in Serial Order */}
                   <div className="py-1 space-y-0.5">
                     <Link
-                      href="/account"
+                      href="/account/orders"
                       onClick={() => setIsMobileUserMenuOpen(false)}
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
-                      <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Account</span>
+                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Orders</span>
                     </Link>
 
                     <Link
@@ -380,16 +369,6 @@ export function Navbar() {
                     >
                       <Scroll className="h-4 w-4 text-neutral-400 shrink-0" />
                       <span>Generated Posters</span>
-                    </Link>
-
-                    <Link
-                      href="/account/orders"
-                      onClick={() => setIsMobileUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Orders</span>
                     </Link>
 
                     <Link

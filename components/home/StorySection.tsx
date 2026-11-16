@@ -1,108 +1,165 @@
-import Image from "next/image";
+import { LayoutGrid, Sparkles, Scan, Printer, Eye, Cpu, ShieldCheck } from "lucide-react";
 
 export function StorySection() {
   return (
-    <section id="about" className="relative border-t border-white/[0.06] bg-bg-primary py-8 sm:py-12">
+    <section id="story" className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-14">
-          <div className="lg:col-span-5">
-            
-            <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-              Our Story
-            </h2>
-            <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
-              Preserving the art of luxury automotive passion through precision, craftsmanship, and generative
-              mastery.
-            </p>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-8 sm:mb-10">
+          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
+            V1 ATELIER SPECIFICATION
+          </span>
+          <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
+            Our Story &amp; Heritage
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
+            Preserving the art of luxury automotive passion through precision, craftsmanship, and generative
+            mastery.
+          </p>
+        </div>
+
+        {/* 3 Core Tenet Cards (Directly from V1 Specification) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10">
+          {/* Card 1: Authentic Machine Vision */}
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand">
+                  01 • Authentic Machine Vision
+                </span>
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand">
+                  <Eye className="h-3.5 w-3.5" />
+                </div>
+              </div>
+              <h3 className="text-sm sm:text-base font-bold text-white mb-2 font-heading uppercase">
+                Zero Stock 3D Renders
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+                Poster Gen was founded by automotive designers, computational artists, and obsessive petrolheads with a shared conviction: an enthusiast&apos;s machine is never generic transport—it is a sculpture of engineering, memories, and personal character. Rather than substituting vehicles with generic 3D stock models, our proprietary neural vision pipeline honors every authentic chassis contour, aftermarket splitter, bespoke wheel, and natural specular reflection from your original photo.
+              </p>
+            </div>
           </div>
 
-          <div className="lg:col-span-7 lg:pt-6">
-            <p className="text-xs sm:text-sm leading-relaxed text-neutral-300 md:text-base">
-              Poster Gen was founded by car designers, computational artists, and obsessive petrolheads with a shared
-              conviction: an enthusiast&apos;s machine is more than transport—it is a sculpture of engineering, memories,
-              and character.
-            </p>
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-neutral-400 md:text-base">
-              Today, we are proud to serve collectors across 40 countries, turning everyday photos of trackday icons,
-              classic restorations, and daily drivers into museum-grade framed posters worth over $2.5M in custom-built
-              enthusiast art.
-            </p>
+          {/* Card 2: Generative Architecture */}
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand">
+                  02 • Multi-Template Synthesis
+                </span>
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand">
+                  <Cpu className="h-3.5 w-3.5" />
+                </div>
+              </div>
+              <h3 className="text-sm sm:text-base font-bold text-white mb-2 font-heading uppercase">
+                Customer Autonomy &amp; Triptych
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+                As established in our V1 Development Specification, collectors upload a single vehicle photograph and select 1 to 3 master templates simultaneously across 29 curated artistic disciplines. Our generative architecture synthesizes up to 4 high-resolution outputs—including 1 to 3 individual master artworks and an exclusive harmonized Combined Triptych blending the selected design styles.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 3: Archival Physicality */}
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand">
+                  03 • Physical Giclée Execution
+                </span>
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand">
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                </div>
+              </div>
+              <h3 className="text-sm sm:text-base font-bold text-white mb-2 font-heading uppercase">
+                Verified 300 DPI Canvas
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+                Digital artwork only reaches its full potential when manifested in physical reality. Print acceptance is strictly governed by physical millimeter canvas dimensions and verified 300 DPI native pixel resolution—never software metadata scaling. Executed on 310 GSM 100% acid-free velvet cotton rag paper with 12-pigment archival Giclée inks certified 100+ years lightfast.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Front Supercar Visual with Glowing Headlights */}
-        <div className="relative mt-6 sm:mt-10 overflow-hidden rounded-xl border border-white/[0.08] bg-black lg:mt-16 hover:border-white/20 transition-all duration-300">
-          <div className="relative aspect-[16/10] sm:aspect-[16/8] w-full overflow-hidden">
-            <Image
-              src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1900&q=85"
-              alt="Front view dark luxury supercar with LED headlights"
-              fill
-              className="object-cover object-center filter brightness-95 contrast-125"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/70 via-transparent to-bg-primary/70" />
+        {/* 4 Metric Specification Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+          {/* Metric 1: 1-3 Templates */}
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white font-mono">
+                  1 to 3
+                </span>
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-brand/10 border border-brand/25 text-brand shadow-sm shadow-brand/10">
+                  <LayoutGrid className="h-4 w-4" />
+                </div>
+              </div>
+              <div className="text-xs sm:text-sm font-bold text-white">
+                Template Multi-Select
+              </div>
+              <p className="mt-1 text-[11px] sm:text-xs text-neutral-400 leading-relaxed">
+                Curated archive of 29 distinct automotive artistic disciplines
+              </p>
+            </div>
           </div>
 
-          {/* 4 Floating Metric Glass Cards */}
-          <div className="relative mt-4 sm:-mt-10 lg:-mt-14 z-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 px-3 sm:px-6 pb-4 sm:pb-6 lg:px-10 lg:pb-10">
-            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
-                <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.8"
-                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"
-                  />
-                </svg>
+          {/* Metric 2: Up to 4 Previews */}
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white font-mono">
+                  Up to 4
+                </span>
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-brand/10 border border-brand/25 text-brand shadow-sm shadow-brand/10">
+                  <Sparkles className="h-4 w-4" />
+                </div>
               </div>
-              <div className="mt-3 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white">15,000+</div>
-              <p className="mt-1 text-[11px] sm:text-xs font-medium text-neutral-400">Our Presence Across Global Markets</p>
+              <div className="text-xs sm:text-sm font-bold text-white">
+                Master AI Previews
+              </div>
+              <p className="mt-1 text-[11px] sm:text-xs text-neutral-400 leading-relaxed">
+                3 individual artworks plus an optional harmonized combined triptych
+              </p>
             </div>
+          </div>
 
-            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
-                <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.8"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
+          {/* Metric 3: 300 DPI Native Resolution */}
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white font-mono">
+                  300 DPI
+                </span>
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-brand/10 border border-brand/25 text-brand shadow-sm shadow-brand/10">
+                  <Scan className="h-4 w-4" />
+                </div>
               </div>
-              <div className="mt-3 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white">40+</div>
-              <p className="mt-1 text-[11px] sm:text-xs font-medium text-neutral-400">Curated Master Design Templates</p>
+              <div className="text-xs sm:text-sm font-bold text-white">
+                Verified Print Resolution
+              </div>
+              <p className="mt-1 text-[11px] sm:text-xs text-neutral-400 leading-relaxed">
+                Physical millimeter canvas sizing, not software metadata scaling
+              </p>
             </div>
+          </div>
 
-            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
-                <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.8"
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                  />
-                </svg>
+          {/* Metric 4: 310 GSM Archival Fine Paper */}
+          <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white font-mono">
+                  310 GSM
+                </span>
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-brand/10 border border-brand/25 text-brand shadow-sm shadow-brand/10">
+                  <Printer className="h-4 w-4" />
+                </div>
               </div>
-              <div className="mt-3 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white">310 GSM</div>
-              <p className="mt-1 text-[11px] sm:text-xs font-medium text-neutral-400">Museum Archival Grade Fine Paper</p>
-            </div>
-
-            <div className="group rounded-xl border border-white/[0.08] bg-neutral-900/85 p-3.5 sm:p-4.5 lg:p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:bg-neutral-900/95 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80">
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-white/[0.04] text-brand">
-                <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.8"
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+              <div className="text-xs sm:text-sm font-bold text-white">
+                Archival Cotton Rag
               </div>
-              <div className="mt-3 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white">$2.5M+</div>
-              <p className="mt-1 text-[11px] sm:text-xs font-medium text-neutral-400">Enthusiast Collector Art Delivered</p>
+              <p className="mt-1 text-[11px] sm:text-xs text-neutral-400 leading-relaxed">
+                100% acid-free museum fine art paper with 12-pigment archival inks
+              </p>
             </div>
           </div>
         </div>

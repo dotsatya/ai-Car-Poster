@@ -8,16 +8,49 @@ import {
   Truck,
   ArrowRight,
   Sliders,
-  CheckCircle2,
   Lock,
   Cpu,
   Palette,
   Eye,
+  Camera,
+  Sparkles,
+  ShieldCheck,
+  Layers,
 } from "lucide-react";
 import { StorySection } from "@/components/home/StorySection";
+import { PRINT_SIZES } from "@/data/print-sizes";
+
+const SIZE_RESOLUTIONS: Record<string, { pixels: string; ideal: string }> = {
+  a4: {
+    pixels: "2,480 × 3,508 px",
+    ideal: "Compact desk displays, studio frames, and collector folios.",
+  },
+  a3: {
+    pixels: "3,508 × 4,960 px",
+    ideal: "Personal office, desk display, and compact enthusiast garages.",
+  },
+  "12x18": {
+    pixels: "3,600 × 5,400 px",
+    ideal: "Classic architectural proportions ideal for study rooms and corridors.",
+  },
+  a2: {
+    pixels: "4,960 × 7,016 px",
+    ideal: "Our most popular collector size. Striking, balanced wall presence.",
+  },
+  a1: {
+    pixels: "7,016 × 9,933 px",
+    ideal: "Commanding museum presence for living spaces and automotive galleries.",
+  },
+  ultra: {
+    pixels: "7,087 × 14,173 px",
+    ideal: "Full showroom showcase spanning wide automotive wall installations.",
+  },
+};
 
 export default function AboutPage() {
-  const [activePhotoTab, setActivePhotoTab] = useState<"after" | "before">("after");
+  const [activePhotoTab, setActivePhotoTab] = useState<"after" | "before">(
+    "after",
+  );
   const [activeProcessStep, setActiveProcessStep] = useState<number>(0);
 
   const processSteps = [
@@ -122,64 +155,26 @@ export default function AboutPage() {
     },
   ];
 
-  const printSizes = [
-    {
-      name: "A3 Studio",
-      mm: "297 × 420 mm",
-      inches: "11.7 × 16.5 in",
-      pixels: "3,508 × 4,960 px",
-      price: "$129",
-      ideal: "Personal office, desk display, and compact enthusiast garages.",
-      badge: "Studio Edition",
-    },
-    {
-      name: "A2 Gallery",
-      mm: "420 × 594 mm",
-      inches: "16.5 × 23.4 in",
-      pixels: "4,960 × 7,016 px",
-      price: "$189",
-      ideal: "Our most popular collector size. Striking, balanced wall presence.",
-      badge: "Enthusiast Favorite",
-      popular: true,
-    },
-    {
-      name: "A1 Exhibition",
-      mm: "594 × 841 mm",
-      inches: "23.4 × 33.1 in",
-      pixels: "7,016 × 9,933 px",
-      price: "$269",
-      ideal: "Showroom-grade focal piece with ultra-fine chassis details.",
-      badge: "Exhibition Grade",
-    },
-    {
-      name: "Panoramic Grand",
-      mm: "600 × 1,200 mm",
-      inches: "23.6 × 47.2 in",
-      pixels: "7,086 × 14,173 px",
-      price: "$389",
-      ideal: "Specially proportioned for 3-template combined triptych artworks.",
-      badge: "Collector Triptych",
-    },
-  ];
-
   return (
-    <div className="py-6 sm:py-8 lg:py-12">
+    <div className="py-6 sm:py-8 lg:py-12 bg-bg-primary">
       {/* ============================================================== */}
-      {/* 1. HERO HEADER */}
+      {/* 1. HERO HEADER SECTION */}
       {/* ============================================================== */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 mb-8 sm:mb-12 lg:mb-16">
-      
-        <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white leading-[1.05]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 mb-8 sm:mb-12 lg:mb-14">
+  
+        <h1 className="mt-1.5 text-3xl sm:text-5xl lg:text-6xl tracking-wide sm:tracking-wider text-white leading-[1.05] font-heading uppercase">
           Crafting Automotive Immortality
         </h1>
         <p className="mt-2.5 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-neutral-400">
-          Poster Gen bridges the physical garage and digital generative intelligence. Every vehicle has a soul—a
-          symphony of displacement, silhouette, and human memory. Here is our story, our exacting production standards,
-          and the complete creation journey from photograph to museum fine art.
+          Poster Gen bridges the physical garage and digital generative
+          intelligence. Every vehicle has a soul—a symphony of displacement,
+          silhouette, and human memory. Here is our story, our exacting
+          production standards, and the complete creation journey from
+          photograph to museum fine art.
         </p>
 
         {/* Quick Nav Anchors */}
-        <div className="mt-6 flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/[0.08] text-xs">
+        <div className="mt-6 flex flex-wrap items-center gap-2 pt-4 border-t border-white/[0.08] text-xs">
           <a
             href="#story"
             className="rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] px-3 py-1.5 text-neutral-300 hover:text-white transition-colors"
@@ -190,7 +185,7 @@ export default function AboutPage() {
             href="#process"
             className="rounded-lg border border-brand/40 bg-brand/10 hover:bg-brand/20 px-3 py-1.5 text-brand font-semibold transition-colors"
           >
-            The 7-Stage Creation Process
+            Creation Pipeline
           </a>
           <a
             href="#specifications"
@@ -208,136 +203,207 @@ export default function AboutPage() {
       </div>
 
       {/* ============================================================== */}
-      {/* 2. OUR STORY & COLLECTOR FOOTPRINT */}
+      {/* 2. OUR STORY & SPECIFICATION FOOTPRINT */}
       {/* ============================================================== */}
       <div id="story">
         <StorySection />
       </div>
 
       {/* ============================================================== */}
-      {/* 3. THE COMPLETE CREATION PROCESS (MERGED & ENHANCED FROM PDF) */}
+      {/* 3. THE COMPLETE CREATION PROCESS & INTERACTIVE TRANSITION */}
       {/* ============================================================== */}
-      <section id="process" className="relative border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-16 lg:py-24">
-        {/* Ambient Glows */}
-        <div className="pointer-events-none absolute -top-40 right-10 h-96 w-96 rounded-full bg-brand/10 blur-[140px]" />
-        <div className="pointer-events-none absolute top-1/2 left-0 h-96 w-96 rounded-full bg-blue-600/5 blur-[150px]" />
+      <section
+        id="process"
+        className="relative border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-14 lg:py-16"
+      >
+        {/* Subtle Ambient Red Glow */}
+        <div
+          className="pointer-events-none absolute -top-40 right-10 h-96 w-96 rounded-full bg-brand/5 blur-[140px]"
+          aria-hidden="true"
+        />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          {/* Section Header */}
-          <div className="max-w-3xl mb-8 sm:mb-12 lg:mb-16">
-           
-            <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1]">
-              From Customer Photo to Gallery Masterpiece
-            </h2>
-            <p className="mt-3 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed">
-              As established in our V1 Atelier Specification, our creation journey balances customer autonomy,
-              multi-template generative AI rendering, state-preserved authentication, and physical fine-art execution.
-            </p>
-          </div>
+          {/* Interactive Before & After Visual Component + Machine Vision Features */}
+          {/* Layout mirrors HowItWorksSection perfectly: Row 1 Header/Buttons, Row 2 Cards/Image */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 lg:gap-x-10 xl:gap-x-12 gap-y-6 sm:gap-y-8 items-stretch mb-12 sm:mb-16">
+            {/* ROW 1 LEFT: Section Header (order-1 on mobile/tablet, Row 1 on desktop) */}
+            <div className="order-1 lg:order-none lg:col-span-7 xl:col-span-8 flex flex-col justify-end">
+              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
+                MACHINE VISION &amp; CREATION PIPELINE
+              </span>
+              <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading uppercase">
+                From Customer Photo to Gallery Masterpiece
+              </h2>
+              <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl">
+                As established in our V1 Atelier Specification, our creation
+                journey balances customer autonomy, multi-template generative AI
+                rendering, state-preserved authentication, and physical fine-art
+                execution.
+              </p>
+            </div>
 
-          {/* Interactive Before & After Visual Component */}
-          <div className="mb-12 sm:mb-16 lg:mb-20 rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-6 lg:p-8 backdrop-blur-md hover:border-white/20 transition-all duration-300">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-              {/* Left Image View */}
-              <div className="lg:col-span-7">
-                <div className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-black shadow-2xl hover:border-white/20 transition-all duration-300">
-                  <div className="relative aspect-[16/10] w-full">
-                    <Image
-                      src={
-                        activePhotoTab === "after"
-                          ? "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1400&q=85"
-                          : "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80"
-                      }
-                      alt="Before and after transformation of customer car photo into AI artwork"
-                      fill
-                      className="object-cover object-center filter contrast-125 transition-all duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            {/* ROW 1 RIGHT: Toggle Buttons (order-3 on mobile/tablet, Row 1 on desktop) */}
+            <div className="order-3 lg:order-none lg:col-span-5 xl:col-span-4 flex items-end justify-center lg:justify-end">
+              <div className="w-full max-w-[280px] sm:max-w-[340px] xl:max-w-[360px] flex justify-center lg:justify-end">
+                <div className="inline-flex w-full sm:w-auto p-1 rounded-xl bg-black/40 border border-white/[0.08] shadow-sm">
+                  <button
+                    type="button"
+                    onClick={() => setActivePhotoTab("before")}
+                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-3 sm:px-3.5 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer ${
+                      activePhotoTab === "before"
+                        ? "bg-white/10 text-white border border-white/20 shadow-sm"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    <Camera size={13} className={activePhotoTab === "before" ? "text-brand" : ""} />
+                    <span>Before Generation</span>
+                  </button>
 
-                    {/* Interactive Tab Switcher */}
-                    <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row items-center justify-between gap-2 rounded-xl border border-white/15 bg-black/85 p-2 backdrop-blur-md">
-                      <div className="flex gap-1.5 w-full sm:w-auto">
-                        <button
-                          type="button"
-                          onClick={() => setActivePhotoTab("before")}
-                          className={`flex-1 sm:flex-initial rounded-lg px-3 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all text-center cursor-pointer ${
-                            activePhotoTab === "before"
-                              ? "bg-white text-black shadow-md"
-                              : "text-neutral-400 hover:text-white"
-                          }`}
-                        >
-                          Customer Raw Photo
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setActivePhotoTab("after")}
-                          className={`flex-1 sm:flex-initial rounded-lg px-3 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all text-center cursor-pointer ${
-                            activePhotoTab === "after"
-                              ? "bg-brand text-white shadow-md shadow-brand/40"
-                              : "text-neutral-400 hover:text-white"
-                          }`}
-                        >
-                          AI Master Poster
-                        </button>
-                      </div>
-                      <span className="text-[9px] sm:text-[10px] font-mono tracking-wider text-neutral-300 uppercase">
-                        {activePhotoTab === "after" ? "Studio Specimen V4.2" : "Original Customer Upload"}
-                      </span>
-                    </div>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setActivePhotoTab("after")}
+                    className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-1.5 px-3 sm:px-3.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                      activePhotoTab === "after"
+                        ? "bg-brand text-white border border-brand/50 shadow-sm shadow-brand/30"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    <Sparkles size={13} />
+                    <span>After Generation</span>
+                  </button>
                 </div>
               </div>
+            </div>
 
-              {/* Right Transformation Narrative */}
-              <div className="lg:col-span-5 space-y-4">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">
-                  Machine Vision Intelligence
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">
-                  Zero Stock Models. Pure Enthusiast Identity.
+            {/* ROW 2 LEFT: 3 Feature Cards (order-2 on mobile/tablet, Row 2 on desktop) */}
+            <div className="order-2 lg:order-none lg:col-span-7 xl:col-span-8 flex flex-col justify-between gap-3 sm:gap-3.5 h-full">
+              {/* Card 1 */}
+              <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex-1 flex flex-col justify-center">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-brand font-mono text-xs sm:text-sm font-bold tracking-wider">
+                    01 / AUTHENTIC CHASSIS GEOMETRY
+                  </span>
+                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-md bg-white/[0.04] text-neutral-400 border border-white/[0.06]">
+                    Zero Stock 3D
+                  </span>
+                </div>
+                <h3 className="text-sm sm:text-base font-bold text-white tracking-wide">
+                  Preserving Stance, Reflection &amp; Bespoke Aero
                 </h3>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
-                  Traditional poster makers slap your photo into a generic mockup or replace your vehicle with a
-                  generic 3D render. Our pipeline honors every exact curve, aftermarket wheel, aerodynamic canard, and
-                  bespoke body line of your individual vehicle.
+                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
+                  Preserves genuine reflections, paint depth, aftermarket carbon splitters, custom wheels, and natural specular lighting without generic 3D model substitution.
                 </p>
+              </div>
 
-                <div className="pt-2 space-y-2 text-xs">
-                  <div className="flex items-center gap-2 text-neutral-300">
-                    <CheckCircle2 className="h-4 w-4 text-brand shrink-0" />
-                    <span>Preserves genuine reflections, paint depth, and wheels</span>
+              {/* Card 2 */}
+              <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex-1 flex flex-col justify-center">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-brand font-mono text-xs sm:text-sm font-bold tracking-wider">
+                    02 / NEURAL BACKGROUND &amp; STUDIO RELIGHTING
+                  </span>
+                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-md bg-white/[0.04] text-neutral-400 border border-white/[0.06]">
+                    Automated Vision
+                  </span>
+                </div>
+                <h3 className="text-sm sm:text-base font-bold text-white tracking-wide">
+                  Driveway to Editorial Studio Environment
+                </h3>
+                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
+                  Proprietary vision models isolate the subject from messy surroundings, applying studio specular reflections and multi-angle dynamic lighting composites.
+                </p>
+              </div>
+
+              {/* Card 3 */}
+              <div className="group rounded-xl sm:rounded-2xl border border-white/[0.08] bg-[#0E1013]/80 p-4 sm:p-5 backdrop-blur-md transition-all duration-300 hover:border-brand/40 hover:bg-[#121418] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/70 flex-1 flex flex-col justify-center">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-brand font-mono text-xs sm:text-sm font-bold tracking-wider">
+                    03 / 300+ DPI MASTER RESOLUTION
+                  </span>
+                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-md bg-white/[0.04] text-neutral-400 border border-white/[0.06]">
+                    Giclée Certified
+                  </span>
+                </div>
+                <h3 className="text-sm sm:text-base font-bold text-white tracking-wide">
+                  Physical Millimeter Print Fidelity
+                </h3>
+                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
+                  Native pixel synthesis scaled directly for large-format physical Giclée plotters, guaranteeing razor-sharp badge typography and crisp chassis contours.
+                </p>
+              </div>
+            </div>
+
+            {/* ROW 2 RIGHT: Image Showcase (order-4 on mobile/tablet, Row 2 on desktop) */}
+            <div className="order-4 lg:order-none lg:col-span-5 xl:col-span-4 flex items-center justify-center lg:justify-end">
+              <div
+                onClick={() => setActivePhotoTab(activePhotoTab === "before" ? "after" : "before")}
+                className="group relative w-full max-w-[280px] sm:max-w-[340px] xl:max-w-[360px] aspect-[3/4] lg:aspect-auto lg:h-full rounded-2xl overflow-hidden border border-white/10 bg-[#0E1013] shadow-2xl cursor-pointer select-none"
+                title="Click to toggle Before / After"
+              >
+                {/* Before Image */}
+                <div
+                  className={`absolute inset-0 transition-opacity duration-300 ease-out ${
+                    activePhotoTab === "before" ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
+                >
+                  <Image
+                    src="/carTransition/old.png"
+                    alt="Before Generation - Original Car Photo"
+                    fill
+                    sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 360px"
+                    className="object-cover object-center"
+                    priority
+                  />
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/70 border border-white/20 text-neutral-200 text-[10px] font-mono backdrop-blur-md">
+                      <Camera size={10} className="text-amber-400" />
+                      Before • Raw Photo
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2 text-neutral-300">
-                    <CheckCircle2 className="h-4 w-4 text-brand shrink-0" />
-                    <span>Automated neural background removal &amp; studio relighting</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-neutral-300">
-                    <CheckCircle2 className="h-4 w-4 text-brand shrink-0" />
-                    <span>Upscaled to 300+ DPI master resolution for fine-art plotters</span>
+                </div>
+
+                {/* After Image */}
+                <div
+                  className={`absolute inset-0 transition-opacity duration-300 ease-out ${
+                    activePhotoTab === "after" ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
+                >
+                  <Image
+                    src="/carTransition/new.png"
+                    alt="After Generation - AI Fine-Art Poster"
+                    fill
+                    sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 360px"
+                    className="object-cover object-center"
+                    priority
+                  />
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand/90 border border-brand/50 text-white text-[10px] font-mono font-medium backdrop-blur-md shadow-sm shadow-brand/30">
+                      <Sparkles size={10} />
+                      After • Master Poster
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Core Customer Flow Diagram & Interactive 7-Step Pipeline */}
-          <div className="space-y-6 sm:space-y-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/[0.08] pb-4">
+          {/* Core Customer Flow: Interactive 7-Step Pipeline */}
+          <div className="space-y-6 sm:space-y-8 pt-8 border-t border-white/[0.06]">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">
-                  End-to-End Architecture
+                <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
+                  END-TO-END ARCHITECTURE
                 </span>
-                <h3 className="text-lg sm:text-xl font-bold text-white mt-0.5">
+                <h3 className="mt-1.5 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white font-heading uppercase">
                   The 7-Stage Creation Pipeline
                 </h3>
               </div>
-              <span className="text-xs text-neutral-400">
+              <span className="text-xs text-neutral-400 font-mono">
                 Click any stage below to inspect specifications
               </span>
             </div>
 
-            {/* Step Selection Buttons */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
+            {/* Step Selection Buttons: responsive grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
               {processSteps.map((s, idx) => {
                 const isSelected = activeProcessStep === idx;
                 const Icon = s.icon;
@@ -346,22 +412,26 @@ export default function AboutPage() {
                     key={idx}
                     type="button"
                     onClick={() => setActiveProcessStep(idx)}
-                    className={`rounded-xl border p-3 text-left transition-all cursor-pointer ${
+                    className={`rounded-xl border p-3 sm:p-3.5 text-left transition-all cursor-pointer flex flex-col justify-between ${
                       isSelected
-                        ? "border-brand bg-brand/10 shadow-lg shadow-brand/15 ring-1 ring-brand/40"
-                        : "border-white/[0.08] bg-neutral-900/50 hover:border-white/20 hover:bg-neutral-900/80"
+                        ? "border-brand bg-brand/10 shadow-lg shadow-brand/15 ring-1 ring-brand/40 -translate-y-0.5"
+                        : "border-white/[0.08] bg-[#0E1013]/80 hover:border-white/20 hover:bg-[#121418]"
                     }`}
                   >
-                    <div className="flex items-center justify-between text-xs mb-1">
-                      <span className={`font-mono font-bold ${isSelected ? "text-brand" : "text-neutral-500"}`}>
-                        {s.step}
-                      </span>
-                      <Icon className={`h-3.5 w-3.5 ${isSelected ? "text-brand" : "text-neutral-400"}`} />
+                    <div>
+                      <div className="flex items-center justify-between text-xs mb-2">
+                        <span className={`font-mono font-bold text-xs ${isSelected ? "text-brand" : "text-neutral-500"}`}>
+                          {s.step}
+                        </span>
+                        <div className={`flex h-6 w-6 items-center justify-center rounded-lg ${isSelected ? "bg-brand/20 text-brand" : "bg-white/[0.04] text-neutral-400"}`}>
+                          <Icon className="h-3.5 w-3.5" />
+                        </div>
+                      </div>
+                      <div className="text-xs font-bold text-white leading-tight">
+                        {s.title}
+                      </div>
                     </div>
-                    <div className="text-xs font-bold text-white truncate">
-                      {s.title.split(" ")[0]} {s.title.split(" ")[1]}
-                    </div>
-                    <span className="text-[9px] text-neutral-500 block truncate mt-0.5">
+                    <span className="text-[10px] font-mono text-neutral-400 block truncate mt-2 pt-1.5 border-t border-white/[0.04]">
                       {s.highlight}
                     </span>
                   </button>
@@ -374,18 +444,18 @@ export default function AboutPage() {
               const current = processSteps[activeProcessStep];
               const StepIcon = current.icon;
               return (
-                <div className="rounded-xl border border-white/[0.08] bg-neutral-900/60 p-5 sm:p-8 backdrop-blur-md shadow-2xl hover:border-white/20 transition-all duration-300">
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-5 sm:p-7 backdrop-blur-xl shadow-2xl hover:border-white/15 transition-all duration-300">
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 sm:gap-8">
                     <div className="space-y-3 max-w-2xl">
                       <div className="flex items-center gap-2.5">
                         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand text-white font-mono text-xs font-bold shadow-md shadow-brand/30">
                           {current.step}
                         </span>
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-brand">
+                        <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-brand">
                           {current.tagline}
                         </span>
                       </div>
-                      <h4 className="text-xl sm:text-2xl font-bold text-white">
+                      <h4 className="text-xl sm:text-2xl font-bold text-white font-heading uppercase">
                         {current.title}
                       </h4>
                       <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
@@ -403,17 +473,17 @@ export default function AboutPage() {
                     </div>
 
                     {/* Step Visual Summary Pill */}
-                    <div className="rounded-xl border border-white/10 bg-black/50 p-4 sm:p-5 shrink-0 w-full md:w-64 space-y-3 self-center md:self-start">
+                    <div className="rounded-xl border border-white/10 bg-black/60 p-4 sm:p-5 shrink-0 w-full md:w-64 space-y-3 self-center md:self-start">
                       <div className="flex items-center gap-2 text-white">
-                        <StepIcon className="h-5 w-5 text-brand" />
-                        <span className="text-xs font-bold uppercase tracking-wider">
+                        <StepIcon className="h-4 w-4 text-brand" />
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider">
                           Key Deliverable
                         </span>
                       </div>
-                      <div className="text-sm font-bold text-white">
+                      <div className="text-sm font-bold text-white font-mono">
                         {current.highlight}
                       </div>
-                      <div className="text-[11px] text-neutral-400 leading-relaxed border-t border-white/10 pt-2">
+                      <div className="text-[11px] text-neutral-400 leading-relaxed border-t border-white/10 pt-2 font-sans">
                         Part of Poster Gen&apos;s verified V1 specification.
                       </div>
                     </div>
@@ -428,96 +498,94 @@ export default function AboutPage() {
       {/* ============================================================== */}
       {/* 4. PRINT ACCEPTANCE & 300 DPI SPECIFICATIONS */}
       {/* ============================================================== */}
-      <section id="specifications" className="border-t border-white/[0.06] bg-bg-primary py-10 sm:py-16 lg:py-24">
+      <section
+        id="specifications"
+        className="relative border-t border-white/[0.06] bg-bg-primary py-10 sm:py-14 lg:py-20"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-           
-            <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1]">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <span className="inline-block text-[10px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-brand mb-2">
+              Museum-Grade Execution
+            </span>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-heading uppercase">
               Print Acceptance &amp; 300 DPI Resolution
             </h2>
-            <p className="mt-3 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed mx-auto">
-              As mandated by our production guidelines, print acceptance is strictly governed by verified physical
-              millimeter dimensions and true 300 DPI pixel counts—never software metadata scaling.
+            <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed">
+              As mandated by our production guidelines, print acceptance is
+              strictly governed by verified physical millimeter dimensions and
+              true 300 DPI pixel counts—never software metadata scaling.
             </p>
           </div>
 
-          {/* Size Specifications Grid */}
-          <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {printSizes.map((size, idx) => (
-              <div
-                key={idx}
-                className={`group relative rounded-xl border p-5 sm:p-6 transition-all duration-300 ${
-                  size.popular
-                    ? "border-brand/50 bg-neutral-900/60 shadow-xl shadow-brand/10 ring-1 ring-brand/30 -translate-y-1"
-                    : "border-white/[0.08] bg-neutral-900/30 hover:border-white/25 hover:bg-neutral-900/50 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80"
-                }`}
-              >
-                {/* Badge */}
-                <div className="flex items-center justify-between text-xs mb-3">
-                  <span
-                    className={`rounded-full px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider ${
-                      size.popular ? "bg-brand text-white" : "bg-white/[0.06] text-neutral-400"
-                    }`}
-                  >
-                    {size.badge}
-                  </span>
-                  <span className="text-base font-extrabold text-white">{size.price}</span>
-                </div>
+          {/* Size Specifications Grid (Directly using verified PRINT_SIZES) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {PRINT_SIZES.map((size) => {
+              const res = SIZE_RESOLUTIONS[size.id] || {
+                pixels: "300 DPI Native Canvas",
+                ideal: "Includes serialized certificate, museum mounting, and insured courier.",
+              };
+              return (
+                <div
+                  key={size.id}
+                  className={`group relative rounded-xl border p-4 sm:p-5 transition-all duration-300 ${
+                    size.popular
+                      ? "border-brand/50 bg-neutral-900/60 shadow-lg shadow-brand/10 ring-1 ring-brand/30 pt-7 sm:pt-8 -translate-y-1"
+                      : "border-white/[0.08] bg-neutral-900/30 hover:border-white/25 hover:bg-neutral-900/50 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 pt-6 sm:pt-6"
+                  }`}
+                >
+                  {size.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none">
+                      <span className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-brand px-3 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-brand/30 ring-1 ring-white/20">
+                        Enthusiast Favorite
+                      </span>
+                    </div>
+                  )}
+                  <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                    {size.dimensions}
+                  </div>
+                  <h4 className="mt-1 text-base sm:text-lg font-bold text-white">{size.label}</h4>
+                  <div className="mt-2 text-2xl sm:text-3xl font-extrabold text-brand font-mono">
+                    {size.price}
+                  </div>
 
-                <h4 className="text-lg font-bold text-white">{size.name}</h4>
-                <div className="text-xs text-neutral-400 mt-0.5 font-medium">
-                  {size.mm} <span className="text-neutral-600">·</span> {size.inches}
-                </div>
+                  {/* Verified 300 DPI Box */}
+                  <div className="mt-3 rounded-lg border border-white/[0.06] bg-black/50 p-2">
+                    <span className="text-[9px] uppercase tracking-wider text-neutral-500 block font-semibold font-mono">
+                      Verified 300 DPI Canvas
+                    </span>
+                    <span className="text-xs font-mono font-bold text-white mt-0.5 block">
+                      {res.pixels}
+                    </span>
+                  </div>
 
-                {/* Exact Verified 300 DPI Resolution */}
-                <div className="mt-3.5 rounded-xl border border-white/[0.06] bg-black/50 p-2.5">
-                  <span className="text-[10px] uppercase tracking-wider text-neutral-500 block font-semibold">
-                    Verified 300 DPI Canvas
-                  </span>
-                  <span className="text-xs font-mono font-bold text-brand mt-0.5 block">
-                    {size.pixels}
-                  </span>
+                  <p className="mt-2.5 text-[11px] sm:text-xs text-neutral-400 leading-relaxed">
+                    {res.ideal}
+                  </p>
                 </div>
-
-                <p className="mt-3 text-xs text-neutral-400 leading-relaxed">
-                  {size.ideal}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* Archival Material Pillars */}
-          <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3 text-xs">
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">01</span>
-              <h5 className="mt-2 text-sm sm:text-base font-bold text-white">
-                310 GSM Cotton Rag
-              </h5>
-              <p className="mt-1.5 text-neutral-400 leading-relaxed">
-                100% acid-free museum cotton rag paper with a velvet matte texture that completely eliminates harsh
-                specular glare from garage LED and gallery ceiling lighting.
+          {/* Archival Material Pillars matching CraftsmanshipSection */}
+          <div className="mt-8 sm:mt-10 grid grid-cols-1 gap-3.5 sm:gap-5 md:grid-cols-3">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
+              <div className="text-brand text-sm sm:text-base font-bold font-mono">01 / 310 GSM Cotton Rag</div>
+              <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">
+                100% acid-free museum cotton rag paper with a velvet matte texture that completely eliminates harsh specular glare from garage LED and gallery ceiling lighting.
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">02</span>
-              <h5 className="mt-2 text-sm sm:text-base font-bold text-white">
-                Aerospace CNC Aluminum
-              </h5>
-              <p className="mt-1.5 text-neutral-400 leading-relaxed">
-                Precision-machined matte aluminum framing finished in deep anodized obsidian or hand-brushed titanium,
-                glazed with UV-blocking museum acrylic.
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
+              <div className="text-brand text-sm sm:text-base font-bold font-mono">02 / Aerospace Matte Aluminum</div>
+              <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">
+                Precision-machined matte aluminum framing finished in deep anodized obsidian or hand-brushed titanium, glazed with UV-blocking museum acrylic.
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">03</span>
-              <h5 className="mt-2 text-sm sm:text-base font-bold text-white">
-                Serialized Hologram Seal
-              </h5>
-              <p className="mt-1.5 text-neutral-400 leading-relaxed">
-                Every physical print is registered in our production registry and stamped with a serialized tamper-evident
-                hologram seal and numbered Certificate of Authenticity.
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
+              <div className="text-brand text-sm sm:text-base font-bold font-mono">03 / Serialized Hologram Seal</div>
+              <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">
+                Every physical print is registered in our production registry and stamped with a serialized tamper-evident hologram seal and numbered Certificate of Authenticity.
               </p>
             </div>
           </div>
@@ -527,62 +595,80 @@ export default function AboutPage() {
       {/* ============================================================== */}
       {/* 5. THE THREE ATELIER PILLARS & FINAL CTA */}
       {/* ============================================================== */}
-      <section id="pillars" className="border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-16 lg:py-24">
+      <section
+        id="pillars"
+        className="border-t border-white/[0.06] bg-[#07080A] py-10 sm:py-14 lg:py-20"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-          <div className="max-w-2xl mb-8 sm:mb-12">
-           
-            <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1]">
+          <div className="max-w-2xl mb-8 sm:mb-10">
+            <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
+              ATELIER FOUNDATIONS
+            </span>
+            <h2 className="mt-1.5 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-heading uppercase leading-[1.1]">
               The Three Pillars of Poster Gen
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-3">
             <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-5 sm:p-6 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">Pillar I</span>
-              <h4 className="mt-2 text-base sm:text-lg font-bold text-white">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-xs font-bold text-brand">
+                  PILLAR I
+                </span>
+                <Eye className="h-4 w-4 text-brand/70" />
+              </div>
+              <h4 className="text-base sm:text-lg font-bold text-white font-heading uppercase">
                 Authentic Machine Vision
               </h4>
               <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-400">
-                We never replace your vehicle with a generic stock 3D model. Our neural pipeline analyzes your exact
-                wheels, aerodynamic splitters, imperfections, and lighting to create an honest tribute to your machine.
+                We never replace your vehicle with a generic stock 3D model. Our neural pipeline analyzes your exact wheels, aerodynamic splitters, imperfections, and lighting to create an honest tribute to your machine.
               </p>
             </div>
 
             <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-5 sm:p-6 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">Pillar II</span>
-              <h4 className="mt-2 text-base sm:text-lg font-bold text-white">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-xs font-bold text-brand">
+                  PILLAR II
+                </span>
+                <Layers className="h-4 w-4 text-brand/70" />
+              </div>
+              <h4 className="text-base sm:text-lg font-bold text-white font-heading uppercase">
                 Multi-Template Perspective
               </h4>
               <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-400">
-                A single car can be aggressive on track, elegant in studio, or historic in racing livery. We enable
-                simultaneous generation across up to 3 master aesthetics plus an optional harmonized triptych.
+                A single car can be aggressive on track, elegant in studio, or historic in racing livery. We enable simultaneous generation across up to 3 master aesthetics plus an optional harmonized triptych.
               </p>
             </div>
 
             <div className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-5 sm:p-6 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
-              <span className="font-mono text-xs font-bold text-brand">Pillar III</span>
-              <h4 className="mt-2 text-base sm:text-lg font-bold text-white">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-xs font-bold text-brand">
+                  PILLAR III
+                </span>
+                <ShieldCheck className="h-4 w-4 text-brand/70" />
+              </div>
+              <h4 className="text-base sm:text-lg font-bold text-white font-heading uppercase">
                 Archival Giclée Physicality
               </h4>
               <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-400">
-                Digital art only reaches full power when manifested in physical reality. 310 GSM 100% cotton rag,
-                12-color pigment plotters, and CNC anodized aluminum guarantee 100-year color fidelity.
+                Digital art only reaches full power when manifested in physical reality. 310 GSM 100% cotton rag, 12-color pigment plotters, and CNC anodized aluminum guarantee 100-year color fidelity.
               </p>
             </div>
           </div>
 
           {/* Final Call to Action Box */}
-          <div className="mt-12 sm:mt-16 rounded-xl border border-white/[0.08] bg-gradient-to-r from-neutral-950 via-neutral-900 to-black p-6 sm:p-10 lg:p-12 text-center relative overflow-hidden hover:border-white/20 transition-all duration-300">
+          <div className="mt-12 sm:mt-16 rounded-2xl border border-white/[0.08] bg-gradient-to-r from-neutral-950 via-neutral-900 to-black p-6 sm:p-10 lg:p-12 text-center relative overflow-hidden hover:border-white/20 transition-all duration-300">
             <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-48 w-[600px] rounded-full bg-brand/15 blur-[100px]" />
 
-            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-brand relative z-10">
+            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-brand relative z-10 font-mono">
               Ready to Immortalize Your Machine?
             </span>
-            <h3 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-white relative z-10">
+            <h3 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-white relative z-10 font-heading uppercase">
               Transform Your Car into Fine Art
             </h3>
             <p className="mt-2.5 max-w-xl mx-auto text-xs sm:text-sm text-neutral-400 relative z-10">
-              Select up to 3 templates, upload your photograph, and preview your custom automotive poster in minutes.
+              Select up to 3 templates, upload your photograph, and preview your
+              custom automotive poster in minutes.
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 relative z-10">
@@ -597,7 +683,7 @@ export default function AboutPage() {
                 href="/templates"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.04] hover:bg-white/[0.09] px-6 py-3 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer"
               >
-                <span>Browse All 29 Templates</span>
+                <span>Browse All Templates</span>
               </Link>
             </div>
           </div>

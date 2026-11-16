@@ -18,9 +18,16 @@ import { useCart } from "@/context/CartContext";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cartItems, cartSubtotal } = useCart();
+  const { cartItems, cartSubtotal, clearCart } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<"card" | "upi" | "wire">("card");
+
+  // Form values
+  const [fullName, setFullName] = useState("Satya Dey");
+  const [phone, setPhone] = useState("+91 98765 43210");
+  const [address, setAddress] = useState("Studio 4B, Atelier Penthouse, Bandra West");
+  const [cityPostal, setCityPostal] = useState("Mumbai 400050");
+  const [country, setCountry] = useState("India");
 
   const hasInrItems = cartItems.some((i) => i.currency === "INR" || i.price >= 200);
   const shippingFee = cartItems.length > 0 ? (hasInrItems ? 199 : 25) : 0;
@@ -30,19 +37,26 @@ export default function CheckoutPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const generatedOrderId = `PG-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
-      toast.success("Commission Confirmed!", {
-        description: "Your archival prints have entered production.",
+      clearCart();
+
+      toast.success("Commission Authorized!", {
+        description: `Order #${generatedOrderId} has entered our production queue.`,
       });
-      router.push("/account/orders");
-    }, 1200);
+
+      // Directly forward to order confirmation page
+      router.push(`/checkout/success?orderId=${generatedOrderId}`);
+    }, 600);
   };
 
   return (
-    <div className="min-h-screen bg-bg-primary pb-24">
+    <div className="min-h-screen bg-bg-primary pb-24 text-white">
+      {/* Checkout Top Bar */}
       <div className="border-b border-white/[0.08] bg-[#0d0e10]/60 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-5 flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-4 sm:py-5 flex items-center justify-between">
           <Link
             href="/studio"
             className="inline-flex items-center gap-2 text-xs font-semibold text-neutral-400 hover:text-white transition-colors"
@@ -60,7 +74,10 @@ export default function CheckoutPage() {
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold uppercase tracking-wider text-white">
+          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-brand font-mono">
+            SECURE ATELIER COMMISSIONS
+          </span>
+          <h1 className="mt-1 text-2xl sm:text-3xl font-bold uppercase tracking-wider text-white font-heading">
             Checkout &amp; Commission Dispatch
           </h1>
           <p className="text-xs sm:text-sm text-neutral-400 mt-1">
@@ -86,7 +103,8 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     required
-                    defaultValue="Satya Dey"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-brand"
                   />
                 </div>
@@ -98,7 +116,8 @@ export default function CheckoutPage() {
                   <input
                     type="tel"
                     required
-                    defaultValue="+91 98765 43210"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-brand"
                   />
                 </div>
@@ -110,7 +129,8 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     required
-                    defaultValue="Studio 4B, Atelier Penthouse, Bandra West"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-brand"
                   />
                 </div>
@@ -122,7 +142,8 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     required
-                    defaultValue="Mumbai 400050"
+                    value={cityPostal}
+                    onChange={(e) => setCityPostal(e.target.value)}
                     className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-brand"
                   />
                 </div>
@@ -134,7 +155,8 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     required
-                    defaultValue="India"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
                     className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-brand"
                   />
                 </div>

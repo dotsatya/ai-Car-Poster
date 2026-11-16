@@ -169,6 +169,7 @@ interface StudioContextType {
   addDirectCartItem: (item: Omit<CartItem, "total">) => void;
   removeDirectCartItem: (id: string) => void;
   updateDirectCartQuantity: (id: string, delta: number) => void;
+  clearCart: () => void;
   cartItems: CartItem[];
   cartSubtotal: number;
 }
@@ -519,6 +520,13 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
       };
     });
 
+  const clearCart = () => {
+    setDirectCartItems([]);
+    setGeneratedArtworks((prev) =>
+      prev.map((art) => ({ ...art, selected: false }))
+    );
+  };
+
   const cartItems: CartItem[] = [...directCartItems, ...studioCartItems];
   const cartSubtotal = cartItems.reduce((acc, curr) => acc + curr.total, 0);
 
@@ -554,6 +562,7 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
         addDirectCartItem,
         removeDirectCartItem,
         updateDirectCartQuantity,
+        clearCart,
         cartItems,
         cartSubtotal,
       }}

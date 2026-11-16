@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { User, MapPin, Package, Heart, Settings, Scroll } from "lucide-react";
+import { MapPin, Package, Heart, Settings, Scroll } from "lucide-react";
 import { useAppAuth } from "@/lib/auth";
 
 export function AccountNav() {
@@ -14,7 +14,6 @@ export function AccountNav() {
     : "U";
 
   const tabs = [
-    { label: "Overview", href: "/account", icon: User },
     { label: "Generated Posters", href: "/account/generated", icon: Scroll },
     { label: "My Orders", href: "/account/orders", icon: Package },
     { label: "Wishlist", href: "/account/wishlist", icon: Heart },
@@ -46,12 +45,12 @@ export function AccountNav() {
             </div>
           </div>
 
-          <Link
+          {/* <Link
             href="/studio"
             className="shrink-0 rounded-lg sm:rounded-xl border border-white/15 bg-white/[0.04] hover:bg-white/10 px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold text-neutral-300 hover:text-white transition-all cursor-pointer whitespace-nowrap"
           >
             <span>Studio →</span>
-          </Link>
+          </Link> */}
         </div>
 
         {/* Tab Navigation with hidden scrollbar */}
@@ -60,7 +59,6 @@ export function AccountNav() {
             const Icon = tab.icon;
             const isActive =
               pathname === tab.href ||
-              (tab.href === "/account" && pathname === "/account") ||
               (tab.href === "/account/orders" && pathname.startsWith("/account/orders"));
 
             return (
