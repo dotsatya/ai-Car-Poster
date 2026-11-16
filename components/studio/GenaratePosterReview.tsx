@@ -323,7 +323,7 @@ export function GenaratePosterReview({
                   {/* Available Sizes Dropdown Popover (Solid Opaque Background + Blur) */}
                   {openSizeMenuId === art.id && (
                     <div
-                      className={`absolute bottom-full mb-2 z-50 rounded-xl border border-white/20 bg-[#15161c] p-2 sm:p-2.5 shadow-2xl shadow-black/95 ring-1 ring-white/10 backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150 w-[240px] xs:w-[260px] sm:w-full max-w-[calc(100vw-24px)] ${
+                      className={`absolute bottom-full mb-2 z-50 rounded-xl border border-white/20 bg-[#15161c] p-2 shadow-2xl shadow-black/95 ring-1 ring-white/10 backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150 w-[240px] xs:w-[260px] sm:w-full max-w-[calc(100vw-24px)] ${
                         idx % 2 === 0
                           ? "left-0 sm:left-0 sm:right-0"
                           : "right-0 sm:left-0 sm:right-0"
