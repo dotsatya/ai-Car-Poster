@@ -168,7 +168,7 @@ export function TemplatesShowcaseSection() {
               href="/templates"
               className="inline-flex items-center gap-1.5 rounded-md border border-brand/40 bg-brand/10 hover:bg-brand px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-bold text-white transition-all shadow-sm shadow-brand/30 hover:shadow-brand/50 hover:scale-[1.01] active:scale-[0.98] cursor-pointer ml-1 whitespace-nowrap"
             >
-              <span>View All 29</span>
+              <span>View All</span>
               <ArrowRight size={13} />
             </Link>
           </div>
