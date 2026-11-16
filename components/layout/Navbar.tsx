@@ -9,11 +9,8 @@ import {
   Menu,
   X,
   User as UserIcon,
-  MapPin,
-  Package,
-  Heart,
+  LayoutDashboard,
   LogOut,
-  Scroll,
 } from "lucide-react";
 import { useStudio } from "@/context/StudioContext";
 import { useAppAuth } from "@/lib/auth";
@@ -74,7 +71,7 @@ export function Navbar() {
 
   const navLinks = [
     { label: "Templates", href: "/templates" },
-    { label: "Studio", href: "/studio" },
+    { label: "Pricing", href: "/pricing" },
     { label: "About", href: "/about" },
     { label: "FAQ", href: "/faq" },
   ];
@@ -208,46 +205,26 @@ export function Navbar() {
                     </div>
                   </div>
 
-                  {/* Menu Links in Serial Order */}
+                  {/* Menu Links: My Dashboard, My Account */}
                   <div className="py-1 space-y-0.5">
                     <Link
-                      href="/account/orders"
+                      href="/account"
                       onClick={() => setIsUserMenuOpen(false)}
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
-                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Orders</span>
+                      <LayoutDashboard className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Dashboard</span>
                     </Link>
 
                     <Link
-                      href="/account/generated"
+                      href="/account/settings"
                       onClick={() => setIsUserMenuOpen(false)}
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
-                      <Scroll className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>Generated Posters</span>
-                    </Link>
-
-                    <Link
-                      href="/account/wishlist"
-                      onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <Heart className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>Wishlist</span>
-                    </Link>
-
-                    <Link
-                      href="/account/addresses"
-                      onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <MapPin className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Addresses</span>
+                      <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Account</span>
                     </Link>
                   </div>
 
@@ -349,46 +326,26 @@ export function Navbar() {
                     </div>
                   </div>
 
-                  {/* Menu Links in Serial Order */}
+                  {/* Menu Links: My Dashboard, My Account */}
                   <div className="py-1 space-y-0.5">
                     <Link
-                      href="/account/orders"
+                      href="/account"
                       onClick={() => setIsMobileUserMenuOpen(false)}
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
-                      <Package className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Orders</span>
+                      <LayoutDashboard className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Dashboard</span>
                     </Link>
 
                     <Link
-                      href="/account/generated"
+                      href="/account/settings"
                       onClick={() => setIsMobileUserMenuOpen(false)}
                       className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
                       role="menuitem"
                     >
-                      <Scroll className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>Generated Posters</span>
-                    </Link>
-
-                    <Link
-                      href="/account/wishlist"
-                      onClick={() => setIsMobileUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <Heart className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>Wishlist</span>
-                    </Link>
-
-                    <Link
-                      href="/account/addresses"
-                      onClick={() => setIsMobileUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <MapPin className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Addresses</span>
+                      <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
+                      <span>My Account</span>
                     </Link>
                   </div>
 
@@ -459,19 +416,31 @@ export function Navbar() {
               </span>
 
               {user ? (
-                <Link
-                  href="/account"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between w-full rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer shadow-sm"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <UserIcon className="h-4 w-4 text-brand" />
-                    <span>Account</span>
-                  </div>
-                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
-                    Enter Account →
-                  </span>
-                </Link>
+                <div className="space-y-1.5">
+                  <Link
+                    href="/account"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between w-full rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all cursor-pointer shadow-sm"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <LayoutDashboard className="h-4 w-4 text-brand" />
+                      <span>My Dashboard</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
+                      Enter →
+                    </span>
+                  </Link>
+                  <Link
+                    href="/account/settings"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between w-full rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 px-3.5 py-2 text-xs font-medium text-neutral-300 hover:text-white transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <UserIcon className="h-4 w-4 text-neutral-400" />
+                      <span>My Account</span>
+                    </div>
+                  </Link>
+                </div>
               ) : (
                 <div className="space-y-2">
                   <button

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MapPin, Package, Heart, Settings, Scroll } from "lucide-react";
+import { Package, Heart, Scroll, User as UserIcon } from "lucide-react";
 import { useAppAuth } from "@/lib/auth";
 
 export function AccountNav() {
@@ -14,11 +14,10 @@ export function AccountNav() {
     : "U";
 
   const tabs = [
-    { label: "Generated Posters", href: "/account/generated", icon: Scroll },
+    { label: "My Posters", href: "/account/generated", icon: Scroll },
     { label: "My Orders", href: "/account/orders", icon: Package },
-    { label: "Wishlist", href: "/account/wishlist", icon: Heart },
-    { label: "My Addresses", href: "/account/addresses", icon: MapPin },
-    { label: "Settings", href: "/account/settings", icon: Settings },
+    { label: "My Wishlist", href: "/account/wishlist", icon: Heart },
+    { label: "My Account", href: "/account/settings", icon: UserIcon },
   ];
 
   return (
@@ -59,7 +58,8 @@ export function AccountNav() {
             const Icon = tab.icon;
             const isActive =
               pathname === tab.href ||
-              (tab.href === "/account/orders" && pathname.startsWith("/account/orders"));
+              (tab.href === "/account/orders" && pathname.startsWith("/account/orders")) ||
+              (tab.href === "/account/settings" && (pathname === "/account/settings" || pathname === "/account/addresses"));
 
             return (
               <Link

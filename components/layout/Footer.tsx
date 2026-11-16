@@ -24,6 +24,9 @@ export function Footer() {
           <Link href="/account/orders" className="text-neutral-400 hover:text-white transition-colors">
             Orders
           </Link>
+          <Link href="/pricing" className="text-neutral-400 hover:text-white transition-colors">
+            Pricing
+          </Link>
           <Link href="/about" className="text-neutral-400 hover:text-white transition-colors">
             About
           </Link>

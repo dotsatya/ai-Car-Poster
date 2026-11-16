@@ -18,34 +18,6 @@ import {
   Layers,
 } from "lucide-react";
 import { StorySection } from "@/components/home/StorySection";
-import { PRINT_SIZES } from "@/data/print-sizes";
-
-const SIZE_RESOLUTIONS: Record<string, { pixels: string; ideal: string }> = {
-  a4: {
-    pixels: "2,480 × 3,508 px",
-    ideal: "Compact desk displays, studio frames, and collector folios.",
-  },
-  a3: {
-    pixels: "3,508 × 4,960 px",
-    ideal: "Personal office, desk display, and compact enthusiast garages.",
-  },
-  "12x18": {
-    pixels: "3,600 × 5,400 px",
-    ideal: "Classic architectural proportions ideal for study rooms and corridors.",
-  },
-  a2: {
-    pixels: "4,960 × 7,016 px",
-    ideal: "Our most popular collector size. Striking, balanced wall presence.",
-  },
-  a1: {
-    pixels: "7,016 × 9,933 px",
-    ideal: "Commanding museum presence for living spaces and automotive galleries.",
-  },
-  ultra: {
-    pixels: "7,087 × 14,173 px",
-    ideal: "Full showroom showcase spanning wide automotive wall installations.",
-  },
-};
 
 export default function AboutPage() {
   const [activePhotoTab, setActivePhotoTab] = useState<"after" | "before">(
@@ -517,73 +489,27 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Size Specifications Grid (Directly using verified PRINT_SIZES) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {PRINT_SIZES.map((size) => {
-              const res = SIZE_RESOLUTIONS[size.id] || {
-                pixels: "300 DPI Native Canvas",
-                ideal: "Includes serialized certificate, museum mounting, and insured courier.",
-              };
-              return (
-                <div
-                  key={size.id}
-                  className={`group relative rounded-xl border p-4 sm:p-5 transition-all duration-300 ${
-                    size.popular
-                      ? "border-brand/50 bg-neutral-900/60 shadow-lg shadow-brand/10 ring-1 ring-brand/30 pt-7 sm:pt-8 -translate-y-1"
-                      : "border-white/[0.08] bg-neutral-900/30 hover:border-white/25 hover:bg-neutral-900/50 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 pt-6 sm:pt-6"
-                  }`}
-                >
-                  {size.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none">
-                      <span className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-brand px-3 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-brand/30 ring-1 ring-white/20">
-                        Enthusiast Favorite
-                      </span>
-                    </div>
-                  )}
-                  <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-neutral-400">
-                    {size.dimensions}
-                  </div>
-                  <h4 className="mt-1 text-base sm:text-lg font-bold text-white">{size.label}</h4>
-                  <div className="mt-2 text-2xl sm:text-3xl font-extrabold text-brand font-mono">
-                    {size.price}
-                  </div>
-
-                  {/* Verified 300 DPI Box */}
-                  <div className="mt-3 rounded-lg border border-white/[0.06] bg-black/50 p-2">
-                    <span className="text-[9px] uppercase tracking-wider text-neutral-500 block font-semibold font-mono">
-                      Verified 300 DPI Canvas
-                    </span>
-                    <span className="text-xs font-mono font-bold text-white mt-0.5 block">
-                      {res.pixels}
-                    </span>
-                  </div>
-
-                  <p className="mt-2.5 text-[11px] sm:text-xs text-neutral-400 leading-relaxed">
-                    {res.ideal}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Archival Material Pillars matching CraftsmanshipSection */}
-          <div className="mt-8 sm:mt-10 grid grid-cols-1 gap-3.5 sm:gap-5 md:grid-cols-3">
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
+          {/* Archival Material Pillars */}
+          <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-3">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-5 sm:p-6 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
               <div className="text-brand text-sm sm:text-base font-bold font-mono">01 / 310 GSM Cotton Rag</div>
+              <h4 className="mt-2 text-base font-bold text-white font-heading uppercase">Acid-Free Velvet Matte</h4>
               <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">
                 100% acid-free museum cotton rag paper with a velvet matte texture that completely eliminates harsh specular glare from garage LED and gallery ceiling lighting.
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-5 sm:p-6 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
               <div className="text-brand text-sm sm:text-base font-bold font-mono">02 / Aerospace Matte Aluminum</div>
+              <h4 className="mt-2 text-base font-bold text-white font-heading uppercase">CNC Obsidian Framing</h4>
               <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">
                 Precision-machined matte aluminum framing finished in deep anodized obsidian or hand-brushed titanium, glazed with UV-blocking museum acrylic.
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-4 sm:p-5 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/30 p-5 sm:p-6 backdrop-blur-md hover:border-white/25 hover:-translate-y-1 transition-all duration-300">
               <div className="text-brand text-sm sm:text-base font-bold font-mono">03 / Serialized Hologram Seal</div>
+              <h4 className="mt-2 text-base font-bold text-white font-heading uppercase">Tamper-Proof Provenance</h4>
               <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">
                 Every physical print is registered in our production registry and stamped with a serialized tamper-evident hologram seal and numbered Certificate of Authenticity.
               </p>

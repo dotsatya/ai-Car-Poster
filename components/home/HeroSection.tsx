@@ -50,9 +50,9 @@ export function HeroSection() {
             <div className="pt-1.5 sm:pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5">
               <Link
                 href="/templates"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] text-center"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
               >
-                <span>Choose Templates</span>
+                <span>CHOOSE TEMPLATES</span>
                 <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
