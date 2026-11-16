@@ -39,7 +39,7 @@ export function SelectedDesignsList() {
             >
               <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
                 {/* 3:4 Portrait Poster Artwork Preview */}
-                <div className="relative aspect-[3/4] h-14 w-10.5 sm:h-18 sm:w-13.5 shrink-0 overflow-hidden rounded-lg sm:rounded-xl border border-white/15 bg-black shadow-md transition-transform duration-200 group-hover:scale-102">
+                <div className="relative aspect-[3/4] h-14 w-10.5 sm:h-18 sm:w-13.5 shrink-0 overflow-hidden rounded-md border border-white/15 bg-black shadow-md transition-transform duration-200 group-hover:scale-102">
                   <Image
                     src={tpl.image}
                     alt={tpl.name}

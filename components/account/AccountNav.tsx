@@ -26,7 +26,7 @@ export function AccountNav() {
         {/* User Monogram & Identity Banner on ONE single clean row */}
         <div className="flex items-center justify-between gap-3 pb-3 sm:pb-4 border-b border-white/[0.06]">
           <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
-            <div className="flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 via-neutral-900 to-neutral-950 border border-brand/40 text-white font-bold text-sm sm:text-lg shadow-md shadow-brand/10">
+            <div className="flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-brand/20 via-neutral-900 to-neutral-950 border border-brand/40 text-white font-bold text-sm sm:text-lg shadow-md shadow-brand/10">
               {avatarLetter}
             </div>
             <div className="min-w-0 flex-1">

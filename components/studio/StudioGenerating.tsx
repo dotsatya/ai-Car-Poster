@@ -30,7 +30,7 @@ export function StudioGenerating() {
           return (
             <div
               key={art.id}
-              className="rounded-xl border border-white/[0.08] bg-black/60 p-3 sm:p-4 overflow-hidden relative flex flex-col justify-between hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300"
+              className="rounded-xl border border-white/[0.08] bg-black/60 p-1.5 sm:p-2.5 overflow-hidden relative flex flex-col justify-between hover:border-white/25 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/80 transition-all duration-300"
             >
               <div className="flex items-center justify-between gap-1 sm:gap-2">
                 <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-brand truncate">
@@ -49,7 +49,7 @@ export function StudioGenerating() {
                 </span>
               </div>
 
-              <div className="mt-2 sm:mt-3 relative aspect-[3/4] w-full overflow-hidden rounded-lg sm:rounded-xl bg-neutral-900 border border-white/[0.08]">
+              <div className="mt-2 sm:mt-3 relative aspect-[3/4] w-full overflow-hidden rounded-md bg-neutral-900 border border-white/[0.08]">
                 <Image
                   src={art.image}
                   alt={art.title}
@@ -64,7 +64,7 @@ export function StudioGenerating() {
                 {status === "processing" && (
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand/25 to-transparent animate-pulse" />
                 )}
-                <div className="absolute bottom-1.5 left-1.5 right-1.5 sm:bottom-2 sm:left-2 sm:right-2 rounded-md sm:rounded-lg bg-black/80 p-1.5 sm:p-2 backdrop-blur-sm text-[8px] sm:text-[10px] text-neutral-300 leading-tight">
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 sm:bottom-2 sm:left-2 sm:right-2 rounded-md bg-black/80 p-1.5 sm:p-2 backdrop-blur-sm text-[8px] sm:text-[10px] text-neutral-300 leading-tight">
                   {status === "completed"
                     ? "✓ 300 DPI Render Ready"
                     : status === "processing"

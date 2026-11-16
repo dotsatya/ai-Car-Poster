@@ -248,7 +248,7 @@ export default function OrdersPage() {
 
                     <Link
                       href={`/account/orders/${order.orderNumber}`}
-                      className="inline-flex items-center justify-center gap-1 sm:gap-1.5 rounded-lg sm:rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.98] px-3 sm:px-5 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-red-600/30 transition-all cursor-pointer whitespace-nowrap shrink-0"
+                      className="inline-flex items-center justify-center gap-1 sm:gap-1.5 rounded-md bg-red-600 hover:bg-red-700 active:scale-[0.98] px-3 sm:px-5 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-red-600/30 transition-all cursor-pointer whitespace-nowrap shrink-0"
                     >
                       <span>Order Details</span>
                       <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
