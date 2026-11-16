@@ -252,7 +252,127 @@ export default function AccountSettingsPage() {
 
         <div className="space-y-5 sm:space-y-6 max-w-4xl">
           {/* ============================================================== */}
-          {/* PARTITION 1: FIRST — DELIVERY ADDRESSES */}
+          {/* PARTITION 1: FIRST — PERSONAL & ACCOUNT DETAILS (COMBINED) */}
+          {/* ============================================================== */}
+          <section className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-6 backdrop-blur-md">
+            <div className="flex items-center gap-2.5 pb-3.5 sm:pb-4 mb-4 border-b border-white/[0.06]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
+                <User className="h-4 w-4" />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
+                  01 / PARTITION
+                </span>
+                <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
+                  Personal &amp; Account Details
+                </h2>
+              </div>
+            </div>
+
+            <form onSubmit={handleSaveProfile} className="space-y-4">
+              {/* Email & Authentication Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div>
+                  <label className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center justify-between">
+                    <span className="flex items-center gap-1.5">
+                      <Mail className="h-3 w-3 text-brand" />
+                      <span>Registered Email Identifier</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[10px] text-neutral-400 lowercase font-mono">
+                      <Lock className="h-3 w-3 text-neutral-400" />
+                      verified ID
+                    </span>
+                  </label>
+                  <input
+                    type="email"
+                    disabled
+                    value={user?.email || "member@postergen.atelier"}
+                    className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-neutral-200 font-mono select-all cursor-not-allowed"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
+                    <ShieldCheck className="h-3 w-3 text-brand" />
+                    <span>Authentication Status</span>
+                  </label>
+                  <div className="mt-1.5 flex items-center justify-between rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs text-neutral-300">
+                    <span className="flex items-center gap-1.5">
+                      <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                      Passwordless OTP
+                    </span>
+                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                      Active &amp; Verified
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+  
+              {/* Subtle divider */}
+              <div className="pt-1 border-t border-white/[0.06]" />
+
+              {/* Personal Details Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {/* Name Option */}
+                <div>
+                  <label
+                    htmlFor="fullNameInput"
+                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
+                  >
+                    <User className="h-3 w-3 text-brand" />
+                    <span>Collector Full Name</span>
+                  </label>
+                  <input
+                    id="fullNameInput"
+                    type="text"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="e.g. Satya Sundar Dey"
+                    className="mt-1.5 w-full rounded-xl border border-white/[0.12] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-neutral-500 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand transition-all"
+                  />
+                  <p className="mt-1 text-[10px] text-neutral-400">
+                    Appears on your signed Certificate of Authenticity.
+                  </p>
+                </div>
+
+                {/* Phone Number Option */}
+                <div>
+                  <label
+                    htmlFor="phoneInput"
+                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
+                  >
+                    <Phone className="h-3 w-3 text-brand" />
+                    <span>Contact Phone Number</span>
+                  </label>
+                  <input
+                    id="phoneInput"
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="e.g. +91 98765 43210"
+                    className="mt-1.5 w-full rounded-xl border border-white/[0.12] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white font-mono placeholder-neutral-500 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand transition-all"
+                  />
+                  <p className="mt-1 text-[10px] text-neutral-400">
+                    Used for courier dispatch updates and delivery verification.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2 flex justify-end">
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+                >
+                  <Check className="h-3.5 w-3.5" />
+                  <span>Save Details</span>
+                </button>
+              </div>
+            </form>
+          </section>
+
+          {/* ============================================================== */}
+          {/* PARTITION 2: SECOND — DELIVERY ADDRESSES */}
           {/* ============================================================== */}
           <section className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-6 backdrop-blur-md">
             <div className="flex items-center justify-between gap-2.5 pb-3.5 sm:pb-4 mb-4 border-b border-white/[0.06]">
@@ -263,7 +383,7 @@ export default function AccountSettingsPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
-                      01 / PARTITION
+                      02 / PARTITION
                     </span>
                   </div>
                   <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
@@ -275,7 +395,7 @@ export default function AccountSettingsPage() {
               <button
                 type="button"
                 onClick={openAddAddressModal}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-3 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap shrink-0"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-3 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer whitespace-nowrap shrink-0 hover:scale-[1.01] active:scale-[0.98]"
               >
                 <Plus className="h-3.5 w-3.5" />
                 <span>Add Address</span>
@@ -359,141 +479,7 @@ export default function AccountSettingsPage() {
           </section>
 
           {/* ============================================================== */}
-          {/* PARTITION 2: THEN — ACCOUNT USER EMAIL ID */}
-          {/* ============================================================== */}
-          <section className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-6 backdrop-blur-md">
-            <div className="flex items-center gap-2.5 pb-3.5 sm:pb-4 mb-4 border-b border-white/[0.06]">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
-                <Mail className="h-4 w-4" />
-              </div>
-              <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
-                  02 / PARTITION
-                </span>
-                <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
-                  Account User Email ID
-                </h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div>
-                <label className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center justify-between">
-                  <span>Registered Email Identifier</span>
-                  <span className="inline-flex items-center gap-1 text-[10px] text-neutral-400 lowercase font-mono">
-                    <Lock className="h-3 w-3 text-neutral-400" />
-                    verified ID
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  disabled
-                  value={user?.email || "member@postergen.atelier"}
-                  className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-neutral-200 font-mono select-all cursor-not-allowed"
-                />
-              </div>
-
-              <div>
-                <label className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
-                  Authentication Status
-                </label>
-                <div className="mt-1.5 flex items-center justify-between rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs text-neutral-300">
-                  <span className="flex items-center gap-1.5">
-                    <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                    Passwordless OTP
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                    Active &amp; Verified
-                  </span>
-                </div>
-              </div>
-            </div>
-            <p className="mt-3 text-[11px] text-neutral-400 leading-relaxed">
-              Your registered email is your unique Atelier key used for authenticating commissions, serialized certificates, and one-time sign-in.
-            </p>
-          </section>
-
-          {/* ============================================================== */}
-          {/* PARTITION 3: THEN — OPTION TO INCLUDE NAME AND PHONE NUMBER */}
-          {/* ============================================================== */}
-          <section className="rounded-xl border border-white/[0.08] bg-neutral-900/40 p-3.5 sm:p-6 backdrop-blur-md">
-            <div className="flex items-center justify-between gap-3 pb-3.5 sm:pb-4 mb-4 border-b border-white/[0.06]">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10 border border-brand/25 text-brand shrink-0">
-                  <User className="h-4 w-4" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand">
-                    03 / PARTITION
-                  </span>
-                  <h2 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
-                    Personal Details
-                  </h2>
-                </div>
-              </div>
-            </div>
-
-            <form onSubmit={handleSaveProfile} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                {/* Name Option */}
-                <div>
-                  <label
-                    htmlFor="fullNameInput"
-                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
-                  >
-                    <User className="h-3 w-3 text-brand" />
-                    <span>Collector Full Name</span>
-                  </label>
-                  <input
-                    id="fullNameInput"
-                    type="text"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    placeholder="e.g. Satya Sundar Dey"
-                    className="mt-1.5 w-full rounded-xl border border-white/[0.12] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-neutral-500 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand transition-all"
-                  />
-                  <p className="mt-1 text-[10px] text-neutral-400">
-                    Appears on your signed Certificate of Authenticity.
-                  </p>
-                </div>
-
-                {/* Phone Number Option */}
-                <div>
-                  <label
-                    htmlFor="phoneInput"
-                    className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5"
-                  >
-                    <Phone className="h-3 w-3 text-brand" />
-                    <span>Contact Phone Number</span>
-                  </label>
-                  <input
-                    id="phoneInput"
-                    type="tel"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="e.g. +91 98765 43210"
-                    className="mt-1.5 w-full rounded-xl border border-white/[0.12] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white font-mono placeholder-neutral-500 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand transition-all"
-                  />
-                  <p className="mt-1 text-[10px] text-neutral-400">
-                    Used for courier dispatch updates and delivery verification.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-2 flex justify-end">
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand hover:bg-brand-hover px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer"
-                >
-                  <Check className="h-3.5 w-3.5" />
-                  <span>Save Details</span>
-                </button>
-              </div>
-            </form>
-          </section>
-
-          {/* ============================================================== */}
-          {/* PARTITION 4: THEN — SIGN OUT BUTTON */}
+          {/* PARTITION 3: THIRD — SIGN OUT BUTTON */}
           {/* ============================================================== */}
           <section className="rounded-xl border border-red-500/20 bg-red-950/10 p-3.5 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 sm:gap-4">
@@ -503,7 +489,7 @@ export default function AccountSettingsPage() {
                 </div>
                 <div>
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-400">
-                    04 / PARTITION
+                    03 / PARTITION
                   </span>
                   <h3 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
                     Sign Out of Atelier

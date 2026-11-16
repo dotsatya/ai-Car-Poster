@@ -240,12 +240,10 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   const setGeneratedArtworks = (
     artworks: GeneratedArtwork[] | ((prev: GeneratedArtwork[]) => GeneratedArtwork[])
   ) => {
-    setSessionGenerated((prev) => {
-      const current = prev || generatedArtworks;
-      const next = typeof artworks === "function" ? artworks(current) : artworks;
-      saveGeneratedToStorage(next);
-      return next;
-    });
+    const current = sessionGenerated || generatedArtworks;
+    const next = typeof artworks === "function" ? artworks(current) : artworks;
+    saveGeneratedToStorage(next);
+    setSessionGenerated(next);
   };
 
   const signOut = () => {
@@ -406,23 +404,23 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleArtworkSelection = (id: string) => {
+    const targetArt = generatedArtworks.find((art) => art.id === id);
+    if (!targetArt) return;
+
+    const nextSelected = !targetArt.selected;
+    const availableSizes = getAvailableSizesForArtwork(targetArt, selectedTemplates);
+    const sizeObj = availableSizes.find((s) => s.id === targetArt.size) || availableSizes[0];
+
+    if (nextSelected) {
+      toast.success(`Added to Cart: "${targetArt.title}"`, {
+        description: `${sizeObj.name} (${sizeObj.dimensions}) · ${sizeObj.price}`,
+      });
+    } else {
+      toast.info(`Removed from Cart: "${targetArt.title}"`);
+    }
+
     setGeneratedArtworks((prev) =>
-      prev.map((art) => {
-        if (art.id === id) {
-          const nextSelected = !art.selected;
-          const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
-          const sizeObj = availableSizes.find((s) => s.id === art.size) || availableSizes[0];
-          if (nextSelected) {
-            toast.success(`Added to Cart: "${art.title}"`, {
-              description: `${sizeObj.name} (${sizeObj.dimensions}) · ${sizeObj.price}`,
-            });
-          } else {
-            toast.info(`Removed from Cart: "${art.title}"`);
-          }
-          return { ...art, selected: nextSelected };
-        }
-        return art;
-      })
+      prev.map((art) => (art.id === id ? { ...art, selected: nextSelected } : art))
     );
   };
 

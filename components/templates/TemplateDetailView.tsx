@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Plus, ArrowLeft, ArrowRight, ShoppingBag, ShieldCheck } from "lucide-react";
-import { toast } from "sonner";
+import { Check, Plus, ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react";
 import { Template, PrintSizeId, PaperGsmId } from "@/types";
 import { ALL_PRINT_SIZES, ALL_PAPER_GSM } from "@/lib/templatePhotos";
 import { TEMPLATES } from "@/data/templates";
@@ -20,8 +19,6 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
     selectedTemplates,
     toggleTemplate,
     setStudioState,
-    addDirectCartItem,
-    setIsCartOpen,
   } = useStudio();
   const isSelected = selectedTemplates.includes(template.id);
   const selectionIndex = selectedTemplates.indexOf(template.id);
@@ -72,31 +69,8 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
 
   const currentPriceFormatted =
     currentPricing?.formattedPrice || template.formattedStartingPrice || "₹799";
-  const currentPriceNum = currentPricing?.price || 799;
-
   const currentSizeObj = ALL_PRINT_SIZES[selectedSizeId] || availableSizes[0];
   const currentGsmObj = ALL_PAPER_GSM[selectedGsmId] || availableGsm[0];
-
-  const handleAddToCart = () => {
-    addDirectCartItem({
-      id: `${template.slug}-${selectedSizeId}-${selectedGsmId}`,
-      title: template.name,
-      size: currentSizeObj.name,
-      gsm: currentGsmObj.name,
-      dimensions: currentSizeObj.dimensions,
-      price: currentPriceNum,
-      quantity: 1,
-      isCombined: false,
-      image: template.image,
-      currency: "INR",
-      formattedPrice: currentPriceFormatted,
-      templateSlug: template.slug,
-    });
-    setIsCartOpen(true);
-    toast.success(
-      `Added ${template.name} (${currentSizeObj.name}, ${currentGsmObj.name}) to cart!`
-    );
-  };
 
   // Curated related templates from the library: same category first, then fallback
   const sameCategory = TEMPLATES.filter(
@@ -319,41 +293,34 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
               </div>
             </div>
 
-            {/* Direct Order Button & Studio Multi-Select */}
-            <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-hover py-3 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] text-center"
-              >
-                <ShoppingBag className="h-4 w-4 shrink-0" />
-                <span>Order Physical Print ({currentPriceFormatted})</span>
-              </button>
-
+            {/* Single "Use this template" Button */}
+            <div className="pt-2">
               <button
                 type="button"
                 onClick={() => toggleTemplate(template.id)}
-                className={`flex-1 flex items-center justify-center gap-2 rounded-xl py-3 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer text-center ${
+                className={`w-full flex items-center justify-center gap-2 rounded-xl py-3.5 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] text-center ${
                   isSelected
-                    ? "border border-white/20 bg-white/10 text-white hover:bg-white/15"
-                    : "border border-white/15 bg-black/50 text-neutral-300 hover:text-white hover:border-white/30"
+                    ? "bg-brand/90 hover:bg-brand text-white shadow-brand/30 hover:shadow-brand/50 ring-1 ring-brand/50"
+                    : "bg-brand hover:bg-brand-hover text-white shadow-brand/30 hover:shadow-brand/50"
                 }`}
               >
                 {isSelected ? (
                   <>
-                    <Check className="h-4 w-4 text-emerald-400 stroke-[2.5] shrink-0" />
-                    <span>In Studio Queue ({selectionIndex + 1}/3)</span>
+                    <Check className="h-4 w-4 stroke-[2.5] shrink-0" />
+                    <span>In Selection Bar ({selectionIndex + 1}/3)</span>
                   </>
                 ) : (
                   <>
-                    <Plus className="h-4 w-4 stroke-[2] shrink-0" />
-                    <span>Add to Studio ({selectedTemplates.length}/3)</span>
+                    <Plus className="h-4 w-4 stroke-[2.5] shrink-0" />
+                    <span>Use this template</span>
                   </>
                 )}
               </button>
             </div>
             <p className="text-center text-[10px] sm:text-[11px] text-neutral-400 pt-1">
-              {currentSizeObj.name} ({currentSizeObj.dimensions}) printed on {currentGsmObj.name} ({currentGsmObj.label}).
+              {isSelected
+                ? "This template is in your selection bar below (select up to 3 for Studio)."
+                : `${currentSizeObj.name} (${currentSizeObj.dimensions}) · Archival grade ${currentGsmObj.name}.`}
             </p>
           </div>
 

@@ -37,9 +37,17 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="h-full antialiased dark scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="h-full antialiased dark scroll-smooth"
+      suppressHydrationWarning
+    >
       <body
         className={`${barlowCondensed.variable} ${inter.variable} min-h-full flex flex-col bg-bg-primary text-foreground selection:bg-brand selection:text-white font-sans`}
         suppressHydrationWarning
@@ -57,14 +65,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Toaster
             position="top-right"
             theme="dark"
-            richColors
             closeButton
+            className="max-sm:!hidden"
+            offset={{ top: "88px", right: "20px" }}
             toastOptions={{
-              className: "font-sans",
-              style: {
-                background: "#0F1012",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
-                color: "#FFFFFF",
+              duration: 3500,
+              classNames: {
+                toast:
+                  "font-sans !bg-[#111215] !border !border-white/10 !text-white !shadow-xl !shadow-black/70 " +
+                  "!w-[260px] lg:!w-[320px] " +
+                  "!rounded-lg lg:!rounded-xl " +
+                  "!gap-2 !px-3 !py-2 lg:!px-3.5 lg:!py-2.5",
+                title:
+                  "!text-xs !font-semibold !text-white !leading-tight tracking-wide",
+                description:
+                  "!text-[10.5px] lg:!text-[11px] !text-neutral-400 !font-normal !leading-snug !mt-0.5",
+                icon: "!size-3.5 lg:!size-4",
+                closeButton:
+                  "max-lg:!hidden !bg-[#18191D] !border-white/10 !text-neutral-400 hover:!text-white hover:!bg-white/10",
               },
             }}
           />

@@ -162,7 +162,12 @@ export function TemplateCard({ template }: TemplateCardProps) {
 
           {/* Bottom Row: "+ Add" Button on the Bottom Left; Starting Price on the Bottom Right */}
           <div className="mt-2.5 pt-1.5 flex items-center justify-between border-t border-white/[0.06]">
-            {/* Bottom Left: "+ Add" / "✓ Added" Button with Tooltip */}
+            {/* Bottom Right: Starting Price */}
+            <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
+              {template.formattedStartingPrice
+                ? `From ${template.formattedStartingPrice}`
+                : "₹499"}
+            </span>
             <div className="relative group/btn">
               <button
                 type="button"
@@ -200,13 +205,6 @@ export function TemplateCard({ template }: TemplateCardProps) {
                 </div>
               </div>
             </div>
-
-            {/* Bottom Right: Starting Price */}
-            <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
-              {template.formattedStartingPrice
-                ? `From ${template.formattedStartingPrice}`
-                : "₹499"}
-            </span>
           </div>
         </div>
       </Link>
