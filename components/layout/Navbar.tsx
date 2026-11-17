@@ -18,11 +18,7 @@ import { useAppAuth } from "@/lib/auth";
 export function Navbar() {
   const pathname = usePathname();
   const { user, signOut, setIsSignInOpen } = useAppAuth();
-  const {
-    setIsCartOpen,
-    setIsSearchOpen,
-    cartItems,
-  } = useStudio();
+  const { setIsCartOpen, setIsSearchOpen, cartItems } = useStudio();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileUserMenuOpen, setIsMobileUserMenuOpen] = useState(false);
@@ -85,7 +81,10 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-bg-primary/90 backdrop-blur-xl transition-all">
       <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-12">
         {/* Brand Monogram & Logo */}
-        <Link href="/" className="group flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <Link
+          href="/"
+          className="group flex items-center gap-2.5 sm:gap-3 shrink-0"
+        >
           <div className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-md bg-gradient-to-br from-neutral-800 to-black p-[1px] shadow-lg shadow-black/80">
             <div className="flex h-full w-full items-center justify-center rounded-md bg-[#0F1012] transition-colors group-hover:bg-[#16181C]">
               <svg
@@ -197,7 +196,10 @@ export function Navbar() {
                       {avatarLetter}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-xs font-semibold text-white truncate" title={user.email}>
+                      <p
+                        className="text-xs font-semibold text-white truncate"
+                        title={user.email}
+                      >
                         {user.email}
                       </p>
                       <p className="text-[10px] text-neutral-400 font-medium">
@@ -318,7 +320,10 @@ export function Navbar() {
                       {avatarLetter}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-xs font-semibold text-white truncate" title={user.email}>
+                      <p
+                        className="text-xs font-semibold text-white truncate"
+                        title={user.email}
+                      >
                         {user.email}
                       </p>
                       <p className="text-[10px] text-neutral-400 font-medium">

@@ -77,9 +77,6 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
           onClick={(e) => {
             e.currentTarget.value = "";
           }}
-          onClick={(e) => {
-            (e.currentTarget.value = "");
-          }}
           onChange={handleFileUpload}
           className="hidden"
         />
