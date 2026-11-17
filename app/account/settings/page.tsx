@@ -12,7 +12,6 @@ import {
   Edit2,
   Check,
   X,
-  ShieldCheck,
   Lock,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -298,22 +297,6 @@ export default function AccountSettingsPage() {
                     value={user?.email || "member@postergen.atelier"}
                     className="mt-1.5 w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-neutral-200 font-mono select-all cursor-not-allowed"
                   />
-                </div>
-
-                <div>
-                  <label className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
-                    <ShieldCheck className="h-3 w-3 text-brand" />
-                    <span>Authentication Status</span>
-                  </label>
-                  <div className="mt-1.5 flex items-center justify-between rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2.5 text-xs text-neutral-300">
-                    <span className="flex items-center gap-1.5">
-                      <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                      Passwordless OTP
-                    </span>
-                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                      Active &amp; Verified
-                    </span>
-                  </div>
                 </div>
               </div>
 

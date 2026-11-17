@@ -56,11 +56,11 @@ export function CartDrawer() {
               No generated posters selected for print yet. Run the studio generator to review previews and choose sizes.
               <div className="mt-4">
                 <Link
-                  href="/studio"
+                  href="/templates"
                   onClick={() => setIsCartOpen(false)}
-                  className="inline-block rounded-xl bg-white/[0.06] hover:bg-white/10 px-4 py-2 text-xs font-semibold text-white"
+                  className="inline-block rounded-md bg-white/[0.06] hover:bg-white/10 px-4 py-2 text-xs font-semibold text-white"
                 >
-                  Open Studio →
+                  Browse Templates →
                 </Link>
               </div>
             </div>

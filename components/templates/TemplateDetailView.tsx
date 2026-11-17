@@ -176,30 +176,30 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
           </p>
 
           {/* Dynamic Print Size & Paper GSM Configuration Section */}
-          <div className="rounded-xl border border-white/[0.08] bg-neutral-900/60 p-4 sm:p-5 space-y-4 shadow-xl hover:border-white/20 transition-all duration-300">
+          <div className="rounded-xl border border-white/[0.08] bg-neutral-900/60 p-3.5 sm:p-5 space-y-3.5 sm:space-y-4 shadow-xl hover:border-white/20 transition-all duration-300">
             {/* Header: Dynamic Price & Live Guarantee */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.08] pb-3.5">
+            <div className="flex items-start sm:items-center justify-between gap-2 border-b border-white/[0.08] pb-3 sm:pb-3.5">
               <div>
                 <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-neutral-400">
                   Fine Art Physical Print
                 </span>
-                <div className="flex items-baseline gap-2.5 mt-0.5">
+                <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-2xl sm:text-3xl font-extrabold text-brand tracking-tight">
                     {currentPriceFormatted}
                   </span>
-                  <span className="text-xs text-neutral-400">
-                    all taxes included • tube packaging
+                  <span className="text-[11px] sm:text-xs text-neutral-400">
+                    all taxes included
                   </span>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1.5 self-start sm:self-auto rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 text-[10px] font-semibold text-emerald-400">
-                <ShieldCheck className="h-3.5 w-3.5" />
-                <span>100+ Year Archival Inks</span>
+              <div className="inline-flex items-center gap-1.5 shrink-0 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2 sm:px-2.5 py-1 text-[9px] sm:text-[10px] font-semibold text-emerald-400">
+                <ShieldCheck className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                <span>100+ Year Archival</span>
               </div>
             </div>
 
             {/* 1. Print Size Selector */}
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-bold uppercase tracking-wider text-white">
                   1. Print Size
@@ -208,7 +208,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                   {availableSizes.length} size{availableSizes.length > 1 ? "s" : ""} available
                 </span>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2">
                 {(Object.keys(ALL_PRINT_SIZES) as PrintSizeId[]).map((sizeKey) => {
                   const sizeOption = ALL_PRINT_SIZES[sizeKey];
                   const isAvailable = availableSizes.some((s) => s.id === sizeKey);
@@ -220,12 +220,12 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                       type="button"
                       disabled={!isAvailable}
                       onClick={() => handleSizeChange(sizeKey)}
-                      className={`relative flex flex-col items-center justify-center rounded-md border p-2.5 text-center transition-all ${
+                      className={`relative flex flex-col items-center justify-center rounded-md border p-2 sm:p-2.5 text-center transition-all ${
                         !isAvailable
                           ? "border-white/5 bg-neutral-950/40 text-neutral-600 cursor-not-allowed opacity-40 line-through"
                           : isSelected
-                            ? "border-brand bg-brand/10 ring-1 ring-brand text-white shadow-md shadow-brand/20 scale-[1.02]"
-                            : "border-white/10 bg-black/40 text-neutral-300 hover:border-white/30 hover:bg-white/[0.04] cursor-pointer"
+                            ? "border-brand/60 bg-[#111114] ring-1 ring-brand/25 text-white shadow-[0_0_15px_rgba(217,39,46,0.18)] scale-[1.02]"
+                            : "border-white/10 bg-[#111114] text-neutral-300 hover:border-white/25 hover:bg-white/[0.04] hover:text-white cursor-pointer"
                       }`}
                     >
                       <span className="text-xs sm:text-sm font-bold">{sizeOption.name}</span>
@@ -242,7 +242,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
             </div>
 
             {/* 2. Paper Quality (GSM) Selector */}
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-bold uppercase tracking-wider text-white">
                   2. Paper Quality (GSM)
@@ -251,7 +251,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                   Archival Giclée Paper
                 </span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                 {(Object.keys(ALL_PAPER_GSM) as PaperGsmId[]).map((gsmKey) => {
                   const gsmOption = ALL_PAPER_GSM[gsmKey];
                   const isAvailableForTemplate = availableGsm.some((g) => g.id === gsmKey);
@@ -265,28 +265,23 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                       type="button"
                       disabled={!isEnabled}
                       onClick={() => setSelectedGsmId(gsmKey)}
-                      className={`relative flex flex-col items-start p-2.5 sm:p-3 rounded-md border text-left transition-all ${
+                      className={`relative flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-md border text-center transition-all ${
                         !isEnabled
                           ? "border-white/5 bg-neutral-950/40 text-neutral-600 cursor-not-allowed opacity-40"
                           : isSelected
-                            ? "border-brand bg-brand/10 ring-1 ring-brand text-white shadow-md shadow-brand/20"
-                            : "border-white/10 bg-black/40 text-neutral-300 hover:border-white/30 hover:bg-white/[0.04] cursor-pointer"
+                            ? "border-brand/60 bg-[#111114] ring-1 ring-brand/25 text-white shadow-[0_0_15px_rgba(217,39,46,0.18)] scale-[1.02]"
+                            : "border-white/10 bg-[#111114] text-neutral-300 hover:border-white/25 hover:bg-white/[0.04] hover:text-white cursor-pointer"
                       }`}
                     >
-                      <div className="flex items-center justify-between w-full">
-                        <span className="text-xs sm:text-sm font-bold text-white">
-                          {gsmOption.name}
-                        </span>
-                        {isSelected && (
-                          <span className="text-[10px] font-bold text-brand uppercase">Selected</span>
-                        )}
-                        {!isEnabled && (
-                          <span className="text-[9px] text-neutral-600 uppercase">Unavailable</span>
-                        )}
-                      </div>
-                      <span className="text-[10px] text-neutral-400 mt-0.5 leading-snug">
-                        {gsmOption.label}
+                      <span className="text-xs sm:text-sm font-bold text-white">
+                        {gsmOption.name}
                       </span>
+                      <span className="text-[10px] text-neutral-400 mt-0.5 truncate w-full">
+                        {gsmOption.name === "200 GSM" ? "Satin" : gsmOption.name === "250 GSM" ? "Heavy Matte" : "Museum Rag"}
+                      </span>
+                      {isSelected && (
+                        <div className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-brand" />
+                      )}
                     </button>
                   );
                 })}
@@ -294,13 +289,13 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
             </div>
 
             {/* Single "Use this template" Button */}
-            <div className="pt-2">
+            <div className="pt-1 sm:pt-2">
               <button
                 type="button"
                 onClick={() => toggleTemplate(template.id)}
-                className={`w-full flex items-center justify-center gap-2 rounded-md py-3.5 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] text-center ${
+                className={`w-full flex items-center justify-center gap-2 rounded-md py-3 sm:py-3.5 px-4 sm:px-6 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] text-center ${
                   isSelected
-                    ? "bg-brand/90 hover:bg-brand text-white shadow-brand/30 hover:shadow-brand/50 ring-1 ring-brand/50"
+                    ? "bg-brand text-white shadow-brand/30 hover:bg-brand-hover ring-1 ring-brand/30"
                     : "bg-brand hover:bg-brand-hover text-white shadow-brand/30 hover:shadow-brand/50"
                 }`}
               >
@@ -317,7 +312,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
                 )}
               </button>
             </div>
-            <p className="text-center text-[10px] sm:text-[11px] text-neutral-400 pt-1">
+            <p className="text-center text-[10px] sm:text-[11px] text-neutral-400 pt-0.5">
               {isSelected
                 ? "This template is in your selection bar below (select up to 3 for Studio)."
                 : `${currentSizeObj.name} (${currentSizeObj.dimensions}) · Archival grade ${currentGsmObj.name}.`}

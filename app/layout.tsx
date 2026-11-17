@@ -5,6 +5,7 @@ import { Providers } from "@/components/providers";
 import { AmbientGlow } from "@/components/layout/AmbientGlow";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { SearchModal } from "@/components/layout/SearchModal";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { SignInModal } from "@/components/layout/SignInModal";
@@ -55,8 +56,9 @@ export default function RootLayout({
         <Providers>
           <AmbientGlow />
           <Navbar />
-          <main className="relative z-10 flex-1">{children}</main>
+          <main className="relative z-10 flex-1 pb-20 md:pb-0">{children}</main>
           <Footer />
+          <MobileBottomNav />
 
           {/* Global Modals & Drawers */}
           <SearchModal />

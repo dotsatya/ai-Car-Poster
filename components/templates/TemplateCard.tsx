@@ -181,8 +181,8 @@ export function TemplateCard({ template }: TemplateCardProps) {
                 }}
                 className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all duration-200 cursor-pointer shadow-sm hover:scale-[1.01] active:scale-[0.98] ${
                   isSelected
-                    ? "bg-brand/90 text-white shadow-brand/30 hover:shadow-brand/50 ring-1 ring-brand/35 hover:bg-brand"
-                    : "border border-white/20 bg-white/[0.06] text-white hover:border-brand/60 hover:bg-brand/80 hover:text-white hover:shadow-sm hover:shadow-brand/30"
+                    ? "bg-brand text-white shadow-brand/30 hover:shadow-brand/50 ring-1 ring-brand/35 hover:bg-brand-hover"
+                    : "border border-white/20 bg-white/[0.06] text-white hover:border-brand/60 hover:bg-brand hover:text-white hover:shadow-sm hover:shadow-brand/30"
                 }`}
               >
                 {isSelected ? (

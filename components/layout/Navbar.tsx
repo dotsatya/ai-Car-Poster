@@ -6,8 +6,6 @@ import { usePathname } from "next/navigation";
 import {
   Search,
   ShoppingBag,
-  Menu,
-  X,
   User as UserIcon,
   LayoutDashboard,
   LogOut,
@@ -19,15 +17,12 @@ export function Navbar() {
   const pathname = usePathname();
   const { user, signOut, setIsSignInOpen } = useAppAuth();
   const { setIsCartOpen, setIsSearchOpen, cartItems } = useStudio();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isMobileUserMenuOpen, setIsMobileUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
-  const mobileUserMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdowns on outside click or Escape key
+  // Close dropdown on outside click or Escape key
   useEffect(() => {
-    if (!isUserMenuOpen && !isMobileUserMenuOpen && !isMobileMenuOpen) return;
+    if (!isUserMenuOpen) return;
 
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       const target = e.target as Node;
@@ -38,20 +33,11 @@ export function Navbar() {
       ) {
         setIsUserMenuOpen(false);
       }
-      if (
-        isMobileUserMenuOpen &&
-        mobileUserMenuRef.current &&
-        !mobileUserMenuRef.current.contains(target)
-      ) {
-        setIsMobileUserMenuOpen(false);
-      }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsUserMenuOpen(false);
-        setIsMobileUserMenuOpen(false);
-        setIsMobileMenuOpen(false);
       }
     };
 
@@ -64,7 +50,7 @@ export function Navbar() {
       document.removeEventListener("touchstart", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isUserMenuOpen, isMobileUserMenuOpen, isMobileMenuOpen]);
+  }, [isUserMenuOpen]);
 
   const navLinks = [
     { label: "Templates", href: "/templates" },
@@ -259,181 +245,18 @@ export function Navbar() {
           )}
         </div>
 
-        {/* Mobile Right Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 md:hidden shrink-0">
-          {/* Mobile Search Button */}
+        {/* Mobile Right Controls: Minimal Top Header with only Search icon */}
+        <div className="flex items-center md:hidden shrink-0">
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md text-neutral-300 hover:bg-white/[0.06] hover:text-white cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors cursor-pointer"
             aria-label="Search templates"
             title="Search"
           >
-            <Search className="h-4 w-4 sm:h-5 sm:w-5" />
-          </button>
-
-          {/* Mobile Shopping Bag */}
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md text-neutral-300 hover:bg-white/[0.06] hover:text-white cursor-pointer"
-            aria-label="Shopping Bag"
-            title="Cart"
-          >
-            <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5" />
-            {cartItems.length > 0 && (
-              <span className="absolute top-0.5 right-0.5 flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-brand text-[8px] sm:text-[9px] font-bold text-white shadow-sm">
-                {cartItems.length}
-              </span>
-            )}
-          </button>
-
-          {/* Mobile User Avatar with Dedicated Account Dropdown (or Sign In button) */}
-          {user ? (
-            <div className="relative" ref={mobileUserMenuRef}>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsMobileUserMenuOpen(!isMobileUserMenuOpen);
-                }}
-                aria-expanded={isMobileUserMenuOpen}
-                aria-haspopup="true"
-                aria-label="User Account Menu"
-                className={`flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-neutral-800 to-neutral-900 border text-white font-bold text-xs shadow-sm transition-all duration-200 cursor-pointer ${
-                  isMobileUserMenuOpen
-                    ? "border-brand ring-2 ring-brand/40 shadow-brand/20 scale-105"
-                    : "border-brand/50 hover:border-brand hover:scale-105"
-                }`}
-                title={user.email}
-              >
-                <span>{avatarLetter}</span>
-              </button>
-
-              {/* Dedicated Mobile Account Dropdown Menu */}
-              {isMobileUserMenuOpen && (
-                <div
-                  role="menu"
-                  className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] rounded-md border border-white/[0.08] bg-[#121215]/98 p-1.5 shadow-2xl backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150"
-                >
-                  {/* Dropdown Header: Avatar + User Email */}
-                  <div className="flex items-center gap-2.5 px-3 py-2.5 border-b border-white/[0.08]">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/15 border border-brand/30 text-white font-bold text-xs shadow-inner">
-                      {avatarLetter}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p
-                        className="text-xs font-semibold text-white truncate"
-                        title={user.email}
-                      >
-                        {user.email}
-                      </p>
-                      <p className="text-[10px] text-neutral-400 font-medium">
-                        Atelier Collector
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Menu Links: My Dashboard, My Account */}
-                  <div className="py-1 space-y-0.5">
-                    <Link
-                      href="/account"
-                      onClick={() => setIsMobileUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <LayoutDashboard className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Dashboard</span>
-                    </Link>
-
-                    <Link
-                      href="/account/settings"
-                      onClick={() => setIsMobileUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors"
-                      role="menuitem"
-                    >
-                      <UserIcon className="h-4 w-4 text-neutral-400 shrink-0" />
-                      <span>My Account</span>
-                    </Link>
-                  </div>
-
-                  {/* Sign Out Item */}
-                  <div className="pt-1 border-t border-white/[0.08]">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsMobileUserMenuOpen(false);
-                        signOut();
-                      }}
-                      className="flex items-center gap-2.5 w-full rounded-md px-3 py-2 text-xs font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors cursor-pointer text-left"
-                      role="menuitem"
-                    >
-                      <LogOut className="h-4 w-4 text-red-400 shrink-0" />
-                      <span>Sign Out</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setIsSignInOpen(true)}
-              className="rounded-md bg-brand hover:bg-brand-hover px-2.5 sm:px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 transition-all cursor-pointer"
-            >
-              Sign In
-            </button>
-          )}
-
-          {/* Mobile Hamburger Toggle */}
-          <button
-            onClick={() => {
-              setIsMobileUserMenuOpen(false);
-              setIsMobileMenuOpen(!isMobileMenuOpen);
-            }}
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white cursor-pointer"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-4 w-4 sm:h-5 sm:w-5" />
-            ) : (
-              <Menu className="h-4 w-4 sm:h-5 sm:w-5" />
-            )}
+            <Search className="h-5 w-5" />
           </button>
         </div>
       </div>
-
-      {/* Mobile Drawer Menu (Pure navigation overlay floating over the page without pushing content down) */}
-      {isMobileMenuOpen && (
-        <>
-          {/* Backdrop overlay */}
-          <div
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 top-16 sm:top-20 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-in fade-in duration-200"
-          />
-
-          {/* Navigation Dropdown Overlay */}
-          <div className="absolute top-full left-0 right-0 border-b border-white/10 bg-[#08090A]/98 px-4 py-4 md:hidden backdrop-blur-2xl shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="flex flex-col space-y-1">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`rounded-md px-3.5 py-2.5 text-xs sm:text-sm font-medium transition-colors ${
-                      isActive
-                        ? "bg-white/10 font-semibold text-white"
-                        : "hover:bg-white/[0.04] text-neutral-300 hover:text-white"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </>
-      )}
     </header>
   );
 }
