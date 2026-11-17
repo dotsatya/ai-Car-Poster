@@ -81,7 +81,7 @@ export function TemplatePreviewModal({
               {template.category}
             </span>
             {selectionIndex !== -1 && (
-              <span className="rounded-full bg-emerald-500/15 border border-emerald-500/25 px-2 py-0.2 text-[9px] font-mono font-bold text-emerald-400">
+              <span className="rounded-md bg-emerald-500/15 border border-emerald-500/25 px-2 py-0.2 text-[9px] font-mono font-bold text-emerald-400">
                 #{selectionIndex + 1} Selected
               </span>
             )}
@@ -110,10 +110,10 @@ export function TemplatePreviewModal({
 
           {/* Bottom Overlay Info Tag */}
           <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[10px] sm:text-[11px] text-white/90">
-            <span className="rounded-full bg-black/60 px-2.5 py-0.5 backdrop-blur-md border border-white/10">
+            <span className="rounded-md bg-black/60 px-2.5 py-0.5 backdrop-blur-md border border-white/10">
               {template.tag || "300 DPI Atelier Master"}
             </span>
-            <span className="rounded-full bg-black/60 px-2 py-0.5 backdrop-blur-md border border-white/10 font-mono">
+            <span className="rounded-md bg-black/60 px-2 py-0.5 backdrop-blur-md border border-white/10 font-mono">
               3:4 Fine Art
             </span>
           </div>

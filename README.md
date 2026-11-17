@@ -45,5 +45,5 @@ Poster Style	                  Minimal, Vintage, Racing, Magazine, Artistic
 Collection	                      JDM Legends, Supercars, Classic Icons, Motorsport
 Car Category	                  Sports, Supercar, Hypercar, Muscle, Luxury, SUV
 Model Year	                      1990s, 2000s, 2010s, 2020s
-Price Range	                      ₹499–₹999, ₹999–₹1,999, Custom
+Price Range	                      $25–$50, $50–$100, Custom
 ///////////////////////////////////////////////////

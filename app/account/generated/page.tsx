@@ -106,9 +106,13 @@ export default function AccountGeneratedPostersPage() {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 border border-brand/20 text-brand mb-4">
               <Sparkles size={24} />
             </div>
-            <h2 className="text-lg sm:text-xl font-bold text-white">No AI Posters Generated Yet</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-white">
+              No AI Posters Generated Yet
+            </h2>
             <p className="mt-2 text-xs sm:text-sm text-neutral-400 max-w-md mx-auto leading-relaxed">
-              Upload your personal car photograph in the Creation Studio and select up to 3 templates to render 4 bespoke museum-grade poster variations.
+              Upload your personal car photograph in the Creation Studio and
+              select up to 3 templates to render 4 bespoke museum-grade poster
+              variations.
             </p>
             <div className="mt-6">
               <Link
@@ -124,10 +128,14 @@ export default function AccountGeneratedPostersPage() {
           /* Responsive Posters Grid: 2 in a row on mobile, 3 on tablet, 4 on desktop */
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
             {generatedArtworks.map((art, idx) => {
-              const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
+              const availableSizes = getAvailableSizesForArtwork(
+                art,
+                selectedTemplates,
+              );
               const sizeObj =
-                availableSizes.find((s) => s.id === art.size) || availableSizes[0];
-              const formattedPrice = `₹${(sizeObj.priceNum * art.quantity).toLocaleString("en-IN")}`;
+                availableSizes.find((s) => s.id === art.size) ||
+                availableSizes[0];
+              const formattedPrice = `$${sizeObj.priceNum * art.quantity}`;
 
               return (
                 <div
@@ -166,7 +174,7 @@ export default function AccountGeneratedPostersPage() {
                         </p>
                         <div className="mt-1.5 flex items-center gap-1.5 text-[9px] text-neutral-400 font-mono">
                           <span className="flex items-center gap-1">
-                            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+                            <span className="h-1.5 w-1.5 rounded-md bg-brand" />
                             300+ DPI
                           </span>
                           <span>•</span>
@@ -176,11 +184,14 @@ export default function AccountGeneratedPostersPage() {
 
                       {/* Bottom Image Info Tag in default state */}
                       <div className="absolute bottom-1.5 left-1.5 right-1.5 flex items-center justify-between text-[9px] text-white/90 font-mono pointer-events-none group-hover:opacity-0 transition-opacity">
-                        <span className="rounded-full bg-black/60 px-1.5 py-0.5 backdrop-blur-md border border-white/10">
+                        <span className="rounded-md bg-black/60 px-1.5 py-0.5 backdrop-blur-md border border-white/10">
                           {sizeObj.name}
                         </span>
-                        <span className="rounded-full bg-black/60 px-1.5 py-0.5 backdrop-blur-md border border-white/10 flex items-center gap-1">
-                          <Eye size={9} className="text-brand inline sm:hidden" />
+                        <span className="rounded-md bg-black/60 px-1.5 py-0.5 backdrop-blur-md border border-white/10 flex items-center gap-1">
+                          <Eye
+                            size={9}
+                            className="text-brand inline sm:hidden"
+                          />
                           <span>300+ DPI</span>
                         </span>
                       </div>
@@ -202,7 +213,9 @@ export default function AccountGeneratedPostersPage() {
                           <button
                             type="button"
                             aria-label={
-                              art.selected ? "Remove from Print Selection" : "Add to Print Selection"
+                              art.selected
+                                ? "Remove from Print Selection"
+                                : "Add to Print Selection"
                             }
                             onClick={(e) => {
                               e.preventDefault();
@@ -236,7 +249,9 @@ export default function AccountGeneratedPostersPage() {
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              setOpenSizeMenuId(openSizeMenuId === art.id ? null : art.id);
+                              setOpenSizeMenuId(
+                                openSizeMenuId === art.id ? null : art.id,
+                              );
                             }}
                             className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-white hover:text-brand transition-colors cursor-pointer group/price"
                             title="Click to choose print size"
@@ -264,63 +279,65 @@ export default function AccountGeneratedPostersPage() {
                             style={{ backgroundColor: "#15161c" }}
                           >
                             <div className="px-2 py-1.5 border-b border-white/[0.08] flex items-center justify-between text-[10px] text-neutral-400 uppercase font-semibold tracking-wider gap-2">
-                              <span className="whitespace-nowrap">Print Size</span>
+                              <span className="whitespace-nowrap">
+                                Print Size
+                              </span>
                               <span className="text-brand font-mono text-[9px] whitespace-nowrap">
                                 {availableSizes.length} sizes
                               </span>
                             </div>
 
                             <div className="mt-1 space-y-1 max-h-52 overflow-y-auto pr-1">
-                                {availableSizes.map((size) => {
-                                  const isSelected = sizeObj.id === size.id;
-                                  return (
-                                    <button
-                                      key={size.id}
-                                      type="button"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        updateArtworkSize(art.id, size.id);
-                                        setOpenSizeMenuId(null);
-                                      }}
-                                      className={`w-full flex items-center justify-between gap-2 rounded-md px-2.5 py-2 text-left text-xs transition-all cursor-pointer ${
-                                        isSelected
-                                          ? "bg-brand/20 text-white border border-brand/50 font-semibold shadow-sm"
-                                          : "text-neutral-300 hover:bg-white/[0.08] hover:text-white border border-transparent"
-                                      }`}
-                                    >
-                                      <div className="min-w-0">
-                                        <div className="flex items-center gap-1.5 flex-wrap">
-                                          <span className="font-bold text-xs text-white whitespace-nowrap">
-                                            {size.name}
+                              {availableSizes.map((size) => {
+                                const isSelected = sizeObj.id === size.id;
+                                return (
+                                  <button
+                                    key={size.id}
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      updateArtworkSize(art.id, size.id);
+                                      setOpenSizeMenuId(null);
+                                    }}
+                                    className={`w-full flex items-center justify-between gap-2 rounded-md px-2.5 py-2 text-left text-xs transition-all cursor-pointer ${
+                                      isSelected
+                                        ? "bg-brand/20 text-white border border-brand/50 font-semibold shadow-sm"
+                                        : "text-neutral-300 hover:bg-white/[0.08] hover:text-white border border-transparent"
+                                    }`}
+                                  >
+                                    <div className="min-w-0">
+                                      <div className="flex items-center gap-1.5 flex-wrap">
+                                        <span className="font-bold text-xs text-white whitespace-nowrap">
+                                          {size.name}
+                                        </span>
+                                        {size.isPopular && (
+                                          <span className="rounded bg-brand/25 border border-brand/40 px-1 py-0.2 text-[7px] font-bold text-brand uppercase tracking-wider shrink-0">
+                                            Popular
                                           </span>
-                                          {size.isPopular && (
-                                            <span className="rounded bg-brand/25 border border-brand/40 px-1 py-0.2 text-[7px] font-bold text-brand uppercase tracking-wider shrink-0">
-                                              Popular
-                                            </span>
-                                          )}
-                                        </div>
-                                        <span className="text-[10px] text-neutral-400 font-mono block mt-0.5 whitespace-nowrap">
-                                          {size.dimensions}
-                                        </span>
-                                      </div>
-                                      <div className="flex items-center gap-1.5 shrink-0 ml-2">
-                                        <span className="font-mono font-bold text-brand text-xs whitespace-nowrap">
-                                          {size.price}
-                                        </span>
-                                        {isSelected && (
-                                          <Check className="h-3.5 w-3.5 text-brand stroke-[2.5]" />
                                         )}
                                       </div>
-                                    </button>
-                                  );
-                                })}
-                              </div>
+                                      <span className="text-[10px] text-neutral-400 font-mono block mt-0.5 whitespace-nowrap">
+                                        {size.dimensions}
+                                      </span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                                      <span className="font-mono font-bold text-brand text-xs whitespace-nowrap">
+                                        {size.price}
+                                      </span>
+                                      {isSelected && (
+                                        <Check className="h-3.5 w-3.5 text-brand stroke-[2.5]" />
+                                      )}
+                                    </div>
+                                  </button>
+                                );
+                              })}
                             </div>
-                          )}
-                        </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
+                </div>
               );
             })}
           </div>
@@ -329,17 +346,9 @@ export default function AccountGeneratedPostersPage() {
         {/* Bottom Cart Callout Bar */}
         {selectedCount > 0 && (
           <div className="mt-6 sm:mt-8 rounded-xl border border-brand/40 bg-gradient-to-r from-brand/15 via-neutral-900/90 to-neutral-950 p-3.5 sm:p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3.5 sm:gap-4 shadow-xl">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-white text-[10px] font-bold shrink-0">
-                  {selectedCount}
-                </span>
-                <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
-                  Posters Ready in Studio Print Cart
-                </h3>
-              </div>
-              <p className="text-[11px] text-neutral-300 mt-1 leading-relaxed">
-                Your chosen AI poster variations are queued with 12-color archival giclée plotter specifications.
+            <div className="flex items-center gap-2">
+              <p className="text-xs sm:text-sm font-bold text-white tracking-wider">
+                {selectedCount} Posters added to the cart
               </p>
             </div>
 
@@ -348,7 +357,7 @@ export default function AccountGeneratedPostersPage() {
               onClick={() => setIsCartOpen(true)}
               className="w-full sm:w-auto shrink-0 rounded-md bg-brand hover:bg-brand-hover px-5 sm:px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] whitespace-nowrap text-center"
             >
-              Open Print Cart ({selectedCount}) →
+              Checkout →
             </button>
           </div>
         )}
@@ -399,10 +408,10 @@ export default function AccountGeneratedPostersPage() {
               <div className="flex-1 p-4 sm:p-6 md:p-7 overflow-y-auto flex flex-col justify-between space-y-4 sm:space-y-6">
                 <div>
                   <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                    <span className="rounded-full bg-brand/15 border border-brand/30 px-2.5 py-0.5 text-[9px] sm:text-[10px] font-bold text-brand uppercase tracking-wider">
+                    <span className="rounded-md bg-brand/15 border border-brand/30 px-2.5 py-0.5 text-[9px] sm:text-[10px] font-bold text-brand uppercase tracking-wider">
                       {currentArtwork.badge}
                     </span>
-                    <span className="rounded-full bg-white/[0.06] border border-white/10 px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] font-mono text-neutral-300">
+                    <span className="rounded-md bg-white/[0.06] border border-white/10 px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] font-mono text-neutral-300">
                       300+ DPI Archival Giclée
                     </span>
                   </div>
@@ -429,7 +438,9 @@ export default function AccountGeneratedPostersPage() {
                           <button
                             key={size.id}
                             type="button"
-                            onClick={() => updateArtworkSize(currentArtwork.id, size.id)}
+                            onClick={() =>
+                              updateArtworkSize(currentArtwork.id, size.id)
+                            }
                             className={`p-2 sm:p-2.5 rounded-md border text-left transition-all cursor-pointer ${
                               isSizeActive
                                 ? "border-brand bg-brand/10 ring-1 ring-brand text-white shadow-sm"
@@ -457,8 +468,12 @@ export default function AccountGeneratedPostersPage() {
                 {/* Bottom Actions */}
                 <div className="pt-3 sm:pt-4 border-t border-white/10 space-y-2.5 sm:space-y-3">
                   <div className="flex items-center justify-between text-[11px] sm:text-xs">
-                    <span className="text-neutral-400">Archival Packaging:</span>
-                    <span className="text-white font-medium">CNC Kraft Tube Included</span>
+                    <span className="text-neutral-400">
+                      Archival Packaging:
+                    </span>
+                    <span className="text-white font-medium">
+                      CNC Kraft Tube Included
+                    </span>
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
@@ -479,7 +494,9 @@ export default function AccountGeneratedPostersPage() {
                       ) : (
                         <>
                           <ShoppingBag className="h-4 w-4" />
-                          <span>Select for Print ({currentSizeObj?.price || "₹1,299"})</span>
+                          <span>
+                            Select for Print ({currentSizeObj?.price || "$79"})
+                          </span>
                         </>
                       )}
                     </button>
@@ -496,7 +513,7 @@ export default function AccountGeneratedPostersPage() {
               </div>
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </div>
   );

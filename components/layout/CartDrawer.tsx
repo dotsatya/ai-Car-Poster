@@ -20,7 +20,8 @@ export function CartDrawer() {
 
   if (!isCartOpen) return null;
 
-  const hasInrItems = cartItems.some((i) => i.currency === "INR" || i.price >= 200);
+  const shippingFee = cartItems.length > 0 ? 15 : 0;
+  const grandTotal = cartSubtotal + shippingFee;
 
   return (
     <div
@@ -67,10 +68,7 @@ export function CartDrawer() {
           ) : (
             <div className="space-y-3">
               {cartItems.map((item) => {
-                const isINR = item.currency === "INR" || item.price >= 200;
-                const formattedTotal = isINR
-                  ? `₹${item.total.toLocaleString("en-IN")}`
-                  : `$${item.total}`;
+                const formattedTotal = `$${item.total}`;
 
                 return (
                   <div
@@ -140,7 +138,7 @@ export function CartDrawer() {
               <div className="flex justify-between text-neutral-400">
                 <span>Artworks Subtotal:</span>
                 <span className="text-white font-semibold">
-                  {hasInrItems ? `₹${cartSubtotal.toLocaleString("en-IN")}` : `$${cartSubtotal}`}
+                  ${cartSubtotal}
                 </span>
               </div>
               <div className="flex justify-between text-neutral-400">
@@ -149,14 +147,12 @@ export function CartDrawer() {
               </div>
               <div className="flex justify-between text-neutral-400">
                 <span>Insured Express Dispatch:</span>
-                <span className="text-white font-semibold">{hasInrItems ? "₹199" : "$25"}</span>
+                <span className="text-white font-semibold">$15</span>
               </div>
               <div className="border-t border-white/10 pt-2 flex justify-between font-bold text-sm">
                 <span className="text-white">Estimated Total:</span>
                 <span className="text-brand">
-                  {hasInrItems
-                    ? `₹${(cartSubtotal + 199).toLocaleString("en-IN")}`
-                    : `$${cartSubtotal + 25}`}
+                  ${grandTotal}
                 </span>
               </div>
             </div>
@@ -184,7 +180,7 @@ export function CartDrawer() {
               cartItems.length === 0 ? "opacity-40 pointer-events-none" : ""
             }`}
           >
-            Proceed to Checkout ({hasInrItems ? `₹${(cartSubtotal + 199).toLocaleString("en-IN")}` : `$${cartSubtotal + 25}`})
+            Proceed to Checkout (${grandTotal})
           </Link>
         </div>
       </div>

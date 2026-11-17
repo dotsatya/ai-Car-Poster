@@ -571,7 +571,7 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
             total: sizeObj.priceNum * art.quantity,
             isCombined: art.id === "gen-poster-4",
             image: art.image,
-            currency: "INR",
+            currency: "USD",
             formattedPrice: sizeObj.price,
           };
         })

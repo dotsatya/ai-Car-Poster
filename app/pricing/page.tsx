@@ -70,7 +70,7 @@ const PRICING_FAQS = [
   },
   {
     q: "What are your courier shipping rates and delivery timelines?",
-    a: "We charge a flat ₹199 for insured express air logistics across India. Prints are cured, sealed, framed, and dispatched within 48 hours in reinforced heavy-duty transit packaging.",
+    a: "We charge a flat $15 for insured express air courier logistics across the United States. Prints are cured, sealed, framed, and dispatched within 48 hours in reinforced heavy-duty transit packaging.",
   },
   {
     q: "Do you include a Certificate of Authenticity?",
@@ -103,17 +103,17 @@ export default function PricingPage() {
 
           {/* Key Value Badges */}
           <div className="mt-5 sm:mt-6 flex flex-wrap gap-2 sm:gap-3 text-[11px] sm:text-xs font-mono">
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 shrink-0">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-white/[0.04] border border-white/10 text-neutral-300 shrink-0">
               <Printer className="h-3.5 w-3.5 text-brand" />
               12-Pigment Giclée
             </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 shrink-0">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-white/[0.04] border border-white/10 text-neutral-300 shrink-0">
               <ShieldCheck className="h-3.5 w-3.5 text-brand" />
               Serialized Hologram Seal
             </span>
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 shrink-0">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-white/[0.04] border border-white/10 text-neutral-300 shrink-0">
               <Truck className="h-3.5 w-3.5 text-brand" />
-              Flat ₹199 Insured Air Courier
+              Flat $15 Insured Air Courier
             </span>
           </div>
         </div>

@@ -398,18 +398,18 @@ export function TemplateFilterDrawer({
                 {filters.priceRange === "custom" && (
                   <div className="rounded-xl border border-white/[0.08] bg-black/40 p-3 space-y-2 mt-2 animate-in fade-in duration-200">
                     <span className="text-[11px] text-neutral-400 block">
-                      Custom Starting Price (₹)
+                      Custom Starting Price ($)
                     </span>
                     <div className="flex items-center gap-2">
                       <div className="flex-1">
                         <label className="text-[10px] text-neutral-500 uppercase font-mono block mb-1">
-                          Min ₹
+                          Min $
                         </label>
                         <input
                           type="number"
-                          min={300}
-                          max={3000}
-                          step={50}
+                          min={20}
+                          max={200}
+                          step={5}
                           value={filters.customMinPrice}
                           onChange={(e) =>
                             setFilters((prev) => ({
@@ -423,18 +423,18 @@ export function TemplateFilterDrawer({
                       <span className="text-neutral-500 pt-4">—</span>
                       <div className="flex-1">
                         <label className="text-[10px] text-neutral-500 uppercase font-mono block mb-1">
-                          Max ₹
+                          Max $
                         </label>
                         <input
                           type="number"
-                          min={300}
-                          max={3000}
-                          step={50}
+                          min={20}
+                          max={200}
+                          step={5}
                           value={filters.customMaxPrice}
                           onChange={(e) =>
                             setFilters((prev) => ({
                               ...prev,
-                              customMaxPrice: Number(e.target.value) || 2000,
+                              customMaxPrice: Number(e.target.value) || 150,
                             }))
                           }
                           className="w-full rounded-lg border border-white/10 bg-neutral-900/80 px-2.5 py-1.5 text-xs text-white font-mono focus:border-brand focus:outline-none"

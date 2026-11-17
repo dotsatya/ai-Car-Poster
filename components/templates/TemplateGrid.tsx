@@ -310,10 +310,10 @@ export function TemplateGrid() {
             {filters.priceRange !== "all" && (
               <span className="inline-flex items-center gap-1 rounded-md border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] font-mono text-brand">
                 <span>
-                  {filters.priceRange === "499-999" && "₹499–₹999"}
-                  {filters.priceRange === "999-1999" && "₹999–₹1,999"}
+                  {filters.priceRange === "25-50" && "$25–$50"}
+                  {filters.priceRange === "50-100" && "$50–$100"}
                   {filters.priceRange === "custom" &&
-                    `₹${filters.customMinPrice}–₹${filters.customMaxPrice}`}
+                    `$${filters.customMinPrice}–$${filters.customMaxPrice}`}
                 </span>
                 <button
                   type="button"

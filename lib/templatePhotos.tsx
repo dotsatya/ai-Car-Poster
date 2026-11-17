@@ -77,35 +77,35 @@ interface TemplateConfig {
 
 // Deterministic combinations ensuring diverse sizes (1, 2, 3, or 4) and GSMs (1, 2, or 3)
 const TEMPLATE_CONFIGS: Record<number, TemplateConfig> = {
-  1: { basePrice: 499, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  2: { basePrice: 549, sizes: ["a3", "a2"], gsms: ["250gsm", "300gsm"] },
-  3: { basePrice: 449, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm"] },
-  4: { basePrice: 499, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  5: { basePrice: 449, sizes: ["12x18"], gsms: ["250gsm", "300gsm"] },
-  6: { basePrice: 599, sizes: ["a2"], gsms: ["300gsm"] },
-  7: { basePrice: 549, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
-  8: { basePrice: 549, sizes: ["12x18", "a2"], gsms: ["250gsm", "300gsm"] },
-  9: { basePrice: 449, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm"] },
-  10: { basePrice: 599, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  11: { basePrice: 599, sizes: ["a2"], gsms: ["300gsm"] },
-  12: { basePrice: 499, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  13: { basePrice: 449, sizes: ["a4", "a3"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  14: { basePrice: 449, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm"] },
-  15: { basePrice: 449, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm"] },
-  17: { basePrice: 499, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  18: { basePrice: 549, sizes: ["12x18"], gsms: ["250gsm", "300gsm"] },
-  19: { basePrice: 549, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  20: { basePrice: 449, sizes: ["a4", "a3"], gsms: ["200gsm", "250gsm"] },
-  21: { basePrice: 499, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  22: { basePrice: 499, sizes: ["a3", "a2"], gsms: ["250gsm", "300gsm"] },
-  23: { basePrice: 499, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
-  24: { basePrice: 499, sizes: ["a3"], gsms: ["250gsm"] },
-  25: { basePrice: 449, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm"] },
-  26: { basePrice: 549, sizes: ["12x18", "a2"], gsms: ["250gsm", "300gsm"] },
-  27: { basePrice: 599, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  28: { basePrice: 449, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm", "300gsm"] },
-  29: { basePrice: 549, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
-  30: { basePrice: 549, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  1: { basePrice: 29, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  2: { basePrice: 35, sizes: ["a3", "a2"], gsms: ["250gsm", "300gsm"] },
+  3: { basePrice: 29, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  4: { basePrice: 35, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  5: { basePrice: 29, sizes: ["12x18"], gsms: ["250gsm", "300gsm"] },
+  6: { basePrice: 45, sizes: ["a2"], gsms: ["300gsm"] },
+  7: { basePrice: 35, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  8: { basePrice: 35, sizes: ["12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  9: { basePrice: 29, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  10: { basePrice: 45, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  11: { basePrice: 45, sizes: ["a2"], gsms: ["300gsm"] },
+  12: { basePrice: 35, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  13: { basePrice: 29, sizes: ["a4", "a3"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  14: { basePrice: 29, sizes: ["a4", "a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  15: { basePrice: 29, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm"] },
+  17: { basePrice: 35, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  18: { basePrice: 35, sizes: ["12x18"], gsms: ["250gsm", "300gsm"] },
+  19: { basePrice: 35, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  20: { basePrice: 29, sizes: ["a4", "a3"], gsms: ["200gsm", "250gsm"] },
+  21: { basePrice: 35, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  22: { basePrice: 35, sizes: ["a3", "a2"], gsms: ["250gsm", "300gsm"] },
+  23: { basePrice: 35, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  24: { basePrice: 35, sizes: ["a3"], gsms: ["250gsm"] },
+  25: { basePrice: 29, sizes: ["a4", "a3", "a2"], gsms: ["200gsm", "250gsm"] },
+  26: { basePrice: 35, sizes: ["12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  27: { basePrice: 45, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  28: { basePrice: 29, sizes: ["a3", "12x18"], gsms: ["200gsm", "250gsm", "300gsm"] },
+  29: { basePrice: 35, sizes: ["a3", "12x18", "a2"], gsms: ["250gsm", "300gsm"] },
+  30: { basePrice: 35, sizes: ["a4", "a3", "12x18", "a2"], gsms: ["200gsm", "250gsm", "300gsm"] },
 };
 
 function buildPricingMatrix(
@@ -115,16 +115,16 @@ function buildPricingMatrix(
 ): SizeGsmPrice[] {
   const sizeOffsets: Record<PrintSizeId, number> = {
     a4: 0,
-    a3: 300,
-    "12x18": 450,
-    a2: 700,
+    a3: 16,
+    "12x18": 26,
+    a2: 50,
   };
 
   const gsmOffsets: Record<PrintSizeId, Record<PaperGsmId, number>> = {
-    a4: { "200gsm": 0, "250gsm": 100, "300gsm": 200 },
-    a3: { "200gsm": 0, "250gsm": 100, "300gsm": 200 },
-    "12x18": { "200gsm": 0, "250gsm": 150, "300gsm": 300 },
-    a2: { "200gsm": 0, "250gsm": 200, "300gsm": 400 },
+    a4: { "200gsm": 0, "250gsm": 10, "300gsm": 20 },
+    a3: { "200gsm": 0, "250gsm": 10, "300gsm": 20 },
+    "12x18": { "200gsm": 0, "250gsm": 12, "300gsm": 24 },
+    a2: { "200gsm": 0, "250gsm": 15, "300gsm": 30 },
   };
 
   const matrix: SizeGsmPrice[] = [];
@@ -135,7 +135,7 @@ function buildPricingMatrix(
         size,
         gsm,
         price,
-        formattedPrice: `₹${price.toLocaleString("en-IN")}`,
+        formattedPrice: `$${price}`,
       });
     }
   }
@@ -144,7 +144,7 @@ function buildPricingMatrix(
 
 function attachTemplateOptions(raw: RawTemplatePhoto): TemplatePhoto {
   const config = TEMPLATE_CONFIGS[raw.id] || {
-    basePrice: 499,
+    basePrice: 29,
     sizes: ["a4", "a3", "12x18", "a2"] as PrintSizeId[],
     gsms: ["200gsm", "250gsm", "300gsm"] as PaperGsmId[],
   };
@@ -153,7 +153,7 @@ function attachTemplateOptions(raw: RawTemplatePhoto): TemplatePhoto {
   const availableGsm = config.gsms.map((g) => ALL_PAPER_GSM[g]);
   const pricing = buildPricingMatrix(config.basePrice, config.sizes, config.gsms);
   const startingPrice = Math.min(...pricing.map((p) => p.price));
-  const formattedStartingPrice = `₹${startingPrice.toLocaleString("en-IN")}`;
+  const formattedStartingPrice = `$${startingPrice}`;
 
   return {
     ...raw,

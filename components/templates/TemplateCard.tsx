@@ -131,7 +131,6 @@ export function TemplateCard({ template }: TemplateCardProps) {
             </p>
             <div className="mt-2 flex items-center gap-2 text-[10px] text-neutral-400 font-medium">
               <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                 {template.category}
               </span>
               <span>•</span>
@@ -166,7 +165,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
             <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
               {template.formattedStartingPrice
                 ? `From ${template.formattedStartingPrice}`
-                : "₹499"}
+                : "From $29"}
             </span>
             <div className="relative group/btn">
               <button

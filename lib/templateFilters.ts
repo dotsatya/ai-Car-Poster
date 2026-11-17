@@ -7,7 +7,7 @@ export interface FilterState {
   collections: string[];
   categories: string[];
   years: string[];
-  priceRange: "all" | "499-999" | "999-1999" | "custom";
+  priceRange: "all" | "25-50" | "50-100" | "custom";
   customMinPrice: number;
   customMaxPrice: number;
 }
@@ -20,8 +20,8 @@ export const INITIAL_FILTER_STATE: FilterState = {
   categories: [],
   years: [],
   priceRange: "all",
-  customMinPrice: 400,
-  customMaxPrice: 2000,
+  customMinPrice: 25,
+  customMaxPrice: 150,
 };
 
 export const FILTER_OPTIONS = {
@@ -83,8 +83,8 @@ export const FILTER_OPTIONS = {
   ],
   priceRanges: [
     { id: "all", label: "All Prices" },
-    { id: "499-999", label: "₹499–₹999" },
-    { id: "999-1999", label: "₹999–₹1,999" },
+    { id: "25-50", label: "$25–$50" },
+    { id: "50-100", label: "$50–$100" },
     { id: "custom", label: "Custom Range" },
   ] as const,
 };
@@ -415,11 +415,11 @@ export function matchTemplate(
   }
 
   // 8. Price Range
-  const price = template.startingPrice || 499;
-  if (filters.priceRange === "499-999") {
-    if (price < 400 || price > 999) return false;
-  } else if (filters.priceRange === "999-1999") {
-    if (price < 999 || price > 1999) return false;
+  const price = template.startingPrice || 29;
+  if (filters.priceRange === "25-50") {
+    if (price < 20 || price > 50) return false;
+  } else if (filters.priceRange === "50-100") {
+    if (price < 50 || price > 100) return false;
   } else if (filters.priceRange === "custom") {
     if (price < filters.customMinPrice || price > filters.customMaxPrice) return false;
   }

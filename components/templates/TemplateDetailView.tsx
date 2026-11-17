@@ -68,7 +68,7 @@ export function TemplateDetailView({ template }: TemplateDetailViewProps) {
     ) || template.pricing?.[0];
 
   const currentPriceFormatted =
-    currentPricing?.formattedPrice || template.formattedStartingPrice || "₹799";
+    currentPricing?.formattedPrice || template.formattedStartingPrice || "$35";
   const currentSizeObj = ALL_PRINT_SIZES[selectedSizeId] || availableSizes[0];
   const currentGsmObj = ALL_PAPER_GSM[selectedGsmId] || availableGsm[0];
 

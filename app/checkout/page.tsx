@@ -23,7 +23,7 @@ export default function CheckoutPage() {
   const { user, isLoaded, isSignedIn, openSignIn } = useAppAuth();
   const { cartItems, cartSubtotal, clearCart } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"card" | "upi" | "wire">("card");
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "apple_pay" | "wire">("card");
 
   // Form values
   const [fullName, setFullName] = useState(() => {
@@ -34,13 +34,13 @@ export default function CheckoutPage() {
   });
   const [phone, setPhone] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("postergen_user_phone") || "+91 98765 43210";
+      return localStorage.getItem("postergen_user_phone") || "+1 (310) 894-2201";
     }
-    return "+91 98765 43210";
+    return "+1 (310) 894-2201";
   });
-  const [address, setAddress] = useState("Studio 4B, Atelier Penthouse, Bandra West");
-  const [cityPostal, setCityPostal] = useState("Mumbai 400050");
-  const [country, setCountry] = useState("India");
+  const [address, setAddress] = useState("9540 Wilshire Blvd, Suite 800");
+  const [cityPostal, setCityPostal] = useState("Beverly Hills, CA 90212");
+  const [country, setCountry] = useState("United States");
 
   // Authentication barrier: Redirect if not signed in
   useEffect(() => {
@@ -63,8 +63,7 @@ export default function CheckoutPage() {
     }
   }, [isLoaded, isSignedIn, cartItems.length, router]);
 
-  const hasInrItems = cartItems.some((i) => i.currency === "INR" || i.price >= 200);
-  const shippingFee = cartItems.length > 0 ? (hasInrItems ? 199 : 25) : 0;
+  const shippingFee = cartItems.length > 0 ? 15 : 0;
   const grandTotal = cartSubtotal + shippingFee;
 
   const handlePlaceOrder = (e: React.FormEvent) => {
@@ -87,18 +86,18 @@ export default function CheckoutPage() {
       date: new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
       status: "order_received",
       statusLabel: "Order Received",
-      estimatedDelivery: "Expected in 4-5 business days",
-      courier: "DHL Express Worldwide · Insured Fine Art Flight",
-      trackingNumber: `DHL-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}-IN`,
+      estimatedDelivery: "Expected in 3-4 business days",
+      courier: "FedEx Priority Fine Art · Insured Flight Logistics",
+      trackingNumber: `FX-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}-US`,
       shippingAddress: {
         name: fullName || "Atelier Collector",
-        street: address || "Studio 4B, Atelier Penthouse, Bandra West",
-        city: cityPostal.split(" ")[0] || "Mumbai",
-        state: "Maharashtra",
-        postalCode: cityPostal.split(" ")[1] || "400050",
-        phone: phone || "+91 98765 43210",
+        street: address || "9540 Wilshire Blvd, Suite 800",
+        city: cityPostal.includes(",") ? cityPostal.split(",")[0].trim() : cityPostal.split(" ")[0] || "Beverly Hills",
+        state: "California",
+        postalCode: cityPostal.match(/\d{5}/)?.[0] || "90212",
+        phone: phone || "+1 (310) 894-2201",
       },
-      totalAmount: hasInrItems ? `₹${grandTotal.toLocaleString("en-IN")}` : `$${grandTotal.toFixed(2)}`,
+      totalAmount: `$${grandTotal}`,
       items: cartItems.map((item, idx) => ({
         id: `${generatedOrderId}-${idx + 1}`,
         templateName: item.title,
@@ -108,7 +107,7 @@ export default function CheckoutPage() {
         dimensions: item.dimensions || "420 × 594 mm",
         framing: "CNC Matte Obsidian Aluminum · Museum UV Acrylic Glazing",
         certificateNumber: `CERT-#${Math.floor(1000 + Math.random() * 9000)}-PG`,
-        price: item.currency === "INR" || item.price >= 200 ? `₹${item.price.toLocaleString("en-IN")}` : `$${item.price}`,
+        price: `$${item.price}`,
         image: item.image,
         qty: item.quantity,
       })),
@@ -310,14 +309,14 @@ export default function CheckoutPage() {
 
                 <button
                   type="button"
-                  onClick={() => setPaymentMethod("upi")}
+                  onClick={() => setPaymentMethod("apple_pay")}
                   className={`rounded-md border p-3 text-center text-xs font-semibold transition-all cursor-pointer ${
-                    paymentMethod === "upi"
+                    paymentMethod === "apple_pay"
                       ? "border-brand bg-brand/10 text-white"
                       : "border-white/[0.08] bg-black/30 text-neutral-400 hover:text-white"
                   }`}
                 >
-                  UPI / NetBanking
+                  Apple Pay / Google Pay
                 </button>
 
                 <button
@@ -329,7 +328,7 @@ export default function CheckoutPage() {
                       : "border-white/[0.08] bg-black/30 text-neutral-400 hover:text-white"
                   }`}
                 >
-                  Bank Wire
+                  Bank Wire / ACH
                 </button>
               </div>
 
@@ -367,7 +366,7 @@ export default function CheckoutPage() {
                       </p>
                     </div>
                     <span className="text-white font-semibold shrink-0">
-                      {item.formattedPrice || (hasInrItems ? `₹${item.total}` : `$${item.total}`)}
+                      {item.formattedPrice || `$${item.total}`}
                     </span>
                   </div>
                 ))}
@@ -378,9 +377,7 @@ export default function CheckoutPage() {
                 <div className="flex justify-between text-neutral-400">
                   <span>Archival Print Subtotal</span>
                   <span className="text-white font-mono">
-                    {hasInrItems
-                      ? `₹${cartSubtotal.toLocaleString("en-IN")}`
-                      : `$${cartSubtotal}`}
+                    ${cartSubtotal}
                   </span>
                 </div>
 
@@ -392,16 +389,14 @@ export default function CheckoutPage() {
                 <div className="flex justify-between text-neutral-400">
                   <span>Insured Express Courier</span>
                   <span className="text-white font-mono">
-                    {hasInrItems ? "₹199" : "$25"}
+                    ${shippingFee}
                   </span>
                 </div>
 
                 <div className="border-t border-white/[0.08] pt-3 flex justify-between text-sm font-bold">
                   <span className="text-white uppercase tracking-wider">Total Due</span>
                   <span className="text-brand font-mono text-base">
-                    {hasInrItems
-                      ? `₹${grandTotal.toLocaleString("en-IN")}`
-                      : `$${grandTotal}`}
+                    ${grandTotal}
                   </span>
                 </div>
               </div>

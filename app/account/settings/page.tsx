@@ -36,24 +36,24 @@ const DEFAULT_ADDRESSES: Address[] = [
     id: "addr-1",
     name: "Satya Sundar Dey",
     type: "Home Atelier",
-    street: "Penthouse 14B, Apex Grand Tower, Road No. 36, Jubilee Hills",
-    city: "Hyderabad",
-    state: "Telangana",
-    postalCode: "500033",
-    country: "India",
-    phone: "+91 98765 43210",
+    street: "9540 Wilshire Blvd, Suite 800",
+    city: "Beverly Hills",
+    state: "California",
+    postalCode: "90212",
+    country: "United States",
+    phone: "+1 (310) 894-2201",
     isDefault: true,
   },
   {
     id: "addr-2",
     name: "Satya Dey (Studio Atelier)",
     type: "Design Studio & Garage",
-    street: "Hangar 4, Motorway Industrial Park, Outer Ring Road, Gachibowli",
-    city: "Hyderabad",
-    state: "Telangana",
-    postalCode: "500032",
-    country: "India",
-    phone: "+91 98765 43211",
+    street: "Hangar 7, Santa Monica Airport, Airport Ave",
+    city: "Santa Monica",
+    state: "California",
+    postalCode: "90405",
+    country: "United States",
+    phone: "+1 (310) 894-2205",
     isDefault: false,
   },
 ];
@@ -99,11 +99,11 @@ export default function AccountSettingsPage() {
   });
 
   const [phoneNumber, setPhoneNumber] = useState<string>(() => {
-    if (typeof window === "undefined") return "+91 98765 43210";
+    if (typeof window === "undefined") return "+1 (310) 894-2201";
     try {
-      return localStorage.getItem("postergen_user_phone") || "+91 98765 43210";
+      return localStorage.getItem("postergen_user_phone") || "+1 (310) 894-2201";
     } catch {
-      return "+91 98765 43210";
+      return "+1 (310) 894-2201";
     }
   });
 
@@ -128,7 +128,7 @@ export default function AccountSettingsPage() {
     setAddrCity("");
     setAddrState("");
     setAddrPostalCode("");
-    setAddrPhone(phoneNumber || "+91 98765 43210");
+    setAddrPhone(phoneNumber || "+1 (310) 894-2201");
     setAddrIsDefault(addresses.length === 0);
     setIsAddressModalOpen(true);
   };
@@ -155,7 +155,7 @@ export default function AccountSettingsPage() {
       !addrPostalCode.trim()
     ) {
       toast.error(
-        "Please fill in required fields (Name, Street, City, PIN code).",
+        "Please fill in required fields (Name, Street, City, ZIP code).",
       );
       return;
     }
@@ -191,7 +191,7 @@ export default function AccountSettingsPage() {
         city: addrCity.trim(),
         state: addrState.trim(),
         postalCode: addrPostalCode.trim(),
-        country: "India",
+        country: "United States",
         phone: addrPhone.trim(),
         isDefault: addrIsDefault || addresses.length === 0,
       };
@@ -341,7 +341,7 @@ export default function AccountSettingsPage() {
                     type="tel"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="e.g. +91 98765 43210"
+                    placeholder="e.g. +1 (310) 894-2201"
                     className="mt-1.5 w-full rounded-xl border border-white/[0.12] bg-black/40 px-3.5 py-2.5 text-xs sm:text-sm text-white font-mono placeholder-neutral-500 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand transition-all"
                   />
                   <p className="mt-1 text-[10px] text-neutral-400">
@@ -604,14 +604,14 @@ export default function AccountSettingsPage() {
 
                 <div className="col-span-2 sm:col-span-1">
                   <label className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
-                    PIN Code *
+                    ZIP Code *
                   </label>
                   <input
                     type="text"
                     required
                     value={addrPostalCode}
                     onChange={(e) => setAddrPostalCode(e.target.value)}
-                    placeholder="PIN Code"
+                    placeholder="ZIP Code (e.g. 90212)"
                     className="mt-1 w-full rounded-xl border border-white/[0.1] bg-black/50 px-3 py-2 text-xs text-white font-mono placeholder-neutral-600 focus:border-brand focus:outline-none"
                   />
                 </div>
@@ -625,7 +625,7 @@ export default function AccountSettingsPage() {
                   type="tel"
                   value={addrPhone}
                   onChange={(e) => setAddrPhone(e.target.value)}
-                  placeholder="+91 98765 43210"
+                  placeholder="+1 (310) 894-2201"
                   className="mt-1 w-full rounded-xl border border-white/[0.1] bg-black/50 px-3 py-2 text-xs text-white font-mono placeholder-neutral-600 focus:border-brand focus:outline-none"
                 />
               </div>

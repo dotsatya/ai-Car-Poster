@@ -93,8 +93,8 @@ export function getAvailableSizesForArtwork(
       const preferredPrice =
         matchingPrices?.find((p) => p.gsm === "250gsm") || matchingPrices?.[0];
 
-      const priceNum = preferredPrice?.price || standardSize?.priceNum || 1299;
-      const price = preferredPrice?.formattedPrice || standardSize?.price || `₹${priceNum.toLocaleString("en-IN")}`;
+      const priceNum = preferredPrice?.price || standardSize?.priceNum || 79;
+      const price = preferredPrice?.formattedPrice || standardSize?.price || `$${priceNum}`;
 
       return {
         id: opt.id,

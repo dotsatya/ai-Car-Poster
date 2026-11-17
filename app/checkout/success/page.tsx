@@ -227,15 +227,15 @@ function OrderSuccessContent() {
                   </span>
                 </div>
                 <span className="text-[10px] font-mono text-emerald-400 font-semibold uppercase">
-                  Insured DHL Air
+                  Insured FedEx Air
                 </span>
               </div>
 
               <div className="text-xs space-y-1 text-neutral-300">
                 <p className="font-bold text-white text-sm">Satya Dey</p>
-                <p>Studio 4B, Atelier Penthouse, Bandra West</p>
-                <p>Mumbai, 400050 · India</p>
-                <p className="text-[11px] text-neutral-400 font-mono pt-1">+91 98765 43210</p>
+                <p>9540 Wilshire Blvd, Suite 800</p>
+                <p>Beverly Hills, CA 90212 · United States</p>
+                <p className="text-[11px] text-neutral-400 font-mono pt-1">+1 (310) 894-2201</p>
               </div>
 
               <div className="rounded-xl border border-white/[0.06] bg-black/40 p-3 text-[11px] text-neutral-400 flex items-center gap-2">

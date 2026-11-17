@@ -163,7 +163,7 @@ export default function AboutPage() {
               <a
                 key={link.href}
                 href={link.href}
-                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 whitespace-nowrap transition-colors hover:bg-white/[0.08] hover:border-brand/40 hover:text-white"
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-white/[0.04] border border-white/10 text-neutral-300 whitespace-nowrap transition-colors hover:bg-white/[0.08] hover:border-brand/40 hover:text-white"
               >
                 {link.label}
               </a>

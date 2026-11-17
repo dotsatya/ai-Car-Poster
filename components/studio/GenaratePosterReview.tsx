@@ -413,7 +413,7 @@ export function GenaratePosterReview({
 
                   <div className="text-right">
                     <span className="text-xs font-bold text-white font-mono">
-                      ₹{itemTotal.toLocaleString("en-IN")}
+                      ${itemTotal}
                     </span>
                   </div>
                 </div>
@@ -457,7 +457,7 @@ export function GenaratePosterReview({
           <div className="text-base sm:text-xl font-bold text-white mt-0.5">
             {selectedCount} of {generatedArtworks.length} Posters Selected ·{" "}
             <span className="text-brand font-mono">
-              ₹{cartSubtotal.toLocaleString("en-IN")}
+              ${cartSubtotal}
             </span>
           </div>
           <p className="text-[11px] text-neutral-400 mt-0.5">
@@ -485,7 +485,7 @@ export function GenaratePosterReview({
             {selectedCount} of {generatedArtworks.length} Selected
           </span>
           <span className="text-sm font-bold font-mono text-brand">
-            ₹{cartSubtotal.toLocaleString("en-IN")}
+            ${cartSubtotal}
           </span>
         </div>
 
@@ -668,11 +668,9 @@ export function GenaratePosterReview({
                           Unit Price
                         </span>
                         <div className="text-base sm:text-lg font-bold text-white mt-0.5 font-mono">
-                          ₹
-                          {(
-                            (modalCurrentSize?.priceNum || 1299) *
-                            currentArtwork.quantity
-                          ).toLocaleString("en-IN")}
+                          $
+                          {(modalCurrentSize?.priceNum || 79) *
+                            currentArtwork.quantity}
                         </div>
                       </div>
                     </div>
