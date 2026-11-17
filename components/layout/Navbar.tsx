@@ -124,22 +124,22 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Desktop Action Icons & Profile */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Action Icons & Profile (Search & Account on all views, Bag on Desktop) */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Search Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-md text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-md text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
             aria-label="Search"
             title="Search Templates"
           >
-            <Search className="h-4 w-4" />
+            <Search className="h-4 w-4 sm:h-4 sm:w-4" />
           </button>
 
-          {/* Shopping Bag Button */}
+          {/* Shopping Bag Button (Desktop only) */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className="relative flex h-9 w-9 items-center justify-center rounded-md text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
+            className="hidden md:flex relative h-9 w-9 items-center justify-center rounded-md text-neutral-300 transition-colors hover:bg-white/[0.06] hover:text-white cursor-pointer"
             aria-label="Shopping Bag"
             title="Studio Bag"
           >
@@ -238,23 +238,11 @@ export function Navbar() {
           ) : (
             <button
               onClick={() => setIsSignInOpen(true)}
-              className="rounded-md bg-brand hover:bg-brand-hover px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
+              className="rounded-md bg-brand hover:bg-brand-hover px-3 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
             >
               Sign In
             </button>
           )}
-        </div>
-
-        {/* Mobile Right Controls: Minimal Top Header with only Search icon */}
-        <div className="flex items-center md:hidden shrink-0">
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-md text-neutral-300 hover:bg-white/[0.06] hover:text-white transition-colors cursor-pointer"
-            aria-label="Search templates"
-            title="Search"
-          >
-            <Search className="h-5 w-5" />
-          </button>
         </div>
       </div>
     </header>

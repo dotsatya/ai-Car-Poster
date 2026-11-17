@@ -2,7 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Suspense, useState } from "react";
+import Image from "next/image";
+import { Suspense, useState, useSyncExternalStore } from "react";
 import {
   CheckCircle2,
   Package,
@@ -13,13 +14,37 @@ import {
   Printer,
   ArrowRight,
   Clock,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
+import { getOrderById, AtelierOrder } from "@/data/orders";
+
+const emptySubscribe = () => () => {};
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
 
 function OrderSuccessContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId") || "PG-2026-98142";
   const [copied, setCopied] = useState(false);
+  const isMounted = useIsMounted();
+
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-bg-primary flex items-center justify-center text-white text-xs font-mono">
+        <div className="h-8 w-8 rounded-full border-2 border-brand border-t-transparent animate-spin mr-3" />
+        <span>Loading order details...</span>
+      </div>
+    );
+  }
+
+  const order: AtelierOrder | null = getOrderById(orderId) || null;
 
   const handleCopy = () => {
     navigator.clipboard?.writeText(orderId);
@@ -84,10 +109,6 @@ function OrderSuccessContent() {
               <CheckCircle2 className="h-8 w-8 sm:h-10 sm:w-10 text-emerald-400" />
             </div>
           </div>
-
-          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-brand font-mono block">
-            OFFICIAL ATELIER COMMISSION
-          </span>
           <h1 className="mt-1 text-2xl sm:text-4xl font-bold tracking-tight text-white font-heading uppercase">
             Order Successfully Placed
           </h1>
@@ -217,6 +238,42 @@ function OrderSuccessContent() {
 
           {/* Right Column: Delivery Details & Navigation Actions */}
           <div className="lg:col-span-5 space-y-6">
+            {/* Commissioned Artworks Box if order found */}
+            {order?.items && order.items.length > 0 && (
+              <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-5 sm:p-6 backdrop-blur-xl space-y-4">
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+                  <div className="flex items-center gap-2">
+                    <Package className="h-4 w-4 text-brand" />
+                    <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
+                      Commissioned Artwork ({order.items.length})
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono font-bold text-brand">
+                    {order.totalAmount}
+                  </span>
+                </div>
+
+                <div className="space-y-3 max-h-60 overflow-y-auto pr-1">
+                  {order.items.map((item) => (
+                    <div key={item.id} className="flex items-center gap-3 text-xs">
+                      <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-white/[0.08] bg-black shrink-0">
+                        <Image src={item.image} alt={item.templateName} fill className="object-cover" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white font-medium truncate">{item.templateName}</p>
+                        <p className="text-[10px] text-neutral-400 font-mono">
+                          {item.sizeLabel} • Qty {item.qty}
+                        </p>
+                      </div>
+                      <span className="text-white font-semibold font-mono shrink-0">
+                        {item.price}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Delivery Destination Box */}
             <div className="rounded-2xl border border-white/[0.08] bg-[#0E1013]/90 p-5 sm:p-6 backdrop-blur-xl space-y-4">
               <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
@@ -227,15 +284,25 @@ function OrderSuccessContent() {
                   </span>
                 </div>
                 <span className="text-[10px] font-mono text-emerald-400 font-semibold uppercase">
-                  Insured FedEx Air
+                  {order?.courier ? "Insured FedEx Air" : "Insured FedEx Air"}
                 </span>
               </div>
 
               <div className="text-xs space-y-1 text-neutral-300">
-                <p className="font-bold text-white text-sm">Satya Dey</p>
-                <p>9540 Wilshire Blvd, Suite 800</p>
-                <p>Beverly Hills, CA 90212 · United States</p>
-                <p className="text-[11px] text-neutral-400 font-mono pt-1">+1 (310) 894-2201</p>
+                <p className="font-bold text-white text-sm">
+                  {order?.shippingAddress?.name || "Satya Dey"}
+                </p>
+                <p>
+                  {order?.shippingAddress?.street || "9540 Wilshire Blvd, Suite 800"}
+                </p>
+                <p>
+                  {order?.shippingAddress?.city && order?.shippingAddress?.state
+                    ? `${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.postalCode} · United States`
+                    : "Beverly Hills, CA 90212 · United States"}
+                </p>
+                <p className="text-[11px] text-neutral-400 font-mono pt-1">
+                  {order?.shippingAddress?.phone || "+1 (310) 894-2201"}
+                </p>
               </div>
 
               <div className="rounded-xl border border-white/[0.06] bg-black/40 p-3 text-[11px] text-neutral-400 flex items-center gap-2">
@@ -274,14 +341,29 @@ function OrderSuccessContent() {
               </div>
             </div>
 
-            {/* Quick Actions: Only Track in My Orders */}
+            {/* Quick Actions */}
             <div className="space-y-2.5">
               <Link
-                href="/account/orders"
+                href={orderId ? `/account/orders/${orderId}` : "/account/orders"}
                 className="w-full flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover py-3.5 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98]"
               >
                 <span>Track in My Orders</span>
                 <ArrowRight className="h-4 w-4" />
+              </Link>
+
+              <Link
+                href="/studio"
+                className="w-full flex items-center justify-center gap-2 rounded-md border border-white/10 hover:border-white/25 bg-white/[0.04] hover:bg-white/10 py-3 px-4 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center cursor-pointer"
+              >
+                <span>Create Another Commission</span>
+              </Link>
+
+              <Link
+                href="/studio"
+                className="w-full flex items-center justify-center gap-2 rounded-md border border-white/10 hover:border-white/25 bg-white/[0.04] hover:bg-white/10 py-3 px-4 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center cursor-pointer"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-brand" />
+                <span>Create Another Commission</span>
               </Link>
             </div>
           </div>

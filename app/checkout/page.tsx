@@ -23,6 +23,7 @@ export default function CheckoutPage() {
   const { user, isLoaded, isSignedIn, openSignIn } = useAppAuth();
   const { cartItems, cartSubtotal, clearCart } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<"card" | "apple_pay" | "wire">("card");
 
   // Form values
@@ -53,15 +54,15 @@ export default function CheckoutPage() {
     }
   }, [isLoaded, isSignedIn, router, openSignIn]);
 
-  // Redirect if cart is empty
+  // Redirect if cart is empty (only if order is not being placed or completed)
   useEffect(() => {
-    if (isLoaded && isSignedIn && cartItems.length === 0) {
+    if (isLoaded && isSignedIn && !isOrderPlaced && !isSubmitting && cartItems.length === 0) {
       toast.info("Print Cart Empty", {
         description: "Your cart has no active print items. Choose posters from the studio to checkout.",
       });
       router.replace("/studio");
     }
-  }, [isLoaded, isSignedIn, cartItems.length, router]);
+  }, [isLoaded, isSignedIn, isOrderPlaced, isSubmitting, cartItems.length, router]);
 
   const shippingFee = cartItems.length > 0 ? 15 : 0;
   const grandTotal = cartSubtotal + shippingFee;
@@ -123,15 +124,15 @@ export default function CheckoutPage() {
     }
 
     setTimeout(() => {
-      setIsSubmitting(false);
+      setIsOrderPlaced(true);
       clearCart();
 
       toast.success("Commission Authorized!", {
         description: `Order #${generatedOrderId} has entered our production queue.`,
       });
 
-      // Directly forward to order confirmation page
-      router.push(`/checkout/success?orderId=${generatedOrderId}`);
+      // Forward to order confirmation success page
+      router.replace(`/checkout/success?orderId=${generatedOrderId}`);
     }, 600);
   };
 
@@ -151,6 +152,20 @@ export default function CheckoutPage() {
           >
             Sign In to Checkout
           </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (isOrderPlaced) {
+    return (
+      <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4">
+        <div className="rounded-xl border border-white/10 bg-[#0E1013] p-8 max-w-md text-center">
+          <div className="h-10 w-10 rounded-full border-2 border-brand border-t-transparent animate-spin mx-auto mb-4" />
+          <h2 className="text-lg font-bold text-white mb-2 font-heading uppercase">Payment Authorized</h2>
+          <p className="text-xs text-neutral-400">
+            Transferring to order confirmation and authenticity certificate...
+          </p>
         </div>
       </div>
     );
@@ -404,11 +419,11 @@ export default function CheckoutPage() {
               {/* Submit CTA */}
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isOrderPlaced}
                 className="w-full flex items-center justify-center gap-2 rounded-md bg-brand hover:bg-brand-hover py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
               >
                 <CheckCircle2 className="h-4 w-4" />
-                <span>{isSubmitting ? "Processing ..." : "Pay Now"}</span>
+                <span>{isSubmitting || isOrderPlaced ? "Authorizing Payment ..." : "Pay Now"}</span>
               </button>
             </div>
           </div>

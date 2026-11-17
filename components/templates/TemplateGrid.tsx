@@ -161,7 +161,7 @@ export function TemplateGrid() {
       </div>
 
       {/* 2. Quick Style Pills + Result Count Row */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="hidden sm:flex flex-wrap items-center justify-between gap-3 ">
         <div className="flex flex-wrap items-center gap-2">
           {QUICK_STYLES.map((style) => {
             const isActive =
