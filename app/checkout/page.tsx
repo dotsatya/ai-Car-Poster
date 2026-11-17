@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -15,20 +15,53 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/context/CartContext";
+import { useAppAuth } from "@/lib/auth";
 import { generateOrderMilestones } from "@/data/orders";
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const { user, isLoaded, isSignedIn, openSignIn } = useAppAuth();
   const { cartItems, cartSubtotal, clearCart } = useCart();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<"card" | "upi" | "wire">("card");
 
   // Form values
-  const [fullName, setFullName] = useState("Satya Dey");
-  const [phone, setPhone] = useState("+91 98765 43210");
+  const [fullName, setFullName] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("postergen_user_name") || "Atelier Collector";
+    }
+    return "Atelier Collector";
+  });
+  const [phone, setPhone] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("postergen_user_phone") || "+91 98765 43210";
+    }
+    return "+91 98765 43210";
+  });
   const [address, setAddress] = useState("Studio 4B, Atelier Penthouse, Bandra West");
   const [cityPostal, setCityPostal] = useState("Mumbai 400050");
   const [country, setCountry] = useState("India");
+
+  // Authentication barrier: Redirect if not signed in
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.replace("/studio");
+      openSignIn();
+      toast.info("Authentication Required", {
+        description: "Please sign in or create an atelier account to access checkout and finalize your commission.",
+      });
+    }
+  }, [isLoaded, isSignedIn, router, openSignIn]);
+
+  // Redirect if cart is empty
+  useEffect(() => {
+    if (isLoaded && isSignedIn && cartItems.length === 0) {
+      toast.info("Print Cart Empty", {
+        description: "Your cart has no active print items. Choose posters from the studio to checkout.",
+      });
+      router.replace("/studio");
+    }
+  }, [isLoaded, isSignedIn, cartItems.length, router]);
 
   const hasInrItems = cartItems.some((i) => i.currency === "INR" || i.price >= 200);
   const shippingFee = cartItems.length > 0 ? (hasInrItems ? 199 : 25) : 0;
@@ -36,6 +69,13 @@ export default function CheckoutPage() {
 
   const handlePlaceOrder = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user || cartItems.length === 0) {
+      toast.error("Cannot Proceed", {
+        description: "You must be signed in with items in your cart to checkout.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     const generatedOrderId = `PG-2026-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -43,6 +83,7 @@ export default function CheckoutPage() {
     const newOrder = {
       id: generatedOrderId,
       orderNumber: generatedOrderId,
+      userEmail: user.email,
       date: new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
       status: "order_received",
       statusLabel: "Order Received",
@@ -50,7 +91,7 @@ export default function CheckoutPage() {
       courier: "DHL Express Worldwide · Insured Fine Art Flight",
       trackingNumber: `DHL-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}-IN`,
       shippingAddress: {
-        name: fullName || "Satya Dey",
+        name: fullName || "Atelier Collector",
         street: address || "Studio 4B, Atelier Penthouse, Bandra West",
         city: cityPostal.split(" ")[0] || "Mumbai",
         state: "Maharashtra",
@@ -58,7 +99,7 @@ export default function CheckoutPage() {
         phone: phone || "+91 98765 43210",
       },
       totalAmount: hasInrItems ? `₹${grandTotal.toLocaleString("en-IN")}` : `$${grandTotal.toFixed(2)}`,
-      items: cartItems.length > 0 ? cartItems.map((item, idx) => ({
+      items: cartItems.map((item, idx) => ({
         id: `${generatedOrderId}-${idx + 1}`,
         templateName: item.title,
         templateSlug: item.templateSlug || "porsche-911-gt3-rs-minimalist-spec",
@@ -70,21 +111,7 @@ export default function CheckoutPage() {
         price: item.currency === "INR" || item.price >= 200 ? `₹${item.price.toLocaleString("en-IN")}` : `$${item.price}`,
         image: item.image,
         qty: item.quantity,
-      })) : [
-        {
-          id: `${generatedOrderId}-1`,
-          templateName: "Porsche 911 GT3 RS Minimalist Spec",
-          templateSlug: "porsche-911-gt3-rs-minimalist-spec",
-          vehicle: "Porsche 911 GT3 RS (992)",
-          sizeLabel: "A2 Gallery (42.0 × 59.4 cm)",
-          dimensions: "420 × 594 mm • 300 DPI",
-          framing: "CNC Matte Obsidian Aluminum · Museum UV Acrylic Glazing",
-          certificateNumber: `CERT-#${Math.floor(1000 + Math.random() * 9000)}-PG`,
-          price: "₹1,499",
-          image: "/template photo/1.webp",
-          qty: 1,
-        }
-      ],
+      })),
       milestones: generateOrderMilestones("order_received", "Today"),
     };
 
@@ -108,6 +135,47 @@ export default function CheckoutPage() {
       router.push(`/checkout/success?orderId=${generatedOrderId}`);
     }, 600);
   };
+
+  if (!isLoaded || !isSignedIn) {
+    return (
+      <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4">
+        <div className="rounded-xl border border-white/10 bg-[#0E1013] p-8 max-w-md text-center">
+          <Lock className="h-8 w-8 text-brand mx-auto mb-3" />
+          <h2 className="text-lg font-bold text-white mb-2 font-heading uppercase">Authentication Required</h2>
+          <p className="text-xs text-neutral-400 mb-5 leading-relaxed">
+            Please sign in to authenticate and finalize your fine-art commission dispatch.
+          </p>
+          <button
+            type="button"
+            onClick={openSignIn}
+            className="rounded-md bg-brand px-6 py-2.5 text-xs font-bold text-white hover:bg-brand-hover transition-colors shadow-sm shadow-brand/30 cursor-pointer uppercase tracking-wider"
+          >
+            Sign In to Checkout
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (cartItems.length === 0) {
+    return (
+      <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4">
+        <div className="rounded-xl border border-white/10 bg-[#0E1013] p-8 max-w-md text-center">
+          <Package className="h-8 w-8 text-neutral-500 mx-auto mb-3" />
+          <h2 className="text-lg font-bold text-white mb-2 font-heading uppercase">Your Print Cart is Empty</h2>
+          <p className="text-xs text-neutral-400 mb-5 leading-relaxed">
+            You have no posters selected for physical print execution yet.
+          </p>
+          <Link
+            href="/studio"
+            className="inline-block rounded-md bg-brand px-6 py-2.5 text-xs font-bold text-white hover:bg-brand-hover transition-colors shadow-sm shadow-brand/30 uppercase tracking-wider"
+          >
+            Go to Studio
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-bg-primary pb-24 text-white">
@@ -281,41 +349,28 @@ export default function CheckoutPage() {
                   <span>Order Summary</span>
                 </div>
                 <span className="text-xs text-neutral-400 font-mono">
-                  {cartItems.length > 0 ? `${cartItems.length} item(s)` : "1 Sample Print"}
+                  {cartItems.length} item{cartItems.length > 1 ? "s" : ""}
                 </span>
               </div>
 
               {/* Items List */}
               <div className="space-y-3 max-h-60 overflow-y-auto pr-1">
-                {cartItems.length > 0 ? (
-                  cartItems.map((item) => (
-                    <div key={item.id} className="flex items-center gap-3 text-xs">
-                      <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-white/[0.08] bg-black shrink-0">
-                        <Image src={item.image} alt={item.title} fill className="object-cover" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-white font-medium truncate">{item.title}</p>
-                        <p className="text-[10px] text-neutral-400 font-mono">
-                          {item.size.toUpperCase()} • Qty {item.quantity}
-                        </p>
-                      </div>
-                      <span className="text-white font-semibold shrink-0">
-                        {item.formattedPrice || (hasInrItems ? `₹${item.total}` : `$${item.total}`)}
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                  <div className="flex items-center gap-3 text-xs">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="flex items-center gap-3 text-xs">
                     <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-white/[0.08] bg-black shrink-0">
-                      <Image src="/template photo/1.webp" alt="Porsche 911 GT3 RS" fill className="object-cover" />
+                      <Image src={item.image} alt={item.title} fill className="object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-white font-medium truncate">Porsche 911 GT3 RS Minimalist</p>
-                      <p className="text-[10px] text-neutral-400 font-mono">A2 Gallery (42×59cm) • Qty 1</p>
+                      <p className="text-white font-medium truncate">{item.title}</p>
+                      <p className="text-[10px] text-neutral-400 font-mono">
+                        {item.size.toUpperCase()} • Qty {item.quantity}
+                      </p>
                     </div>
-                    <span className="text-white font-semibold shrink-0">₹1,499</span>
+                    <span className="text-white font-semibold shrink-0">
+                      {item.formattedPrice || (hasInrItems ? `₹${item.total}` : `$${item.total}`)}
+                    </span>
                   </div>
-                )}
+                ))}
               </div>
 
               {/* Cost Breakdown */}
@@ -323,11 +378,9 @@ export default function CheckoutPage() {
                 <div className="flex justify-between text-neutral-400">
                   <span>Archival Print Subtotal</span>
                   <span className="text-white font-mono">
-                    {cartItems.length > 0
-                      ? hasInrItems
-                        ? `₹${cartSubtotal.toLocaleString("en-IN")}`
-                        : `$${cartSubtotal}`
-                      : "₹1,499"}
+                    {hasInrItems
+                      ? `₹${cartSubtotal.toLocaleString("en-IN")}`
+                      : `$${cartSubtotal}`}
                   </span>
                 </div>
 
@@ -339,18 +392,16 @@ export default function CheckoutPage() {
                 <div className="flex justify-between text-neutral-400">
                   <span>Insured Express Courier</span>
                   <span className="text-white font-mono">
-                    {cartItems.length > 0 ? (hasInrItems ? "₹199" : "$25") : "₹199"}
+                    {hasInrItems ? "₹199" : "$25"}
                   </span>
                 </div>
 
                 <div className="border-t border-white/[0.08] pt-3 flex justify-between text-sm font-bold">
                   <span className="text-white uppercase tracking-wider">Total Due</span>
                   <span className="text-brand font-mono text-base">
-                    {cartItems.length > 0
-                      ? hasInrItems
-                        ? `₹${grandTotal.toLocaleString("en-IN")}`
-                        : `$${grandTotal}`
-                      : "₹1,698"}
+                    {hasInrItems
+                      ? `₹${grandTotal.toLocaleString("en-IN")}`
+                      : `$${grandTotal}`}
                   </span>
                 </div>
               </div>

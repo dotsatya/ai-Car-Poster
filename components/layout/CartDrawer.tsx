@@ -3,9 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, X, Trash2, Plus, Minus } from "lucide-react";
+import { toast } from "sonner";
 import { useCart } from "@/context/CartContext";
+import { useAppAuth } from "@/lib/auth";
 
 export function CartDrawer() {
+  const { user, openSignIn } = useAppAuth();
   const {
     isCartOpen,
     setIsCartOpen,
@@ -164,7 +167,19 @@ export function CartDrawer() {
         <div className="shrink-0 border-t border-white/10 pt-4 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
           <Link
             href="/checkout"
-            onClick={() => setIsCartOpen(false)}
+            onClick={(e) => {
+              if (!user) {
+                e.preventDefault();
+                setIsCartOpen(false);
+                openSignIn();
+                toast.info("Sign In Required", {
+                  description:
+                    "Please sign in to your atelier account to proceed to checkout and complete payment.",
+                });
+                return;
+              }
+              setIsCartOpen(false);
+            }}
             className={`w-full inline-flex items-center justify-center rounded-md bg-brand hover:bg-brand-hover py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm shadow-brand/30 hover:shadow-brand/50 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] ${
               cartItems.length === 0 ? "opacity-40 pointer-events-none" : ""
             }`}

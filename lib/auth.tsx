@@ -111,6 +111,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = () => {
     saveUserToStorage(null);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.removeItem("poster_gen_generated_artworks");
+        localStorage.removeItem("poster_gen_selected_templates");
+        window.dispatchEvent(new Event("poster_gen_generated_changed"));
+        window.dispatchEvent(new Event("poster_gen_templates_changed"));
+      } catch (e) {
+        console.warn("Could not clear studio storage on sign out", e);
+      }
+    }
     toast.info("Signed Out", {
       description: "You have been signed out of your atelier account.",
     });

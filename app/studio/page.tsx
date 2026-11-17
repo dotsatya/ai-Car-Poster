@@ -63,6 +63,9 @@ export default function StudioPage() {
     if (!user) {
       pendingGenerateRef.current = true;
       setIsSignInOpen(true);
+      toast.info("Sign In Required", {
+        description: "Please sign in or create an atelier account to generate AI car posters.",
+      });
       return;
     }
 
@@ -112,6 +115,14 @@ export default function StudioPage() {
             </button>
             <button
               onClick={() => {
+                if (!user) {
+                  toast.info("Please Sign In", {
+                    description:
+                      "Sign in to your account to review generated posters and customize sizes.",
+                  });
+                  setIsSignInOpen(true);
+                  return;
+                }
                 if (Object.keys(generationProgress).length > 0)
                   setStudioState("review");
                 else handleStartGenerationClick();
@@ -137,7 +148,7 @@ export default function StudioPage() {
 
         {studioState === "generating" && <StudioGenerating />}
 
-        {studioState === "review" && (
+        {studioState === "review" && user && (
           <GenaratePosterReview
             onBackToConfigure={() => setStudioState("configure")}
           />

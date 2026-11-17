@@ -215,8 +215,15 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   const [vehicleName, setVehicleName] = useState<string>("");
   const [customText, setCustomText] = useState<string>("");
 
-  const [studioState, setStudioState] = useState<StudioState>("configure");
-  const [generationProgress, setGenerationProgress] = useState<Record<string, GenerationJobStatus>>({});
+  const [internalStudioState, setStudioState] = useState<StudioState>("configure");
+  const [internalGenerationProgress, setGenerationProgress] = useState<Record<string, GenerationJobStatus>>({});
+  const [internalDirectCartItems, setDirectCartItems] = useState<CartItem[]>([]);
+  const [sessionGenerated, setSessionGenerated] = useState<GeneratedArtwork[] | null>(null);
+
+  // Derived state: strictly protect generation review and cart when unauthenticated
+  const studioState: StudioState = user ? internalStudioState : "configure";
+  const generationProgress = user ? internalGenerationProgress : {};
+  const directCartItems = user ? internalDirectCartItems : [];
 
   const rawStoredGenerated = useSyncExternalStore(
     subscribeGenerated,
@@ -224,9 +231,34 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     () => ""
   );
 
-  const [sessionGenerated, setSessionGenerated] = useState<GeneratedArtwork[] | null>(null);
+  // External auth reset listener for cross-tab or navbar logouts
+  React.useEffect(() => {
+    const handleAuthReset = () => {
+      try {
+        const storedUser = localStorage.getItem("poster_gen_auth_user");
+        if (!storedUser) {
+          setStudioState("configure");
+          setSessionGenerated(null);
+          setDirectCartItems([]);
+          setUploadedPhoto("");
+          setVehicleName("");
+          setCustomText("");
+          setGenerationProgress({});
+          setIsCartOpen(false);
+        }
+      } catch {}
+    };
+
+    window.addEventListener("poster_gen_auth_changed", handleAuthReset);
+    window.addEventListener("storage", handleAuthReset);
+    return () => {
+      window.removeEventListener("poster_gen_auth_changed", handleAuthReset);
+      window.removeEventListener("storage", handleAuthReset);
+    };
+  }, []);
 
   const generatedArtworks: GeneratedArtwork[] = useMemo(() => {
+    if (!user) return [];
     if (sessionGenerated) return sessionGenerated;
     if (rawStoredGenerated) {
       try {
@@ -235,7 +267,7 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
       } catch {}
     }
     return DEFAULT_GENERATED_ARTWORKS;
-  }, [sessionGenerated, rawStoredGenerated]);
+  }, [user, sessionGenerated, rawStoredGenerated]);
 
   const setGeneratedArtworks = (
     artworks: GeneratedArtwork[] | ((prev: GeneratedArtwork[]) => GeneratedArtwork[])
@@ -249,7 +281,19 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   const signOut = () => {
     authSignOut();
     setStudioState("configure");
+    setSessionGenerated(null);
+    setDirectCartItems([]);
+    setUploadedPhoto("");
+    setVehicleName("");
+    setCustomText("");
     setGenerationProgress({});
+    setIsCartOpen(false);
+    try {
+      localStorage.removeItem(GENERATED_STORAGE_KEY);
+      localStorage.removeItem(TEMPLATES_STORAGE_KEY);
+      window.dispatchEvent(new Event(GENERATED_STORAGE_EVENT));
+      window.dispatchEvent(new Event(STORAGE_EVENT));
+    } catch {}
   };
 
   const toggleTemplate = (id: string) => {
@@ -373,6 +417,14 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
 
   // Simulates progressive AI generation queue
   const startGenerationPipeline = () => {
+    if (!user) {
+      setIsSignInOpen(true);
+      toast.info("Authentication Required", {
+        description: "Please sign in or create an atelier account to generate AI car posters.",
+      });
+      return;
+    }
+
     setStudioState("generating");
 
     const fourPosters = createFourPosterVariations();
@@ -396,6 +448,13 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
 
     const totalTime = fourPosters.length * 600 + 1500;
     setTimeout(() => {
+      try {
+        const stored = localStorage.getItem("poster_gen_auth_user");
+        if (!stored) return;
+      } catch {
+        return;
+      }
+
       setStudioState("review");
       toast.success("4 AI Posters Generated", {
         description: "Select which pictures you want to print to add them to your cart.",
@@ -443,8 +502,6 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Direct template purchases for size & GSM
-  const [directCartItems, setDirectCartItems] = useState<CartItem[]>([]);
-
   const addDirectCartItem = (newItem: Omit<CartItem, "total">) => {
     setDirectCartItems((prev) => {
       const existingIndex = prev.findIndex((i) => i.id === newItem.id);
@@ -498,35 +555,41 @@ export function StudioProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  const studioCartItems: CartItem[] = generatedArtworks
-    .filter((art) => art.selected)
-    .map((art) => {
-      const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
-      const sizeObj = availableSizes.find((s) => s.id === art.size) || availableSizes[0];
-      return {
-        id: art.id,
-        title: art.title,
-        size: sizeObj.name,
-        dimensions: sizeObj.dimensions,
-        price: sizeObj.priceNum,
-        quantity: art.quantity,
-        total: sizeObj.priceNum * art.quantity,
-        isCombined: art.id === "gen-poster-4",
-        image: art.image,
-        currency: "INR",
-        formattedPrice: sizeObj.price,
-      };
-    });
+  const studioCartItems: CartItem[] = user
+    ? generatedArtworks
+        .filter((art) => art.selected)
+        .map((art) => {
+          const availableSizes = getAvailableSizesForArtwork(art, selectedTemplates);
+          const sizeObj = availableSizes.find((s) => s.id === art.size) || availableSizes[0];
+          return {
+            id: art.id,
+            title: art.title,
+            size: sizeObj.name,
+            dimensions: sizeObj.dimensions,
+            price: sizeObj.priceNum,
+            quantity: art.quantity,
+            total: sizeObj.priceNum * art.quantity,
+            isCombined: art.id === "gen-poster-4",
+            image: art.image,
+            currency: "INR",
+            formattedPrice: sizeObj.price,
+          };
+        })
+    : [];
 
   const clearCart = () => {
     setDirectCartItems([]);
     setGeneratedArtworks((prev) =>
       prev.map((art) => ({ ...art, selected: false }))
     );
+    try {
+      localStorage.removeItem(GENERATED_STORAGE_KEY);
+      window.dispatchEvent(new Event(GENERATED_STORAGE_EVENT));
+    } catch {}
   };
 
-  const cartItems: CartItem[] = [...directCartItems, ...studioCartItems];
-  const cartSubtotal = cartItems.reduce((acc, curr) => acc + curr.total, 0);
+  const cartItems: CartItem[] = user ? [...directCartItems, ...studioCartItems] : [];
+  const cartSubtotal = user ? cartItems.reduce((acc, curr) => acc + curr.total, 0) : 0;
 
   return (
     <StudioContext.Provider

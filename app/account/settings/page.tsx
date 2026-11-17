@@ -496,9 +496,6 @@ export default function AccountSettingsPage() {
                   <LogOut className="h-4 w-4" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-400">
-                    03 / PARTITION
-                  </span>
                   <h3 className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-white">
                     Sign Out of Atelier
                   </h3>

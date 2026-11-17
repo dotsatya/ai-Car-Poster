@@ -74,6 +74,12 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
           ref={fileInputRef}
           type="file"
           accept="image/*"
+          onClick={(e) => {
+            e.currentTarget.value = "";
+          }}
+          onClick={(e) => {
+            (e.currentTarget.value = "");
+          }}
           onChange={handleFileUpload}
           className="hidden"
         />
@@ -89,12 +95,6 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
                 className="object-cover object-center filter contrast-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
-
-              {/* Top Badges */}
-              <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 bg-black/75 px-2.5 sm:px-3 py-1 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Active Car Photo</span>
-              </div>
 
               {/* Top Right Action Buttons */}
               <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 flex items-center gap-1.5 sm:gap-2">
@@ -123,7 +123,9 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
               {/* Bottom Metadata */}
               <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-bold text-white truncate">{vehicleName}</div>
+                  <div className="text-sm font-bold text-white truncate">
+                    {vehicleName}
+                  </div>
                   {customText && (
                     <div className="text-xs text-neutral-400 font-mono">
                       {customText}
@@ -137,7 +139,9 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
             {isDragging && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/85 backdrop-blur-sm text-center">
                 <UploadCloud size={40} className="text-brand animate-bounce" />
-                <p className="mt-2 text-sm font-bold text-white">Drop to replace this car photograph</p>
+                <p className="mt-2 text-sm font-bold text-white">
+                  Drop to replace this car photograph
+                </p>
               </div>
             )}
           </div>
@@ -148,16 +152,18 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
             className="py-6 sm:py-10 md:py-12 px-3 sm:px-6 text-center cursor-pointer flex flex-col items-center justify-center space-y-2.5 group"
           >
             <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-white/[0.03] text-neutral-300 group-hover:text-white group-hover:scale-105 transition-all">
-              <UploadCloud size={24} className="sm:w-[28px] sm:h-[28px]" strokeWidth={1.8} />
+              <UploadCloud
+                size={24}
+                className="sm:w-[28px] sm:h-[28px]"
+                strokeWidth={1.8}
+              />
             </div>
 
             <div className="space-y-0.5">
               <h3 className="text-xs sm:text-sm md:text-base font-semibold text-white tracking-wide">
                 Drag &amp; drop your car photo here
               </h3>
-              <p className="text-[11px] sm:text-xs text-neutral-400">
-                or
-              </p> 
+              <p className="text-[11px] sm:text-xs text-neutral-400">or</p>
               <p className="text-xs sm:text-sm text-white underline underline-offset-4 group-hover:text-brand transition-colors font-medium">
                 click to upload
               </p>
@@ -189,4 +195,3 @@ export function CarPhotoUpload({ fileInputRef }: CarPhotoUploadProps) {
     </div>
   );
 }
-
